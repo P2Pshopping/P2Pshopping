@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -22,6 +22,8 @@
             width: 100%;
             height: 400px;
         }
+        
+
         .narrow-select {
             width: 300px;
             height: auto;
@@ -42,6 +44,7 @@
         .subcategory-select {
             width: 100%;
         }
+        
         #popup, #locationPopup {
             position: fixed;
             top: 50%;
@@ -82,49 +85,29 @@
     
     
    
+    <script language="javascript">
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+
+function goPopup(){
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
     
-    
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+}
+</script>
+      
     <script>
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-        function searchAddress() {
-            const address = document.getElementById('address').value;
-            if (!address) {
-                alert('주소를 입력해주세요.');
-                return;
-            }
-
-            naver.maps.Service.geocode({
-                address: address
-            }, function(status, response) {
-                if (status !== naver.maps.Service.Status.OK) {
-                    return alert('주소 검색에 실패하였습니다.');
-                }
-
-                const result = response.result.items[0];
-                const addr = result.address;
-                document.getElementById('result').innerText = addr;
-
-                const mapCenter = new naver.maps.LatLng(result.point.y, result.point.x);
-                const map = new naver.maps.Map(document.getElementById('map'), {
-                    center: mapCenter,
-                    zoom: 10
-                });
-
-                new naver.maps.Marker({
-                    position: mapCenter,
-                    map: map
-                });
-            });
-        }
 
         $(document).ready(function() {
             $('#autocompleteInput').autocomplete({
@@ -152,157 +135,62 @@
                 $('#subcategoryContainer').removeClass('hidden');
             });
 
-            $('#subcategorySelect').change(function() {
+            $('#subcategorySelect').change(function() {			
                 $('#overlay').show();
-                $('#popup').show();
+                goPopup();
             });
 
-            $('#goButton').click(function() {
-                $('#overlay').hide();
-                $('#popup').hide();
-            });
-
-            $('#selectLocation').click(function() {
-                $('#locationPopup').removeClass('hidden');
-                $('#overlay').removeClass('hidden');
-                loadProvinces();
-            });
-
-            $('#provinceSelect').change(function() {
-                loadCities();
-            });
-
-            $('#citySelect').change(function() {
-                loadDistricts();
-            });
-
-            $('#locationConfirmButton').click(function() {
-                const province = $('#provinceSelect').val();
-                const city = $('#citySelect').val();
-                const district = $('#districtSelect').val();
-                alert(`선택된 위치: ${province} ${city} ${district}`);
-                $('#locationPopup').addClass('hidden');
-                $('#overlay').addClass('hidden');
-            });
-
-            $('#currentLocationButton').click(function() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        alert(`현재 위치: ${latitude}, ${longitude}`);
-                        $('#popup').addClass('hidden');
-                        $('#overlay').addClass('hidden');
-                    });
-                } else {
-                    alert("Geolocation은 이 브라우저에서 지원되지 않습니다.");
-                }
-            });
-
-            function openJusoPopup() {
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                        // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-                        document.getElementById('address').value = data.address; // 주소 정보를 해당 필드에 입력
-                        searchAddress();
-                    }
-                }).open();
-            }
-
-            function loadProvinces() {
-                // 도로명주소 팝업 API 사용하여 도 목록 불러오기
-                $.ajax({
-                    url: 'https://business.juso.go.kr/addrlink/addrLinkUrl.do', // 도로명주소 API 엔드포인트
-                    method: 'POST',
-                    data: {
-                        confmKey: 'U01TX0FVVEgyMDI0MDYxNjIyNDUwMDExNDg0NTc=', // 발급받은 API 키
-                        currentPage: 1,
-                        countPerPage: 100,
-                        resultType: 'json'
-                    },
-                    success: function(data) {
-                        const provinces = data.results.juso.map(item => item.sido);
-                        const select = $('#provinceSelect');
-                        select.empty();
-                        [...new Set(provinces)].forEach(province => {
-                            select.append(new Option(province, province));
-                        });
-                    },
-                    error: function() {
-                        alert('도 목록을 불러오는데 실패했습니다.');
-                    }
-                });
-            }
-
-            function loadCities() {
-                const province = $('#provinceSelect').val();
-                $.ajax({
-                    url: 'https://business.juso.go.kr/addrlink/addrLinkUrl.do',
-                    method: 'POST',
-                    data: {
-                        confmKey: 'U01TX0FVVEgyMDI0MDYxNjIyNDUwMDExNDg0NTc=',
-                        currentPage: 1,
-                        countPerPage: 100,
-                        keyword: province,
-                        resultType: 'json'
-                    },
-                    success: function(data) {
-                        const cities = data.results.juso.map(item => item.sigungu);
-                        const select = $('#citySelect');
-                        select.removeClass('hidden');
-                        select.empty();
-                        [...new Set(cities)].forEach(city => {
-                            select.append(new Option(city, city));
-                        });
-                    },
-                    error: function() {
-                        alert('시 목록을 불러오는데 실패했습니다.');
-                    }
-                });
-            }
-
-            function loadDistricts() {
-                const city = $('#citySelect').val();
-                $.ajax({
-                    url: 'https://business.juso.go.kr/addrlink/addrLinkUrl.do',
-                    method: 'POST',
-                    data: {
-                        confmKey: 'U01TX0FVVEgyMDI0MDYxNjIyNDUwMDExNDg0NTc=',
-                        currentPage: 1,
-                        countPerPage: 100,
-                        keyword: city,
-                        resultType: 'json'
-                    },
-                    success: function(data) {
-                        const districts = data.results.juso.map(item => item.dong);
-                        const select = $('#districtSelect');
-                        select.removeClass('hidden');
-                        select.empty();
-                        [...new Set(districts)].forEach(district => {
-                            select.append(new Option(district, district));
-                        });
-                    },
-                    error: function() {
-                        alert('동 목록을 불러오는데 실패했습니다.');
-                    }
-                });
-            }
+          
         });
+        
+    
     </script>
+    
+    
 </head>
+
 <body>
-	<input type="text" id="keyword" name="keyword" value="" onkeydown="fn_enterSearch();"/>
-	<input type="button" value="주소조회" onClick="javascript:fn_getAddress()">
-	<p>
-	<div id="list" ></div><!-- 검색 결과 리스트 출력 영역 -->
+
+<form name="form" id="form" method="post" class="hidden">
+	<table >
+			<colgroup>
+				<col style="width:20%"><col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>우편번호</th>
+					<td>
+					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+						<!-- <input type="button"  value="주소검색" onclick="goPopup();"> -->
+					</td>
+				</tr>
+				<tr>
+					<th>도로명주소</th>
+					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td>
+						<input type="text" id="addrDetail" style="width:40%" value="">
+						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</form>
+
+
+
+
+
 
 
     <h2>상품 판매하기</h2>
-    <div id="map"></div>
+  <!--    <div id="map"></div>
     <input type="text" id="address" placeholder="주소 입력">
     <button onclick="openJusoPopup()">검색</button>
-    <div id="result"></div>
+    <div id="result"></div> -->
 
     <div class="container">
         <div class="category-section">
