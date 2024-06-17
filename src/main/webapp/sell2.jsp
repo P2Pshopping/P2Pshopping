@@ -269,7 +269,7 @@
                 $('#subcategoryContainer').removeClass('hidden');
             });
 
-            // 서브카테고리 선택 시 팝업 표시
+            // 서브카테고리 선택 시 팝업 표시 
             $('#subcategorySelect').change(function() {
                 $('#overlay').show(); // 배경을 어둡게
                 $('#popup').show(); // 팝업 표시
@@ -284,7 +284,7 @@
             // 위치 직접 선택 클릭 시
             $('#selectLocation').click(function() {
                 alert('위치를 직접 선택하는 기능은 아직 구현되지 않았습니다.');
-            });
+            });-
         });
     </script>
 

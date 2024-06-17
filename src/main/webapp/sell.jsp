@@ -5,12 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>상품 판매하기</title>
     <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ztfp2obt82"></script> <!-- 네이버 지도 API 키 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+   <script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-1.7.2.min.js"></script>
+
+
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
     <style>
         #map {
             width: 100%;
@@ -73,7 +79,22 @@
             z-index: 500;
         }
     </style>
+    
+    
+   
+    
+    
     <script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
         function searchAddress() {
             const address = document.getElementById('address').value;
             if (!address) {
@@ -271,6 +292,12 @@
     </script>
 </head>
 <body>
+	<input type="text" id="keyword" name="keyword" value="" onkeydown="fn_enterSearch();"/>
+	<input type="button" value="주소조회" onClick="javascript:fn_getAddress()">
+	<p>
+	<div id="list" ></div><!-- 검색 결과 리스트 출력 영역 -->
+
+
     <h2>상품 판매하기</h2>
     <div id="map"></div>
     <input type="text" id="address" placeholder="주소 입력">
