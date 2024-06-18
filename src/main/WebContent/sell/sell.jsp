@@ -18,12 +18,6 @@
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
     <style>
-        #map {
-            width: 100%;
-            height: 400px;
-        }
-        
-
         .narrow-select {
             width: 300px;
             height: auto;
@@ -44,32 +38,6 @@
         .subcategory-select {
             width: 100%;
         }
-        
-        #popup, #locationPopup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #f0f8ff;
-            border: 1px solid black;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-        #popup label, #locationPopup label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        #popup input[type="text"], #locationPopup select {
-            width: calc(100% - 50px);
-            margin-right: 10px;
-        }
-        #popup button, #locationPopup button {
-            width: 40px;
-            height: 30px;
-            background-color: green;
-            color: white;
-            border: none;
         }
         #overlay {
             position: fixed;
@@ -299,7 +267,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	<!-- 화면어둡게 -->
     <div id="overlay" class="hidden"></div>
     
-    <!--  -->
+    <!-- 주소확인 && 다음버튼 -->
     <form name="form" id="form" method="post" class="hidden">
 	<table >
 			<colgroup>

@@ -9,4 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+ <context-param>
+    <param-name>OracleDriver</param-name>
+    <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleURL</param-name>
+    <param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleId</param-name>
+    <param-value>c##musthave</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OraclePwd</param-name>
+    <param-value>1234</param-value>
+  </context-param>
+    <session-config>
+    <session-timeout>300</session-timeout>
+  </session-config>
 </web-app>
