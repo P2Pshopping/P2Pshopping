@@ -110,6 +110,55 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
     <script>
 
         $(document).ready(function() {
+        	
+        	  var data = [
+                  "유아 안전용품 > 아기 모니터",
+                  "유아 안전용품 > 침대 난간 및 가드",
+                  "유아 안전용품 > 게이트 및 가드",
+                  "유아 안전용품 > 기타 아기 및 어린이 안전용품",
+                  "유아 안전용품 > 놀이펜",
+                  "바운서, 로커 및 그네 > 아기 바운서",
+                  "바운서, 로커 및 그네 > 아기 로커",
+                  "바운서, 로커 및 그네 > 아기 그네",
+                  "바운서, 로커 및 그네 > 아기 보행기",
+                  "아기 옷",
+                  "카시트 및 아기 캐리어",
+                  "기저귀 용품 > 기저귀 가방",
+                  "기저귀 용품 > 기저귀 가방",
+                  "기저귀 용품 > 기저귀 매트",
+                  "기저귀 용품 > 기타 기저귀 갈이 용품",
+                  "기저귀 용품 > 유아용 변기",
+                  "수유 용품 > 젖병 워머",
+                  "수유 용품 > 젖병",
+                  "수유 용품 > 유축기",
+                  "수유 용품 > 기타 수유 용품",
+                  "유아 옷, 신발 및 액세서리 > 옷 묶음",
+                  "유아 옷, 신발 및 액세서리 > 드레스",
+                  "유아 옷, 신발 및 액세서리 > 청바지 및 바지",
+                  "유아 옷, 신발 및 액세서리 > 어린이 액세서리",
+                  "유아 옷, 신발 및 액세서리 > 코트 및 재킷",
+                  "유아 옷, 신발 및 액세서리 > 잠옷",
+                  "유아 옷, 신발 및 액세서리 > 기타 어린이 옷",
+                  "유아 옷, 신발 및 액세서리 > 신발 및 부츠",
+                  "유아 옷, 신발 및 액세서리 > 수영복",
+                  "유아 옷, 신발 및 액세서리 > 상의 및 셔츠",
+                  "유아 및 어린이 가구 > 욕조",
+                  "유아 및 어린이 가구 > 기저귀 교환대",
+                  "유아 및 어린이 가구 > 유아용 침대",
+                  "유아 및 어린이 가구 > 아기 침대 및 요람",
+                  "유아 및 어린이 가구 > 하이체어",
+                  "유아 및 어린이 가구 > 램프, 조명 및 갓",
+                  "유아 및 어린이 가구 > 기타",
+                  "야외 장난감 > 기타 야외 장난감",
+                  "야외 장난감 > 놀이집 및 놀이 텐트",
+                  "야외 장난감 > 모래놀이 및 물놀이 장난감",
+                  "야외 장난감 > 스쿠터",
+                  "야외 장난감 > 스케이트보드",
+                  "야외 장난감 > 미끄럼틀",
+                  "유모차 및 스토롤러",
+                  "장난감"
+              ];
+        	//검색어 자동완성
             $('#autocompleteInput').autocomplete({
                 source: function(request, response) {
                     var results = $.ui.autocomplete.filter(data, request.term);
@@ -117,11 +166,31 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
                 },
                 minLength: 1
             });
+            
+			//검색창옆 확인버튼
+            $("#autocompleteInput").on("input", function() {
+                var inputLength = $(this).val().length;
+                if (inputLength > 0) {
+                    $("#confirmButton").show();
+                } else {
+                    $("#confirmButton").hide();
+                }
+            });
 
+			//카테고리확인버튼
+            $('#confirmButton').click(function() {			
+                $('#overlay').show();
+                goPopup();
+                $('#categoryContainer').hide();
+                $('#subcategoryContainer').hide();
+            });
+
+			//'카테고리를 직접 둘러보시겠어요?'링크클릭
             $('#showCategoriesButton').click(function() {
                 $('#categoryContainer').toggleClass('hidden');
             });
 
+			// 상위카테고리 선택
             $('#categorySelect').change(function() {
                 const selectedCategory = $(this).val();
                 $('#subcategorySelect option').each(function() {
@@ -135,9 +204,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
                 $('#subcategoryContainer').removeClass('hidden');
             });
 
+            // 하위카테고리 선택
             $('#subcategorySelect').change(function() {			
                 $('#overlay').show();
                 goPopup();
+                $('#autocompleteInput').val('');
             });
 
           
@@ -150,51 +221,16 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </head>
 
 <body>
-
-<form name="form" id="form" method="post" class="hidden">
-	<table >
-			<colgroup>
-				<col style="width:20%"><col>
-			</colgroup>
-			<tbody>
-				<tr>
-					<th>우편번호</th>
-					<td>
-					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
-						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
-						<!-- <input type="button"  value="주소검색" onclick="goPopup();"> -->
-					</td>
-				</tr>
-				<tr>
-					<th>도로명주소</th>
-					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
-				</tr>
-				<tr>
-					<th>상세주소</th>
-					<td>
-						<input type="text" id="addrDetail" style="width:40%" value="">
-						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-</form>
-
-
-
-
+<%@include file="../layout/Header.jsp"%>
 
 
 
     <h2>상품 판매하기</h2>
-  <!--    <div id="map"></div>
-    <input type="text" id="address" placeholder="주소 입력">
-    <button onclick="openJusoPopup()">검색</button>
-    <div id="result"></div> -->
 
     <div class="container">
         <div class="category-section">
             <label for="autocompleteInput">어떤 물건을 판매하고 싶으신가요?:</label>
+             <button id="confirmButton" class="btn btn-primary hidden">확인</button>
             <input type="text" id="autocompleteInput" class="form-control" placeholder="유모차, 유아용품, 장난감, 안전용품 등">
         </div>
 
@@ -260,25 +296,40 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         </div>
     </div>
 
+	<!-- 화면어둡게 -->
     <div id="overlay" class="hidden"></div>
-    <div id="popup" class="hidden">
-        <label>판매자분의 위치를 알려주세요</label>
-        <button id="currentLocationButton">현재 위치로 설정하기</button>
-        <label>우편번호</label>
-        <input type="text" id="zipcode" placeholder="우편번호">
-        <button id="goButton">Go</button>
-        <p>우편번호는 외부에 공개되지 않습니다</p>
-        <p><a href="javascript:void(0);" id="selectLocation">위치를 직접 선택하시겠어요?</a></p>
-    </div>
-
-    <div id="locationPopup" class="hidden">
-        <label>도 선택</label>
-        <select id="provinceSelect"></select>
-        <label>시 선택</label>
-        <select id="citySelect" class="hidden"></select>
-        <label>동 선택</label>
-        <select id="districtSelect" class="hidden"></select>
-        <button id="locationConfirmButton">확인</button>
-    </div>
+    
+    <!--  -->
+    <form name="form" id="form" method="post" class="hidden">
+	<table >
+			<colgroup>
+				<col style="width:20%"><col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>우편번호</th>
+					<td>
+					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+						<!-- <input type="button"  value="주소검색" onclick="goPopup();"> -->
+					</td>
+				</tr>
+				<tr>
+					<th>도로명주소</th>
+					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td>
+						<input type="text" id="addrDetail" style="width:40%" value="">
+						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</form>
+    <button id="nextPage" class="btn btn-primary hidden">다음</button>
+    
 </body>
+<%@ include file="../layout/Footer.jsp"%>
 </html>

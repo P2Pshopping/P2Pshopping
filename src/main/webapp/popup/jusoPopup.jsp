@@ -63,8 +63,10 @@ function init(){
 		opener.jusoCallBack("<%=roadFullAddr%>","<%=roadAddrPart1%>","<%=addrDetail%>","<%=roadAddrPart2%>","<%=engAddr%>","<%=jibunAddr%>","<%=zipNo%>", "<%=admCd%>", "<%=rnMgtSn%>", "<%=bdMgtSn%>", "<%=detBdNmList%>", "<%=bdNm%>", "<%=bdKdcd%>", "<%=siNm%>", "<%=sggNm%>", "<%=emdNm%>", "<%=liNm%>", "<%=rn%>", "<%=udrtYn%>", "<%=buldMnnm%>", "<%=buldSlno%>", "<%=mtYn%>", "<%=lnbrMnnm%>", "<%=lnbrSlno%>", "<%=emdNo%>");
 		// overlay 닫기
 		opener.document.getElementById('overlay').style.display = 'none';
+		opener.document.getElementById('confirmButton').style.display = 'none';
 		// form 열기
 		opener.document.getElementById('form').style.display = 'block';
+		opener.document.getElementById('nextPage').style.display = 'block';
 		window.close();
 		}
 }
