@@ -14,8 +14,7 @@
 </head>
 <body>
 
-<!-- <%@include file="layout/Header.jsp"%> -->
-<%@include file="../layout/Header.jsp"%>
+<%@include file="layout/Header.jsp"%>
 <div style="display: flex; justify-content: center;">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style=" width : 1200px;" >
   <div class="carousel-indicators">
