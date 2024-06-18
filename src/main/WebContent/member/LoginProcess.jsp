@@ -18,6 +18,8 @@ String oracleURL = application.getInitParameter("OracleURL");
 String oracleId = application.getInitParameter("OracleId");
 String oraclePwd = application.getInitParameter("OraclePwd");
 
+System.out.println("Login attempt: " + userId);
+
 //회원 테이블 DAO를 통해 회원 정보 DTO 획득
 UserDAO dao = new UserDAO(oracleDriver, oracleURL, oracleId, oraclePwd);
 UserDTO userDTO = dao.getuserDTO(userId, userPwd);
@@ -26,6 +28,7 @@ dao.close();
 //로그인 성공 여부에 따른 처리
 if(userDTO.getId()!=0){
 	//로그인 성공
+	    System.out.println("Login successful: " + userDTO.getUsername());
 	session.setAttribute("UserId",userDTO.getId());
 	session.setAttribute("UserName",userDTO.getName());
 	response.sendRedirect("LoginForm.jsp");
@@ -34,6 +37,10 @@ else{
 	//로그인 실패
 	request.setAttribute("LoginErrMsg","로그인 오류입니다.");
 	request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
+	
+    // 로그인 실패
+    System.out.println("Login failed for user: " + userId);
+    response.sendRedirect("LoginForm.jsp?error=1");
 }
 %>
 <!DOCTYPE html>

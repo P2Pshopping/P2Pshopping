@@ -1,5 +1,7 @@
 package common; // 기본 패키지 이외의 패키지 (규약 1번)
 
+import java.security.Timestamp;
+
 public class UserDTO {
 	private int id;	//	private 멤버 변수(규약 2번)
 	private String username;
@@ -14,13 +16,13 @@ public class UserDTO {
 	private int cityId;
 	private int districtId;
 	private String auth;
-	private String createDate;
+	private Timestamp createDate;
 
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
 	public UserDTO(int id, String username, String name, String email, String phone, String address, String password,
-			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,String createDate) {
+			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,Timestamp createDate) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -143,11 +145,11 @@ public class UserDTO {
 		this.auth = auth;
 	}
 
-	public String getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
