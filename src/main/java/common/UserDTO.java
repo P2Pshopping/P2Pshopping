@@ -152,5 +152,4 @@ public class UserDTO {
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
-
 }
