@@ -8,9 +8,9 @@
 </head>
 <body>
 <div style="display: flex; justify-content: center;">
-<nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">
+<nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px; height: auto;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
+    <a class="navbar-brand" href="#" style="font-weight: 700; font-size : 25px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 25px;">i-</span>Market </a>
 
     <c:choose>
 				<c:when test="${sessionScope.principal != null}">
