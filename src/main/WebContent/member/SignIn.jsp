@@ -47,6 +47,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     UserDAO memberDAO = null;
     try {
         memberDAO = new UserDAO(application);
+        String hashedPassword = memberDAO.hashPassword(password); // 비밀번호 해시
+        user.setPassword(hashedPassword); // 해시된 비밀번호 설정
         boolean isUserAdded = memberDAO.addUser(user);
 
         if (isUserAdded) {
