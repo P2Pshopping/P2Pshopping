@@ -69,7 +69,7 @@
 	
 	<br/>
 	
-	<b style="border:solid 1px black;><%
+	<b style="border:solid 1px black;>"><%
 		String seller = (String) session.getAttribute("seller");  //판매자 이름
 		out.print(seller);
 	%>&nbsp;&nbsp;&nbsp;
