@@ -16,6 +16,7 @@ public class JDBConnect {
 
 	// 기본 생성자
 	public JDBConnect() {
+		// 데이터베이스 연결 설정
 		try {
 			// JDBC 드라이버 로드
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -33,7 +34,7 @@ public class JDBConnect {
 		}
 	}
 
-	// 두 번째 생성자 194p
+	// 매개변수를 통한 두 번째  생성자
 	public JDBConnect(String driver, String url, String id, String pwd) {
 		try {
 			// JDBC 드라이버 로드
@@ -61,17 +62,18 @@ public class JDBConnect {
 //		}
 //}
 		
-	
+	   // ServletContext를 사용하는 생성자
 	public JDBConnect(ServletContext application) {
 		try {
-			//JDBC 드라이버 로드
-			String driver = application.getInitParameter("OracleDriver");
-			Class.forName(driver);
-			
 			//DB에 연결
+			String driver = application.getInitParameter("OracleDriver");
 			String url = application.getInitParameter("OracleURL");
 			String id= application.getInitParameter("OracleId");
 			String pwd = application.getInitParameter("OraclePwd");
+			
+			//JDBC 드라이버 로드
+			Class.forName(driver);
+			// 데이터베이스 연결
 			con = DriverManager.getConnection(url,id,pwd);
 			
 			System.out.println("DB 연결 성공(인수 생성자 2)");

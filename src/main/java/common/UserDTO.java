@@ -16,13 +16,13 @@ public class UserDTO {
 	private int cityId;
 	private int districtId;
 	private String auth;
-	private Timestamp createDate;
+	private java.sql.Timestamp createDate;
 
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
 	public UserDTO(int id, String username, String name, String email, String phone, String address, String password,
-			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,Timestamp createDate) {
+			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,java.sql.Timestamp createDate) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -145,11 +145,11 @@ public class UserDTO {
 		this.auth = auth;
 	}
 
-	public Timestamp getCreateDate() {
+	public java.sql.Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(java.sql.Timestamp createDate) {
 		this.createDate = createDate;
 	}
 }

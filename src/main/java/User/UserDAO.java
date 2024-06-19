@@ -22,8 +22,11 @@ public class UserDAO extends JDBConnect {
 
 	// 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
 	public UserDTO getuserDTO(String uid, String upass) {
-		UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
-		String query = "SELECT * FROM users WHERE id=? AND password=?";
+//		UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
+//		String query = "SELECT * FROM users WHERE id=? AND password=?";
+		  UserDTO dto = null;
+	        String query = "SELECT * FROM users WHERE username=? AND password=?";
+		
 		
         System.out.println("Executing query: " + query);
         System.out.println("Parameters: " + uid + ", " + upass);
@@ -39,9 +42,10 @@ public class UserDAO extends JDBConnect {
 			// 결과 처리
 			if (rs.next()) {
 				// 쿼리 결과로 얻은 회원 정보를 DTO 객체에 저장
+				  dto = new UserDTO();
                 dto.setId(rs.getInt("id"));
                 dto.setUsername(rs.getString("username"));
-                dto.setPassword(rs.getString("password"));
+                dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
                 dto.setName(rs.getString("name"));
                 dto.setEmail(rs.getString("email"));
                 dto.setPhone(rs.getString("phone"));
@@ -64,26 +68,26 @@ public class UserDAO extends JDBConnect {
 		return dto; // DTO 객체 반환
 	}
 								//////////////////////////////////////
-	  private String hashPassword(String password) {
-	        try {
-	            MessageDigest md = MessageDigest.getInstance("SHA-256");
-	            byte[] hash = md.digest(password.getBytes());
-	            StringBuilder hexString = new StringBuilder();
-	            for (byte b : hash) {
-	                hexString.append(String.format("%02x", b));
-	            }
-	            return hexString.toString();
-	        } catch (NoSuchAlgorithmException e) {
-	            throw new RuntimeException(e);
-	        }
-	    }
+    public String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 	
 	
 	
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
         String sql = "INSERT INTO users (username, name, email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
@@ -99,6 +103,7 @@ public class UserDAO extends JDBConnect {
             stmt.setInt(11, user.getDistrictId());
             stmt.setString(12, user.getAuth());
 //            stmt.setString(13, user.getTimestamp());
+            stmt.setTimestamp(13, new java.sql.Timestamp(System.currentTimeMillis()));
             
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
