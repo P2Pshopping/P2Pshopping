@@ -9,8 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
- <context-param>
+  <context-param>
     <param-name>OracleDriver</param-name>
     <param-value>oracle.jdbc.OracleDriver</param-value>
   </context-param>
@@ -25,17 +24,23 @@
   <context-param>
     <param-name>OraclePwd</param-name>
     <param-value>1234</param-value>
-    
   </context-param>
-    <session-config>
+  <session-config>
     <session-timeout>300</session-timeout>
   </session-config>
-  
+  <servlet>
+    <description></description>
+    <display-name>Test</display-name>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>DetailTest.Test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/Test</url-pattern>
+  </servlet-mapping>
     <context-param>
     <param-name>CHAT_ADDR</param-name>
     <param-value>ws://localhost:8081/MustHaveJSP</param-value>
   </context-param>
-  
-   
-  
+
 </web-app>

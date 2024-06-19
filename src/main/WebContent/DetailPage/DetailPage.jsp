@@ -69,7 +69,13 @@
 	
 	<br/>
 	
-	<p style="margin-right:30%;text-align:right"> <b>닉네임</b>&nbsp;&nbsp;&nbsp;<b>아이나이</b> </p> <!-- 글정보를  기반으로 찾아서 넣기  -->
+	<b style="border:solid 1px black;>"><%
+		String seller = (String) session.getAttribute("seller");  //판매자 이름
+		out.print(seller);
+	%>&nbsp;&nbsp;&nbsp;
+	
+	</b>
+	  
 	
 	<hr class="recenter" style="border:solid 1px black; width:1200px;">
 	
@@ -177,8 +183,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     marker.setPosition(latlng);
     
-    
-    
+   
     
 });
 
