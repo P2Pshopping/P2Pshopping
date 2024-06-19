@@ -56,8 +56,6 @@ footer {
 </head>
 <body>
 
-
-
 <!-- Main Container -->
 <div id="container">
     <div class="flex-container">
