@@ -25,8 +25,17 @@
   <context-param>
     <param-name>OraclePwd</param-name>
     <param-value>1234</param-value>
+    
   </context-param>
     <session-config>
     <session-timeout>300</session-timeout>
   </session-config>
+  
+    <context-param>
+    <param-name>CHAT_ADDR</param-name>
+    <param-value>ws://localhost:8081/MustHaveJSP</param-value>
+  </context-param>
+  
+   
+  
 </web-app>

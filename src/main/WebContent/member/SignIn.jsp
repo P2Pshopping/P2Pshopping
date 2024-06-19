@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="common.JDBConnect" %>
@@ -9,54 +9,60 @@
 <%
 String message = null;
 
-    if ("POST".equalsIgnoreCase(request.getMethod())) {
-        String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String password = request.getParameter("password");
-        int kakaoId = Integer.parseInt(request.getParameter("kakaoId"));
-        int naverId = Integer.parseInt(request.getParameter("naverId"));
-        int provinceId = Integer.parseInt(request.getParameter("provinceId"));
-        int cityId = Integer.parseInt(request.getParameter("cityId"));
-        int districtId = Integer.parseInt(request.getParameter("districtId"));
-        String auth = request.getParameter("auth");
+if ("POST".equalsIgnoreCase(request.getMethod())) {
+    String username = request.getParameter("username");
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    String phone = request.getParameter("phone");
+    String address = request.getParameter("address");
+    String password = request.getParameter("password");
 
-        UserDTO user = new UserDTO();
-        user.setUsername(username);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setPassword(password);
-        user.setKakaoId(kakaoId);
-        user.setNaverId(naverId);
-        user.setProvinceId(provinceId);
-        user.setCityId(cityId);
-        user.setDistrictId(districtId);
-        user.setAuth(auth);
+    // 빈 문자열 또는 null 체크 후 기본값 설정
+    int kakaoId = request.getParameter("kakaoId") != null && !request.getParameter("kakaoId").isEmpty() 
+                  ? Integer.parseInt(request.getParameter("kakaoId")) : 0;
+    int naverId = request.getParameter("naverId") != null && !request.getParameter("naverId").isEmpty() 
+                  ? Integer.parseInt(request.getParameter("naverId")) : 0;
+    int provinceId = request.getParameter("provinceId") != null && !request.getParameter("provinceId").isEmpty() 
+                     ? Integer.parseInt(request.getParameter("provinceId")) : 0;
+    int cityId = request.getParameter("cityId") != null && !request.getParameter("cityId").isEmpty() 
+                 ? Integer.parseInt(request.getParameter("cityId")) : 0;
+    int districtId = request.getParameter("districtId") != null && !request.getParameter("districtId").isEmpty() 
+                     ? Integer.parseInt(request.getParameter("districtId")) : 0;
+    String auth = request.getParameter("auth");
 
-        UserDAO memberDAO = null;
-        try {
-            ServletContext application = getServletContext();
-            memberDAO = new UserDAO(application);
-            boolean isUserAdded = memberDAO.addUser(user);
+    UserDTO user = new UserDTO();
+    user.setUsername(username);
+    user.setName(name);
+    user.setEmail(email);
+    user.setPhone(phone);
+    user.setAddress(address);
+    user.setPassword(password);
+    user.setKakaoId(kakaoId);
+    user.setNaverId(naverId);
+    user.setProvinceId(provinceId);
+    user.setCityId(cityId);
+    user.setDistrictId(districtId);
+    user.setAuth(auth);
 
-            if (isUserAdded) {
-                message = "회원가입이 성공적으로 완료되었습니다.";
-            } else {
-                message = "회원가입에 실패했습니다. 다시 시도해주세요.";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            message = "회원가입 중 오류가 발생했습니다: " + e.getMessage();
-        } finally {
-            if (memberDAO != null) {
-                memberDAO.close();
-            }
+    UserDAO memberDAO = null;
+    try {
+        memberDAO = new UserDAO(application);
+        boolean isUserAdded = memberDAO.addUser(user);
+
+        if (isUserAdded) {
+            message = "회원가입이 성공적으로 완료되었습니다.";
+        } else {
+            message = "회원가입에 실패했습니다. 다시 시도해주세요.";
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        message = "회원가입 중 오류가 발생했습니다: " + e.getMessage();
+    } finally {
+        if (memberDAO != null) {
+            memberDAO.close();
         }
     }
+}
 %>
 
 <!DOCTYPE html>
@@ -99,3 +105,4 @@ String message = null;
     <% } %>
 </body>
 </html>
+
