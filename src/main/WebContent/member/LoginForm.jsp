@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- Add JSTL core taglib // JSTL 태그 (동적 경로)-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,24 +32,17 @@
 			}
 		}
 	</script>
-	<form action="LoginProcess.jsp" method="post" name="loginFrm">
-		<!-- onsubmit="return validateForm(this);"> -->
+	
+	<!-- mode1로그인 -->
+ <!-- <form action="LoginProcess.jsp" method="post" name="loginFrm">
+
 		아이디 : <input type="text" name="user_id" /><br /> 
 		패스워드 : <input
 			type="password" name="user_pw" /><br /> 
-		<!-- 	<input type="text" name="user_username" /><br />
-			<input
-			type="text" name="user_name" /><br /> 
-			<input
-			type="text" name="user_email" /><br /> 
-			<input
-			type="text" name="user_phone" /><br /> 
-			<input
-			type="text" name="user_address" /><br />   -->
-			<!-- <button type="button" class="btn btn-success" />로그인하기</button> -->
+
 			<input type="submit" value="로그인하기"/>
-	</form>
-	<%
+	</form>	
+ 	<%
 	} else { //로그인된 상태
 	%>
 	<%=session.getAttribute("UserName")%>
@@ -56,6 +51,20 @@
 	<a href="Logout.jsp">[로그아웃]</a>
 	<%
 	}
-	%>
+	%>  -->
+	
+	
+	
+	
+	<!-- 서블릿 로그인(model2) -->
+<form action="<c:url value='/login' />" method="post"><!-- JSTL (동적 경로)-->
+    Username: <input type="text" name="username"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+</form>
+<% if (request.getParameter("error") != null) { %>
+    <p style="color: red;">Invalid username or password. Please try again.</p>
+<% } %>
+
 </body>
 </html>

@@ -38,9 +38,32 @@
     <servlet-name>Test</servlet-name>
     <url-pattern>/Test</url-pattern>
   </servlet-mapping>
-    <context-param>
+  <context-param>
     <param-name>CHAT_ADDR</param-name>
     <param-value>ws://localhost:8081/MustHaveJSP</param-value>
   </context-param>
-
+  
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <!-- 서블릿 이름: 서블릿을 식별하는 데 사용됨 -->
+    <servlet-name>LoginServlet</servlet-name>
+    <!-- 서블릿 클래스: 실제 서블릿 구현 클래스의 완전한 이름을 지정함 -->
+    <servlet-class>User.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+     <!-- URL 패턴: 이 서블릿이 응답할 URL 패턴을 지정함 -->
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>User.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
 </web-app>
