@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,19 +17,14 @@ body {
 	height: 100vh;
 	margin: 0;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	
 }
 
 #container {
 	width: 1200px;
 	padding: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	background-color: #f8f9fa;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
+	
 }
 
 #contents {
