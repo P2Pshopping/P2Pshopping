@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 
 .center{
@@ -12,9 +12,9 @@
 }
 
 
-.map2 {
+.end {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   
 }
 
