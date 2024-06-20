@@ -2,6 +2,8 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- Add JSTL core taglib // JSTL 태그 (동적 경로)-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");//날짜 표시 형식
 
@@ -29,5 +31,16 @@ String lastTimeStr = dateFormat.format(new Date(lastTime));
 		<li>마지막 요청 시각 : <%=lastTimeStr%>
 		</li>
 	</ul>
+	
+	<h2>서블랫 로그인(model2)</h2>
+	<% 
+    String username = (String) session.getAttribute("username");
+    if (username == null) {
+        response.sendRedirect("LoginForm.jsp");
+        return;
+    }
+%>
+<h1>Welcome, <%= username %>!</h1>
+<a href="<c:url value='/logout.do' />" >Logout</a>
 </body>
 </html>
