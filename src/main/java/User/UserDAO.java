@@ -20,8 +20,10 @@ public class UserDAO extends JDBConnect {
         super(application);
     }
 
+    
+    
 	// 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
-	public UserDTO getuserDTO(String uid, String upass) {
+	public UserDTO getUserDTO(String uid, String upass) {
 //		UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
 		  UserDTO dto = null;
@@ -56,8 +58,6 @@ public class UserDAO extends JDBConnect {
                 dto.setCityId(rs.getInt("cityId"));
                 dto.setDistrictId(rs.getInt("districtId"));
                 dto.setAuth(rs.getString("auth"));
-//                dto.setCreateDate(rs.getTimestamp("createDate"));
-//                dto.setCreateDate(rs.getTimestamp("createDate"));
                 System.out.println("User found: " + dto.getUsername());
 			} else {
                 System.out.println("No user found with provided credentials.");
@@ -67,20 +67,31 @@ public class UserDAO extends JDBConnect {
 		}
 		return dto; // DTO 객체 반환
 	}
-								//////////////////////////////////////
-    public String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(password.getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                hexString.append(String.format("%02x", b));
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
+							
+	
+	
+	//비밀번호 해시화 매서드
+	public String hashPassword(String password) {
+	    try {
+	        // MessageDigest 인스턴스를 SHA-256 알고리즘으로 초기화.
+	        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+	        // 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
+	        byte[] hash = md.digest(password.getBytes());
+
+	        // 해시 값을 16진수 문자열로 변환하기 위해 StringBuilder를 사용.
+	        StringBuilder hexString = new StringBuilder();
+	        for (byte b : hash) {
+	            // 각 바이트를 16진수로 변환하여 StringBuilder에 추가.
+	            hexString.append(String.format("%02x", b));
+	        }
+	        // 최종적으로 16진수 문자열을 반환.
+	        return hexString.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        // SHA-256 알고리즘이 지원되지 않는 경우 발생할 수 있는 예외를 처리.
+	        throw new RuntimeException(e);
+	    }
+	}
 	
 	
 	

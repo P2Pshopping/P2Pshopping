@@ -1,0 +1,118 @@
+@charset "UTF-8";
+body{
+	
+    background-color:#FAFAFA;
+    margin: 0px;
+    color: #262626;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color:#262626;
+}
+
+.login_wrapper{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  	width:330px;
+    height:380px;
+    top:50%;
+    left:50%;
+    margin: -175px 0px 0px -190px;
+    background-color:white;
+
+}
+
+.login_logo{
+    margin :30px 0 30px 0;
+    color:#262626;
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    font-weight: 100px;
+}
+
+.login_form{
+    display:flex;
+     align-items: center;
+    flex-direction: column;
+    width:350px;
+    margin-top:10px;
+}
+
+.login_text{
+    width:100%;
+    height:40px;
+    margin: 3px 0 3px 0 ;
+    padding: 0 10px 0 10px;
+    background-color:#FAFAFA;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    font-size:15px;
+}
+
+.login_text:focus{
+    outline: 1px solid #a8a8a8;
+}
+
+.login_text::placeholder{
+    color:#8E8E8E;
+}
+
+.login_text::value{
+    color:#262626;
+}
+
+.login_btn{
+    width:100%;
+    height:33px;
+    margin: 10px 0 5px 0;
+    color:white;
+    background-color: #C0DFFD;
+    border-radius: 5px;
+    border-style: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login_bottom{
+    margin-top: 65px;
+    color:#01376A;
+    font-size: 13px;
+}
+.join_wrapper2{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  	width:330px;
+    height:380px;
+    top:50%;
+    left:50%;
+    margin: -175px 0px 0px -190px;
+    background-color:white;
+    }
+.join_form{
+    display:flex;
+     align-items: center;
+    flex-direction: column;
+    width:600px;
+    margin-top:10px;
+}
+
+ .login_button {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+  --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+  --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+}
