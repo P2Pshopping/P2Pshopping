@@ -17,7 +17,7 @@
 	<%=request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg")%>
 	</span>
 	<%
-	if (session.getAttribute("UserId") == null) { //로그인 상태 확인
+	if (session.getAttribute("username") == null) { //로그인 상태 확인(세션)
 		//로그아웃 상태
 	%>
 	<script>
@@ -41,23 +41,10 @@
 			type="password" name="user_pw" /><br /> 
 
 			<input type="submit" value="로그인하기"/>
-	</form>	
- 	<%
-	} else { //로그인된 상태
-	%>
-	<%=session.getAttribute("UserName")%>
-	회원님, 로그인하셨습니다.
-	<br />
-	<a href="Logout.jsp">[로그아웃]</a>
-	<%
-	}
-	%>  -->
-	
-	
-	
-	
+	</form>	  -->
+
 	<!-- 서블릿 로그인(model2) -->
-<form action="<c:url value='/login' />" method="post"><!-- JSTL (동적 경로)-->
+<form action="<c:url value='/login.do' />" method="post"><!-- JSTL (동적 경로)-->
     Username: <input type="text" name="username"><br>
     Password: <input type="password" name="password"><br>
     <input type="submit" value="Login">
@@ -65,6 +52,18 @@
 <% if (request.getParameter("error") != null) { %>
     <p style="color: red;">Invalid username or password. Please try again.</p>
 <% } %>
+
+
+ 	<%
+	} else { //로그인된 상태
+	%>
+	<%=session.getAttribute("UserName")%>
+	회원님, 로그인하셨습니다.
+	<br />
+	<a href="<c:url value='/logout.do' />">[로그아웃]</a>
+	<%
+	}
+	%>
 
 </body>
 </html>

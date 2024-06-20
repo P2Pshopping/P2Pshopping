@@ -54,7 +54,7 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
      <!-- URL 패턴: 이 서블릿이 응답할 URL 패턴을 지정함 -->
-    <url-pattern>/Login</url-pattern>
+    <url-pattern>/Login.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -64,6 +64,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/Logout</url-pattern>
+    <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
 </web-app>

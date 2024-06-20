@@ -41,6 +41,6 @@ String lastTimeStr = dateFormat.format(new Date(lastTime));
     }
 %>
 <h1>Welcome, <%= username %>!</h1>
-<a href="<c:url value='/logout' />" >Logout</a>
+<a href="<c:url value='/logout.do' />" >Logout</a>
 </body>
 </html>
