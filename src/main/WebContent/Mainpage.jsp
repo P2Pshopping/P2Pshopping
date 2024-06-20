@@ -43,11 +43,11 @@
     </div>
     
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -60,7 +60,32 @@
   </blockquote>
 </figure>
 </div>
-
+<div class="container" style="display: flex; justify-content: center;" >
+  <div class="row" style="width:1200px;">
+    <div class="col">
+      <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+    <div class="col">
+            <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+    <div class="col">
+            <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+  </div>
+  </div>
+  <div class="container" style="display: flex; justify-content: center; margin-top:100px;" >
+  <div class="row" style="width:1200px;">
+    <div class="col" >
+            <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+    <div class="col">
+            <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+    <div class="col">
+            <h3>조회수 또는 찜하기 기반으로 인기상품 불러오기</h3>
+    </div>
+  </div>
+  </div>
 </body>
 
 <%@ include file="layout/Footer.jsp"%>
