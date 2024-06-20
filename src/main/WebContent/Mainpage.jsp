@@ -22,16 +22,24 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <a><img src="Image/Header/babe1.jpg" class="pics" alt="..." width="1200" height="450"></a>
+  <div class="carousel-item active">
+      <a><img src="Image/logobanner.png" class="pics" alt="..." width="1200" height="450"></a>
     </div>
     <div class="carousel-item">
-      <a><img src="Image/Header/babe2.jpg" class="pics" alt="..." width="1200" height="450"></a>
+      <a><img src="https://baby-direct.com.au/cdn/shop/files/Copy_of_Pink_and_Tan_Flowers_Modern_Artisan_Business_X-Frame_Banner_4_1200x.png?v=1641170892" class="pics" alt="..." width="1200" height="450"></a>
     </div>
     <div class="carousel-item">
-      <img src="Image/Header/babe3.jpg" class="pics" alt="..." width="1200" height="450">
+      <a><img src="https://cdn.shopify.com/s/files/1/0082/8070/3056/files/eggbanner.jpg?v=1559160385" class="pics" alt="..." width="1200" height="450"></a>
+    </div>
+    <div class="carousel-item">
+      <img src="https://cdn.shopify.com/s/files/1/0082/8070/3056/files/KINGS_BABYSHOP_-_Oyster3_-_1200_x_400px.jpg?v=1559245858" class="pics" alt="..." width="1200" height="450">
+    </div>
+    <div class="carousel-item">
+      <img src="https://angusanddudleycollections.com.au/cdn/shop/files/A_D_Website_Banner_3000_x_1200_px_50806e8f-e8ad-4e00-bb42-13ce6e502bcd_1600x.png?v=1715729012" class="pics" alt="..." width="1200" height="450">
     </div>
     
   </div>
