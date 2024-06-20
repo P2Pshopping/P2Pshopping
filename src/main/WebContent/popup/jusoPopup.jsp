@@ -37,6 +37,12 @@
 	String emdNo  = request.getParameter("emdNo");
 
 %>
+<style>
+/* 바탕 배경 이미지 */
+.pop-address-search { background-image: url(http://www.0000.com/img/backImg.png);}
+/* 회사 로고 이미지 */
+.pop-address-search .pop-address-search-inner .logo { background: url(http://www.0000.com/img/logo.png) no-repeat; background-position:center; }
+</style>
 </head>
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.)
@@ -72,6 +78,7 @@ function init(){
 }
 </script>
 <body onload="init();">
+
 	<form id="form" name="form" method="post">
 		<input type="hidden" id="confmKey" name="confmKey" value=""/>
 		<input type="hidden" id="returnUrl" name="returnUrl" value=""/>

@@ -34,7 +34,7 @@
         .photo-upload {
             border: 2px dashed #ccc;
             border-radius: 8px;
-            text-align: center;
+            text-align: ce nter;
             padding: 20px;
             margin-bottom: 10px;
         }
