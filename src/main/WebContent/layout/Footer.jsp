@@ -10,7 +10,6 @@
 	width: 1200px;
 	margin-top: 28px;
 	padding-bottom: 25px;
-	background: url(/img/imfs/main/bg_footer.jpg) repeat-x;
 	font-family: "Noto Sans KR";
 	font-weight: 400;
 	font-size: 12px;

@@ -10,11 +10,12 @@
 <div style="display: flex; justify-content: center;">
 <nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">
   <div class="container-fluid">
-    <div class=row>
-    <div class=col-md-2>
+    <div class=row style="width:1100px;">
+    <div class=col-sm-4>
     <a class="navbar-brand" href="#" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
 	</div>
-	<div class=col-md-4>
+	<div class=col-md-4></div>
+	<div class=col-md-4 style="display: flex; justify-content: right; align-items: center" >
     <c:choose>
 				<c:when test="${sessionScope.principal != null}">
 						<c:if test="${sessionScope.principal.auth eq 'admin' }">
@@ -32,13 +33,12 @@
 				</c:when>
 				<c:otherwise>
 						<a href="<%=request.getContextPath()%>/member/LoginForm.jsp"
-							class="header-sub-menu">로그인</a> <a
+							class="header-sub-menu" style="margin: 5px;">로그인</a> <a
 							href="<%=request.getContextPath()%>/user?cmd=joinForm"
 							class="header-sub-menu">회원가입</a>
 				</c:otherwise>
 			</c:choose>
 			</div>
-			
   </div>
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
             중고장터
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item"  onclick="location.href='../iMarket/ItemList.jsp'">상품목록</a></li>
+            <li><a class="dropdown-item"  href="../iMarket/ItemList.jsp">상품목록</a></li>
             <li><a class="dropdown-item" href="#">후기글</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">커뮤니티</a></li>
@@ -68,8 +68,9 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
-  </div>
+    </div>
 </nav>
+
 </div>
 </body>
 </html>
