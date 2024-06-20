@@ -29,8 +29,8 @@ UserDAO dao = new UserDAO(oracleDriver, oracleURL, oracleId, oraclePwd);
 
 
 String hashedPassword = dao.hashPassword(userPwd); ///////////// 비밀번호 해시
-UserDTO userDTO = dao.getuserDTO(username, hashedPassword); // 해시된 비밀번호를 사용하여 DB 조회
-/*UserDTO userDTO = dao.getuserDTO(username, userPwd);*/
+UserDTO userDTO = dao.getUserDTO(username, hashedPassword); // 해시된 비밀번호를 사용하여 DB 조회
+/*UserDTO userDTO = dao.getUserDTO(username, userPwd);*/
 dao.close();
 
 //로그인 성공 여부에 따른 처리

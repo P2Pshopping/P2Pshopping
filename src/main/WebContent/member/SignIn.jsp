@@ -7,6 +7,8 @@
 <%@ page import="jakarta.servlet.ServletContext" %>
 
 <%
+
+
 String message = null;
 
 if ("POST".equalsIgnoreCase(request.getMethod())) {
