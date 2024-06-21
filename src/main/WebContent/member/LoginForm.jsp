@@ -57,7 +57,7 @@
  	<%
 	} else { //로그인된 상태
 	%>
-	<%=session.getAttribute("UserName")%>
+	<%=session.getAttribute("username")%>
 	회원님, 로그인하셨습니다.
 	<br />
 	<a href="<c:url value='/logout.do' />">[로그아웃]</a>

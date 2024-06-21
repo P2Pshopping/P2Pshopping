@@ -18,6 +18,14 @@
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
     <style>
+            body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            
+           /* text-align: center;*/
+            padding: 20px;
+            margin-bottom: 10px;
+        }
         .narrow-select {
             width: 300px;
             height: auto;
@@ -25,9 +33,16 @@
         option {
             color: black;
         }
-        .container {
+        /*.container {
             max-width: 800px;
             margin-top: 50px;
+        }*/
+           .container {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .category-section, .subcategory-section {
             margin-top: 20px;
@@ -52,7 +67,7 @@
     </style>
     
     
-   
+   <!-- 도로명지도검색 API -->
     <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
@@ -188,7 +203,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
     
 </head>
 
-<body>
+<body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
 <%@include file="../layout/Header.jsp"%>
 
 
