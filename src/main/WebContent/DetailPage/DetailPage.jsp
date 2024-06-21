@@ -102,15 +102,20 @@
 </script>
 	
 	<br/>
+	<div>
+	<svg style="float:left; border: solid 1px black;" xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+</svg>
 	
-	<div class="end" style="margin-right:500px;">
-	<b style="border:solid 1px black;"><%
+	
+	<div class="end" style="float:right;">
+	<b style="border:solid 1px black; width:auto; height:auto; " ><%
 		String seller = (String) session.getAttribute("seller");  //판매자 이름
 		out.print(seller);
 	%>&nbsp;&nbsp;&nbsp;
 	</b>
 	</div>  
-	
+	</div>
 	<hr class="recenter" style="border:solid 1px black; width:1200px;">
 	
 	<br/>
@@ -129,16 +134,14 @@
 	
 	
 	
-	
+	<div>
 	 <div class="container text-center">
-	 <div class="col" style="float:right;  margin-right:100px; ">
 	<%@ include file="./MultiChatMain.jsp"%> <!-- 세션에서 가져온 아이디를 기반으로 찾아서 넣기  -->
 	</div>
-	</div>
 	
 	
-	<div class="container text-center">		
-		<table class="table" style=" width: 500px; height:200px;">
+	<div style="margin:0 auto; ">
+		<table class="table" style=" width: 500px; height:200px; margin:0 auto; ">
   <thead >
     <tr>
       <th scope="col">#</th>
@@ -147,7 +150,7 @@
       <th scope="col">Handle</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <tr>
       <th scope="row">1</th>
       <td>Mark</td>
@@ -169,19 +172,19 @@
   </tbody>
 </table>
 </div>
-
-
+</div>
 <br/>
 <br/>
 <br/>
 	
 
 	
-<div class="container text-center">	
+
 <div class="map_wrap">
-    <div id="map" style="width:500px;height:300px;position:relative;overflow:hidden; "></div>
-	
-    <div id="menu_wrap" class="bg_white" >
+    <div id="map" style="width:500px;height:300px;position:relative;overflow:hidden; margin:0 auto; border:solid 2px black;"></div>
+ 
+   
+    <div id="menu_wrap" class="bg_white" style="border:solid 2px black;" >
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
@@ -197,9 +200,7 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-</div>
-</div>
-
+   </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0637e168501ef6ed107e35286b4b79b1&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
