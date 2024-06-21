@@ -48,6 +48,8 @@ public class UserDAO extends JDBConnect {
                 dto.setId(rs.getInt("id"));
                 dto.setUsername(rs.getString("username"));
                 dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
+                dto.setBirth(rs.getString("birth"));
+                dto.setNickname(rs.getString("nickname"));
                 dto.setName(rs.getString("name"));
                 dto.setEmail(rs.getString("email"));
                 dto.setPhone(rs.getString("phone"));
@@ -76,6 +78,9 @@ public class UserDAO extends JDBConnect {
 	        // MessageDigest 인스턴스를 SHA-256 알고리즘으로 초기화.
 	        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
+	        if(password == null) {
+        		System.out.println("Password is null");
+        	}
 	        // 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
 	        byte[] hash = md.digest(password.getBytes());
 
@@ -97,24 +102,26 @@ public class UserDAO extends JDBConnect {
 	
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (username, name, email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getName());
-            stmt.setString(3, user.getEmail());
-            stmt.setString(4, user.getPhone());
-            stmt.setString(5, user.getAddress());
-            stmt.setString(6, user.getPassword());
-            stmt.setInt(7, user.getKakaoId());
-            stmt.setInt(8, user.getNaverId());
-            stmt.setInt(9, user.getProvinceId());
-            stmt.setInt(10, user.getCityId());
-            stmt.setInt(11, user.getDistrictId());
-            stmt.setString(12, user.getAuth());
+            stmt.setString(3,user.getNickname());
+            stmt.setString(4,user.getBirth());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getAddress());
+            stmt.setString(8, user.getPassword());
+            stmt.setInt(9, user.getKakaoId());
+            stmt.setInt(10, user.getNaverId());
+            stmt.setInt(11, user.getProvinceId());
+            stmt.setInt(12, user.getCityId());
+            stmt.setInt(13, user.getDistrictId());
+            stmt.setString(14, user.getAuth());
 //            stmt.setString(13, user.getTimestamp());
-            stmt.setTimestamp(13, new java.sql.Timestamp(System.currentTimeMillis()));
+            stmt.setTimestamp(15, new java.sql.Timestamp(System.currentTimeMillis()));
             
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;

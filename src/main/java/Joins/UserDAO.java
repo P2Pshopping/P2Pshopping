@@ -1,12 +1,12 @@
 package Joins;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Joins.UserDTO;
+import common.JDBConnect;
 import jakarta.servlet.ServletContext;
-import utils.JDBConnect;
 
 public class UserDAO extends JDBConnect {
 
@@ -23,7 +23,7 @@ public class UserDAO extends JDBConnect {
   //  	UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
 		  UserDTO dto = null;
-	        String query = "SELECT * FROM users WHERE username=? AND password=?";
+	        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
 		
 		
         System.out.println("Executing query: " + query);
@@ -65,7 +65,30 @@ public class UserDAO extends JDBConnect {
         }
         return dto;
     }
+	public String hashPassword(String password) {
+	    try {
+	        // MessageDigest 인스턴스를 SHA-256 알고리즘으로 초기화.
+	        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
+	       
+	        		
+	        // 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
+	        byte[] hash = md.digest(password.getBytes());
+
+	        // 해시 값을 16진수 문자열로 변환하기 위해 StringBuilder를 사용.
+	        StringBuilder hexString = new StringBuilder();
+	        for (byte b : hash) {
+	            // 각 바이트를 16진수로 변환하여 StringBuilder에 추가.
+	            hexString.append(String.format("%02x", b));
+	        }
+	        // 최종적으로 16진수 문자열을 반환.
+	        return hexString.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        // SHA-256 알고리즘이 지원되지 않는 경우 발생할 수 있는 예외를 처리.
+	        throw new RuntimeException(e);
+	    }
+	}
+	
     public boolean addUser(UserDTO user) {
         String sql = "INSERT INTO users (name, birth, username, password, email, phone, address, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

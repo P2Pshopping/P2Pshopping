@@ -6,6 +6,7 @@ public class UserDTO {
 	private String name;		//본명
 	private String birth;		//생년월일
 	private String username;	// 가입아이디
+	private String nickname;
 	private String email;		//이메일
 	private String phone;		//휴대폰번호
 	private String address;		//주소
@@ -22,13 +23,14 @@ public class UserDTO {
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
-	public UserDTO(int id, String name, String birth,String username, String email, String phone, String address, String password,
+	public UserDTO(int id, String name, String nickname,String birth,String username, String email, String phone, String address, String password,
 			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,java.sql.Timestamp createDate) {
 		super();
 		this.username = username;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.nickname=nickname;
 		this.address = address;
 		this.password = password;
 		this.kakaoId = kakaoId;
@@ -47,8 +49,14 @@ public class UserDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getNickname() {
 		return name;
 	}
 
