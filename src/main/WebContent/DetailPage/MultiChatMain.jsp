@@ -15,14 +15,15 @@
 				id.focus();
 				return;
 			}
+			
 			window.open("ChatWindow.jsp?chatId=" + id.value, "",
-					"width=320,height=400");
+					"width=300,height=400,left=750px,top=350px");
 		}
 	</script>
 	<input type="text"
 		value=<%String username = (String) session.getAttribute("username"); //판매자 이름
 out.print(username);%>
 		id="chatId"  style="display:none;"/>
-	<button onclick="chatWinOpen();">채팅 참여</button>
+	<button class="btn btn-warning" onclick="chatWinOpen();" style="width:100px; height:50px; float:right;" >채팅 참여</button>
 </body>
 </html>
