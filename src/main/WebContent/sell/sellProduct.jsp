@@ -81,14 +81,34 @@
             background-color: #218838;
         }
     </style>
+    
+ 
+</script>
+
+<script language="javascript">
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+		, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+/* document.form.roadAddrPart1.value = roadAddrPart1;
+document.form.roadAddrPart2.value = roadAddrPart2;
+document.form.addrDetail.value = addrDetail;
+document.form.zipNo.value = zipNo; */
+
+document.getElementById('roadAddrPart1').value = roadAddrPart1;
+document.getElementById('addrDetail').value = addrDetail;
+document.getElementById('roadAddrPart2').value = roadAddrPart2;
+document.getElementById('zipNo').value = zipNo;
+}
+</script>
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
 <div class="container">
     <h2>상품 판매하기</h2>
     <div class="category-section">
-        <label for="category">카테고리</label> <span style="color: green;">✔</span>
-        <p>상품판매 > 유모차 및 스토롤러 <a href="#">수정</a></p>
+        <label for="categorySelect">카테고리</label> <span style="color: green;">✔</span>
+
+        <!-- <p>상품판매 > 유모차 및 스토롤러 <a href="#">수정</a></p> -->
     </div>
 
     <div class="photo-upload">
@@ -113,13 +133,47 @@
             <input type="text" id="price" name="price" class="form-control" required>
         </div>
 
+
+	    
         <div class="seller-info">
             <h3>판매자 정보 *</h3>
-            <p>성함: 서준맘</p>
-            <p>위치: 대전광역시 서구 갈마2동 <a href="#">수정</a></p>
-            <p>이메일: seojooni@naver.com</p>
-            <p>휴대폰:</p>
+    <p>성함: <%=session.getAttribute("name")%></p>
+               <p>위치:  <input type="text" id="roadAddrPart1" style="width:85%"> <a href="javascript:goPopup();" target="_blank">수정</a></p>
+            <input type="text"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" />
+            <p>이메일: <%=session.getAttribute("email")%></p>
+            <p>휴대폰: <%=session.getAttribute("phone")%></p>
         </div>
+        
+          <!-- 주소확인 && 다음버튼 -->
+    <form action="sellProduct.jsp" name="form" id="form" method="post" class="hidden">
+		<table >
+			<colgroup>
+				<col style="width:20%"><col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>우편번호</th>
+					<td>
+					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+						<!-- <input type="button"  value="주소검색" onclick="goPopup();"> -->
+					</td>
+				</tr>
+				<tr>
+					<th>도로명주소</th>
+					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td>
+						<input type="text" id="addrDetail" style="width:40%" value="">
+						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit" id="nextPage" class="btn btn-primary hidden">다음</button>
+</form>
 
         <div class="note">
             <p>모든 이메일 답변은 iMarket 메시지 센터를 통해 전송됩니다. 잠재적인 사기, 스팸 또는 의심스러운 행동을 방지하고 식별하기 위해 당사는 귀하의 이메일 주소를 익명화하고 대화를 모니터링할 권리를 보유합니다.</p>
