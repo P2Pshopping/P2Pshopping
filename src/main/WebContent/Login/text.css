@@ -11,9 +11,20 @@ a{
     text-decoration: none;
     color:#262626;
 }
+.flex-center {
+  display: flex; /* 플렉스 컨테이너로 설정합니다 */
+  justify-content: center; /* 수평으로 가운데 정렬합니다 */
+  height: 100vh; /* 컨테이너 높이를 전체 뷰포트 높이로 설정 (예시) */
+margin-top:-40px;
+font-size :50px;
+   font-family: Verdana, Geneva, Arial, sans-serif;
+
+
+ 
+}
 
 .login_wrapper{
-    position:absolute;
+     position:relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +32,7 @@ a{
     height:380px;
     top:50%;
     left:50%;
-    margin: -175px 0px 0px -190px;
+    margin: -345px 0px 0px -190px;
     background-color:white;
 
 }
@@ -35,11 +46,12 @@ a{
 }
 
 .login_form{
+	   position:relative;
     display:flex;
      align-items: center;
     flex-direction: column;
     width:350px;
-    margin-top:10px;
+ margin-top:-200px;
 }
 
 .login_text{

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="fn" %>
 <link href="text.css" rel="stylesheet" type="text/css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"	rel="stylesheet"	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
 <meta charset="UTF-8">
@@ -34,19 +35,47 @@ function validateForm(form) {
 	}
 </script>
 </head>
-<body>
+
+<body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
+ <%@include file="../layout/Header.jsp"%>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<span style="color: red; font-size: 1.2em;"> 
 <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>	
 <% if(session.getAttribute("UserId") == null) { %>
-	<div class="login_wrapper">
-		<div class="login_form">
+</span>
+<script>
+		function validateForm(form) {
+			if (!form.username.value) {
+				alert("아이디를 입력하세요.");
+				return false;
+			}
+			if (form.password.value == "") {
+				alert("패스워드를 입력하세요.");
+				return false;
+			}
+		}
+	</script>
 
-		  <form action="LoginProcess.jsp" method="post" name = "loginFrm" onsubmit = "return validateForm(this);">
+
+
+	<div class="login_wrapper">
+	<div class="flex-center">
+Login In
+</div>
+	
+		<div class="login_form">
+		
+
+
+		  <form action="<c:url value='/login.do' />"  method="post" name = "loginFrm" onsubmit = "return validateForm(this);">
+
 				<input type="text"  name="username" class="login_text" placeholder="ID">
-				 <input type="password" name="user_password" class="login_text"  placeholder="PASSWORD">
+				 <input type="password" name="password" class="login_text"  placeholder="PASSWORD">
 
 				<p>
-					<a href="../Find/Find.jsp" class="btn btn-link" type=button
-						id="join">Forgot Password?</a> 
+				<div class ="blank">
+					<a href="../Find/FindId.jsp" class="btn btn-link" type=button
+						id="Find">Forgot Password?</a> 
 						
 						
 					<a href="../agree/agree.jsp"
@@ -54,6 +83,7 @@ function validateForm(form) {
 						
 					<input type="checkbox" class="form-check-input" name="save_check">
 					<label class="form-check-label">아이디 저장</label>
+				</div>
 				</p>
 			<div class="d-grid gap-2 col-6 mx-auto">
 				<input type="submit" class="btn btn-secondary btn-lg"  value = "로그인"/>
@@ -69,82 +99,23 @@ function validateForm(form) {
 			</div>
 
 		</div>
-<%
-	}else {
-%>
-<%= session.getAttribute("username") %> 회원님, 로그인하셨습니다.<br />
- <a href = "Logout.jsp">[로그아웃]</a>
-	 <%
-	 }
-	 %>
+		<% if (request.getParameter("error") != null) { %>
+    <p style="color: red;">Invalid username or password. Please try again.</p>
+<% } %>
+		
+	<%
+	} else { //로그인된 상태
+	%>
+<%=session.getAttribute("username")%>
+	회원님, 로그인하셨습니다.
+	<br />
+	<a href="<c:url value='/login.do' />">[로그아웃]</a>
+	<%
+	}
+	%>
 
-
-	  <!-- <script>
-	
-		function setCookie(name, value, days) {
-			var expires = "";
-			if (days) {
-				var date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				expires = "; expires=" + date.toUTCString();
-			}
-			document.cookie = name + "=" + (value || "") + expires + "; path=/";
-		}
-
-		// 쿠키 가져오기 함수
-		function getCookie(name) {
-			var nameEQ = name + "=";
-			var ca = document.cookie.split(';');
-			for (var i = 0; i < ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0) == ' ')
-					c = c.substring(1, c.length);
-				if (c.indexOf(nameEQ) == 0)
-					return c.substring(nameEQ.length, c.length);
-			}
-			return null;
-		}
-
-		// 쿠키 삭제 함수
-		function deleteCookie(name) {
-			document.cookie = name + '=; Max-Age=-99999999;';
-		}
-
-		// 아이디 저장하기 함수
-		function saveUsername() {
-			var username = document.getElementById('username').value;
-			var rememberMe = document.getElementById('save_check').checked;
-
-			if (rememberMe && username) {
-				setCookie('username', username, 7); // 7일 동안 저장
-			} else {
-				deleteCookie('username');
-			}
-		} 
- -->
-	<!-- 	// 로그인 버튼 클릭 시 호출될 함수
-	
-
-	//		if(username != db 아이디 && password != db 비번){
-	//			alert('아이디와 비밀번호를 확인해주세요');
-	//			return;
-	//		}
-	//		
-			// 아이디 저장 함수
-			saveUsername();
-
-			// 폼 제출
-			document.getElementById('loginForm').submit();
-		}
-
-		// 페이지 로드 시 쿠키에서 아이디 불러오기
-		window.onload = function() {
-			var savedUsername = getCookie('username');
-			if (savedUsername) {
-				document.getElementById('username').value = savedUsername;
-				document.getElementById('save_check').checked = true;
-			}
-		}
-	</script> -->
+<div style = "margin-top:50%;">
+<%@include file="../layout/Footer.jsp"%>
+</div>
 </body>
 </html>

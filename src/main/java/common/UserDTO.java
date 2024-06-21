@@ -1,34 +1,39 @@
 package common; // 기본 패키지 이외의 패키지 (규약 1번)
 
 import java.security.Timestamp;
-
 public class UserDTO {
-	private int id;	//	private 멤버 변수(규약 2번)
-	private String username;
-	private String name;
-	private String email;
-	private String phone;
-	private String address;
-	private String password;
-	private int kakaoId;
-	private int naverId;
-	private int provinceId;
-	private int cityId;
-	private int districtId;
-	private String auth;
-	private java.sql.Timestamp createDate;
-
+	
+	private int id;			//유저아이디(고유번호)
+	private String name;		//본명
+	private String birth;		//생년월일
+	private String nickname;
+	private String username;	// 가입아이디
+	private String email;		//이메일
+	private String phone;		//휴대폰번호
+	private String address;		//주소
+	private String password;	//비밀번호
+	private int kakaoId;	//카카오아이
+	private int naverId;	//네이버아이디
+	private int provinceId;//도 (위치)
+	private int cityId;		//시 (위치)
+	private int districtId; // 동(위치)
+	private String auth ; 	//권한부여
+	private java.sql.Timestamp createDate; 	//가입일자
+	
+	
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
-	public UserDTO(int id, String username, String name, String email, String phone, String address, String password,
+	public UserDTO(int id, String name, String nickname,String birth,String username, String email, String phone, String address, String password,
 			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,java.sql.Timestamp createDate) {
 		super();
 		this.username = username;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.birth=birth;
 		this.address = address;
+		this.nickname = nickname;
 		this.password = password;
 		this.kakaoId = kakaoId;
 		this.naverId = naverId;
@@ -39,8 +44,6 @@ public class UserDTO {
 		this.createDate = createDate;
 	}
 
-	
-	// public 게터/세터 메서드들(규약 4번, 5번)
 	public int getId() {
 		return id;
 	}
@@ -49,20 +52,35 @@ public class UserDTO {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -152,4 +170,5 @@ public class UserDTO {
 	public void setCreateDate(java.sql.Timestamp createDate) {
 		this.createDate = createDate;
 	}
-}
+
+}	

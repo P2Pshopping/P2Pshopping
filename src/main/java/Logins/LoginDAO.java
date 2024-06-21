@@ -1,6 +1,6 @@
 package Logins;
 
-import utils.JDBConnect;
+import common.JDBConnect;
 
 
 public class LoginDAO extends JDBConnect{

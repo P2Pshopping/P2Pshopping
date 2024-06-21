@@ -18,6 +18,9 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     String phone = request.getParameter("phone");
     String address = request.getParameter("address");
     String password = request.getParameter("password");
+    
+    
+    
 
     // 빈 문자열 또는 null 체크 후 기본값 설정
     int kakaoId = request.getParameter("kakaoId") != null && !request.getParameter("kakaoId").isEmpty() 
@@ -81,6 +84,10 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <input type="text" id="username" name="username" required><br>
         <label for="name">이름:</label>
         <input type="text" id="name" name="name" required><br>
+        <label for="name">생년월일:</label>
+        <input type="text" id="name" name="birth" required><br>
+        <label for="name">닉네임:</label>
+        <input type="text" id="name" name="nickname" required><br>
         <label for="email">이메일:</label>
         <input type="email" id="email" name="email" required><br>
         <label for="phone">전화번호:</label>
