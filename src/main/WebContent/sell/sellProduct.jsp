@@ -1,21 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="java.net.URLDecoder" %>
-<%
-    // URL 파라미터로 전달된 정보를 읽어옴
-    String roadFullAddr = request.getParameter("roadFullAddr");
-    String category = request.getParameter("category");
-    String subcategorySelect = request.getParameter("subcategorySelect");
-
-    if (roadFullAddr != null) {
-        roadFullAddr = URLDecoder.decode(roadFullAddr, "UTF-8");
-    }
-    if (category != null) {
-        category = URLDecoder.decode(category, "UTF-8");
-    }
-    if (subcategorySelect != null) {
-    	subcategorySelect = URLDecoder.decode(subcategorySelect, "UTF-8");
-    }
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -101,14 +84,30 @@
     
  
 </script>
+
+<script language="javascript">
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+		, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+/* document.form.roadAddrPart1.value = roadAddrPart1;
+document.form.roadAddrPart2.value = roadAddrPart2;
+document.form.addrDetail.value = addrDetail;
+document.form.zipNo.value = zipNo; */
+
+document.getElementById('roadAddrPart1').value = roadAddrPart1;
+document.getElementById('addrDetail').value = addrDetail;
+document.getElementById('roadAddrPart2').value = roadAddrPart2;
+document.getElementById('zipNo').value = zipNo;
+}
+</script>
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
 <div class="container">
     <h2>상품 판매하기</h2>
     <div class="category-section">
-        <label for="category">카테고리</label> <span style="color: green;">✔</span>
-         <input type="text" id="subcategory" name="subcategory" class="form-control" value="<%=subcategorySelect%>" readonly>
+        <label for="categorySelect">카테고리</label> <span style="color: green;">✔</span>
+
         <!-- <p>상품판매 > 유모차 및 스토롤러 <a href="#">수정</a></p> -->
     </div>
 
@@ -139,7 +138,7 @@
         <div class="seller-info">
             <h3>판매자 정보 *</h3>
     <p>성함: <%=session.getAttribute("name")%></p>
-               <p>위치:   <input type="text" id="roadFullAddr" name="roadFullAddr" class="form-control" value="<%=roadFullAddr%>" readonly> <a href="javascript:goPopup();" target="_blank">수정</a></p>
+               <p>위치:  <input type="text" id="roadAddrPart1" style="width:85%"> <a href="javascript:goPopup();" target="_blank">수정</a></p>
             <input type="text"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" />
             <p>이메일: <%=session.getAttribute("email")%></p>
             <p>휴대폰: <%=session.getAttribute("phone")%></p>
@@ -147,7 +146,7 @@
         
           <!-- 주소확인 && 다음버튼 -->
     <form action="sellProduct.jsp" name="form" id="form" method="post" class="hidden">
-	<table >
+		<table >
 			<colgroup>
 				<col style="width:20%"><col>
 			</colgroup>
