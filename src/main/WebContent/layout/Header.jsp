@@ -32,7 +32,7 @@
 					
 				</c:when>
 				<c:otherwise>
-						<a href="<%=request.getContextPath()%>/member/LoginForm.jsp"
+						<a href="<%=request.getContextPath()%>/Login/login.jsp"
 							class="header-sub-menu" style="margin: 5px;">로그인</a> <a
 							href="<%=request.getContextPath()%>/user?cmd=joinForm"
 							class="header-sub-menu">회원가입</a>
