@@ -87,7 +87,14 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	document.form.roadAddrPart2.value = roadAddrPart2;
 	document.form.addrDetail.value = addrDetail;
 	document.form.zipNo.value = zipNo;
+	
+	 // 주소를 받아서 다음 페이지로 이동
+//	 var category = document.getElementById('category').value;
+ //    var subcategory = document.getElementById('subcategorySelect').value;
+  //   window.location.href = "/sellProduct.jsp?roadFullAddr=" + encodeURIComponent(roadFullAddr) + "&category=" + encodeURIComponent(category) + "&subcategory=" + encodeURIComponent(subcategory);
 }
+
+
 </script>
       
     <script>
@@ -283,7 +290,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
     <div id="overlay" class="hidden"></div>
     
     <!-- 주소확인 && 다음버튼 -->
-    <form name="form" id="form" method="post" class="hidden">
+    <form action="sellProduct.jsp" name="form" id="form" method="post" class="hidden">
 	<table >
 			<colgroup>
 				<col style="width:20%"><col>
@@ -310,8 +317,8 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				</tr>
 			</tbody>
 		</table>
+		<button type="submit" id="nextPage" class="btn btn-primary hidden">다음</button>
 </form>
-    <button id="nextPage" class="btn btn-primary hidden">다음</button>
     
 </body>
 <%@ include file="../layout/Footer.jsp"%>
