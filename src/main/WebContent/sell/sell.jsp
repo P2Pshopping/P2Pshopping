@@ -83,15 +83,21 @@
  function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
 						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
 	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	/* document.form.roadAddrPart1.value = roadAddrPart1;
+	 document.form.roadAddrPart1.value = roadAddrPart1;
 	document.form.roadAddrPart2.value = roadAddrPart2;
 	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo; */
+	document.form.zipNo.value = zipNo; 
 	
-       document.getElementById('roadAddrPart1').value = roadAddrPart1;
+    // Save data to session storage
+    sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+    sessionStorage.setItem('addrDetail', addrDetail);
+    sessionStorage.setItem('roadAddrPart2', roadAddrPart2);
+    sessionStorage.setItem('zipNo', zipNo);
+	
+/*        document.getElementById('roadAddrPart1').value = roadAddrPart1;
        document.getElementById('addrDetail').value = addrDetail;
        document.getElementById('roadAddrPart2').value = roadAddrPart2;
-       document.getElementById('zipNo').value = zipNo;
+       document.getElementById('zipNo').value = zipNo; */
 }
 
 

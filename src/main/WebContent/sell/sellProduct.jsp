@@ -1,11 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상품 판매하기</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,26 +87,71 @@
     </style>
     
  
+
+
+<!-- 도로명지도검색 API -->
+     <script language="javascript"> 
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+
+ function goPopup(){
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+    /** API 서비스 제공항목 확대 (2017.02) **/
+ 
+    function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+   						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+   	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+   	 document.form.roadAddrPart1.value = roadAddrPart1;
+   	document.form.roadAddrPart2.value = roadAddrPart2;
+   	document.form.addrDetail.value = addrDetail;
+   	document.form.zipNo.value = zipNo; 
+   	
+       // Save data to session storage
+/*        sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+       sessionStorage.setItem('addrDetail', addrDetail);
+       sessionStorage.setItem('roadAddrPart2', roadAddrPart2);
+       sessionStorage.setItem('zipNo', zipNo); */
+ 
+ }
+ 
+ 
 </script>
 
-<script language="javascript">
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-		, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-/* document.form.roadAddrPart1.value = roadAddrPart1;
-document.form.roadAddrPart2.value = roadAddrPart2;
-document.form.addrDetail.value = addrDetail;
-document.form.zipNo.value = zipNo; */
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve data from session storage
+            var roadAddrPart1 = sessionStorage.getItem('roadAddrPart1');
+            var addrDetail = sessionStorage.getItem('addrDetail');
+            var roadAddrPart2 = sessionStorage.getItem('roadAddrPart2');
+            var zipNo = sessionStorage.getItem('zipNo');
+            
+            // Set values to the form fields
+            if (roadAddrPart1) document.getElementById('roadAddrPart1').value = roadAddrPart1;
+            if (addrDetail) document.getElementById('addrDetail').value = addrDetail;
+            if (roadAddrPart2) document.getElementById('roadAddrPart2').value = roadAddrPart2;
+            if (zipNo) document.getElementById('zipNo').value = zipNo;
+        });
+        
+        
+		//카테고리확인버튼
+        $('#nextPage').click(function() {			
+            $('#overlay').show();
+            goPopup();
+/*             $('#categoryContainer').hide();
+            $('#subcategoryContainer').hide(); */
+        });
 
-document.getElementById('roadAddrPart1').value = roadAddrPart1;
-document.getElementById('addrDetail').value = addrDetail;
-document.getElementById('roadAddrPart2').value = roadAddrPart2;
-document.getElementById('zipNo').value = zipNo;
-}
-</script>
+    </script>
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
+<!-- 화면어둡게 -->
+    <div id="overlay" class="hidden"></div>
+    
 <div class="container">
     <h2>상품 판매하기</h2>
     <div class="category-section">
@@ -138,14 +187,14 @@ document.getElementById('zipNo').value = zipNo;
         <div class="seller-info">
             <h3>판매자 정보 *</h3>
     <p>성함: <%=session.getAttribute("name")%></p>
-               <p>위치:  <input type="text" id="roadAddrPart1" style="width:85%"> <a href="javascript:goPopup();" target="_blank">수정</a></p>
-            <input type="text"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" />
+               <p>위치:  <input type="text" id="roadAddrPart1" style="width:40%"> <button type="submit"  id="nextPage" class="btn btn-primary">수정</button>
+   			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="addrDetail" style="width:40%" value=""></p>
             <p>이메일: <%=session.getAttribute("email")%></p>
             <p>휴대폰: <%=session.getAttribute("phone")%></p>
         </div>
         
           <!-- 주소확인 && 다음버튼 -->
-    <form action="sellProduct.jsp" name="form" id="form" method="post" class="hidden">
+   <!--  <form action="sellProduct.jsp" name="form" id="form" method="post" class="hidden">
 		<table >
 			<colgroup>
 				<col style="width:20%"><col>
@@ -156,11 +205,12 @@ document.getElementById('zipNo').value = zipNo;
 					<td>
 					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
 						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
-						<!-- <input type="button"  value="주소검색" onclick="goPopup();"> -->
+						<input type="button"  value="주소검색" onclick="goPopup();">
 					</td>
 				</tr>
 				<tr>
 					<th>도로명주소</th>
+					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
 					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
 				</tr>
 				<tr>
@@ -173,7 +223,7 @@ document.getElementById('zipNo').value = zipNo;
 			</tbody>
 		</table>
 		<button type="submit" id="nextPage" class="btn btn-primary hidden">다음</button>
-</form>
+</form> -->
 
         <div class="note">
             <p>모든 이메일 답변은 iMarket 메시지 센터를 통해 전송됩니다. 잠재적인 사기, 스팸 또는 의심스러운 행동을 방지하고 식별하기 위해 당사는 귀하의 이메일 주소를 익명화하고 대화를 모니터링할 권리를 보유합니다.</p>
