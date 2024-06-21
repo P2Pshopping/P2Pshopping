@@ -12,10 +12,10 @@
   <div class="container-fluid">
     <div class=row style="width:1100px;">
     <div class=col-sm-4>
-    <a class="navbar-brand" href="#" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
+    <a class="navbar-brand" href="../iMarket/Mainpage.jsp" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
 	</div>
 	<div class=col-md-4></div>
-	<div class=col-md-4 style="display: flex; justify-content: right; align-items: center" >
+	<div class=col-md-4 style="display: flex; justify-content: right; align-items: center; font-color:black;" >
     <c:choose>
 				<c:when test="${sessionScope.principal != null}">
 						<c:if test="${sessionScope.principal.auth eq 'admin' }">
@@ -33,23 +33,24 @@
 				</c:when>
 				<c:otherwise>
 						<a href="<%=request.getContextPath()%>/Login/login.jsp"
-							class="header-sub-menu" style="margin: 5px;">로그인</a> <a
+							class="header-sub-menu" style="margin: 5px; fontcolor: black;"><img src="">로그인</a> <a
 							href="<%=request.getContextPath()%>/user?cmd=joinForm"
 							class="header-sub-menu">회원가입</a>
 				</c:otherwise>
 			</c:choose>
 			</div>
   </div>
+  
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">홈</a>
+          <a class="nav-link active" aria-current="page" href="../iMarket/Mainpage.jsp">홈</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-cureent="page" href="#">병원찾기</a>
+          <a class="nav-link active" aria-cureent="page" href="	https://map.kakao.com/link/map/37.402056,127.108212">병원찾기</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
