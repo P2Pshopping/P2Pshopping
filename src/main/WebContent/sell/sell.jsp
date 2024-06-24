@@ -53,7 +53,7 @@
         .subcategory-select {
             width: 100%;
         }
-        }
+        
         #overlay {
             position: fixed;
             top: 0;
@@ -209,6 +209,22 @@
                 $('#autocompleteInput').val('');
             });
 
+            $('#nextPage').click(function(event) {
+                var category = document.getElementById('categorySelect').value;
+                var subcategory = document.getElementById('subcategorySelect').value;
+
+                // 숨겨진 필드에 값 설정
+                document.getElementById('selectedCategoryInput').value = category;
+                document.getElementById('selectedSubcategoryInput').value = subcategory;
+
+                // 디버깅 출력
+                console.log('Category:', category);
+                console.log('Subcategory:', subcategory);
+                alert('Category: ' + category + '\nSubcategory: ' + subcategory);
+
+                // 실제 제출을 위해 기본 동작 유지
+                return true; // 기본 폼 제출 동작 유지
+            });
           
         });
         
@@ -246,7 +262,7 @@
             </select>
 
             <div id="subcategoryContainer" class="hidden">
-                <label for="subcategorySelect">하위 카테고리를 선택해주세요:</label>
+                <label for="subcategorySelectlabel">하위 카테고리를 선택해주세요:</label>
                 <select id="subcategorySelect" class="form-select subcategory-select" aria-label="하위 카테고리 선택">
                     <option class="유아 안전용품 hidden" value="아기 모니터">아기 모니터</option>
                     <option class="유아 안전용품 hidden" value="침대 난간 및 가드">침대 난간 및 가드</option>
@@ -299,6 +315,9 @@
     
     <!-- 주소확인 && 다음버튼 -->
     <form name="form" action="sellProduct.jsp" id="form" method="post" class="hidden">
+    <!--  hidden input 필드를 추가하여, 선택된 카테고리와 서브카테고리 값을 전송할 수 있도록 -->
+    <input type="hidden" id="selectedCategoryInput" name="selectedCategory">
+    <input type="hidden" id="selectedSubcategoryInput" name="selectedSubcategory">
 	<table >
 			<colgroup>
 				<col style="width:20%"><col>

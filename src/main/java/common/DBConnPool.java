@@ -20,7 +20,11 @@ public class DBConnPool {
 			//커넥션 풀을 통해 연결 얻기
 			con = source.getConnection();
 			
-			System.out.println("DB 커넥션 풀 연결 성공");
+	        if (con != null) {
+                System.out.println("DB 커넥션 풀 연결 성공");
+            } else {
+                System.out.println("DB 커넥션 풀 연결 실패: Connection is null");
+            }
 		}
 		catch(Exception e) {
 			System.out.println("DB 커넥션 풀 연결 실패");

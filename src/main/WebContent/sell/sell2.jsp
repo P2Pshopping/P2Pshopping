@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-        <title>상품 판매하기</title>
+    <title>상품 판매하기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -37,7 +37,7 @@
         .photo-upload {
             border: 2px dashed #ccc;
             border-radius: 8px;
-            text-align: ce nter;
+            text-align: center;
             padding: 20px;
             margin-bottom: 10px;
         }
@@ -84,12 +84,11 @@
             background-color: #218838;
         }
     </style>
-    
 
-<!-- 도로명지도검색 API -->
-     <script language="javascript"> 
-// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
+    <!-- 도로명지도검색 API -->
+    <script language="javascript"> 
+    // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+    //document.domain = "abc.go.kr";
 
     function goPopup(){
         // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
@@ -97,21 +96,20 @@
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-   						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-   	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-   	 document.form.roadAddrPart1.value = roadAddrPart1;
-   	document.form.roadAddrPart2.value = roadAddrPart2;
-   	document.form.addrDetail.value = addrDetail;
-   	document.form.zipNo.value = zipNo; 
- 
- }
-</script>
+                          , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+        // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+        document.form.roadAddrPart1.value = roadAddrPart1;
+        document.form.roadAddrPart2.value = roadAddrPart2;
+        document.form.addrDetail.value = addrDetail;
+        document.form.zipNo.value = zipNo; 
+    }
+    </script>
 
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
 <!-- 화면어둡게 -->
-    <div id="overlay" class="hidden"></div>
+<div id="overlay" class="hidden"></div>
 <%
     String selectedCategory = request.getParameter("selectedCategory");
     String selectedSubcategory = request.getParameter("selectedSubcategory");
@@ -132,8 +130,7 @@
     <h2>상품 판매하기</h2>
     <div class="category-section">
         <label for="categorySelect">카테고리</label> <span style="color: green;">✔</span>
-
-     <p>상품판매 > <%= session.getAttribute("selectedCategory") %> > <%= session.getAttribute("selectedSubcategory") %><a href="#">수정</a></p>
+        <p>상품판매 > <%= session.getAttribute("selectedCategory") %> > <%= session.getAttribute("selectedSubcategory") %><a href="#">수정</a></p>
     </div>
 
     <div class="photo-upload">
@@ -144,9 +141,7 @@
         <p>💡 상품을 자세히 보여줄 수 있는 사진은 조회수와 댓글 증가에 도움이 됩니다</p>
     </div>
 
-    <!-- <form action="/iMarket/sell/sellController" method="post" onsubmit="return validateForm()"> -->
-    <form action="/iMarket/sell/sellController" method="post">
-    
+    <form action="/iMarket/sell/sellController" method="post" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="productName">상품명 *</label>
             <input type="text" id="productName" name="productName" class="form-control" required>
@@ -160,14 +155,14 @@
             <input type="text" id="price" name="price" class="form-control" required>
         </div>
 
-    <!-- 숨겨진 필드 추가 -->
-    <input type="hidden" name="selectedCategory" value="<%= session.getAttribute("selectedCategory") %>">
-    <input type="hidden" name="selectedSubcategory" value="<%= session.getAttribute("selectedSubcategory") %>">
-    <input type="hidden" id="photo1" name="photo1">
-    <input type="hidden" id="photo2" name="photo2">
-    <input type="hidden" id="photo3" name="photo3">
-    <input type="hidden" id="photo4" name="photo4">
-	    
+        <!-- 숨겨진 필드 추가 -->
+        <input type="hidden" name="selectedCategory" value="<%= session.getAttribute("selectedCategory") %>">
+        <input type="hidden" name="selectedSubcategory" value="<%= session.getAttribute("selectedSubcategory") %>">
+        <input type="hidden" id="photo1" name="photo1">
+        <input type="hidden" id="photo2" name="photo2">
+        <input type="hidden" id="photo3" name="photo3">
+        <input type="hidden" id="photo4" name="photo4">
+
         <div class="seller-info">
             <h3>판매자 정보 *</h3>
             <p>성함: <%=session.getAttribute("name")%></p>
@@ -281,7 +276,7 @@ function validateForm() {
 
     return true;
 }
-    </script>
+</script>
 
 </body>
 <%@ include file="../layout/Footer.jsp"%>
