@@ -3,7 +3,7 @@ package board;
 public class BoardDTO {
 	private int id; // 글번호
 	private int bno; // 카테고리번호
-	private int writerId; // 작성자
+	private String writerId; // 작성자
 	private String title;
 	private String detail;
 	private java.sql.Date createDate; // 등록 날짜
@@ -32,11 +32,11 @@ public class BoardDTO {
 		this.bno = bno;
 	}
 
-	public int getWriterId() {
+	public String getWriterId() {
 		return writerId;
 	}
 
-	public void setWriterId(int writerId) {
+	public void setWriterId(String writerId) {
 		this.writerId = writerId;
 	}
 
