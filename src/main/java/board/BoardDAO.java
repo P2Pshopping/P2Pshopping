@@ -16,7 +16,7 @@ public class BoardDAO extends DBConnPool {
 		String qr = "SELECT COUNT(*) FROM BOARDS ";
 		if(map.get("searchWord") != null) {
 			qr += " WHERE " + map.get("searchField") + " "
-					+ " likes '%" + map.get("searchWord") + "%' ";
+					+ " like '%" + map.get("searchWord") + "%' ";
 		}
 		try {
 			stmt = con.createStatement();
