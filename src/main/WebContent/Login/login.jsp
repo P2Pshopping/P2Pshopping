@@ -37,7 +37,7 @@ function validateForm(form) {
 </head>
 
 <body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
- <%@include file="../layout/Header.jsp"%>
+ <%@include file="../../layout/Header.jsp"%>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<span style="color: red; font-size: 1.2em;"> 
 <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>	

@@ -10,7 +10,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
+
 </head>
+<script>
+function { 
+	
+	
+}
+
+
+</script>
 <body>
 <div class="header-second" style="display: flex; justify-content: center;">
 <nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">

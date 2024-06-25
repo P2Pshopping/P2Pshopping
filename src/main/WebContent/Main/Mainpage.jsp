@@ -35,7 +35,7 @@
 </head>
 <body>
 
-	<%@include file="layout/Header.jsp"%>
+	<%@include file="../layout/Header.jsp"%>
 	<div class="mainwrrap">
 		<div style="display: flex; justify-content: center;">
 			<div id="carouselExampleIndicators" class="carousel slide"
@@ -140,6 +140,6 @@
 	</div>
 </body>
 
-<%@ include file="layout/Footer.jsp"%>
+<%@ include file="../layout/Footer.jsp"%>
 
 </html>
