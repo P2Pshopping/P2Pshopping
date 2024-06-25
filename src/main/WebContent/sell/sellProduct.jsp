@@ -130,6 +130,7 @@
 
 <div class="container">
     <h2>상품 판매하기</h2>
+    <form action="/iMarket/sell/sellController" method="post" enctype="multipart/form-data">
     <div class="category-section">
         <label for="categorySelect">카테고리</label> <span style="color: green;">✔</span>
 
@@ -137,7 +138,9 @@
     </div>
 
     <div class="photo-upload">
-        <button type="button" id="uploadButton" class="btn btn-outline-primary">사진 추가</button>
+        <!-- <button type="button" id="uploadButton" class="btn btn-outline-primary">사진 추가</button> -->
+        <input type="file" id="productImages" name="productImages" class="form-control" multiple required>
+        
         <p>4장 이하의 사진을 추가해주세요</p>
     </div>
     <div class="info-text">
@@ -145,7 +148,8 @@
     </div>
 
     <!-- <form action="/iMarket/sell/sellController" method="post" onsubmit="return validateForm()"> -->
-    <form action="/iMarket/sell/sellController" method="post">
+    <!-- <form action="/iMarket/sell/sellController" method="post"> -->
+    
     
         <div class="form-group">
             <label for="productName">상품명 *</label>
@@ -163,15 +167,16 @@
     <!-- 숨겨진 필드 추가 -->
     <input type="hidden" name="selectedCategory" value="<%= session.getAttribute("selectedCategory") %>">
     <input type="hidden" name="selectedSubcategory" value="<%= session.getAttribute("selectedSubcategory") %>">
-    <input type="hidden" id="photo1" name="photo1">
+  <input type="hidden" id="roadAddrPart1" name="roadAddrPart1">
+<!--     <input type="hidden" id="photo1" name="photo1">
     <input type="hidden" id="photo2" name="photo2">
     <input type="hidden" id="photo3" name="photo3">
-    <input type="hidden" id="photo4" name="photo4">
+    <input type="hidden" id="photo4" name="photo4"> -->
 	    
         <div class="seller-info">
             <h3>판매자 정보 *</h3>
             <p>성함: <%=session.getAttribute("name")%></p>
-            <p>위치: <input type="text" id="roadAddrPart1" style="width:40%"> <button type="submit" id="nextPage" class="btn btn-primary">수정</button></p>
+            <p>위치: <input type="text" id="roadAddrPart1Display" style="width:40%"> <button type="submit" id="nextPage" class="btn btn-primary">수정</button></p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="addrDetail" style="width:40%" value=""></p>
             <p>이메일: <%=session.getAttribute("email")%></p>
             <p>휴대폰: <%=session.getAttribute("phone")%></p>
@@ -188,8 +193,78 @@
     </form>
 </div>
 
+
+
+
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var roadAddrPart1 = sessionStorage.getItem('roadAddrPart1');
+    var addrDetail = sessionStorage.getItem('addrDetail');
+    var roadAddrPart2 = sessionStorage.getItem('roadAddrPart2');
+    var zipNo = sessionStorage.getItem('zipNo');
+
+    console.log("Session data loaded");
+    console.log("roadAddrPart1: " + roadAddrPart1);
+    console.log("addrDetail: " + addrDetail);
+    console.log("roadAddrPart2: " + roadAddrPart2);
+    console.log("zipNo: " + zipNo);
+
+    if (roadAddrPart1) {
+        document.getElementById('roadAddrPart1').value = roadAddrPart1;
+        document.getElementById('roadAddrPart1Display').value = roadAddrPart1;
+    }
+    if (addrDetail) {
+        document.getElementById('addrDetail').value = addrDetail;
+        document.getElementById('addrDetailDisplay').value = addrDetail;
+    }
+    if (roadAddrPart2) document.getElementById('roadAddrPart2').value = roadAddrPart2;
+    if (zipNo) document.getElementById('zipNo').value = zipNo;
+
+    $('form').on('submit', function(event) {
+        var productName = $('#productName').val();
+        var productDescription = $('#productDescription').val();
+        var price = $('#price').val();
+        var files = $('#productImages')[0].files;
+
+        if (!productName || !productDescription || !price) {
+            alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
+            event.preventDefault();
+        } else if (files.length > 4) {
+            alert('최대 4개의 이미지만 업로드할 수 있습니다.');
+            event.preventDefault();
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+<!-- <script>
+
+
 $(document).ready(function() {
+    $('form').on('submit', function(event) {
+        var productName = $('#productName').val();
+        var productDescription = $('#productDescription').val();
+        var price = $('#price').val();
+        var files = $('#productImages')[0].files;
+
+        if (!productName || !productDescription || !price) {
+            alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
+            event.preventDefault();
+        } else if (files.length > 4) {
+            alert('최대 4개의 이미지만 업로드할 수 있습니다.');
+            event.preventDefault();
+        }
+    });
+ }); 
+
+
+
+/* $(document).ready(function() {
     console.log("JQuery is ready");
 
     var imageCount = 0;
@@ -232,10 +307,10 @@ $(document).ready(function() {
             }
         };
         input.click();
-    });
+    }); */
 
     // Validate form before submission
-    document.querySelector('form').addEventListener('submit', function(event) {
+    /* document.querySelector('form').addEventListener('submit', function(event) {
         console.log("Form submit triggered");
 
         var productName = document.getElementById('productName').value;
@@ -250,24 +325,32 @@ $(document).ready(function() {
             console.log("Form validation passed");
         }
     });
+}); */
+
+// Validate form before submission
+$('form').on('submit', function(event) {
+    console.log("Form submit triggered");
+
+    var productName = $('#productName').val();
+    var productDescription = $('#productDescription').val();
+    var price = $('#price').val();
+    var files = $('#productImages')[0].files;
+
+    if (!productName || !productDescription || !price) {
+        alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
+        event.preventDefault();
+        console.log("Form validation failed");
+    } else if (files.length > 4) {
+        alert('최대 4개의 이미지만 업로드할 수 있습니다.');
+        event.preventDefault();
+        console.log("Too many files selected");
+    } else {
+        console.log("Form validation passed");
+    }
+});
 });
 
-// Separate function for retrieving session storage and setting form values
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM Content Loaded");
 
-    var roadAddrPart1 = sessionStorage.getItem('roadAddrPart1');
-    var addrDetail = sessionStorage.getItem('addrDetail');
-    var roadAddrPart2 = sessionStorage.getItem('roadAddrPart2');
-    var zipNo = sessionStorage.getItem('zipNo');
-
-    console.log("Session data loaded");
-
-    if (roadAddrPart1) document.getElementById('roadAddrPart1').value = roadAddrPart1;
-    if (addrDetail) document.getElementById('addrDetail').value = addrDetail;
-    if (roadAddrPart2) document.getElementById('roadAddrPart2').value = roadAddrPart2;
-    if (zipNo) document.getElementById('zipNo').value = zipNo;
-});
 
 function validateForm() {
     var productName = document.getElementById('productName').value;
@@ -281,7 +364,7 @@ function validateForm() {
 
     return true;
 }
-    </script>
+    </script> -->
 
 </body>
 <%@ include file="../layout/Footer.jsp"%>
