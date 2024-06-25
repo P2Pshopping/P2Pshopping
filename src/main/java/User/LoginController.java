@@ -52,7 +52,8 @@ public class LoginController extends HttpServlet {
             session.setAttribute("auth", user.getAuth());
             session.setAttribute("createDate", user.getCreateDate());
             
-            
+            // 디버깅 메시지 추가
+            System.out.println("User session set: " + user.getName());
 
             response.sendRedirect("Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
         } else {

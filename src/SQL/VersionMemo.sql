@@ -13,7 +13,7 @@ CREATE TABLE subCategory (
     FOREIGN KEY (categoryId) REFERENCES category(id)
 );
 	
-(카테고리추가= 전체복사/ categoryId NUMBER; 옆에엔터)
+(카테고리추가= 전체복사// v_categoryId NUMBER; 옆에서Ctl+엔터)
 DECLARE
     v_categoryId NUMBER;
 BEGIN
@@ -76,7 +76,10 @@ BEGIN
     INSERT INTO subCategory (name, categoryId) VALUES ('기타 장난감', v_categoryId);
 END;
 /
-
 (product테이블 컬럼추가)
 ALTER TABLE product ADD subCategoryId NUMBER NOT NULL;
 ALTER TABLE product ADD CONSTRAINT fk_product_subcategory FOREIGN KEY (subCategoryId) REFERENCES subCategory(id);
+-----------------------------------------------------------------------------------------------------------------
+(ver 1.3.2)
+ALTER TABLE product ADD roadAddrPart1 VARCHAR(255);
+ALTER TABLE product ADD addrDetail VARCHAR(255);

@@ -37,7 +37,7 @@
 					
 				</c:when>
 				<c:otherwise>
-						<a href="<%=request.getContextPath()%>/member/LoginForm.jsp"
+						<a href="<%=request.getContextPath()%>/Login/login.jsp"
 							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">Login</a> 
 							<a href="<%=request.getContextPath()%>/member/SignIn.jsp"
 							class="btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">create account</a>
