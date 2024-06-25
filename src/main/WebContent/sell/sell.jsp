@@ -94,10 +94,11 @@
     sessionStorage.setItem('roadAddrPart2', roadAddrPart2);
     sessionStorage.setItem('zipNo', zipNo);
 	
-/*        document.getElementById('roadAddrPart1').value = roadAddrPart1;
-       document.getElementById('addrDetail').value = addrDetail;
-       document.getElementById('roadAddrPart2').value = roadAddrPart2;
-       document.getElementById('zipNo').value = zipNo; */
+    // Debugging logs
+    console.log("roadAddrPart1 set to: " + roadAddrPart1);
+    console.log("addrDetail set to: " + addrDetail);
+    console.log("roadAddrPart2 set to: " + roadAddrPart2);
+    console.log("zipNo set to: " + zipNo);
 }
 
 
