@@ -101,3 +101,13 @@
 .border-btm-red {
 	border-bottom: 2px solid #FF204B;
 }
+
+.flex-container {
+	width: 1200px;
+	height: auto;
+	display : flex;
+  	justify-content : center;  /* 좌우정렬 */
+  	align-items : center;  /* 상하정렬 */
+  	flex-direction : column; /* 세로정렬 */
+  	flex-wrap : wrap;  /* 폭이 넘치는 요소 wrap 처리 */	
+	}
