@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import board.BoardDTO;
 import common.DBConnPool;
 
 public class BoardDAO extends DBConnPool {
@@ -17,7 +16,7 @@ public class BoardDAO extends DBConnPool {
 		String qr = "SELECT COUNT(*) FROM BOARDS ";
 		if(map.get("searchWord") != null) {
 			qr += " WHERE " + map.get("searchField") + " "
-					+ " likes '%" + map.get("searchWord") + "%' ";
+					+ " like '%" + map.get("searchWord") + "%' ";
 		}
 		try {
 			stmt = con.createStatement();
@@ -34,41 +33,51 @@ public class BoardDAO extends DBConnPool {
 	}
 	
 	public List<BoardDTO> selectListPage(Map<String, Object> map) {
-		List<BoardDTO> board = new Vector<BoardDTO>();
+	    List<BoardDTO> board = new Vector<BoardDTO>();
 
-		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM boards ";
+	    String query = "SELECT * FROM ( " +
+	                   "  SELECT Tb.*, ROWNUM rNum FROM ( " +
+	                   "    SELECT * FROM boards ";
 
-		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
-		}
+	    if (map.get("searchWord") != null) {
+	        query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
+	    }
 
-		query += " ORDER by idx DESC " + " ) Tb " + " ) " + " WHERE rNum BETWEEN ? AND ?";
+	    query += " ORDER by id DESC " +
+	             "  ) Tb " +
+	             ") " +
+	             " WHERE rNum BETWEEN ? AND ?";
 
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, map.get("start").toString());
-			psmt.setString(2, map.get("end").toString());
-			rs = psmt.executeQuery();
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, map.get("start").toString());
+	        psmt.setString(2, map.get("end").toString());
+	        rs = psmt.executeQuery();
 
-			while (rs.next()) {
-				BoardDTO dto = new BoardDTO();
-				dto.setId(rs.getInt(1));
-				dto.setBno(rs.getInt(2));
-				dto.setWriterId(rs.getInt(3));
-				dto.setTitle(rs.getString(4));
-				dto.setDetail(rs.getString(5));
-				dto.setCreateDate(rs.getDate(6));
-				dto.setUpdateDate(rs.getDate(6));
-				dto.setLikes(rs.getInt(8));
-				dto.setViews(rs.getInt(9));
-				board.add(dto);
-			}
-		} catch (Exception e) {
-			System.out.println("게시물 조회 중 예외 발생");
-			e.printStackTrace();
-		}
+	        while (rs.next()) {
+	            BoardDTO dto = new BoardDTO();
+	            dto.setId(rs.getInt("id"));
+	            dto.setBno(rs.getInt("bno"));
+	            dto.setWriterId(rs.getString("writerId"));
+	            dto.setTitle(rs.getString("title"));
+	            dto.setDetail(rs.getString("detail"));
+	            dto.setCreateDate(rs.getDate("createDate"));
+	            dto.setUpdateDate(rs.getDate("updateDate"));
+	            dto.setImgUrl_1(rs.getString("imgUrl_1"));
+	            dto.setImgUrl_2(rs.getString("imgUrl_2"));
+	            dto.setImgUrl_3(rs.getString("imgUrl_3"));
+	            dto.setImgUrl_4(rs.getString("imgUrl_4"));
+	            dto.setLikes(rs.getInt("likes"));
+	            dto.setViews(rs.getInt("views"));
+	            dto.setPass(rs.getString("pass"));
+	            board.add(dto);
+	        }
+	    } catch (Exception e) {
+	        System.out.println("게시물 조회 중 예외 발생");
+	        e.printStackTrace();
+	    }
 
-		return board;
+	    return board;
 	}
 
 	public int insertWrite(BoardDTO dto) {
