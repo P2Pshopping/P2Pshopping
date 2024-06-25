@@ -55,14 +55,14 @@
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<a><img src="Image/logobanner.png" class="pics"
-							onclick="location.href='../iMarket/Mainpage.jsp'" alt="..."
+						<a><img src="../Image/logobanner.png" class="pics"
+							onclick="location.href='../Main/Mainpage.jsp'" alt="..."
 							width="1200" height="450"></a>
 					</div>
 					<div class="carousel-item">
 						<a><img
 							src="https://baby-direct.com.au/cdn/shop/files/Copy_of_Pink_and_Tan_Flowers_Modern_Artisan_Business_X-Frame_Banner_4_1200x.png?v=1641170892"
-							onclick="location.href='../iMarket/ItemList.jsp'" class="pics"
+							onclick="location.href='../Main/ItemList.jsp'" class="pics"
 							alt="..." width="1200" height="450"></a>
 					</div>
 					<div class="carousel-item">
@@ -111,13 +111,13 @@
 				style="display: flex-center; justify-content: center; max-width: 1200px;">
 				<div class="row">
 					<div class="col" style="width: 25%; border: 1px">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 					</div>
 					<div class="col" style="width: 25%">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 					</div>
 					<div class="col" style="width: 25%">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 					</div>
 				</div>
 			</div>
@@ -125,14 +125,14 @@
 				style="display: flex-center; justify-content: center; max-width: 1200px; margin-top: 5%;">
 				<div class="row">
 					<div class="col" style="width: 25%; border: 1px">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 						<a></a>
 					</div>
 					<div class="col" style="width: 25%">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 					</div>
 					<div class="col" style="width: 25%">
-						<img src="../iMarket/Image/babe1.jpg" style="width: 350px;">
+						<img src="../Image/babe1.jpg" style="width: 350px;">
 					</div>
 				</div>
 			</div>
