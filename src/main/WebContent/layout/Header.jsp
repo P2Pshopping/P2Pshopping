@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,23 +9,26 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
-
-</head>
 <script>
-function { 
-	
-	
-}
 
+$('#autocompleteInput').autocomplete({
+    source: function(request, response) {
+        var results = $.ui.autocomplete.filter(data, request.term);
+        response(results.slice(0, 3));
+    },
+    minLength: 1
+});
 
 </script>
+</head>
+
 <body>
 <div class="header-second" style="display: flex; justify-content: center;">
 <nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">
   <div class="container-fluid">
     <div class="row" style="width:1100px;">
     <div class="col-sm-4">
-    <a class="navbar-brand" href="../iMarket/Mainpage.jsp" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
+    <a class="navbar-brand" href="../Main/Mainpage.jsp" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
 	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-4" style="display: flex; justify-content: right; align-items: center; font-color:black;" >
