@@ -102,8 +102,8 @@ public class UserDAO extends JDBConnect {
 	
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+ 
+        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
@@ -122,6 +122,31 @@ public class UserDAO extends JDBConnect {
             stmt.setString(14, user.getAuth());
 //            stmt.setString(13, user.getTimestamp());
             stmt.setTimestamp(15, new java.sql.Timestamp(System.currentTimeMillis()));
+            
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean addUser1(UserDTO user) {
+        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, provinceId,createDate)"+ 
+        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getName());
+            stmt.setString(3,user.getNickname());
+            stmt.setString(4,user.getBirth());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getAddress());
+            stmt.setString(8, user.getPassword());
+            stmt.setInt(9, user.getProvinceId());
+            stmt.setTimestamp(10, new java.sql.Timestamp(System.currentTimeMillis()));
+
+//            stmt.setString(13, user.getTimestamp());
             
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
