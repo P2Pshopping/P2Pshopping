@@ -4,6 +4,14 @@
 <%@ page import="common.JDBConnect" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="common.UserDTO" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Join</title>
+
     <link href="text.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -102,6 +110,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     String phone = request.getParameter("inputPhone");
     String email = request.getParameter("inputEmail");
     String address = request.getParameter("inputAddress");
+    
 
     // 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
     // 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
@@ -118,12 +127,14 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 
     UserDAO userDAO = null;
     try {
+
         userDAO = new UserDAO(application);
         String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
         user.setPassword(hashedPassword); // 해시된 비밀번호 설정
         boolean isUserAdded = userDAO.addUser(user);
 
         if (isUserAdded) {
+
             message = "회원가입이 성공적으로 완료되었습니다.";
 %>
 <script>
@@ -133,6 +144,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 <%
         } else {
             message = "입력칸을 다시 한 번 확인해주세요.";
+
 %>
 <script>
     alert("입력칸을 다시 한 번 확인해주세요.");
@@ -143,6 +155,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     } catch (Exception e) {
         e.printStackTrace();
         // 예외 처리 로직 추가
+
     } finally {
         if (userDAO != null) {
             userDAO.close();
@@ -151,7 +164,6 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 }
 %>
 
- 	
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
@@ -162,7 +174,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <div class="join_wrapper2">
     <div class="logo"> 회원가입 </div>
             <div class="join_form">
-                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joincheck();">
+                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joinCheck(event);">
                     <div class="col-12">
                         <label for="inputName" class="form-label">성명</label>
                         <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
@@ -232,7 +244,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <p><%= message %></p>
     <% } %>
                 <div class="d-grid gap-2">
-                    <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
+                    <a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
                     <button type="submit" class="btn btn-primary btn-lg" name = "loginButton" onclick="joinCheck();">회원 가입</button>
                 
                 </div>
@@ -242,8 +254,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:600px;">
+ <div style = "margin-top:1200px;">
 <%@include file="../layout/Footer.jsp"%>
-</div>
+</div> 
 </body>
 </html>
