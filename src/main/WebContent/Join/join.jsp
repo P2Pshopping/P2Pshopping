@@ -2,8 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="common.JDBConnect" %>
-<%@ page import="Joins.UserDAO" %>
-<%@ page import="Joins.UserDTO" %>
+<%@ page import="User.UserDAO" %>
+<%@ page import="common.UserDTO" %>
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Join</title>
     <link href="text.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -28,6 +34,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     String phone = request.getParameter("inputPhone");
     String email = request.getParameter("inputEmail");
     String address = request.getParameter("inputAddress");
+    
 
 
     // 빈 문자열 또는 null 체크 후 기본값 설정
@@ -62,19 +69,19 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     UserDAO userDAO = null;
     try {
     	userDAO = new UserDAO(application);
-     //   String hashedPassword = memberDAO.hashPassword(password); // 비밀번호 해시
-    //    user.setPassword(hashedPassword); // 해시된 비밀번호 설정
+        String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
+        user.setPassword(hashedPassword); // 해시된 비밀번호 설정
           boolean isUserAdded = userDAO.addUser(user);
 
 
-        /* if (isUserAdded) {
+         if (isUserAdded) {
             message = "회원가입이 성공적으로 완료되었습니다.";
         } else {
             message = "입력칸을 다시 한 번 확인해주세요.";
-        } */
+        } 
     } catch (Exception e) {
         e.printStackTrace();
-/*         message = "회원가입 중 오류가 발생했습니다: " + e.getMessage(); */
+        message = "회원가입 중 오류가 발생했습니다: " + e.getMessage(); 
     } finally {
     	   if (userDAO != null) {
     		   userDAO.close();
@@ -82,12 +89,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     }
 }
 %>
-<!DOCTYPE html>
-<html>
-<head>
 
-    <meta charset="UTF-8">
-    <title>Join</title>
   <script>
   
         function joinCheck() {
@@ -163,7 +165,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
             
             } else{
             	
- 			window.location.href = "../Mainpage.jsp";
+ 			window.location.href = "../Main/Mainpage.jsp";
  			alert("회원가입에 성공하였습니다.");
  			return true;
             }
@@ -180,7 +182,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <div class="join_wrapper2">
     <div class="logo"> 회원가입 </div>
             <div class="join_form">
-                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joincheck();">
+                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joinCheck(event);">
                     <div class="col-12">
                         <label for="inputName" class="form-label">성명</label>
                         <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
@@ -250,7 +252,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <p><%= message %></p>
     <% } %>
                 <div class="d-grid gap-2">
-                    <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
+                    <a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
                     <button type="submit" class="btn btn-primary btn-lg" name = "loginButton" onclick="joinCheck();">회원 가입</button>
                 
                 </div>
@@ -260,8 +262,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:600px;">
+ <div style = "margin-top:1200px;">
 <%@include file="../layout/Footer.jsp"%>
-</div>
+</div> 
 </body>
 </html>

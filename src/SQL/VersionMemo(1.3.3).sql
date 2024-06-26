@@ -83,3 +83,6 @@ ALTER TABLE product ADD CONSTRAINT fk_product_subcategory FOREIGN KEY (subCatego
 (ver 1.3.2)
 ALTER TABLE product ADD roadAddrPart1 VARCHAR(255);
 ALTER TABLE product ADD addrDetail VARCHAR(255);
+(ver 1.3.3)
+ALTER TABLE product ADD latitude VARCHAR(50);
+ALTER TABLE product ADD longitude VARCHAR(50);
