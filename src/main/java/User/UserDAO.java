@@ -135,27 +135,11 @@ public class UserDAO extends JDBConnect {
             return false;
         }
     }
+
+	public boolean validate(UserDTO user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
-    //메인페이지에 인기 상품 목록 불러오기
-    public List<UserDTO> getTopItems() {
-        List<UserDTO> items = new ArrayList<>();
-        String query = "SELECT id, name, description FROM items ORDER BY id LIMIT 6";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                items.add(new UserDTO(id, name, description));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return items;
-    }
 }
