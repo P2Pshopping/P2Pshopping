@@ -17,8 +17,13 @@ public class SellDAO {
         this.con = dbPool.con;
     }
 
-    public void saveProduct(String productName, int categoryId, int subCategoryId, int price, String detail, String photo1, String photo2, String photo3, String photo4, int writerId, String roadAddrPart1, String addrDetail) throws SQLException {
-        String sql = "INSERT INTO product (productName, categoryId, subCategoryId, price, detail, imgUrl_1, imgUrl_2, imgUrl_3, imgUrl_4, writerId, roadAddrPart1, addrDetail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void saveProduct(String productName, int categoryId, int subCategoryId, int price, String detail, 
+    		String photo1, String photo2, String photo3, String photo4, 
+    		int writerId, String roadAddrPart1, String addrDetail,String latitude, String longitude) throws SQLException {
+        String sql = "INSERT INTO product (productName, categoryId, subCategoryId, price, detail, "
+        		+ "imgUrl_1, imgUrl_2, imgUrl_3, imgUrl_4, "
+        		+ "writerId, roadAddrPart1, addrDetail, latitude, longitude) "
+        		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             psmt = con.prepareStatement(sql);
             psmt.setString(1, productName);
@@ -33,6 +38,8 @@ public class SellDAO {
             psmt.setInt(10, writerId);
             psmt.setString(11, roadAddrPart1);
             psmt.setString(12, addrDetail);
+            psmt.setString(13, latitude);
+            psmt.setString(14, longitude);
             psmt.executeUpdate();
         } finally {
         	closeResources();

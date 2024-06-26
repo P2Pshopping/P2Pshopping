@@ -63,13 +63,23 @@
     <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
-        <description></description>
-        <display-name>sellController</display-name>
-        <servlet-name>sellController</servlet-name>
-        <servlet-class>sell.SellController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>sellController</servlet-name>
-        <url-pattern>/sell/sellController</url-pattern>
-    </servlet-mapping>
+    <description></description>
+    <display-name>sellController</display-name>
+    <servlet-name>sellController</servlet-name>
+    <servlet-class>sell.SellController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sellController</servlet-name>
+    <url-pattern>/sell/sellController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddressToCoordinatesServlet</display-name>
+    <servlet-name>AddressToCoordinatesServlet</servlet-name>
+    <servlet-class>HttpClient.AddressToCoordinatesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddressToCoordinatesServlet</servlet-name>
+    <url-pattern>/AddressToCoordinatesServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
