@@ -50,7 +50,7 @@ $('#autocompleteInput').autocomplete({
 				<c:otherwise>
 						<a href="<%=request.getContextPath()%>/Login/login.jsp"
 							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">Login</a> 
-							<a href="<%=request.getContextPath()%>/member/SignIn.jsp"
+							<a href="<%=request.getContextPath()%>/Join/join.jsp"
 							class="btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">create account</a>
 							<a href="<%=request.getContextPath()%>/sell/sell.jsp"
 							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; ">상품등록</a>
