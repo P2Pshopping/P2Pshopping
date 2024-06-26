@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
             // 디버깅 메시지 추가
             System.out.println("User session set: " + user.getName());
 
-            response.sendRedirect("Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
+            response.sendRedirect("Main/Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
         } else {
             // 사용자 인증에 실패한 경우
             response.sendRedirect("Login/login.jsp?error=invalid"); // 로그인 폼으로 리디렉션하고 오류 메시지를 전달합니다.

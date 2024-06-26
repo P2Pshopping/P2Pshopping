@@ -44,7 +44,7 @@
 <body
 	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center;">
 
-	<%@include file="layout/Header.jsp"%>
+	<%@include file="../layout/Header.jsp"%>
 <div class="row">
 <figure>
   <blockquote class="blockquote">
@@ -84,5 +84,8 @@
 			</div>
 		</div>
 	</div>
+	
+<%@ include file="../layout/Footer.jsp"%>
+
 </body>
 </html>
