@@ -51,6 +51,21 @@
             color: #424242;
         }
     </style>
+    <script>
+        function searchHospitals(department) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    window.location.href = 'search.jsp?department=' + department + '&latitude=' + latitude + '&longitude=' + longitude;
+                }, function(error) {
+                    alert('위치 정보를 가져올 수 없습니다.');
+                });
+            } else {
+                alert('위치 정보를 사용할 수 없습니다.');
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -58,11 +73,11 @@
         <h2>원하는 <span style="color: #D81B60;">진료과</span>를 선택해주세요</h2>
     </header>
     <div class="container">
-        <div class="option" onclick="location.href='search.jsp?department=gynecology'">
+        <div class="option" onclick="searchHospitals('gynecology')">
             <img src="gynecology_icon.png" alt="산부인과">
             <p>산부인과</p>
         </div>
-        <div class="option" onclick="location.href='search.jsp?department=pediatrics'">
+        <div class="option" onclick="searchHospitals('pediatrics')">
             <img src="pediatrics_icon.png" alt="소아과">
             <p>소아과</p>
         </div>

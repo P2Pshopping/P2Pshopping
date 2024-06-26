@@ -1,144 +1,113 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.io.BufferedReader, java.io.InputStreamReader, java.net.HttpURLConnection, java.net.URL" %>
+<%@ page import="org.json.JSONArray, org.json.JSONObject" %>
+<%
+    String department = request.getParameter("department");
+    String latitude = request.getParameter("latitude");
+    String longitude = request.getParameter("longitude");
+    String clientId = "ztfp2obt82";
+    String clientSecret = "hnPwfHZh6DgZl65JqRsZJks2sfn8ahvpnfY0mLjG";
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+    if (department == null || latitude == null || longitude == null) {
+        out.println("Missing required parameters.");
+        return;
+    }
 
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.methods.HttpGet;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+    String apiURL = "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=" + java.net.URLEncoder.encode(department, "UTF-8") + "&coordinate=" + latitude + "," + longitude;
 
-//@WebServlet("/sellController.do")  // 주석 처리
-@MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 1,  // 1MB
-    maxFileSize = 1024 * 1024 * 10,       // 10MB
-    maxRequestSize = 1024 * 1024 * 50     // 50MB
-)
-public class SellController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    StringBuilder responseBuilder = new StringBuilder();
+    JSONArray items = null;
+    try {
+        URL url = new URL(apiURL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
+        con.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        
-        // 디버깅 메시지 추가
-        System.out.println("SellController doPost 메서드 호출됨");
+        int responseCode = con.getResponseCode();
+        BufferedReader br;
+        if (responseCode == 200) {
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } else {
+            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+        }
+        String inputLine;
+        while ((inputLine = br.readLine()) != null) {
+            responseBuilder.append(inputLine);
+        }
+        br.close();
 
-        String selectedCategory = request.getParameter("selectedCategory");
-        String selectedSubcategory = request.getParameter("selectedSubcategory");
-        String productName = request.getParameter("productName");
-        String productDescription = request.getParameter("productDescription");
-        String price = request.getParameter("price");
-        String roadAddrPart1 = request.getParameter("roadAddrPart1");
-        String addrDetail = request.getParameter("addrDetail");
-        String email = (String) request.getSession().getAttribute("email");
+        // 디버깅용 응답 데이터 출력
+        out.println("<pre>Response Data: " + responseBuilder.toString() + "</pre>");
 
-        SellDAO sellDAO = new SellDAO();
-        List<String> fileNames = new ArrayList<>();
+        JSONObject jsonResponse = new JSONObject(responseBuilder.toString());
+        items = jsonResponse.getJSONArray("places");
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.println("Error: " + e.getMessage());
+        return;
+    }
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>병원찾기 - 결과</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ztfp2obt82"></script>
+    <script>
+        function initMap() {
+            var mapOptions = {
+                center: new naver.maps.LatLng(<%= latitude %>, <%= longitude %>),
+                zoom: 15
+            };
+            var map = new naver.maps.Map('map', mapOptions);
 
-        for (Part part : request.getParts()) {
-            if (part.getName().equals("productImages") && part.getSize() > 0) {
-                String fileName = part.getSubmittedFileName();
-                String uploadPath = getServletContext().getRealPath("") + "uploads" + File.separator + fileName;
+            var markerList = [];
+            var infowindowList = [];
+            <% for (int i = 0; i < items.length(); i++) {
+                JSONObject item = items.getJSONObject(i);
+                String name = item.getString("name");
+                String roadAddress = item.getString("roadAddress");
+                String jibunAddress = item.getString("jibunAddress");
+                double lat = item.getDouble("y");
+                double lng = item.getDouble("x");
+            %>
+            var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(<%= lat %>, <%= lng %>),
+                map: map
+            });
+            var infowindow = new naver.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:10px;"><b><%= name %></b><br><%= roadAddress %><br><%= jibunAddress %></div>'
+            });
+            markerList.push(marker);
+            infowindowList.push(infowindow);
+            <% } %>
 
-                File uploadDir = new File(getServletContext().getRealPath("") + "uploads");
-                if (!uploadDir.exists()) uploadDir.mkdir();
+            for (var i=0; i<markerList.length; i++) {
+                naver.maps.Event.addListener(markerList[i], 'click', getClickHandler(i));
+            }
 
-                try {
-                    part.write(uploadPath);
-                    fileNames.add("uploads/" + fileName);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            function getClickHandler(seq) {
+                return function(e) {
+                    var marker = markerList[seq],
+                        infowindow = infowindowList[seq];
+                    if (infowindow.getMap()) {
+                        infowindow.close();
+                    } else {
+                        infowindow.open(map, marker);
+                    }
                 }
             }
         }
-        
-        String photo1 = fileNames.size() > 0 ? fileNames.get(0) : null;
-        String photo2 = fileNames.size() > 1 ? fileNames.get(1) : null;
-        String photo3 = fileNames.size() > 2 ? fileNames.get(2) : null;
-        String photo4 = fileNames.size() > 3 ? fileNames.get(3) : null;
-        
-        // 좌표 변환 API 호출
-        Coordinates coordinates = getCoordinates(roadAddrPart1);
-        
-        try {
-            int categoryId = sellDAO.getCategoryId(selectedCategory);
-            int subCategoryId = sellDAO.getSubcategoryId(selectedSubcategory);
-            int writerId = sellDAO.getUserId(email);
 
-            sellDAO.saveProduct(productName, categoryId, subCategoryId, Integer.parseInt(price), productDescription, photo1, photo2, photo3, photo4, writerId, roadAddrPart1, addrDetail, coordinates.getLatitude(), coordinates.getLongitude());
-
-            response.sendRedirect("../Main/ItemList.jsp");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");  // 경로 수정
-        }
-    }
-
-    private Coordinates getCoordinates(String address) {
-        String clientId = "YOUR_NAVER_CLIENT_ID"; // 네이버 클라이언트 ID
-        String clientSecret = "YOUR_NAVER_CLIENT_SECRET"; // 네이버 클라이언트 시크릿
-        String apiURL = "";
-        
-        try {
-            apiURL = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + java.net.URLEncoder.encode(address, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null; // 인코딩 실패 시 null 반환
-        }
-
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(apiURL);
-        httpGet.addHeader("X-NCP-APIGW-API-KEY-ID", clientId);
-        httpGet.addHeader("X-NCP-APIGW-API-KEY", clientSecret);
-
-        try (CloseableHttpResponse httpResponse = client.execute(httpGet)) {
-            String responseString = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-            JSONObject jsonResponse = new JSONObject(responseString);
-            JSONArray addresses = jsonResponse.getJSONArray("addresses");
-            if (addresses.length() > 0) {
-                JSONObject addressObject = addresses.getJSONObject(0);
-                String latitude = addressObject.getString("y");
-                String longitude = addressObject.getString("x");
-                return new Coordinates(latitude, longitude);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private class Coordinates {
-        private String latitude;
-        private String longitude;
-
-        public Coordinates(String latitude, String longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-
-        public String getLongitude() {
-            return longitude;
-        }
-    }
-}
+        window.onload = initMap;
+    </script>
+</head>
+<body>
+    <h1>병원찾기 결과</h1>
+    <div id="map" style="width:100%;height:400px;"></div>
+</body>
+</html>
 
 
