@@ -107,8 +107,8 @@ public class UserDAO extends JDBConnect {
 	
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+ 
+        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
@@ -135,27 +135,56 @@ public class UserDAO extends JDBConnect {
             return false;
         }
     }
-    
-    //메인페이지에 인기 상품 목록 불러오기
-    public List<UserDTO> getTopItems() {
-        List<UserDTO> items = new ArrayList<>();
-        String query = "SELECT id, name, description FROM items ORDER BY id LIMIT 6";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
+    public boolean addUser1(UserDTO user) {
+        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, provinceId,createDate)"+ 
+        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                items.add(new UserDTO(id, name, description));
-            }
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getName());
+            stmt.setString(3,user.getNickname());
+            stmt.setString(4,user.getBirth());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getAddress());
+            stmt.setString(8, user.getPassword());
+            stmt.setInt(9, user.getProvinceId());
+            stmt.setTimestamp(10, new java.sql.Timestamp(System.currentTimeMillis()));
 
-        } catch (Exception e) {
+//            stmt.setString(13, user.getTimestamp());
+            
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-
-        return items;
     }
 }
+
+    
+    //메인페이지에 인기 상품 목록 불러오기
+//     public List<UserDTO> getTopItems() {
+//         List<UserDTO> items = new ArrayList<>();
+//         String query = "SELECT id, name, description FROM items ORDER BY id LIMIT 6";
+
+//         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+//              PreparedStatement statement = connection.prepareStatement(query);
+//              ResultSet resultSet = statement.executeQuery()) {
+
+//             while (resultSet.next()) {
+//                 int id = resultSet.getInt("id");
+//                 String name = resultSet.getString("name");
+//                 String description = resultSet.getString("description");
+//                 items.add(new UserDTO(id, name, description));
+//             }
+
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         }
+
+//         return items;
+//     }
+// }
+

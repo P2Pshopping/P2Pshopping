@@ -33,7 +33,7 @@ console.log(Kakao.isInitialized());
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8080/iMarket/Join/Kakaojoin.jsp',
+      redirectUri: 'http://localhost:8081/iMarket/Join/Kakaojoin.jsp',
     });
   } 
   displayToken()
@@ -218,21 +218,21 @@ Login In
 				</div>
 				</p>
 			<div class="d-grid gap-2 mx-auto" >
-				<input type="submit" width="300px" height="45px" class="btn btn-secondary"   value = "로그인"/>
+				<input type="submit" width="300px" height="45px" class="btn btn-secondary" value = "로그인"/>
 
 	</div>
 		</form>
 
 
-		 <button class="kakao"  type="submit">
-		 <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-                <img src="kakao_login.png" onclick="javascript:loginWithKakao();" alt="카카오 로그인">
+		 <button class="kakao"  type="submit" style="border: none !important;  background-color: transparent;">
+		 <a id="kakao-login-btn" href="javascript:loginWithKakao()" >
+                <img src="kakao_login.png" onclick="javascript:loginWithKakao();"  alt="카카오 로그인">
 </a>
             </button>
 <p id="token-result"></p>
 
            
-            <button class="kakao" type="submit">
+            <button class="kakao" type="submit"style="border: none !important; background-color: transparent;"> 
                 <img src="naver_login.png" alt="네이버 로그인">
                 </button>
 			</div>

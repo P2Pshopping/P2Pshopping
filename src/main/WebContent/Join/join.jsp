@@ -4,12 +4,14 @@
 <%@ page import="common.JDBConnect" %>
 <%@ page import="User.UserDAO" %>
 <%@ page import="common.UserDTO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="UTF-8">
     <title>Join</title>
+
     <link href="text.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -22,13 +24,87 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<%
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Join</title>
+ <script>
+    function joinCheck() {
+        var name = document.getElementById("inputName").value.trim();
+        var birth = document.getElementById("inputBirth").value.trim();
+        var nickname = document.getElementById("inputNickName").value.trim();
+        var id = document.getElementById("inputId").value.trim();
+        var pw = document.getElementById("inputPWD").value.trim();
+        var pwc = document.getElementById("inputPWDC").value.trim();
+        var phone = document.getElementById("inputPhone").value.trim();
+        var address = document.getElementById("inputAddress").value.trim();
+        var email = document.getElementById("inputEmail").value.trim();
+
+        if (name === "") {
+            alert("이름을 입력해주세요.");
+            document.getElementById("inputName").focus();
+            event.preventDefault();
+            return false;
+        } else if (birth === "") {
+            alert("생년월일을 입력해주세요.");
+            document.getElementById("inputBirth").focus();
+            event.preventDefault();
+            return false;
+        } else if (nickname === "") {
+            alert("닉네임을 입력해주세요.");
+            document.getElementById("inputNickName").focus();
+            event.preventDefault();
+            return false;
+        } else if (id === "") {
+            alert("아이디를 입력해주세요.");
+            document.getElementById("inputId").focus();
+            event.preventDefault();
+            return false;
+        } else if (pw === "") {
+            alert("비밀번호를 입력해주세요.");
+            document.getElementById("inputPWD").focus();
+            event.preventDefault();
+            return false;
+        } else if (pwc === "") {
+            alert("비밀번호 확인을 입력해주세요.");
+            document.getElementById("inputPWDC").focus();
+            event.preventDefault();
+            return false;
+        } else if (pw !== pwc) {
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            document.getElementById("inputPWDC").focus();
+            event.preventDefault();
+            return false;
+        } else if (phone === "") {
+            alert("전화번호를 입력해주세요.");
+            document.getElementById("inputPhone").focus();
+            event.preventDefault();
+            return false;
+        } else if (email === "") {
+            alert("이메일을 입력해주세요.");
+            document.getElementById("inputEmail").focus();
+            event.preventDefault();
+            return false;
+        } else if (address === "") {
+            alert("주소를 입력해주세요.");
+            document.getElementById("inputAddress").focus();
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+            <%
 String message = null;
 
 if ("POST".equalsIgnoreCase(request.getMethod())) {
     String name = request.getParameter("inputName");
     String birth = request.getParameter("inputBirth");
-	String nickname = request.getParameter("inputNickName");    
+    String nickname = request.getParameter("inputNickName");
     String username = request.getParameter("inputId");
     String password = request.getParameter("inputPWD");
     String phone = request.getParameter("inputPhone");
@@ -36,19 +112,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     String address = request.getParameter("inputAddress");
     
 
-
-    // 빈 문자열 또는 null 체크 후 기본값 설정
-    int kakaoId = request.getParameter("kakaoId") != null && !request.getParameter("kakaoId").isEmpty() 
-                  ? Integer.parseInt(request.getParameter("kakaoId")) : 0;
-    int naverId = request.getParameter("naverId") != null && !request.getParameter("naverId").isEmpty() 
-                  ? Integer.parseInt(request.getParameter("naverId")) : 0;
-    int provinceId = request.getParameter("provinceId") != null && !request.getParameter("provinceId").isEmpty() 
-                     ? Integer.parseInt(request.getParameter("provinceId")) : 0;
-    int cityId = request.getParameter("cityId") != null && !request.getParameter("cityId").isEmpty() 
-                 ? Integer.parseInt(request.getParameter("cityId")) : 0;
-    int districtId = request.getParameter("districtId") != null && !request.getParameter("districtId").isEmpty() 
-                     ? Integer.parseInt(request.getParameter("districtId")) : 0;
-    String auth = request.getParameter("auth");
+    // 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
+    // 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
 
     UserDTO user = new UserDTO();
     user.setName(name);
@@ -58,120 +123,47 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     user.setAddress(address);
     user.setNickname(nickname);
     user.setPassword(password);
-    user.setKakaoId(kakaoId);
-    user.setNaverId(naverId);
-    user.setProvinceId(provinceId);
-    user.setCityId(cityId);
-    user.setDistrictId(districtId);
-    user.setAuth(auth);
-
+    // 필요한 경우 다른 필드들도 설정
 
     UserDAO userDAO = null;
     try {
-    	userDAO = new UserDAO(application);
+
+        userDAO = new UserDAO(application);
         String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
         user.setPassword(hashedPassword); // 해시된 비밀번호 설정
-          boolean isUserAdded = userDAO.addUser(user);
+        boolean isUserAdded = userDAO.addUser(user);
 
+        if (isUserAdded) {
 
-         if (isUserAdded) {
             message = "회원가입이 성공적으로 완료되었습니다.";
+%>
+<script>
+    window.location.href = "../Login/login.jsp";
+    alert("회원가입에 성공하였습니다.");
+</script>
+<%
         } else {
             message = "입력칸을 다시 한 번 확인해주세요.";
-        } 
+
+%>
+<script>
+    alert("입력칸을 다시 한 번 확인해주세요.");
+    event.preventDefault(); // 폼 제출을 중단
+</script>
+<%
+        }
     } catch (Exception e) {
         e.printStackTrace();
-        message = "회원가입 중 오류가 발생했습니다: " + e.getMessage(); 
+        // 예외 처리 로직 추가
+
     } finally {
-    	   if (userDAO != null) {
-    		   userDAO.close();
+        if (userDAO != null) {
+            userDAO.close();
         }
     }
 }
 %>
 
-  <script>
-  
-        function joinCheck() {
-            var name = document.getElementById("inputName").value.trim();
-            var birth = document.getElementById("inputBirth").value.trim();
-            var nickname = document.getElementById("inputNickName").value.trim();
-            var id = document.getElementById("inputId").value.trim();
-            var pw = document.getElementById("inputPWD").value.trim();
-            var pwc = document.getElementById("inputPWDC").value.trim();
-            var phone = document.getElementById("inputPhone").value.trim();
-            var address = document.getElementById("inputAddress").value.trim();
-            var email = document.getElementById("inputEmail").value.trim();
-
-            if (name === "") {
-                alert("이름을 입력해주세요.");
-                document.getElementById("inputName").focus();
-                event.preventDefault();
-                return false;
-            }
-            else  if (birth === "") {
-                alert("생년월일을 입력해주세요.");
-                document.getElementById("inputBirth").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if (nickname === "") {
-                alert("닉네임을 입력해주세요.");
-                document.getElementById("inputNickName").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if  (id === "") {
-                alert("아이디를 입력해주세요.");
-                document.getElementById("inputId").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if  (pw === "") {
-                alert("비밀번호를 입력해주세요.");
-                document.getElementById("inputPWD").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if (pwc === "") {
-                alert("비밀번호 확인을 입력해주세요.");
-                document.getElementById("inputPWDC").focus();
-                event.preventDefault();
-                return false;
-            }
-            else  if (pw !== pwc) {
-                alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-                document.getElementById("inputPWDC").focus();
-                event.preventDefault();
-                return false;
-                }
-            else if (phone === "") {
-                alert("전화번호를 입력해주세요.");
-                document.getElementById("inputPhone").focus();
-                event.preventDefault();
-                return false;
-            }
-            else  if (email === "") {
-                alert("이메일을 입력해주세요.");
-                document.getElementById("inputEmail").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if (address === "") {
-                alert("주소를 입력해주세요.");
-                document.getElementById("inputAddress").focus();
-                event.preventDefault();
-                return false;
-            
-            } else{
-            	
- 			window.location.href = "../Main/Mainpage.jsp";
- 			alert("회원가입에 성공하였습니다.");
- 			return true;
-            }
-           /*  document.getElementById("joinForm").submit(); */
-        } 
-    </script> 
 </head>
 <body>
 <%@include file="../layout/Header.jsp"%>
