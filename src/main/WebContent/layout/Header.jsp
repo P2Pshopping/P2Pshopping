@@ -40,6 +40,7 @@ $('#autocompleteInput').autocomplete({
 							class="bi bi-suit-heart-fill" style="margin: 2%; color:red; --bs-btn-font-size: .75rem;">찜 </a> 
 						<a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a>
 						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
+
 							class="bi bi-gear-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">정보수정 </a> 
 						<a href="<%=request.getContextPath()%>/user?cmd=logout"
 							class="bi bi-box-arrow-left" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">로그아웃 </a>
@@ -49,6 +50,7 @@ $('#autocompleteInput').autocomplete({
 							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> Login </a> 
 							<a href="<%=request.getContextPath()%>/member/SignIn.jsp"
 							class="bi bi-person-plus-fill btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> create account </a>
+
 							<a href="<%=request.getContextPath()%>/sell/sell.jsp"
 							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; "> 상품등록 </a>
 				</c:if>

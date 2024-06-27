@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import common.JDBConnect;
+import common.UserDTO;
 import jakarta.servlet.ServletContext;
 
 public class UserDAO extends JDBConnect {
@@ -89,32 +90,33 @@ public class UserDAO extends JDBConnect {
 	    }
 	}
 	
-    public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (name, birth, username, password, email, phone, address, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getBirth());
-            stmt.setString(3, user.getUsername());
-            stmt.setString(4, user.getPassword());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getPhone());
-            stmt.setString(7, user.getAddress());
-            stmt.setInt(8, user.getKakaoId());
-            stmt.setInt(9, user.getNaverId());
-            stmt.setInt(10, user.getProvinceId());
-            stmt.setInt(11, user.getCityId());
-            stmt.setInt(12, user.getDistrictId());
-            stmt.setString(13, user.getAuth());
-            stmt.setTimestamp(14, user.getCreateDate());
-            
-            int rowsInserted = stmt.executeUpdate();
-            return rowsInserted > 0;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-}
+	   public boolean addUser(UserDTO user) {
+	        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
+	                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+	            stmt.setString(1, user.getUsername());
+	            stmt.setString(2, user.getName());
+	            stmt.setString(3,user.getNickname());
+	            stmt.setString(4,user.getBirth());
+	            stmt.setString(5, user.getEmail());
+	            stmt.setString(6, user.getPhone());
+	            stmt.setString(7, user.getAddress());
+	            stmt.setString(8, user.getPassword());
+	            stmt.setInt(9, user.getKakaoId());
+	            stmt.setInt(10, user.getNaverId());
+	            stmt.setInt(11, user.getProvinceId());
+	            stmt.setInt(12, user.getCityId());
+	            stmt.setInt(13, user.getDistrictId());
+	            stmt.setString(14, user.getAuth());
+//	            stmt.setString(13, user.getTimestamp());
+	            stmt.setTimestamp(15, new java.sql.Timestamp(System.currentTimeMillis()));
+	            
+	            int rowsInserted = stmt.executeUpdate();
+	            return rowsInserted > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+	}
