@@ -33,7 +33,7 @@ console.log(Kakao.isInitialized());
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8080/iMarket/Join/Kakaojoin.jsp',
+      redirectUri: 'http://localhost:8081/iMarket/Join/Kakaojoin.jsp',
     });
   } 
   displayToken()
@@ -162,7 +162,7 @@ function validateForm(form) {
 </head>
 
 <body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
- <%@include file="../../layout/Header.jsp"%>
+ <%@include file="../layout/Header.jsp"%>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<span style="color: red; font-size: 1.2em;"> 
 <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>	
@@ -218,21 +218,21 @@ Login In
 				</div>
 				</p>
 			<div class="d-grid gap-2 mx-auto" >
-				<input type="submit" width="300px" height="45px" class="btn btn-secondary"   value = "로그인"/>
+				<input type="submit" width="300px" height="45px" class="btn btn-secondary" value = "로그인"/>
 
 	</div>
 		</form>
 
 
-		 <button class="kakao"  type="submit">
-		 <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-                <img src="kakao_login.png" onclick="javascript:loginWithKakao();" alt="카카오 로그인">
+		 <button class="kakao"  type="submit" style="border: none !important;  background-color: transparent;">
+		 <a id="kakao-login-btn" href="javascript:loginWithKakao()" >
+                <img src="kakao_login.png" onclick="javascript:loginWithKakao();"  alt="카카오 로그인">
 </a>
             </button>
 <p id="token-result"></p>
 
            
-            <button class="kakao" type="submit">
+            <button class="kakao" type="submit"style="border: none !important; background-color: transparent;"> 
                 <img src="naver_login.png" alt="네이버 로그인">
                 </button>
 			</div>

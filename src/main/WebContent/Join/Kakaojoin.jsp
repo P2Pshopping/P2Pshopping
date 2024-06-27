@@ -113,7 +113,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
             
             } else{
             	
- 			window.location.href = "../Main/Mainpage.jsp";
+ 			window.location.href = "../Mainpage.jsp";
  			alert("회원가입에 성공하였습니다.");
  			return true;
             }
@@ -157,7 +157,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <p><%= message %></p>
     <% } %>
                 <div class="d-grid gap-2">
-                    <a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
+                    <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
                     <button type="submit" class="btn btn-primary btn-lg" name = "loginButton" onclick="joinCheck1();">회원 가입</button>
                 
                 </div>
@@ -167,7 +167,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:80px;">
+<div style = "margin-top:100px;">
 <%-- <%@include file="../layout/Footer.jsp"%> --%>
 
     <jsp:include page="../layout/Footer.jsp" />

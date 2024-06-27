@@ -40,6 +40,7 @@ $('#autocompleteInput').autocomplete({
 							class="bi bi-suit-heart-fill" style="margin: 2%; color:red; --bs-btn-font-size: .75rem;">찜 </a> 
 						<a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a>
 						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
+
 							class="bi bi-gear-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">정보수정 </a> 
 						<a href="<%=request.getContextPath()%>/logout.do"
 							class="bi bi-box-arrow-left" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">로그아웃 </a>
