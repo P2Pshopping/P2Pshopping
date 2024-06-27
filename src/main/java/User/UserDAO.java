@@ -161,8 +161,48 @@ public class UserDAO extends JDBConnect {
             return false;
         }
     }
-}
 
+public boolean getUsername(String username) {
+	  
+	UserDTO dto = null;
+	
+	String sql = " select username "
+			+ "    from users "
+			+ "    where username=? ";
+	
+
+
+	
+	boolean findid = false;
+	
+	try {
+		//db연결
+	
+		System.out.println("1/3 getId success");
+		
+		//Query실행을 위한 statement 또는 prepareStatemet 객체 생성 시작
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, username);
+		System.out.println("2/3 getId success");
+		
+		//Query실행 시작
+		rs = psmt.executeQuery();
+		System.out.println("3/3 getId success");
+		
+		if(rs.next()) { //찾음
+			findid = true;
+		}			
+		
+	} catch (SQLException e) {	
+		System.out.println("getId fail");
+		e.printStackTrace();
+	} finally {
+		close();
+	}
+	
+	return findid;		
+}
+}
     
     //메인페이지에 인기 상품 목록 불러오기
 //     public List<UserDTO> getTopItems() {
