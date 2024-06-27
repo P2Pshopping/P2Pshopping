@@ -136,6 +136,13 @@ public class UserDAO extends JDBConnect {
         }
     }
 
+
+	public boolean validate(UserDTO user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+    
+
     public boolean addUser1(UserDTO user) {
         String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, provinceId,createDate)"+ 
         		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
@@ -202,6 +209,7 @@ public boolean getUsername(String username) {
 	
 	return findid;		
 }
+
 }
     
     //메인페이지에 인기 상품 목록 불러오기

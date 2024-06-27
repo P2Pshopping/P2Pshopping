@@ -8,7 +8,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
 
 $('#autocompleteInput').autocomplete({
@@ -32,30 +33,27 @@ $('#autocompleteInput').autocomplete({
 	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-4" style="display: flex; justify-content: right; align-items: center; font-color:black;" >
-    <c:choose>
-				<c:when test="${session.getAttribute('username') != null}">
-						<c:if test="${sessionScope.principal.auth eq 'admin' }">
-							<a href="<%=request.getContextPath()%>/product?cmd=insertPage"
-								class="header-sub-menu">상품등록</a>
-							<a href="#" class="header-sub-menu">상품수정</a>
-						</c:if>
+    
+				<c:if test="${sessionScope.username != null}">
+												
 						<a href="<%=request.getContextPath()%>/favor?cmd=favorList"
-							class="header-sub-menu">찜</a> <a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="header-sub-menu">장바구니</a>
+							class="bi bi-suit-heart-fill" style="margin: 2%; color:red; --bs-btn-font-size: .75rem;">찜 </a> 
+						<a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a>
 						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
-							class="header-sub-menu">정보수정</a> <a
-							href="<%=request.getContextPath()%>/user?cmd=logout"
-							class="header-sub-menu">로그아웃</a>
-					
-				</c:when>
-				<c:otherwise>
-						<a href="<%=request.getContextPath()%>/Login/login.jsp"
-							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">Login</a> 
-							<a href="<%=request.getContextPath()%>/Join/join.jsp"
-							class="btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;">create account</a>
+
+							class="bi bi-gear-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">정보수정 </a> 
+						<a href="<%=request.getContextPath()%>/user?cmd=logout"
+							class="bi bi-box-arrow-left" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">로그아웃 </a>
+				</c:if>
+				<c:if test="${sessionScope.username == null}">
+						<a href="../Login/login.jsp"
+							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> Login </a> 
+							<a href="<%=request.getContextPath()%>/member/SignIn.jsp"
+							class="bi bi-person-plus-fill btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> create account </a>
+
 							<a href="<%=request.getContextPath()%>/sell/sell.jsp"
-							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; ">상품등록</a>
-				</c:otherwise>
-			</c:choose>
+							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; "> 상품등록 </a>
+				</c:if>
 			</div>
   </div>
   
