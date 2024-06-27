@@ -1,4 +1,4 @@
-package board;
+package utils;
 
 import java.io.PrintWriter;
 
