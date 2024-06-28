@@ -1,79 +1,236 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"%>
+<%@ page import="common.JDBConnect"%>
+<%@ page import="PJ2.PJ2DTO"%>
+<%@ page import="PJ2.PJ2DAO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href="DPCSS.css" rel="stylesheet" type="text/css">
 <!-- 다중 슬라이드 js,css링크-->
 
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>아이 자세히 보기</title>
 
-<script type="text/javascript" src="./DPJS.js"></script> 
+<script type="text/javascript" src="./DPJS.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
 <meta charset="UTF-8">
 <title>아이 물건 보기</title>
 
 <style>
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family: Verdana, Geneva, Arial,sans-serif;font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
-</style>
-</head>
-<body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
-	
-	 <div class="container text-center">
-	 <div class="col" style="float:right;  margin-right:100px; ">
-	<%@ include file="../layout/Header.jsp"%> 
-	</div>
-	</div>
-	
-	<br/>
-	<br/>
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Geneva, Arial, sans-serif;
+	font-size: 12px;
+}
 
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+</style>
+
+
+
+
+
+
+
+<%
+session.setAttribute("seller", "sell");
+session.setAttribute("username", "usn");
+session.setAttribute("sellerid", "5");
+session.setMaxInactiveInterval(1800);
+
+JDBConnect db = new JDBConnect(); //<% 이건 Java <script>는 jscript...
+PJ2DAO dao = new PJ2DAO();
+String id = (String) session.getAttribute("sellerid");
+PJ2DTO dto = dao.img(id); /* 기억해라 애송이 이거다 */
+%>
+
+
+
+</head>
+<body
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center;">
+
+
+	<%@ include file="../layout/Header.jsp"%>
+
+
+	<br />
+	<br />
+
+
+
+	<!-- <i class="bi bi-suit-heart"></i> -->
+	<!-- <i class="bi bi-suit-heart-fill"></i> -->
+
+	
 
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide"><img src="pc1.jpg"></div>
-			<div class="swiper-slide"><img src="pc2.jpg"></div>
-			<div class="swiper-slide"><img src="pc3.jpg"></div>
-			<div class="swiper-slide"><img src="pc4.jpg"></div>
+			<div class="swiper-slide">
+				<img src="../<%=dto.getImgUrl_1()%>">
+			</div>
+			<div class="swiper-slide">
+				<img src="../<%=dto.getImgUrl_2()%>">
+			</div>
+			<div class="swiper-slide">
+				<img src="../<%=dto.getImgUrl_3()%>">
+			</div>
+			<div class="swiper-slide">
+				<img src="../<%=dto.getImgUrl_4()%>">
+			</div>
 		</div>
-		
-		
+
+
 		<div class="swiper-button-next"></div>
 		<div class="swiper-button-prev"></div>
-				<!-- 버튼  -->
-				
+		<!-- 버튼  -->
+
 		<div class="swiper-pagination"></div>
 	</div>
-	
-	<div style="text-align:center;margint-top:5px;">사진 </div>
-	
-	
+
+	<div style="text-align: center; margint-top: 5px;">사진</div>
+
+
+
+
+
 	<script>
 
 	new Swiper('.swiper-container',{
@@ -100,109 +257,151 @@
 	});
 
 </script>
-	
-	<br/>
+
+	<br />
+
 	<div>
-	<svg style="float:left; border: solid 1px black;" xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+		<button style="background-color: white; width: 60px; height: 50px"
+			onclick="heart()">
+			<svg id="hid" style="position: absolute; display: block;" id="heart "
+				xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red"
+				class="bi bi-suit-heart" viewBox="0 0 16 16">
+  <path
+					d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+  </svg>
+			<svg id="hidf" style="position: absolute; display: none;"
+				xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red"
+				class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+  <path
+					d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1" />
 </svg>
-	
-	
-	<div class="end" style="float:right;">
-	<b style="border:solid 1px black; width:auto; height:auto; " ><%
-		String seller = (String) session.getAttribute("seller");  //판매자 이름
-		out.print(seller);
-	%>&nbsp;&nbsp;&nbsp;
-	</b>
-	</div>  
+		</button>
 	</div>
-	<hr class="recenter" style="border:solid 1px black; width:1200px;">
-	
-	<br/>
-	
-		 <div class="container text-center">
-		<input type = "text" name="title"  value="제목"
-		style="width:50%;height:50px;px;font-size:30px;text-align:center;border:2px solid black;" readonly> 
-		
-		
 
-		<input type = "text" name="content"  value="내용"
-			style="width:50%;height:500px;px;font-size:30px;text-align:center; border:2px solid black;" readonly>	
-		</div>
-	
-	<br/>
-	
-	
-	
+
+	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red" class="bi bi-suit-heart" viewBox="0 0 16 16">
+  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
+</svg>	      안채워진거-->
+
+
+	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+</svg>   채워진거
+	 -->
+
+	<!-- <script>
+	function heart() {
+		var hid = document.getElementById("hid");
+		var hidf = document.getElementById("hidf");
+		if(hid.display==("block")){
+			hid.display=none;
+			hidf.display=block;
+		}
+		
+	}  나중에 적용
+
+</script> -->
+
+
+
+	<div class="end" style="float: right;">
+		<b style="border: solid 1px black; width: auto; height: auto;"
+			id=favorite;> <%
+ String seller = (String) session.getAttribute("seller"); //판매자 이름
+ out.print(seller);
+ %>&nbsp;&nbsp;&nbsp;
+		</b>
+	</div>
+
+	<hr class="recenter" style="border: solid 1px black; width: 1200px;">
+
+	<br />
+
+	<div class="container text-center">
+		<input type="text" name="title" value="<%=dto.getProductName() %>"
+			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
+			readonly> <input type="text" name="content" value="<%=dto.getDetail() %>"
+			style="width: 50%; height: 500px; px; font-size: 30px; text-align: center; border: 2px solid black;"
+			readonly>
+	</div>
+
+	<br />
+
+
+
 	<div>
-	 <div class="container text-center">
-	<%@ include file="./MultiChatMain.jsp"%> <!-- 세션에서 가져온 아이디를 기반으로 찾아서 넣기  -->
+		<div class="container text-center">
+			<%@ include file="./MultiChatMain.jsp"%>
+			<!-- 세션에서 가져온 아이디를 기반으로 찾아서 넣기  -->
+		</div>
+
+
+		<div style="margin: 0 auto;">
+			<table class="table"
+				style="width: 500px; height: 200px; margin: 0 auto;">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">First</th>
+						<th scope="col">Last</th>
+						<th scope="col">Handle</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	
-	
-	<div style="margin:0 auto; ">
-		<table class="table" style=" width: 500px; height:200px; margin:0 auto; ">
-  <thead >
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-<br/>
-<br/>
-<br/>
-	
+	<br />
+	<br />
+	<br />
 
-	
 
-<div class="map_wrap">
-    <div id="map" style="width:500px;height:300px;position:relative;overflow:hidden; margin:0 auto; border:solid 2px black;"></div>
- 
-   
-    <div id="menu_wrap" class="bg_white" style="border:solid 2px black;" >
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value=<%
-		String sellerad = (String) session.getAttribute("sellerad");  //판매자 이름
-		out.print(sellerad);
-	%> id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-   </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0637e168501ef6ed107e35286b4b79b1&libraries=services"></script>
-<script>
+
+
+	<div class="map_wrap">
+		<div id="map"
+			style="width: 500px; height: 300px; position: relative; overflow: hidden; margin: 0 auto; border: solid 2px black;"></div>
+
+
+		<div id="menu_wrap" class="bg_white" style="border: solid 2px black;">
+			<div class="option">
+				<div>
+					<form onsubmit="searchPlaces(); return false;">
+						키워드 : <input type="text"
+							value=<%String sellerad = (String) session.getAttribute("sellerad"); //판매자 이름
+out.print(sellerad);%>
+							id="keyword" size="15">
+						<button type="submit">검색하기</button>
+					</form>
+				</div>
+			</div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0637e168501ef6ed107e35286b4b79b1&libraries=services"></script>
+	<script>
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -421,79 +620,29 @@ function removeAllChildNods(el) {
 }
 </script>
 
-	
-	
-	
-	<div class="grid text-center">
-	<div class="row">
-</div>
-  <div class="col" ><img src="./babycloth.jpg" style="width:300px; height:auto;"></div>
-  <div class="col" ><img src="./babycloth2.jpg" style="width:300px; height:auto;"></div>
-  <div class="col"  ><img src="./babycloth3.jpg" style="width:300px; height:auto;"></div>
-  <div class="col" ><img src="./babycloth5.jpg" style="width:300px; height:auto;"></div>
-</div> 
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 <div class="container text-center">
-	 <div class="col" style="float:right;  margin-right:100px; ">
-	<%@ include file="../layout/Footer.jsp"%> 
+
+
+	<div class="grid text-center">
+		<div class="row"></div>
+		<div class="col">
+			<img src="./babycloth.jpg" style="width: 300px; height: auto;">
+		</div>
+		<div class="col">
+			<img src="./babycloth2.jpg" style="width: 300px; height: auto;">
+		</div>
+		<div class="col">
+			<img src="./babycloth3.jpg" style="width: 300px; height: auto;">
+		</div>
+		<div class="col">
+			<img src="./babycloth5.jpg" style="width: 300px; height: auto;">
+		</div>
 	</div>
-	</div>
-	
-	
+
+	<%@ include file="../layout/Footer.jsp"%>
+
+
+
 </body>
 
 
