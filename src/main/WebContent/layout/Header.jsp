@@ -10,17 +10,74 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0637e168501ef6ed107e35286b4b79b1&libraries=services"></script>
 <script>
+$(document).ready(function() {
+	  var data = [
+        "유아 안전용품 > 아기 모니터",
+        "유아 안전용품 > 침대 난간 및 가드",
+        "유아 안전용품 > 게이트 및 가드",
+        "유아 안전용품 > 기타 아기 및 어린이 안전용품",
+        "유아 안전용품 > 놀이펜",
+        "바운서, 로커 및 그네 > 아기 바운서",
+        "바운서, 로커 및 그네 > 아기 로커",
+        "바운서, 로커 및 그네 > 아기 그네",
+        "바운서, 로커 및 그네 > 아기 보행기",
+        "아기 옷",
+        "카시트 및 아기 캐리어",
+        "기저귀 용품 > 기저귀 가방",
+        "기저귀 용품 > 기저귀 가방",
+        "기저귀 용품 > 기저귀 매트",
+        "기저귀 용품 > 기타 기저귀 갈이 용품",
+        "기저귀 용품 > 유아용 변기",
+        "수유 용품 > 젖병 워머",
+        "수유 용품 > 젖병",
+        "수유 용품 > 유축기",
+        "수유 용품 > 기타 수유 용품",
+        "유아 옷, 신발 및 액세서리 > 옷 묶음",
+        "유아 옷, 신발 및 액세서리 > 드레스",
+        "유아 옷, 신발 및 액세서리 > 청바지 및 바지",
+        "유아 옷, 신발 및 액세서리 > 어린이 액세서리",
+        "유아 옷, 신발 및 액세서리 > 코트 및 재킷",
+        "유아 옷, 신발 및 액세서리 > 잠옷",
+        "유아 옷, 신발 및 액세서리 > 기타 어린이 옷",
+        "유아 옷, 신발 및 액세서리 > 신발 및 부츠",
+        "유아 옷, 신발 및 액세서리 > 수영복",
+        "유아 옷, 신발 및 액세서리 > 상의 및 셔츠",
+        "유아 및 어린이 가구 > 욕조",
+        "유아 및 어린이 가구 > 기저귀 교환대",
+        "유아 및 어린이 가구 > 유아용 침대",
+        "유아 및 어린이 가구 > 아기 침대 및 요람",
+        "유아 및 어린이 가구 > 하이체어",
+        "유아 및 어린이 가구 > 램프, 조명 및 갓",
+        "유아 및 어린이 가구 > 기타",
+        "야외 장난감 > 기타 야외 장난감",
+        "야외 장난감 > 놀이집 및 놀이 텐트",
+        "야외 장난감 > 모래놀이 및 물놀이 장난감",
+        "야외 장난감 > 스쿠터",
+        "야외 장난감 > 스케이트보드",
+        "야외 장난감 > 미끄럼틀",
+        "유모차 및 스토롤러",
+        "장난감"
+    ];
 
-$('#autocompleteInput').autocomplete({
-    source: function(request, response) {
-        var results = $.ui.autocomplete.filter(data, request.term);
-        response(results.slice(0, 3));
-    },
-    minLength: 1
+    // 검색어 자동완성
+    $('#autocompleteInput').autocomplete({
+        source: function(request, response) {
+            var results = $.ui.autocomplete.filter(data, request.term);
+            response(results.slice(0, 3));
+        },
+        minLength: 1
+    });
 });
 
 </script>
+<style>
+    .ui-autocomplete {
+        color: #0000FF; /* 텍스트 색상 변경 */
+    }
+</style>
+
 </head>
 
 <body>
@@ -68,7 +125,8 @@ $('#autocompleteInput').autocomplete({
           <a class="nav-link active" aria-current="page" href="../Main/Mainpage.jsp">홈</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-cureent="page" href="	https://map.kakao.com/link/map/37.402056,127.108212">병원찾기</a>
+
+                  <a class="nav-link active" aria-cureent="page" href="<%=request.getContextPath()%>/hospital/Hospital1.jsp">병원찾기</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,7 +141,7 @@ $('#autocompleteInput').autocomplete({
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="상품명 또는 브랜드명으로 검색해주세요." aria-label="Search">
+        <input class="form-control me-2" id="autocompleteInput" type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요." aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>

@@ -285,7 +285,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:30%;">
+
+<div style = "margin-top:40%;"><!-- 30%하면 가입버튼 가려짐 -->
 <%@include file="../layout/Footer.jsp"%>
 </div>
 
