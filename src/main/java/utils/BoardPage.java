@@ -1,4 +1,4 @@
-package board;
+package utils;
 
 public class BoardPage {
 	public static String pagingStr(int totalCount, int pageSize, int blockPage, int pageNum, String reqUrl) {

@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<title>리스트</title>
+<title>파일 첨부형 게시판</title>
 <style>
 body {
 	font-size: 13px;
@@ -29,9 +29,9 @@ body {
 	margin: 20px;
 }
 
-#gallery-item img {
-	width: 85%;
-	height: 150px;
+#gallery img {
+	width: 50%;
+	height: auto;
 }
 
 #caption {
@@ -52,6 +52,13 @@ body {
 	border-radius: 10px;
 	overflow: hidden;
 	text-align: center;
+	margin-bottom: 20px;
+	cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
+	transition: transform 0.3s ease-in-out; /* 호버 시 부드러운 변화를 위한 트랜지션 설정 */
+}
+
+#gallery-item:hover {
+	transform: scale(1.05); /* 호버 시 약간 확대되도록 스케일 변환 */
 }
 
 #left-sidebar {
@@ -60,6 +67,8 @@ body {
 	margin-right: 20px;
 	font-family: "Noto Sans KR";
 	font-size: 12px;
+	margin-top: 200px; /* 예시로 상단에서 50px 위치로 이동 */
+	margin-left: 20px;
 }
 
 #right-sidebar {
@@ -72,11 +81,11 @@ body {
 	padding: 0px;
 	width: 75px;
 	height: 75px;
-	
 }
 
 .flex-container {
 	display: flex;
+	justify-content: center;
 }
 
 #footer {
@@ -92,215 +101,99 @@ body {
 	background-color: whitesmoke;
 	z-index: 2;
 }
+
+.paging {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.paging a {
+	display: inline-block;
+	padding: 6px 12px;
+	margin: 0px 3px;
+	border: 1px solid #ddd;
+	background-color: #f5f5f5;
+	color: #337ab7;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+.paging .current {
+	background-color: #337ab7;
+	color: white;
+	border: 1px solid #337ab7;
+}
+
+.paging a:hover {
+	background-color: #ddd;
+}
 </style>
 </head>
 <body>
-<div style="display: flex; justify-content: center;">
-<nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">
-  <div class="container-fluid">
-    <div class=row>
-    <div class=col-md-2>
-    <a class="navbar-brand" href="#" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
-	</div>
-	<div class=col-md-4>
-    <c:choose>
-				<c:when test="${sessionScope.principal != null}">
-						<c:if test="${sessionScope.principal.auth eq 'admin' }">
-							<a href="<%=request.getContextPath()%>/product?cmd=insertPage"
-								class="header-sub-menu">상품등록</a>
-							<a href="#" class="header-sub-menu">상품수정</a>
-						</c:if>
-						<a href="<%=request.getContextPath()%>/favor?cmd=favorList"
-							class="header-sub-menu">찜</a> <a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="header-sub-menu">장바구니</a>
-						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
-							class="header-sub-menu">정보수정</a> <a
-							href="<%=request.getContextPath()%>/user?cmd=logout"
-							class="header-sub-menu">로그아웃</a>
-					
-				</c:when>
-				<c:otherwise>
-						<a href="<%=request.getContextPath()%>/member/LoginForm.jsp"
-							class="header-sub-menu">로그인</a> <a
-							href="<%=request.getContextPath()%>/user?cmd=joinForm"
-							class="header-sub-menu">회원가입</a>
-				</c:otherwise>
-			</c:choose>
-			</div>
-			
-  </div>
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">홈</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-cureent="page" href="#">병원찾기</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            중고장터
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item"  onclick="location.href='../iMarket/ItemList.jsp'">상품목록</a></li>
-            <li><a class="dropdown-item" href="#">후기글</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">커뮤니티</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="상품명 또는 브랜드명으로 검색해주세요." aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-</div>
 	<div id="container">
 		<div class="flex-container">
 			<div id="left-sidebar">
 				<div class="btn-group-vertical" role="group"
 					aria-label="Vertical button group" style="font-size: 8px;">
-					<button type="button" class="btn btn-outline-warning">전체보기</button>
-					<button type="button" class="btn btn-outline-warning">아기사진</button>
+					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';">아기사진</button>
 					<button type="button" class="btn btn-outline-warning">거래후기</button>
 				</div>
 			</div>
 
 			<div id="contents">
+				<h2>게시판</h2>
 				<div id="gallery">
-					<div id="gallery-item">
-						<a href="#"><img src="../image/1.jpg" alt="Item"> </a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/2.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/3.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/1.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/2.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/3.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/1.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/2.jpg" alt="Item"></a>
-					</div>
-					<div id="gallery-item">
-						<a href="#"><img src="../image/3.jpg" alt="Item"></a>
-					</div>
-					<!-- <c:choose>
-						<c:when test="${ empty boardLists }">
-							
+					<c:choose>
+						<c:when test="${empty boardLists}">
+							<div id="gallery-item">
+								<p>등록된 게시물이 없습니다^^*</p>
+							</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ boardLists }" var="row" varStatus="loop">
-								<div id="gallery-item">
-									
+							<c:forEach items="${boardLists}" var="row" varStatus="loop">
+								<div id="gallery-item"
+									onclick="location.href='../mvcboard/view.do?idx=${row.idx}'">
+									<c:if test="${not empty row.sfile}">
+										<img
+											src="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.idx}"
+											alt="${row.title}" />
+									</c:if>
+									<div id="caption"></div>
 								</div>
 							</c:forEach>
 						</c:otherwise>
-					</c:choose> -->
+					</c:choose>
 				</div>
 
-				<!-- 검색창 추가 -->
-				<div class="input-group mt-4 mb-4"
-					style="max-width: 300px; margin: 0 auto;">
-					<input type="text" class="form-control" placeholder="검색어를 입력하세요"
-						aria-label="검색어를 입력하세요" aria-describedby="button-search">
-					<button class="btn btn-outline-secondary" type="button"
-						id="button-search">검색</button>
+				<div class="paging">${map.pagingImg}</div>
+
+				<div class="d-flex justify-content-between mt-4">
+					<div></div>
+					<div>
+						<button type="button" class="btn btn-outline-primary"
+							onclick="location.href='../mvcboard/write.do';">글쓰기</button>
+					</div>
+
 				</div>
 			</div>
 
-			<div id="right-sidebar" class="border">
+			<div id="right-sidebar">
 				<p>인기 게시글</p>
 				<a href="#"><img alt="아기1" src="../img/333.jpg" width="100"
 					height="100"></a>
 			</div>
 		</div>
-
-		<div id="footer">
-			<hr color="black" size="5px">
-			<div class="row">
-				<div class="col-md-4">
-					<dl class="dl1">
-						<dt>
-							(주)아이마켓코리아 <span class="txt_owner">대표이사 김아무개</span>
-						</dt>
-						<dd>서울시 강남구 삼성로 512 삼성동빌딩 16층</dd>
-						<dd>
-							사업자등록번호 104-81-58502 <a
-								href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1048158502&amp;apv_perm_no="
-								class="btn_num_con" target="_blank">사업자정보확인</a>
-						</dd>
-						<dd>통신판매업 신고번호 : 제 2011-서울강남-02905호</dd>
-						<dd>의료기기판매업 신고번호: 제4850호</dd>
-					</dl>
-				</div>
-				<div class="col-md-4">
-					<dl class="dl4 ">
-						<dt>
-							고객센터<a
-								href="http://www.imarket.co.kr/ecenter/MainFAQ.do?_method=MainFAQ&amp;pgid=pcfront&amp;cgrp=cmmn&amp;cmod=foot_links"
-								class="btn_inquire">문의 전 클릭</a>
-						</dt>
-						<dt>
-							아이마켓<span style="font-size: 12px;"><span>TEL :
-									1522-8250</span><span class="bar">|</span><span>FAX :
-									02-3708-8338</span></span>
-						</dt>
-						<dt class="type_mg" style="margin-top: 0;">
-							의료몰<span style="font-size: 12px; padding-left: 17px"><span>TEL
-									: 02-6715-4390</span><span class="bar">|</span><span>FAX :
-									02-3708-8338</span></span>
-						</dt>
-					</dl>
-				</div>
-				<div class="col-md-4">
-					<dl class="dl4">
-						<dt>[인증범위]</dt>
-						<dd>
-							<span style="font-size: 12px;"><span>MRO 구매 서비스 운영</span></span>
-						</dd>
-						<dt class="type_mg" style="margin-top: 12px;"></dt>
-						<dt>[유효기간]</dt>
-						<dd>
-							<span style="font-size: 12px;"><span>2023.08.02~2026.08.01</span></span>
-						</dd>
-					</dl>
-				</div>
-				<div class="col-md-4">
-					<dl class="dl3">
-						<dt>
-							구매안전(에스크로)서비스 가맹점 <a
-								href="http://www.allatpay.com/servlet/AllatBizV2/svcinfo/SvcInfoMainCL?menu_id=m010602&amp;action_flag=SEARCH&amp;search_no=biz_no&amp;es_business_no=1048158502"
-								class="btn_join_con" target="_blank">가입확인</a>
-						</dt>
-						<dd>
-							고객님의 안전한 거래를 위해 현금으로 결제 시<br>구매안전(에스크로)서비스를 이용하실 수 있습니다.
-						</dd>
-						<dt class="type_mg" style="margin-top: 20px"></dt>
-						<dd>Copyright ⓒ IMARKETKOREA.CO.LTD All Rights Reserved</dd>
-					</dl>
-				</div>
-			</div>
-		</div>
 	</div>
 
+
+
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-w4C1gPKEqFb/yx8hsIZjkhMCixIqL5ykz6qykIv5Qh4lg7hR1Hz6ol4LZcK0zMLG"
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+		integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0"
 		crossorigin="anonymous"></script>
 </body>
 </html>

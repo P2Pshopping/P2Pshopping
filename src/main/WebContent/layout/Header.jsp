@@ -39,12 +39,13 @@ $('#autocompleteInput').autocomplete({
 						<a href="<%=request.getContextPath()%>/favor?cmd=favorList"
 							class="bi bi-suit-heart-fill" style="margin: 2%; color:red; --bs-btn-font-size: .75rem;">찜 </a> 
 						<a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a>
+													
 						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
 
 							class="bi bi-gear-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">정보수정 </a> 
 						<a href="<%=request.getContextPath()%>/logout.do"
 							class="bi bi-box-arrow-left" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">로그아웃 </a>
-						<a href="<%=request.getContextPath()%>/sell/sell.jsp"
+				<a href="<%=request.getContextPath()%>/sell/sell.jsp"
 							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; "> 상품등록 </a>
 				</c:if>
 				<c:if test="${sessionScope.username == null}">
