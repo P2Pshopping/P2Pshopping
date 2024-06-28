@@ -102,5 +102,14 @@
     <servlet-name>ProxyServlet</servlet-name>
     <url-pattern>/ProxyServlet</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>AdminServlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>admin.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/Admin.do</url-pattern>
+  </servlet-mapping>
 </web-app>
