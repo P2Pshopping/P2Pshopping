@@ -130,6 +130,7 @@ body {
 </style>
 </head>
 <body>
+<jsp:include page="../layout/Header.jsp" />
 	<div id="container">
 		<div class="flex-container">
 			<div id="left-sidebar">
@@ -152,10 +153,10 @@ body {
 						<c:otherwise>
 							<c:forEach items="${boardLists}" var="row" varStatus="loop">
 								<div id="gallery-item"
-									onclick="location.href='../mvcboard/view.do?idx=${row.idx}'">
+									onclick="location.href='../mvcboard/view.do?id=${row.id}'">
 									<c:if test="${not empty row.sfile}">
 										<img
-											src="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.idx}"
+											src="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.id}"
 											alt="${row.title}" />
 									</c:if>
 									<div id="caption"></div>
@@ -171,7 +172,7 @@ body {
 					<div></div>
 					<div>
 						<button type="button" class="btn btn-outline-primary"
-							onclick="location.href='../mvcboard/write.do';">글쓰기</button>
+							onclick="location.href='../board/write.do';">글쓰기</button>
 					</div>
 
 				</div>
@@ -185,7 +186,7 @@ body {
 		</div>
 	</div>
 
-
+<jsp:include page="../layout/Footer.jsp" />
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"

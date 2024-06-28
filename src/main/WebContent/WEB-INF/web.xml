@@ -103,4 +103,34 @@
     <url-pattern>/ProxyServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>MVCBoardList</servlet-name>
+    <servlet-class>mvcboard.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MVCBoardList</servlet-name>
+    <url-pattern>/board/list.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MVCBoardWrite</servlet-name>
+    <servlet-class>mvcboard.WriteController</servlet-class>
+    <multipart-config>
+      <max-file-size>1048576</max-file-size>
+      <max-request-size>10485760</max-request-size>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MVCBoardWrite</servlet-name>
+    <url-pattern>/board/write.do</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+    <param-name>POSTS_PER_PAGE</param-name>
+    <param-value>9</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PAGES_PER_BLOCK</param-name>
+    <param-value>5</param-value>
+  </context-param>
+  
 </web-app>

@@ -40,6 +40,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("username", user.getUsername()); // 세션에 사용자 이름을 저장합니다.
 
             session.setAttribute("name", user.getName());
+            session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("phone", user.getPhone());
             session.setAttribute("address", user.getAddress());

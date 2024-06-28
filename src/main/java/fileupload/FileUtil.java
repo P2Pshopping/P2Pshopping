@@ -16,15 +16,33 @@ import jakarta.servlet.http.Part;
 
 public class FileUtil {
 	public static String uploadFile(HttpServletRequest req, String sDirectory) throws ServletException, IOException {
-		Part part = req.getPart("attachedFile");
-		String partHeader = part.getHeader("content-disposition");
-		String[] phArr = partHeader.split("filename=");
-		String originalFileName = phArr[1].trim().replace("\"", "");
-		if (!originalFileName.isEmpty()) {
-			part.write(sDirectory + File.separator + originalFileName);
-		}
-		return originalFileName;
-	}
+        Part part = req.getPart("attachedFile");
+        if (part == null || part.getSize() == 0) {
+            throw new IOException("파일이 업로드되지 않았습니다.");
+        }
+
+        String partHeader = part.getHeader("content-disposition");
+        String[] phArr = partHeader.split("filename=");
+        String originalFileName = phArr[1].trim().replace("\"", "");
+
+        if (originalFileName.isEmpty()) {
+            throw new IOException("파일 이름이 비어 있습니다.");
+        }
+
+        // 보안을 위해 파일 이름에서 특수 문자를 제거합니다.
+        originalFileName = originalFileName.replaceAll("[^a-zA-Z0-9.-]", "_");
+
+        // 저장 디렉토리가 없으면 생성합니다.
+        File directory = new File(sDirectory);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File savedFile = new File(directory, originalFileName);
+        part.write(savedFile.getAbsolutePath());
+
+        return originalFileName;
+    }
 
 	public static String renameFile(String sDirectory, String fileName) {
 		String ext = fileName.substring(fileName.lastIndexOf("."));

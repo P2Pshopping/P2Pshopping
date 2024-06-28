@@ -45,18 +45,18 @@ body {
 </style>
 </head>
 <body>
-
+<jsp:include page="../layout/Header.jsp" />
 <!-- Main Container -->
 <div id="container">
 
     <div id="contents">
         <form name="editFrm" method="post" enctype="multipart/form-data" action="edit.do" onsubmit="return validateForm(this);">
-            <input type="hidden" name="idx" value="${dto.idx}" />
+            <input type="hidden" name="id" value="${dto.idx}" />
             <div class="form-group">
                 <label for="category">분류</label>
                 <select class="form-control" id="category" name="category">
-                    <option ${dto.category == '아기 자랑' ? 'selected' : ''}>아기 자랑</option>
-                    <option ${dto.category == '거래 후기' ? 'selected' : ''}>거래 후기</option>
+                    <option ${dto.bno == '아기 자랑' ? 'selected' : ''}>아기 자랑</option>
+                    <option ${dto.bno == '거래 후기' ? 'selected' : ''}>거래 후기</option>
                 </select>
             </div>
             <div class="form-group">
@@ -64,9 +64,10 @@ body {
                 <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" value="${dto.title}">
             </div>
             <div class="form-group">
-                <label for="name">작성자</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="작성자 이름을 입력하세요" value="${dto.name}">
-            </div>
+					<label for="name">작성자 : </label>
+					<label name="name" ><%=session.getAttribute("name")%></label>
+					
+				</div>
             <div class="form-group">
                 <label for="summernote">내용</label>
                 <textarea id="summernote" name="content">${dto.content}</textarea>
@@ -77,18 +78,9 @@ body {
     </div>
 
 </div>
-
+<jsp:include page="../layout/Footer.jsp" />
 <script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            tabsize: 2,
-            height: 300,
-            minHeight: 300,
-            maxHeight: 500,
-        });
-    });
-
-    function validateForm(form) {
+        function validateForm(form) {
         if(form.name.value == "") {
             alert("작성자를 입력하세요.");
             form.name.focus();

@@ -104,13 +104,14 @@ html, body {
 </style>
 </head>
 <body>
+<jsp:include page="../layout/Header.jsp" />
 
 <div id="container">
     <div id="main-content">
         <div id="left-sidebar">
             <div class="btn-group-vertical" role="group" aria-label="수직 버튼 그룹">
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';">아기사진</button>
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';">거래후기</button>
+                <button type="button" class="btn btn-outline-warning" onclick="location.href='../board/list.do';">아기사진</button>
+                <button type="button" class="btn btn-outline-warning" onclick="location.href='../board/list.do';">거래후기</button>
             </div>
         </div>
 
@@ -122,7 +123,7 @@ html, body {
                     <li><p>조회수 ${dto.visitcount } | 추천수 ${dto.likes }</p></li>
                     <li><img src="../Uploads/${dto.sfile}" style="max-width: 100%;" /> ${dto.content}</li>
                     <li>
-                        <input class="btn btn-primary btn-block" type="button" value="수정" onclick="location.href='../mvcboard/Edit.do';"> 
+                        <input class="btn btn-primary btn-block" type="button" value="수정" onclick="location.href='../mvcboard/edit.do';"> 
                         <input class="btn btn-danger btn-block" type="button" value="삭제"> 
                         <br />
                         <form action="../mvcboard/like.do" method="post" style="display:inline;">
@@ -146,6 +147,7 @@ html, body {
         </div>
     </div>
 </div>
+<jsp:include page="../layout/Footer.jsp" />
 
 </body>
 </html>

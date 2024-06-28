@@ -78,7 +78,7 @@ $('#autocompleteInput').autocomplete({
             <li><a class="dropdown-item"  href="../Main/ItemList.jsp">상품목록</a></li>
             <li><a class="dropdown-item" href="#">후기글</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">커뮤니티</a></li>
+            <li><a class="dropdown-item" href="../board/list.do">커뮤니티</a></li>
           </ul>
         </li>
       </ul>
