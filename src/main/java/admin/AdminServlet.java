@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.catalina.realm.JNDIRealm.User;
 
-import com.example.dao.AdminDAO;
+import admin.AdminDAO;
 import com.example.model.Product;
 import com.example.model.Transaction;
 
