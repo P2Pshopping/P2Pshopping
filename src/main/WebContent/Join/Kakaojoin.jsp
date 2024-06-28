@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="common.JDBConnect" %>
-<%@ page import="Kakao.KakaoDAO" %>
-<%@ page import="Kakao.KakaoDTO" %>
+<%@ page import="User.UserDAO" %>
+<%@ page import="common.UserDTO" %>
     <link href="text.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -18,108 +18,138 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="access_token" value="${param.access_token}" />
+ <script>
+    function joinCheck() {
+        var name = document.getElementById("inputName").value.trim();
+        var birth = document.getElementById("inputBirth").value.trim();
+        var id = document.getElementById("inputId").value.trim();
+        var pw = document.getElementById("inputPWD").value.trim();
+        var pwc = document.getElementById("inputPWDC").value.trim();
+        var phone = document.getElementById("inputPhone").value.trim();
+        var address = document.getElementById("inputAddress").value.trim();
+        var email = document.getElementById("inputEmail").value.trim();
 
-<%
+        if (name === "") {
+            alert("이름을 입력해주세요.");
+            document.getElementById("inputName").focus();
+            event.preventDefault();
+            return false;
+        } else if (birth === "") {
+            alert("생년월일을 입력해주세요.");
+            document.getElementById("inputBirth").focus();
+            event.preventDefault();
+            return false;
+        
+        } else if (id === "") {
+            alert("아이디를 입력해주세요.");
+            document.getElementById("inputId").focus();
+            event.preventDefault();
+            return false;
+        } else if (pw === "") {
+            alert("비밀번호를 입력해주세요.");
+            document.getElementById("inputPWD").focus();
+            event.preventDefault();
+            return false;
+        } else if (pwc === "") {
+            alert("비밀번호 확인을 입력해주세요.");
+            document.getElementById("inputPWDC").focus();
+            event.preventDefault();
+            return false;
+        } else if (pw !== pwc) {
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            document.getElementById("inputPWDC").focus();
+            event.preventDefault();
+            return false;
+        } else if (phone === "") {
+            alert("전화번호를 입력해주세요.");
+            document.getElementById("inputPhone").focus();
+            event.preventDefault();
+            return false;
+        } else if (email === "") {
+            alert("이메일을 입력해주세요.");
+            document.getElementById("inputEmail").focus();
+            event.preventDefault();
+            return false;
+        } else if (address === "") {
+            alert("주소를 입력해주세요.");
+            document.getElementById("inputAddress").focus();
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+            <%
 String message = null;
 
 if ("POST".equalsIgnoreCase(request.getMethod())) {
-	
-    String uname = request.getParameter("inputId");
-    String upass = request.getParameter("inputPWD");
+    String name = request.getParameter("inputName");
+    String birth = request.getParameter("inputBirth");
+    
+    String username = request.getParameter("inputId");
+    String password = request.getParameter("inputPWD");
+    String phone = request.getParameter("inputPhone");
+    String email = request.getParameter("inputEmail");
+    String address = request.getParameter("inputAddress");
+
+    // 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
+    // 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
+
+    UserDTO user = new UserDTO();
+    user.setName(name);
+    user.setUsername(username);
+    user.setEmail(email);
+    user.setPhone(phone);
+    user.setAddress(address);
    
+    user.setPassword(password);
+    // 필요한 경우 다른 필드들도 설정
 
-
-    // 빈 문자열 또는 null 체크 후 기본값 설정
-    int kakaoId = request.getParameter("kakaoId") != null && !request.getParameter("kakaoId").isEmpty() 
-                  ? Integer.parseInt(request.getParameter("kakaoId")) : 0;
-    int naverId = request.getParameter("naverId") != null && !request.getParameter("naverId").isEmpty() 
-                  ? Integer.parseInt(request.getParameter("naverId")) : 0;
-    int provinceId = request.getParameter("provinceId") != null && !request.getParameter("provinceId").isEmpty() 
-                     ? Integer.parseInt(request.getParameter("provinceId")) : 0;
-    int cityId = request.getParameter("cityId") != null && !request.getParameter("cityId").isEmpty() 
-                 ? Integer.parseInt(request.getParameter("cityId")) : 0;
-    int districtId = request.getParameter("districtId") != null && !request.getParameter("districtId").isEmpty() 
-                     ? Integer.parseInt(request.getParameter("districtId")) : 0;
-    String auth = request.getParameter("auth");
-
-    KakaoDTO kuser = new KakaoDTO();
-
-    kuser.setUsername(uname);
-    kuser.setPassword(upass);
-    kuser.setKakaoId(kakaoId);
-
-
-
-    KakaoDAO kakaoDAO = null;
+    UserDAO userDAO = null;
     try {
-    	kakaoDAO = new KakaoDAO(application);
-     //   String hashedPassword = memberDAO.hashPassword(password); // 비밀번호 해시
-    //    user.setPassword(hashedPassword); // 해시된 비밀번호 설정
-          boolean isUserAdded = kakaoDAO.addKakao(kuser);
+        userDAO = new UserDAO(application);
+        String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
+        user.setPassword(hashedPassword); // 해시된 비밀번호 설정
+        boolean isUserAdded = userDAO.addUser(user);
 
-
-        /* if (isUserAdded) {
+        if (isUserAdded) {
             message = "회원가입이 성공적으로 완료되었습니다.";
+%>
+<script>
+    window.location.href = "../Login/login.jsp";
+    alert("회원가입에 성공하였습니다.");
+</script>
+<%
         } else {
             message = "입력칸을 다시 한 번 확인해주세요.";
-        } */
+%>
+<script>
+    alert("입력칸을 다시 한 번 확인해주세요.");
+    event.preventDefault(); // 폼 제출을 중단
+</script>
+<%
+        }
     } catch (Exception e) {
         e.printStackTrace();
-/*         message = "회원가입 중 오류가 발생했습니다: " + e.getMessage(); */
+        // 예외 처리 로직 추가
     } finally {
-    	   if (kakaoDAO != null) {
-    		   kakaoDAO.close();
+        if (userDAO != null) {
+            userDAO.close();
         }
     }
 }
 %>
+
+ 	
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="UTF-8">
     <title>Join</title>
-  <script>
   
-        function joinCheck1() {
-            var id = document.getElementById("inputId").value.trim();
-            var pw = document.getElementById("inputPWD").value.trim();
-            var pwc = document.getElementById("inputPWDC").value.trim();
-      
-            if  (id === "") {
-                alert("아이디를 입력해주세요.");
-                document.getElementById("inputId").focus();
-                event.preventDefault();
-                return false;
-            }
-          
-           if  (pw === "") {
-                alert("비밀번호를 입력해주세요.");
-                document.getElementById("inputPWD").focus();
-                event.preventDefault();
-                return false;
-            }
-            else if (pwc === "") {
-                alert("비밀번호 확인을 입력해주세요.");
-                document.getElementById("inputPWDC").focus();
-                event.preventDefault();
-                return false;
-            }
-            else  if (pw !== pwc) {
-                alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-                document.getElementById("inputPWDC").focus();
-                event.preventDefault();
-                return false;
-            
-            } else{
-            	
- 			window.location.href = "../Mainpage.jsp";
- 			alert("회원가입에 성공하였습니다.");
- 			return true;
-            }
-        
-        } 
-    </script> 
 </head>
 <body>
 <%-- <%@include file="../layout/Header.jsp"%> --%>
@@ -132,13 +162,22 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     <div class="logo"> 카카오 회원가입 </div>
             <div class="join_form">
                  <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joincheck();">
-           
+                    <div class="col-12">
+                        <label for="inputName" class="form-label">성명</label>
+                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputBirth" class="form-label">생년월일</label>
+                        <input type="number" class="form-control" id="inputBirth" name="inputBirth" placeholder="생년월일 입력">
+                    </div>
+                  
+                    
                     <div class="form-inline w-100">
                         <div class="col-12">
                             <label for="inputId" class="form-label">아이디</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="inputId" name="inputId" placeholder="10자 이하">
-                                <button type="button" class="btn btn-danger">중복 확인</button>
+                            <input type="button" class="btn btn-danger" id="idChkBtn" value="중복 확인">
                             </div>
                         </div>
                     </div>
@@ -150,6 +189,28 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                         <label for="inputPWDC" class="form-label">비밀번호 확인</label>
                         <input type="password" class="form-control" id="inputPWDC" name="inputPWDC" placeholder="위와 같이 입력하세요">
                     </div>
+                    <div class="col-12">
+                        <label for="inputPhone" class="form-label">전화번호</label>
+                        <input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="숫자만 입력하세요.">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="이메일을 입력하세요.">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">주소</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="주소 입력">
+                            <button type="button" class="btn btn-danger">주소 검색</button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label">상세 주소</label>
+                        <input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="상세 주소 입력">
+                    </div>
+                   <div class = "blank">
+                   
+                   </div>
                    <p>
                    </p>
    
@@ -167,7 +228,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:100px;">
+<div style = "margin-top:30%;">	
 <%-- <%@include file="../layout/Footer.jsp"%> --%>
 
     <jsp:include page="../layout/Footer.jsp" />

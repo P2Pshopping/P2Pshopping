@@ -25,7 +25,9 @@ public class UserDAO extends JDBConnect {
         super(application);
     }
 
-    
+    public UserDAO() {
+    	 // 기본 생성자
+    }
     
 	// 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
 	public UserDTO getUserDTO(String uid, String upass) {
@@ -54,7 +56,7 @@ public class UserDAO extends JDBConnect {
                 dto.setUsername(rs.getString("username"));
                 dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
                 dto.setBirth(rs.getString("birth"));
-                dto.setNickname(rs.getString("nickname"));
+          
                 dto.setName(rs.getString("name"));
                 dto.setEmail(rs.getString("email"));
                 dto.setPhone(rs.getString("phone"));
@@ -104,29 +106,28 @@ public class UserDAO extends JDBConnect {
 	}
 	
 	
-	
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+ 
-        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+        String sql = "INSERT INTO users (username, name,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+ 
+        		" VALUES (?, ? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getName());
-            stmt.setString(3,user.getNickname());
-            stmt.setString(4,user.getBirth());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getPhone());
-            stmt.setString(7, user.getAddress());
-            stmt.setString(8, user.getPassword());
-            stmt.setInt(9, user.getKakaoId());
-            stmt.setInt(10, user.getNaverId());
-            stmt.setInt(11, user.getProvinceId());
-            stmt.setInt(12, user.getCityId());
-            stmt.setInt(13, user.getDistrictId());
-            stmt.setString(14, user.getAuth());
+    
+            stmt.setString(3,user.getBirth());
+            stmt.setString(4, user.getEmail());
+            stmt.setString(5, user.getPhone());
+            stmt.setString(6, user.getAddress());
+            stmt.setString(7, user.getPassword());
+            stmt.setInt(8, user.getKakaoId());
+            stmt.setInt(9, user.getNaverId());
+            stmt.setInt(10, user.getProvinceId());
+            stmt.setInt(11, user.getCityId());
+            stmt.setInt(12, user.getDistrictId());
+            stmt.setString(13, user.getAuth());
 //            stmt.setString(13, user.getTimestamp());
-            stmt.setTimestamp(15, new java.sql.Timestamp(System.currentTimeMillis()));
+            stmt.setTimestamp(14, new java.sql.Timestamp(System.currentTimeMillis()));
             
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
@@ -134,6 +135,30 @@ public class UserDAO extends JDBConnect {
             e.printStackTrace();
             return false;
         }
+    }
+    public void dbconn() {
+    	try {
+    		Class.forName("oracle.jdbc.OracleDriver");
+    		
+    		
+    		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+    		String id = "c##musthave";
+    		String pwd = "1234";
+    		
+    		con = DriverManager.getConnection(url,id,pwd);
+    		
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    public void dbclose() {
+    	try {
+    		
+    	close();
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
     }
 
 
@@ -143,73 +168,83 @@ public class UserDAO extends JDBConnect {
 	}
     
 
-    public boolean addUser1(UserDTO user) {
-        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, provinceId,createDate)"+ 
-        		" VALUES (?, ? ,? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
-
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getName());
-            stmt.setString(3,user.getNickname());
-            stmt.setString(4,user.getBirth());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getPhone());
-            stmt.setString(7, user.getAddress());
-            stmt.setString(8, user.getPassword());
-            stmt.setInt(9, user.getProvinceId());
-            stmt.setTimestamp(10, new java.sql.Timestamp(System.currentTimeMillis()));
-
-//            stmt.setString(13, user.getTimestamp());
+	public boolean idCheck(String username) {
+	
+		
+		boolean result = false; //아이디 중복 여부 체크 변수 
+       
+		
+		try {  
+			
+			String sql = "select username from users where username= ?"; 
+		
+			psmt = con.prepareStatement(sql);               
+			psmt.setString(1, username);           
+			rs = psmt.executeQuery();  
+			
+			if(rs.next()) {
+				result = true;    // 아이디가 중복인 경우
+			}else{
+				result = false;  // 사용가능한 아이디인 경우			
+			}
             
-            int rowsInserted = stmt.executeUpdate();
-            return rowsInserted > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+		}
+        catch(Exception e) {
+			System.out.println("confirmId(): " + e);  
+            //어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
+		} 
+        finally {
+			close();
+		}
+		return result;
+	} 
+	
+ 
+public UserDTO getIdFindDTO(String name, String phone) {
+//	UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
+//	String query = "SELECT * FROM users WHERE id=? AND password=?";
+	  UserDTO dto = null;
+        String query = "SELECT * FROM users WHERE name =? AND phone=?";
+	
+	
+    System.out.println("Executing query: " + query);
+    System.out.println("Parameters: " + name + ", " + phone);
+	// 쿼리문 템플릿
 
-public boolean getUsername(String username) {
-	  
-	UserDTO dto = null;
-	
-	String sql = " select username "
-			+ "    from users "
-			+ "    where username=? ";
-	
-
-
-	
-	boolean findid = false;
-	
 	try {
-		//db연결
-	
-		System.out.println("1/3 getId success");
-		
-		//Query실행을 위한 statement 또는 prepareStatemet 객체 생성 시작
-		psmt = con.prepareStatement(sql);
-		psmt.setString(1, username);
-		System.out.println("2/3 getId success");
-		
-		//Query실행 시작
-		rs = psmt.executeQuery();
-		System.out.println("3/3 getId success");
-		
-		if(rs.next()) { //찾음
-			findid = true;
-		}			
-		
-	} catch (SQLException e) {	
-		System.out.println("getId fail");
-		e.printStackTrace();
-	} finally {
-		close();
-	}
-	
-	return findid;		
-}
+		// 쿼리 실행
+		psmt = con.prepareStatement(query); // 동적 쿼리문 준비
+		psmt.setString(1, name); // 쿼리문의 첫번째 인파라미터에 값 설정
+		psmt.setString(2, phone); // 쿼리문의 두 번째 인파라미터에 값 설정
+		rs = psmt.executeQuery(); // 쿼리문 실행
 
+		// 결과 처리
+		if (rs.next()) {
+			// 쿼리 결과로 얻은 회원 정보를 DTO 객체에 저장
+			  dto = new UserDTO();
+            dto.setId(rs.getInt("id"));
+            dto.setUsername(rs.getString("username"));
+            dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
+            dto.setBirth(rs.getString("birth"));
+            dto.setName(rs.getString("name"));
+            dto.setEmail(rs.getString("email"));
+            dto.setPhone(rs.getString("phone"));
+            dto.setAddress(rs.getString("address"));
+            dto.setKakaoId(rs.getInt("kakaoId"));
+            dto.setNaverId(rs.getInt("naverId"));
+            dto.setProvinceId(rs.getInt("provinceId"));
+            dto.setCityId(rs.getInt("cityId"));
+            dto.setDistrictId(rs.getInt("districtId"));
+            dto.setAuth(rs.getString("auth"));
+            System.out.println("User found: " + dto.getUsername());
+		} else {
+            System.out.println("No user found with provided credentials.");
+        }
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return dto; // DTO 객체 반환
+}
 }
     
     //메인페이지에 인기 상품 목록 불러오기

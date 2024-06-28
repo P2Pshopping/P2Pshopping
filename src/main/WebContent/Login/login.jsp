@@ -1,29 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="fn"%>
 
 
-<!-- 로그인 화면에서 border 테두리 없애는거 성공시키고 카카오 로그인 눌렀을때 카카오 로그인 시도 하게 하는거 찾고 네이버 로그인도 이어서 실행되게 하기 -->
-
-
-
-
-
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link href="text.css" rel="stylesheet" type="text/css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"	rel="stylesheet"	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"	crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" 
-integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
- crossorigin="anonymous"></script>
-<script >
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+	integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+	crossorigin="anonymous"></script>
+<script>
 
 Kakao.init("c001e197e7fa7a4857d81e3876d22b27");
 console.log(Kakao.isInitialized());   
@@ -33,7 +52,7 @@ console.log(Kakao.isInitialized());
 <script>
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8081/iMarket/Join/Kakaojoin.jsp',
+      redirectUri: 'http://localhost:8081/Join/Kakaojoin.jsp',
     });
   } 
   displayToken()
@@ -62,7 +81,7 @@ console.log(Kakao.isInitialized());
 	  }
 	</script>
 
-	   <script>
+<script>
 	   
 	  Kakao.init('c001e197e7fa7a4857d81e3876d22b27');
 	  console.log(Kakao.isInitialized()); 
@@ -137,7 +156,8 @@ console.log(Kakao.isInitialized());
 
         	}
 	</script>
-<script type = "text/javascript">
+
+<script type="text/javascript">
 function validateForm(form) {
 
 	if (!form.username.value) {
@@ -161,18 +181,20 @@ function validateForm(form) {
 </script>
 </head>
 
-<body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
- <%@include file="../layout/Header.jsp"%>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-	<span style="color: red; font-size: 1.2em;"> 
-<%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>	
-<% if(session.getAttribute("UserId") == null) { %>
-</span>
+<body
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center;">
+	<%@include file="../layout/Header.jsp"%>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+	<span style="color: red; font-size: 1.2em;"> <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>
+		<% if(session.getAttribute("UserId") == null) { %>
+	</span>
 
 
 	<script>
-	  
-
+	
 		function validateForm(form) {
 			if (!form.username.value) {
 				alert("아이디를 입력하세요.");
@@ -183,69 +205,87 @@ function validateForm(form) {
 				return false;
 			}
 		}
-		
 	
-		
 	</script>
+	<% String chek =null;
+	String userid= "";
+	Cookie[] cookie = request.getCookies();
+	
+	if(cookie != null){
+		for (int i =0; i<cookie.length;i++){
+			if(cookie[i].getName().equals("remember")){
+				chek = "checked";
+				userid = cookie[i].getValue();
+				System.out.println(userid);
+			}
+		}
+	}
+	%>
 
 
 
 	<div class="login_wrapper">
-	<div class="flex-center">
-Login In
-</div>
-	
+		<div class="flex-center" style="margin-top: -100px;">Login In</div>
+
 		<div class="login_form">
-		
 
 
-		  <form action="<c:url value='/login.do' />"  method="post" name = "loginFrm" onsubmit = "return validateForm(this);">
 
-				<input type="text"  name="username" class="login_text" placeholder="ID">
-				 <input type="password" name="password" class="login_text"  placeholder="PASSWORD">
+			<form action="<c:url value='/login.do' />" method="post"
+				name="loginFrm" onsubmit="return validateForm(this);">
+
+				<input type="text" name="username" class="login_text"
+					placeholder="ID">
+					 <input type="password" name="password"
+					class="login_text" placeholder="PASSWORD">
 
 				<p>
-				<div class ="blank">
+				<div class="blank">
 					<a href="../Find/FindId.jsp" class="btn btn-link" type=button
-						id="Find">Forgot Password?</a> 
-						
-						
-					<a href="../agree/agree.jsp"
-						class="btn btn-link" type=button id="join">Sign In</a> 
-						
-					<input type="checkbox" class="form-check-input" name="save_check">
-					<label class="form-check-label">아이디 저장</label>
+						id="Find">Forgot Password?</a> <a href="../agree/agree.jsp"
+						class="btn btn-link" type=button id="join">Sign In</a> <input
+						type="checkbox" class="form-check-input" name="save_check"
+						value= chk<%= chek %>> <label class="form-check-label">아이디
+						저장</label>
 				</div>
 				</p>
-			<div class="d-grid gap-2 mx-auto" >
-				<input type="submit" width="300px" height="45px" class="btn btn-secondary" value = "로그인"/>
+				<div class="d-grid gap-2 mx-auto">
+					<input type="submit" width="300px" height="45px"
+						class="btn btn-secondary" value="로그인" />
+
+				</div>
+			</form>
+
+
+			<button class="kakao" type="submit"
+				style="border: none !important; background-color: transparent;">
+				<a id="kakao-login-btn" href="javascript:loginWithKakao()"> <img
+					src="kakao_login.png" onclick="javascript:loginWithKakao();"
+					alt="카카오 로그인">
+
+				</a>
+			</button>
+			<p id="token-result"></p>
+
+
+			<button class="kakao" type="submit"
+				style="border: none !important; background-color: transparent;">
+				<div id="naver_id_login" value="/Naverlogin.do">
+					<img src="naver_login.png" alt="네이버 로그인">
+				</div>
+			</button>
+		</div>
 
 	</div>
-		</form>
+	<% if (request.getParameter("error") != null) { %>
+	<p style="color: red;">Invalid username or password. Please try
+		again.</p>
+	<% } %>
 
-
-		 <button class="kakao"  type="submit" style="border: none !important;  background-color: transparent;">
-		 <a id="kakao-login-btn" href="javascript:loginWithKakao()" >
-                <img src="kakao_login.png" onclick="javascript:loginWithKakao();"  alt="카카오 로그인">
-</a>
-            </button>
-<p id="token-result"></p>
-
-           
-            <button class="kakao" type="submit"style="border: none !important; background-color: transparent;"> 
-                <img src="naver_login.png" alt="네이버 로그인">
-                </button>
-			</div>
-
-		</div>
-		<% if (request.getParameter("error") != null) { %>
-    <p style="color: red;">Invalid username or password. Please try again.</p>
-<% } %>
-		
 	<%
 	} else { //로그인된 상태
 	%>
-<%=session.getAttribute("username")%>
+	<%=session.getAttribute("username")%>
 	회원님, 로그인하셨습니다.
 	<br />
 	<a href="<c:url value='/login.do' />">[로그아웃]</a>
@@ -253,8 +293,24 @@ Login In
 	}
 	%>
 
-<div style = "margin-top:50%;">
-<%@include file="../layout/Footer.jsp"%>
-</div>
+	<div style="margin-top: 50%;">
+		<%@include file="../layout/Footer.jsp"%>
+	</div>
+
+	<script type="text/javascript">
+	/* http://localhost:8081/members/mypage/social/naver/link */
+	/* http://localhost:8081/iMarket/Join/Naverjoin.jsp */
+  	var naver_id_login = new naver_id_login("siZ_BDmACND9WyZwgnu1", "http://localhost:8081/Join/Naverjoin.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("green", 3,75);
+  	naver_id_login.setDomain("http://localhost:8081");
+  	naver_id_login.setState(state);
+  	/* naver_id_login.setPopup(false); */ //Popup형태의 인증 진행
+	naver_id_login.init_naver_id_login();
+	
+	
+	
+</script>
+
 </body>
 </html>
