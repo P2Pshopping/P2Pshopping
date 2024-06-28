@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+
+<!--  상하단에 header,footer 넣어야함 없어졋음 -->
 <head>
     <meta charset="UTF-8">
     <title>agree</title>
