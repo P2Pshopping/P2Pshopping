@@ -114,5 +114,22 @@
     <url-pattern>/IdFindController</url-pattern>
   </servlet-mapping>
   
+     <servlet>
+        <servlet-name>UserAdminServlet</servlet-name>
+        <servlet-class>admin.UserAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserAdminServlet</servlet-name>
+        <url-pattern>/admin/users.do</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>admin.CategoryAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/admin/categories.do</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -214,6 +214,9 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">주소</label>
                         <div class="input-group">
+                        						<!-- <input type="text" id="addrDetail" style="width:40%" value=""> -->
+						<!-- <input type="text" id="roadAddrPart2"  style="width:40%" value=""> -->
+                        
                             <input type="text" class="form-control" id="roadAddrPart1" name="inputAddress" placeholder="주소 입력">
                             <button type="button" onclick="goPopup()" class="btn btn-danger">주소 검색</button>
                         </div>

@@ -2,11 +2,7 @@ package User;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -245,29 +241,30 @@ public UserDTO getIdFindDTO(String name, String phone) {
 	}
 	return dto; // DTO 객체 반환
 }
-}
+
     
-    //메인페이지에 인기 상품 목록 불러오기
-//     public List<UserDTO> getTopItems() {
-//         List<UserDTO> items = new ArrayList<>();
-//         String query = "SELECT id, name, description FROM items ORDER BY id LIMIT 6";
-
-//         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-//              PreparedStatement statement = connection.prepareStatement(query);
-//              ResultSet resultSet = statement.executeQuery()) {
-
-//             while (resultSet.next()) {
-//                 int id = resultSet.getInt("id");
-//                 String name = resultSet.getString("name");
-//                 String description = resultSet.getString("description");
-//                 items.add(new UserDTO(id, name, description));
-//             }
-
-//         } catch (Exception e) {
-//             e.printStackTrace();
-//         }
-
-//         return items;
-//     }
-// }
+    // 모든 사용자 정보를 가져오는 메서드
+    public List<UserDTO> getAllUsers() {
+        List<UserDTO> userList = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        
+        try (Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                UserDTO user = new UserDTO();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAuth(rs.getString("auth"));
+                userList.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+}
 
