@@ -25,14 +25,14 @@ $('#autocompleteInput').autocomplete({
 
 <body>
 <div class="header-second" style="display: flex; justify-content: center;">
-<nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style=" width : 1200px;">
+<nav class="navbar navbar-expand-max-height navbar-light bg-$orange-300" style="display:flex; width : 1200px;">
   <div class="container-fluid">
-    <div class="row" style="width:1100px;">
+    <div class="row" style="display:flex; width:1100px;">
     <div class="col-sm-4">
     <a class="navbar-brand" href="../Main/Mainpage.jsp" style="font-weight: 700; font-size : 50px;"><span style="color:rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market </a>
 	</div>
-	<div class="col-md-4"></div>
-	<div class="col-md-4" style="display: flex; justify-content: right; align-items: center; font-color:black;" >
+	<div class="col-md-2"></div>
+	<div class="col-md-6" style="display: flex; justify-content: right; align-items: center; font-color:black;" >
     
 				<c:if test="${sessionScope.username != null}">
 												
@@ -43,9 +43,11 @@ $('#autocompleteInput').autocomplete({
 						<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
 
 							class="bi bi-gear-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">정보수정 </a> 
-						<a href="<%=request.getContextPath()%>/user?cmd=logout"
+						<a href="<%=request.getContextPath()%>/logout.do"
 							class="bi bi-box-arrow-left" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">로그아웃 </a>
-				<a href="<%=request.getContextPath()%>/sell/sell.jsp"
+
+						<a href="<%=request.getContextPath()%>/sell/sell.jsp"
+
 							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; "> 상품등록 </a>
 				</c:if>
 				<c:if test="${sessionScope.username == null}">
@@ -53,9 +55,6 @@ $('#autocompleteInput').autocomplete({
 							class="bi bi-box-arrow-in-right btn btn-success btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> Login </a> 
 							<a href="<%=request.getContextPath()%>/member/SignIn.jsp"
 							class="bi bi-person-plus-fill btn btn-primary btn-sm" style="margin: 2%; color:fff; --bs-btn-font-size: .75rem;"> create account </a>
-
-							<a href="<%=request.getContextPath()%>/sell/sell.jsp"
-							class="bi bi-upload btn btn-outline-secondary" type="submit" style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem; "> 상품등록 </a>
 				</c:if>
 			</div>
   </div>
