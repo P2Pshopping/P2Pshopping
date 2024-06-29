@@ -57,6 +57,8 @@ CREATE TABLE product (
     imgUrl_2 VARCHAR2(100),
     imgUrl_3 VARCHAR2(100),
     imgUrl_4 VARCHAR2(100),
+    latitude VARCHAR(50),
+    longitude VARCHAR(50),
     writerId NUMBER NOT NULL,
     createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -6,12 +6,6 @@
 <%@ page import="common.UserDTO" %>
 
 
-<!-- 
-중복확인이 아직도 안됨 이건 급하지 않으니 천천히 해보기로 해야겠음 하루종일 했는데 안되니까 
-우선 내일 로그아웃 컨트롤러 만들어서 세션에서 값빼고 헤더에 있는것도 메인으로 옮기고 바뀌게
-해야될거 같음 하고 find에서 기능 구현도 시켜야함 네이버 api도 날라간거 다시 해야함 아이디 저장도 쿠키 설정해서 해야함
-중복확인이 되면 다른것들도 중복확인 같은 로직으로 넣으면 해결 될듯 싶음  --> 
-
 
 
     <link href="text.css" rel="stylesheet" type="text/css">
@@ -37,8 +31,7 @@
     function joinCheck() {
         var name = document.getElementById("inputName").value.trim();
         var birth = document.getElementById("inputBirth").value.trim();
-        var nickname = document.getElementById("inputNickName").value.trim();
-        var id = document.getElementById("inputId").value.trim();
+        var id = document.getElementById("username").value.trim();
         var pw = document.getElementById("inputPWD").value.trim();
         var pwc = document.getElementById("inputPWDC").value.trim();
         var phone = document.getElementById("inputPhone").value.trim();
@@ -55,14 +48,10 @@
             document.getElementById("inputBirth").focus();
             event.preventDefault();
             return false;
-        } else if (nickname === "") {
-            alert("닉네임을 입력해주세요.");
-            document.getElementById("inputNickName").focus();
-            event.preventDefault();
-            return false;
+        
         } else if (id === "") {
             alert("아이디를 입력해주세요.");
-            document.getElementById("inputId").focus();
+            document.getElementById("username").focus();
             event.preventDefault();
             return false;
         } else if (pw === "") {
@@ -99,47 +88,19 @@
         return true;
     }
 </script>
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	$("#idChkBtn").click(function() {
-		
-		// id의 빈칸을 조사!
-		
-		//id 넘긴 후 중복체크 결과 받음
-		$.ajax({
-			type:"post", //post방식
-			url:"idcheck.jsp", 
-			data:{ "inputId":$("#inputId").val() },
-			success:function(msg){
-				// alert('success');
-				// alert(msg.trim());
-				
-				if(msg.trim() == "YES"){
-					$("#idcheck").css("color", "#0000ff");
-					$("#idcheck").text("사용할 수 있는 아이디입니다");
-				}else{
-					$("#idcheck").css("color", "#ff0000");
-					$("#idcheck").text("사용중인 아이디입니다");
-					$("#inputId").val("");
-				}
-			},
-			error:function(){
-				alert('error');
-			}
-		});
-	});
-});
-</script>
+
 
             <%
+            String inputYn = request.getParameter("inputYn"); 
+        	String roadAddrPart1 = request.getParameter("roadAddrPart1");
+            String addrDetail = request.getParameter("addrDetail"); 
 String message = null;
 
 if ("POST".equalsIgnoreCase(request.getMethod())) {
     String name = request.getParameter("inputName");
     String birth = request.getParameter("inputBirth");
-    String nickname = request.getParameter("inputNickName");
-    String username = request.getParameter("inputId");
+   
+    String username = request.getParameter("username");
     String password = request.getParameter("inputPWD");
     String phone = request.getParameter("inputPhone");
     String email = request.getParameter("inputEmail");
@@ -154,7 +115,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     user.setEmail(email);
     user.setPhone(phone);
     user.setAddress(address);
-    user.setNickname(nickname);
+ 
     user.setPassword(password);
     // 필요한 경우 다른 필드들도 설정
 
@@ -175,10 +136,12 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 <%
         } else {
             message = "입력칸을 다시 한 번 확인해주세요.";
+            
 %>
 <script>
     alert("입력칸을 다시 한 번 확인해주세요.");
-    event.preventDefault(); // 폼 제출을 중단
+    event.preventDefault(); // 폼 제출을 중단 
+ 
 </script>
 <%
         }
@@ -204,7 +167,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
         <div class="join_wrapper2">
     <div class="logo"> 회원가입 </div>
             <div class="join_form">
-                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joincheck();">
+                 <form action="join.jsp" method="post" id ="form__wrap" >
                     <div class="col-12">
                         <label for="inputName" class="form-label">성명</label>
                         <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
@@ -213,22 +176,21 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                         <label for="inputBirth" class="form-label">생년월일</label>
                         <input type="number" class="form-control" id="inputBirth" name="inputBirth" placeholder="생년월일 입력">
                     </div>
-                    <div class="form-inline w-85">
+                 <!--    <div class="form-inline w-85">
                         <div class="col-12">
                             <label for="inputNickName" class="form-label">닉네임</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="inputNickName" name="inputNickName" placeholder="한글만 입력하세요">
-                                <button type="button" class="btn btn-danger">중복 확인</button>
+                                <button type="button" id="nickbtn" class="btn btn-danger">중복 확인</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-inline w-100">
                         <div class="col-12">
                             <label for="inputId" class="form-label">아이디</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inputId" name="inputId" placeholder="10자 이하">
-                 <!--                <button type="button" class="btn btn-danger" id = "idChkBtn">중복 확인</button> -->
-                            	<input type="button" class="btn btn-danger"  id="idChkBtn" value="중복 확인">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="10자 이하">
+                            <input type="button" class="btn btn-danger" id="btn" value="중복 확인">
                             </div>
                         </div>
                     </div>
@@ -248,16 +210,21 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                         <label for="inputEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="이메일을 입력하세요.">
                     </div>
+                    <div onload ="init();">
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">주소</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="주소 입력">
-                            <button type="button" class="btn btn-danger">주소 검색</button>
+                        						<!-- <input type="text" id="addrDetail" style="width:40%" value=""> -->
+						<!-- <input type="text" id="roadAddrPart2"  style="width:40%" value=""> -->
+                        
+                            <input type="text" class="form-control" id="roadAddrPart1" name="inputAddress" placeholder="주소 입력">
+                            <button type="button" onclick="goPopup()" class="btn btn-danger">주소 검색</button>
                         </div>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress2" class="form-label">상세 주소</label>
-                        <input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="상세 주소 입력">
+                        <input type="text" class="form-control" id="addrDetail" name="inputAddress2" placeholder="상세 주소 입력">
+                    </div>
                     </div>
                    <div class = "blank">
                    
@@ -276,7 +243,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     <% } %>
                 <div class="d-grid gap-2">
                     <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
-                    <button type="submit" class="btn btn-primary btn-lg" name = "loginButton" onclick="joinCheck();">회원 가입</button>
+                    <button type="submit" id="target_btn" class="btn btn-primary btn-lg" name = "loginButton" onclick="loginbtn();" disabled>회원 가입</button>
                 
                 </div>
                 </form>
@@ -288,6 +255,101 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 <div style = "margin-top:30%;">
 <%@include file="../layout/Footer.jsp"%>
 </div>
+<script src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
+		$('#btn').on('click', function() {
+			//입력한 email가져오기
+			let username = $('input[name=username]').val();
+			console.log(username);
+			//ajax로 email보내기 idCheckServiceCon
+			$.ajax({
+				url : '/idCheckServiceCon',	//어디로 보낼지 주소
+				data : {
+					username : username //입력한 email data 보내기
+				},
+				dataType : "text",	//중복체크 결과값 text로 받아오기
+				success : function(result){
+				/* 	alert('성공' + result); */
+					// result가 text형태로 와서 false가 text형태로 비교해줘됨
+					if(result == 'false'){
+						alert('사용 가능한 아이디입니다.');
+						   event.preventDefault();
+						   $('#target_btn').prop('disabled', false);
+					
+						//중복이 없다는 뜻
+					}else {
+						//중복이 있다.
+						alert('중복되는 아이디가 있습니다.');
+						   event.preventDefault();
+						   $('#target_btn').prop('disabled', true);
+						
+					}
+				},
+				error : function(){
+					alert('실패');
+				}
 
+			});
+
+		});
+
+function loginbtn(){
+	if (result == "false"){
+		joinCheck();
+	}else{
+		 alert('다시 입력칸을 한번 확인해주세요.'); 
+		   event.preventDefault();
+           return ;
+		
+	}
+}
+function init(){
+    var url = location.href;
+    var confmKey = "U01TX0FVVEgyMDI0MDYxNjIyNDUwMDExNDg0NTc=";
+    var resultType = "4";// 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)
+	var inputYn= "<%=inputYn%>";
+	if(inputYn != "Y"){
+		document.form.confmKey.value = confmKey;
+		document.form.returnUrl.value = url;
+		document.form.resultType.value = resultType;
+		document.form.action="https://business.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
+		//document.form.action="https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
+		document.form.submit();
+	}else{
+		//완료버튼
+	opener.jusoCallBack("<%=roadAddrPart1%>","<%=addrDetail%>");
+	// overlay 닫기
+	opener.document.getElementById('overlay').style.display = 'none';
+	opener.document.getElementById('confirmButton').style.display = 'none';
+	// form 열기
+	opener.document.getElementById('form').style.display = 'block';
+	opener.document.getElementById('nextPage').style.display = 'block';
+	window.close();
+	}
+}  
+function goPopup(){
+	
+    var pop = window.open("../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+function jusoCallBack(roadAddrPart1,addrDetail){
+// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+document.form.roadAddrPart1.value = roadAddrPart1;
+document.form.addrDetail.value = addrDetail;
+document.form.zipNo.value = zipNo; 
+
+sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+sessionStorage.setItem('addrDetail', addrDetail);
+sessionStorage.setItem('zipNo', zipNo);
+
+// Debugging logs
+console.log("roadAddrPart1 set to: " + roadAddrPart1);
+console.log("addrDetail set to: " + addrDetail);
+console.log("zipNo set to: " + zipNo);
+
+}
+</script>
+
+	
 </body>
 </html>

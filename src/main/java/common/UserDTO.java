@@ -6,7 +6,7 @@ public class UserDTO {
 	private int id;			//유저아이디(고유번호)
 	private String name;		//본명
 	private String birth;		//생년월일
-	private String nickname;
+
 	private String username;	// 가입아이디
 	private String email;		//이메일
 	private String phone;		//휴대폰번호
@@ -24,7 +24,7 @@ public class UserDTO {
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
-	public UserDTO(int id, String name, String nickname,String birth,String username, String email, String phone, String address, String password,
+	public UserDTO(int id, String name, String username,String birth, String email, String phone, String address, String password,
 			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,java.sql.Timestamp createDate) {
 		super();
 		this.username = username;
@@ -33,7 +33,6 @@ public class UserDTO {
 		this.phone = phone;
 		this.birth=birth;
 		this.address = address;
-		this.nickname = nickname;
 		this.password = password;
 		this.kakaoId = kakaoId;
 		this.naverId = naverId;
@@ -52,13 +51,7 @@ public class UserDTO {
 		this.id = id;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+	
 	public String getName() {
 		return name;
 	}
