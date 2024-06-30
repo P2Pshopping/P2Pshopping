@@ -224,6 +224,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                     <div class="col-12">
                         <label for="inputAddress2" class="form-label">상세 주소</label>
                         <input type="text" class="form-control" id="addrDetail" name="inputAddress2" placeholder="상세 주소 입력">
+                        <!-- zipNo 안써도 지우지마 --><input type="hidden" class="form-control" id="zipNo" name="inputAddress2" placeholder="">
                     </div>
                     </div>
                    <div class = "blank">
@@ -252,7 +253,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     </div>
 </div>
 </div>
-<div style = "margin-top:30%;">
+<div style = "margin-top:40%;">
+
 <%@include file="../layout/Footer.jsp"%>
 </div>
 <script src="assets/js/jquery.min.js"></script>
@@ -330,24 +332,28 @@ function init(){
 }  
 function goPopup(){
 	
-    var pop = window.open("../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    var pop = window.open("../popup/jusoPopup2.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
-function jusoCallBack(roadAddrPart1,addrDetail){
-// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-document.form.roadAddrPart1.value = roadAddrPart1;
-document.form.addrDetail.value = addrDetail;
-document.form.zipNo.value = zipNo; 
+function jusoCallBack2(roadAddrPart1,addrDetail,zipNo){
+	  // 디버깅 로그 추가
+    console.log("jusoCallBack2 called");
+    console.log("roadAddrPart1: " + roadAddrPart1);
+    console.log("addrDetail: " + addrDetail);
+    console.log("zipNo: " + zipNo);
+	
+    // 팝업 페이지에서 주소 입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+    document.getElementById('roadAddrPart1').value = roadAddrPart1;
+    document.getElementById('addrDetail').value = addrDetail;
+    document.getElementById('zipNo').value = zipNo;
 
-sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
-sessionStorage.setItem('addrDetail', addrDetail);
-sessionStorage.setItem('zipNo', zipNo);
+    sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+    sessionStorage.setItem('addrDetail', addrDetail);
+    sessionStorage.setItem('zipNo', zipNo);
 
-// Debugging logs
-console.log("roadAddrPart1 set to: " + roadAddrPart1);
-console.log("addrDetail set to: " + addrDetail);
-console.log("zipNo set to: " + zipNo);
-
-}
+    // 디버깅 로그
+    console.log("roadAddrPart1 set to: " + roadAddrPart1);
+    console.log("addrDetail set to: " + addrDetail);
+    console.log("zipNo set to: " + zipNo);}
 </script>
 
 	

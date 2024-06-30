@@ -14,7 +14,7 @@ public class MVCBoardDAO extends DBConnPool {
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 
-		String query = "SELECT COUNT(*) FROM mvcboard";
+		String query = "SELECT COUNT(*) FROM boards";
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " " + " LIKE '%" + map.get("searchWord") + "%'";
 		}
@@ -30,17 +30,19 @@ public class MVCBoardDAO extends DBConnPool {
 
 		return totalCount;
 	}
+	
+	
 
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map) {
 		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
 
-		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM mvcboard ";
+		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM boards ";
 
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 
-		query += " ORDER by idx DESC " + " ) Tb " + " ) " + " WHERE rNum BETWEEN ? AND ?";
+		query += " ORDER by id DESC " + " ) Tb " + " ) " + " WHERE rNum BETWEEN ? AND ?";
 
 		try {
 			psmt = con.prepareStatement(query);
@@ -51,16 +53,15 @@ public class MVCBoardDAO extends DBConnPool {
 			while (rs.next()) {
 				MVCBoardDTO dto = new MVCBoardDTO();
 
-				dto.setIdx(rs.getString(1));
-				dto.setName(rs.getString(2));
+				dto.setId(rs.getString(1));
+				dto.setBno(rs.getInt(2));
 				dto.setTitle(rs.getString(3));
 				dto.setContent(rs.getString(4));
-				dto.setPostdate(rs.getDate(5));
+				dto.setCreateDate(rs.getDate(5));
 				dto.setOfile(rs.getString(6));
 				dto.setSfile(rs.getString(7));
-				dto.setDowncount(rs.getInt(8));
-				dto.setPass(rs.getString(9));
-				dto.setVisitcount(rs.getInt(10));
+				dto.setViews(rs.getInt(8));
+				dto.setLikes(rs.getInt(9));
 
 				board.add(dto);
 			}
@@ -76,16 +77,15 @@ public class MVCBoardDAO extends DBConnPool {
 		int result = 0;
 
 		try {
-			String query = "INSERT INTO mvcboard ( " + " idx, name, title, content, ofile, sfile, pass) " + " VALUES( "
-					+ " seq_board_num.NEXTVAL,?,?,?,?,?,?)";
+			String query = "INSERT INTO boards ( " + " id, writerid, title, content, ofile, sfile) " + " VALUES( "
+					+ " seq_board_num.NEXTVAL,?,?,?,?,?)";
 
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getName());
+			psmt.setInt(1, dto.getWriterId());
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
 			psmt.setString(4, dto.getOfile());
 			psmt.setString(5, dto.getSfile());
-			psmt.setString(6, dto.getPass());
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("게시물 입력 중 예외 발생");
@@ -95,26 +95,24 @@ public class MVCBoardDAO extends DBConnPool {
 		return result;
 	}
 
-	public MVCBoardDTO selectView(String idx) {
+	public MVCBoardDTO selectView(String id) {
 		MVCBoardDTO dto = new MVCBoardDTO();
-		String query = "SELECT * FROM mvcboard WHERE idx=?";
+		String query = "SELECT * FROM boards WHERE id=?";
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, idx);
+			psmt.setString(1, id);
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				dto.setIdx(rs.getString(1));
-				dto.setName(rs.getString(2));
+				dto.setId(rs.getString(1));
+				dto.setWriterId(rs.getInt(2));
 				dto.setTitle(rs.getString(3));
 				dto.setContent(rs.getString(4));
-				dto.setPostdate(rs.getDate(5));
+				dto.setCreateDate(rs.getDate(5));
 				dto.setOfile(rs.getString(6));
 				dto.setSfile(rs.getString(7));
-				dto.setDowncount(rs.getInt(8));
-				dto.setPass(rs.getString(9));
-				dto.setVisitcount(rs.getInt(10));
-				dto.setLikes(rs.getInt(11));
+				dto.setViews(rs.getInt(8));
+				dto.setLikes(rs.getInt(9));
 			}
 
 		} catch (Exception e) {
@@ -125,11 +123,11 @@ public class MVCBoardDAO extends DBConnPool {
 		return dto;
 	}
 
-	public void updateVisitCount(String idx) {
-		String query = "UPDATE mvcboard SET " + " visitcount=visitcount+1 " + " WHERE idx=?";
+	public void updateVisitCount(String id) {
+		String query = "UPDATE boards SET " + " views=views+1 " + " WHERE id=?";
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, idx);
+			psmt.setString(1, id);
 			psmt.executeQuery();
 		} catch (Exception e) {
 			System.out.println("게시물 조회수 증가 중 예외 발생");
@@ -137,11 +135,11 @@ public class MVCBoardDAO extends DBConnPool {
 		}
 	}
 	
-	public void updateLikesCount(String idx) {
-        String query = "UPDATE MVCBOARD SET LIKES = LIKES + 1 WHERE IDX=?";
+	public void updateLikesCount(String id) {
+        String query = "UPDATE boards SET LIKES = LIKES + 1 WHERE ID=?";
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, id);
             psmt.executeUpdate(); // 수정된 내용: executeQuery() 대신 executeUpdate() 사용
         } catch (Exception e) {
             System.out.println("게시물 좋아요 증가 중 예외 발생");
@@ -150,12 +148,12 @@ public class MVCBoardDAO extends DBConnPool {
     }
 
     // 추천 수 조회 메서드 (필요에 따라 추가)
-    public int getLikesCount(String idx) {
+    public int getLikesCount(String id) {
         int likes = 0;
-        String query = "SELECT LIKES FROM MVCBOARD WHERE IDX=?";
+        String query = "SELECT LIKES FROM boards WHERE ID=?";
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, id);
             rs = psmt.executeQuery();
             if (rs.next()) {
                 likes = rs.getInt("LIKES");
@@ -167,41 +165,14 @@ public class MVCBoardDAO extends DBConnPool {
         return likes;
     }
 
-	public void downCountPlus(String idx) {
-		String sql = "UPDATE mvcboard SET " + " downcount=downcount+1 " + " WHERE idx=? ";
-		try {
-			psmt = con.prepareStatement(sql);
-			psmt.setString(1, idx);
-			psmt.executeUpdate();
-		} catch (Exception e) {
-		}
-	}
+		
 	
-	public boolean confirmPassword(String pass, String idx) {
-		boolean isCorr = true;
-		try {
-			String sql = "SELECT COUNT(*) FROM mvcboard WHERE pass=? AND idx=?";
-			psmt = con.prepareStatement(sql);
-			psmt.setString(1, pass);
-			psmt.setString(2, idx);
-			rs=psmt.executeQuery();
-			rs.next();
-			if(rs.getInt(1)==0) {
-				isCorr = false;
-			}
-		}
-		catch(Exception e) {
-			isCorr = false;
-			e.printStackTrace();
-		}
-		return isCorr;
-	}
-	public int deletePost(String idx) {
+	public int deletePost(String id) {
 		int result=0;
 		try {
-			String query = "DELETE FROM mvcboard WHERE idx=?";
+			String query = "DELETE FROM boards WHERE id=?";
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, idx);
+			psmt.setString(1, id);
 			result = psmt.executeUpdate();
 		}
 		catch(Exception e) {
@@ -215,17 +186,17 @@ public class MVCBoardDAO extends DBConnPool {
 		int result =0;
 		try {
 			String query = "UPDATE mvcboard "
-					+ " SET title=?, name=?, content=?, ofile=?, sfile=? "
-					+ " WHERE idx=? ane pass=?";
+					+ " SET title=?,  content=?, ofile=?, sfile=? "
+					+ " WHERE id=? ";
 			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getName());
-			psmt.setString(3, dto.getContent());
-			psmt.setString(4, dto.getOfile());
-			psmt.setString(5, dto.getSfile());
-			psmt.setString(6, dto.getIdx());
-			psmt.setString(7, dto.getPass());
+			
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getOfile());
+			psmt.setString(4, dto.getSfile());
+			psmt.setString(5, dto.getId());
+			
 			
 			result = psmt.executeUpdate();
 		}
@@ -235,5 +206,24 @@ public class MVCBoardDAO extends DBConnPool {
 		}
 		return result;
 	}
-		
+	
+	public int getWriterIdByUsername(String username) {
+	    int writerId = 0;
+	    String query = "SELECT id FROM users WHERE username = ?";
+	    
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, username);
+	        rs = psmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            writerId = rs.getInt("id");
+	        }
+	    } catch (Exception e) {
+	        System.out.println("사용자 ID 조회 중 예외 발생");
+	        e.printStackTrace();
+	    }
+	    
+	    return writerId;
+	}
 }

@@ -23,12 +23,12 @@ public class DownloadController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String ofile = req.getParameter("ofile");
 		String sfile = req.getParameter("sfile");
-		String idx = req.getParameter("idx");
+		String id = req.getParameter("id");
 
 		FileUtil.download(req, resp, "/Uploads", sfile, ofile);
 
 		MVCBoardDAO dao = new MVCBoardDAO();
-		dao.downCountPlus(idx);
+		
 		dao.close();
 
 	}

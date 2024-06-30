@@ -19,14 +19,14 @@ public class ViewController extends HttpServlet {
         throws ServletException, IOException {
         // 게시물 불러오기
         MVCBoardDAO dao = new MVCBoardDAO();
-        String idx = req.getParameter("idx");
+        String id = req.getParameter("id");
         
         // 조회수 증가 (좋아요 클릭이 아닌 경우에만)
         if (req.getParameter("like") == null) {
-            dao.updateVisitCount(idx);  // 조회수 1 증가
+            dao.updateVisitCount(id);  // 조회수 1 증가
         }
 
-        MVCBoardDTO dto = dao.selectView(idx);
+        MVCBoardDTO dto = dao.selectView(id);
         dao.close();
 
         // 줄바꿈 처리

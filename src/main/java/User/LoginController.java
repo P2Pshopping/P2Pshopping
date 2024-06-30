@@ -44,8 +44,6 @@ public class LoginController extends HttpServlet {
             session.setAttribute("phone", user.getPhone());
             session.setAttribute("address", user.getAddress());
             session.setAttribute("password", user.getPassword());
-//            session.setAttribute("birth", user.getBirth());
-//            session.setAttribute("nickname", user.getNickname());
             session.setAttribute("kakaoId", user.getKakaoId());
             session.setAttribute("naverId", user.getNaverId());
             session.setAttribute("provinceId", user.getProvinceId());
