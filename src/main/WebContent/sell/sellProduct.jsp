@@ -116,18 +116,25 @@
     String selectedCategory = request.getParameter("selectedCategory");
     String selectedSubcategory = request.getParameter("selectedSubcategory");
 
-    // 디버깅용 출력
-    System.out.println("Selected Category (parameter): " + selectedCategory);
-    System.out.println("Selected Subcategory (parameter): " + selectedSubcategory);
 
     session.setAttribute("selectedCategory", selectedCategory);
     session.setAttribute("selectedSubcategory", selectedSubcategory);
 
-    // 디버깅용 출력
-    System.out.println("Selected Category (session): " + session.getAttribute("selectedCategory"));
-    System.out.println("Selected Subcategory (session): " + session.getAttribute("selectedSubcategory"));
 %>
-
+    <%-- <%
+        // 방문 기록 서블릿 호출
+        response.sendRedirect("/track?pageUrl=/iMarket/sell/sellProduct.jsp");
+    %> --%>
+<%--   <%
+        // 방문 기록 서블릿 호출
+        String contextPath = request.getContextPath();
+        response.sendRedirect(contextPath + "/track?pageUrl=" + contextPath + "/iMarket/sell/sellProduct.jsp");
+    %> --%>
+<%--   <%
+        // 방문 기록 서블릿 호출
+        String contextPath = request.getContextPath();
+        response.sendRedirect(contextPath + "/track?pageUrl=" + contextPath + "/sell/sellProduct.jsp");
+    %> --%>
 <div class="container">
     <h2>상품 판매하기</h2>
     <form action="/iMarket/sell/sellController" method="post" enctype="multipart/form-data">
@@ -198,6 +205,21 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+	
+	  // 페이지 로드 시 방문 기록 저장
+    var pageUrl = window.location.pathname + window.location.search;
+    $.ajax({
+        url: '<%= request.getContextPath() %>/track',
+        method: 'GET',
+        data: { pageUrl: pageUrl },
+        success: function(response) {
+            console.log('Visit recorded');
+        },
+        error: function(xhr, status, error) {
+            console.error('Error recording visit:', error);
+        }
+    });
+	
     var roadAddrPart1 = sessionStorage.getItem('roadAddrPart1');
     var addrDetail = sessionStorage.getItem('addrDetail');
     var roadAddrPart2 = sessionStorage.getItem('roadAddrPart2');
@@ -237,134 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
-
-
-
-<!-- <script>
-
-
-$(document).ready(function() {
-    $('form').on('submit', function(event) {
-        var productName = $('#productName').val();
-        var productDescription = $('#productDescription').val();
-        var price = $('#price').val();
-        var files = $('#productImages')[0].files;
-
-        if (!productName || !productDescription || !price) {
-            alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
-            event.preventDefault();
-        } else if (files.length > 4) {
-            alert('최대 4개의 이미지만 업로드할 수 있습니다.');
-            event.preventDefault();
-        }
-    });
- }); 
-
-
-
-/* $(document).ready(function() {
-    console.log("JQuery is ready");
-
-    var imageCount = 0;
-
-    // 사진업로드기능
-    $('#uploadButton').click(function() {
-        console.log("Upload button clicked");
-
-        if (imageCount >= 4) {
-            alert('최대 4개의 이미지만 업로드할 수 있습니다.');
-            return;
-        }
-
-        var input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = function(event) {
-            console.log("File input changed");
-
-            if (event.target.files && event.target.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    console.log("FileReader onload event triggered");
-
-                    var img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.width = '50px';
-                    img.style.margin = '5px';
-                    document.querySelector('.photo-upload').appendChild(img);
-
-                    var hiddenInput = document.createElement('input');
-                    hiddenInput.type = 'hidden';
-                    hiddenInput.name = 'photo' + (++imageCount);
-                    hiddenInput.value = e.target.result;
-                    document.querySelector('form').appendChild(hiddenInput);
-
-                    console.log("Image added, hidden input created");
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        };
-        input.click();
-    }); */
-
-    // Validate form before submission
-    /* document.querySelector('form').addEventListener('submit', function(event) {
-        console.log("Form submit triggered");
-
-        var productName = document.getElementById('productName').value;
-        var productDescription = document.getElementById('productDescription').value;
-        var price = document.getElementById('price').value;
-
-        if (!productName || !productDescription || !price) {
-            alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
-            event.preventDefault();
-            console.log("Form validation failed");
-        } else {
-            console.log("Form validation passed");
-        }
-    });
-}); */
-
-// Validate form before submission
-$('form').on('submit', function(event) {
-    console.log("Form submit triggered");
-
-    var productName = $('#productName').val();
-    var productDescription = $('#productDescription').val();
-    var price = $('#price').val();
-    var files = $('#productImages')[0].files;
-
-    if (!productName || !productDescription || !price) {
-        alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
-        event.preventDefault();
-        console.log("Form validation failed");
-    } else if (files.length > 4) {
-        alert('최대 4개의 이미지만 업로드할 수 있습니다.');
-        event.preventDefault();
-        console.log("Too many files selected");
-    } else {
-        console.log("Form validation passed");
-    }
-});
-});
-
-
-
-function validateForm() {
-    var productName = document.getElementById('productName').value;
-    var productDescription = document.getElementById('productDescription').value;
-    var price = document.getElementById('price').value;
-
-    if (!productName || !productDescription || !price) {
-        alert('상품명, 상품설명, 가격을 모두 입력해주세요.');
-        return false;
-    }
-
-    return true;
-}
-    </script> -->
 
 </body>
 <%@ include file="../layout/Footer.jsp"%>

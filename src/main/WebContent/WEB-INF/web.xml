@@ -102,8 +102,7 @@
     <servlet-name>ProxyServlet</servlet-name>
     <url-pattern>/ProxyServlet</url-pattern>
   </servlet-mapping>
-
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>IdFindController</display-name>
     <servlet-name>IdFindController</servlet-name>
@@ -113,25 +112,32 @@
     <servlet-name>IdFindController</servlet-name>
     <url-pattern>/IdFindController</url-pattern>
   </servlet-mapping>
-  
-     <servlet>
+ <!-- <servlet>
+    <servlet-name>UserAdminServlet</servlet-name>
+    <servlet-class>admin.UserAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserAdminServlet</servlet-name>
+    <url-pattern>/admin/users.do</url-pattern>
+  </servlet-mapping>  -->
+ <servlet>
         <servlet-name>UserAdminServlet</servlet-name>
         <servlet-class>admin.UserAdminServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAdminServlet</servlet-name>
-        <url-pattern>/admin/users.do</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>CategoryServlet</servlet-name>
-        <servlet-class>admin.CategoryAdminServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CategoryServlet</servlet-name>
-        <url-pattern>/admin/categories.do</url-pattern>
-    </servlet-mapping>
-<servlet>
+        <url-pattern>/admin/users/*</url-pattern>
+    </servlet-mapping> 
+  
+  <servlet>
+    <servlet-name>CategoryServlet</servlet-name>
+    <servlet-class>admin.CategoryAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryServlet</servlet-name>
+    <url-pattern>/admin/categories.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>MVCBoardList</servlet-name>
     <servlet-class>mvcboard.ListController</servlet-class>
   </servlet>
@@ -151,7 +157,6 @@
     <servlet-name>MVCBoardWrite</servlet-name>
     <url-pattern>/board/write.do</url-pattern>
   </servlet-mapping>
-  
   <context-param>
     <param-name>POSTS_PER_PAGE</param-name>
     <param-value>9</param-value>
@@ -160,4 +165,24 @@
     <param-name>PAGES_PER_BLOCK</param-name>
     <param-value>5</param-value>
   </context-param>
+  <servlet>
+    <description></description>
+    <display-name>DashboardServlet</display-name>
+    <servlet-name>DashboardServlet</servlet-name>
+    <servlet-class>admin.DashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DashboardServlet</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SiteTrafficServlet</display-name>
+    <servlet-name>SiteTrafficServlet</servlet-name>
+    <servlet-class>admin.SiteTrafficServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SiteTrafficServlet</servlet-name>
+    <url-pattern>/track</url-pattern>
+  </servlet-mapping>
 </web-app>

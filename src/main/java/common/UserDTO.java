@@ -19,7 +19,7 @@ public class UserDTO {
 	private int districtId; // 동(위치)
 	private String auth ; 	//권한부여
 	private java.sql.Timestamp createDate; 	//가입일자
-	
+	private int active; //비활성
 	
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
@@ -162,6 +162,14 @@ public class UserDTO {
 
 	public void setCreateDate(java.sql.Timestamp createDate) {
 		this.createDate = createDate;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 
 }	
