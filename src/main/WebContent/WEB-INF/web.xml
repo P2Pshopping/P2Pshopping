@@ -44,22 +44,22 @@
   </context-param>
   <servlet>
     <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>User.LoginServlet</servlet-class>
+    <display-name>LoginController</display-name>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>User.LoginController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/Login.do</url-pattern>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/login.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LogoutServlet</display-name>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>User.LogoutServlet</servlet-class>
+    <display-name>LogoutController</display-name>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>User.LogoutController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-name>LogoutController</servlet-name>
     <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
   <servlet>

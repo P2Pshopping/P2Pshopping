@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/login.do") // 이 서블릿을 "/login" URL 패턴에 매핑합니다.
+//@WebServlet("/login.do") // 이 서블릿을 "/login" URL 패턴에 매핑합니다.
 public class LoginController extends HttpServlet {
     private UserDAO userDAO;
 
