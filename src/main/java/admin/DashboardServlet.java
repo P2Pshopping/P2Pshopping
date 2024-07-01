@@ -34,6 +34,7 @@ public class DashboardServlet extends HttpServlet {
         int dashboardVisits = trafficDAO.getPageVisits("/iMarket/dashboard");
         int sellProductVisits = trafficDAO.getPageVisits("/iMarket/sell/sellProduct.jsp");
         int MainpageVisits = trafficDAO.getPageVisits("/iMarket/Main/Mainpage.jsp");
+        int HospitalVisits = trafficDAO.getPageVisits("/iMarket/hospital/Hospital1.jsp");
 //        int dashboardVisits = trafficDAO.getPageVisits("/iMarket/dashboard");
 
 
@@ -48,6 +49,7 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("dashboardVisits", dashboardVisits);
         request.setAttribute("sellProductVisits", sellProductVisits);
         request.setAttribute("MainpageVisits", MainpageVisits);
+        request.setAttribute("HospitalVisits", HospitalVisits);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/dashboard.jsp");
         dispatcher.forward(request, response);

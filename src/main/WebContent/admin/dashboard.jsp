@@ -131,7 +131,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">사이트 트래픽 통계</h5>
                         <p>전체 방문 수: ${totalVisits}</p>
-                        <p>관리페이지 방문: ${dashboardVisits}/ 메인페이지 방문: ${MainpageVisits}/ 판매페이지 방문: ${sellProductVisits}</p>
+                        <p>관리페이지 방문: ${dashboardVisits}/ 메인페이지 방문: ${MainpageVisits}/ 판매페이지 방문: ${sellProductVisits}/ 병원페이지 방문: ${HospitalVisits}</p>
                         <div class="chart-container-large">
                             <canvas id="trafficChart"></canvas>
                         </div>
@@ -194,10 +194,10 @@
             var trafficChart = new Chart(document.getElementById('trafficChart').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['전체 방문 수', '관리페이지', '메인페이지', '판매페이지'],
+                    labels: ['전체 방문 수', '관리페이지', '메인페이지', '판매페이지', '병원페이지'],
                     datasets: [{
                         label: '방문 수',
-                        data: [${totalVisits}, ${dashboardVisits}, ${MainpageVisits}, ${sellProductVisits}],
+                        data: [${totalVisits}, ${dashboardVisits}, ${MainpageVisits}, ${sellProductVisits}, ${HospitalVisits}],
                         borderColor: '#36a2eb',
                         fill: false
                     }]
