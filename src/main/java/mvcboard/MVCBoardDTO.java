@@ -3,22 +3,44 @@ package mvcboard;
 import java.sql.Date;
 
 public class MVCBoardDTO {
-    private String id;
-    private int bno;
-    private int writerId;
-    private String username;
-    private String title;
-    private String content;
-    private Date createDate;
-    private Date updateDate;
-    private String ofile;
-    private String sfile;
-    private int views;
-    private int likes;
+	private String id; //게시물 번호
+	private String bno; // 카테고리
+	private int writerId; // 작성자 아이디번호 == user(id)
+	private String username; // 작성자 아이디
+	private String title; // 제목
+	private String content; // 내용
+	private Date createDate; // 작성일
+	private Date updateDate; // 수정일
+	private String ofile; // 파일 
+	private String sfile; // 파일
+	private int views; // 조회수
+	private int likes; // 추천수
 
-    
-    
-    public String getUsername() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getBno() {
+		return bno;
+	}
+
+	public void setBno(String bno) {
+		this.bno = bno;
+	}
+
+	public int getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(int writerId) {
+		this.writerId = writerId;
+	}
+
+	public String getUsername() {
 		return username;
 	}
 
@@ -26,142 +48,68 @@ public class MVCBoardDTO {
 		this.username = username;
 	}
 
-	public String getId() {
-        return id;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public int getBno() {
-        return bno;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setBno(int bno) {
-        this.bno = bno;
-    }
-<<<<<<< HEAD
-=======
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public int getWriterId() {
-        return writerId;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void setWriterId(int writerId) {
-        this.writerId = writerId;
-    }
->>>>>>> refs/heads/master
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public int getWriterId() {
-        return writerId;
-    }
+	public Date getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setWriterId(int writerId) {
-        this.writerId = writerId;
-    }
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getOfile() {
+		return ofile;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setOfile(String ofile) {
+		this.ofile = ofile;
+	}
 
-<<<<<<< HEAD
-    public String getContent() {
-        return content;
-=======
-    public Date getCreateDate() {
-        return createDate;
->>>>>>> refs/heads/master
-    }
+	public String getSfile() {
+		return sfile;
+	}
 
-<<<<<<< HEAD
-    public void setContent(String content) {
-        this.content = content;
-=======
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
+	public int getViews() {
+		return views;
+	}
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
->>>>>>> refs/heads/master
-    }
+	public void setViews(int views) {
+		this.views = views;
+	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public int getLikes() {
+		return likes;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-<<<<<<< HEAD
-    public String getOfile() {
-        return ofile;
-=======
-    public int getViews() {
-        return views;
->>>>>>> refs/heads/master
-    }
-
-<<<<<<< HEAD
-    public void setOfile(String ofile) {
-        this.ofile = ofile;
-=======
-    public void setViews(int views) {
-        this.views = views;
->>>>>>> refs/heads/master
-    }
-
-<<<<<<< HEAD
-    public String getSfile() {
-        return sfile;
-=======
-    public int getLikes() {
-        return likes;
->>>>>>> refs/heads/master
-    }
-
-<<<<<<< HEAD
-    public void setSfile(String sfile) {
-        this.sfile = sfile;
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
 }
-=======
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-}
->>>>>>> refs/heads/master

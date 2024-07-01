@@ -74,7 +74,7 @@ body {
                 <textarea id="summernote" name="content">${dto.content}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">수정 완료</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='../boards/List.jsp';">취소</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='../Board/List.jsp';">취소</button>
         </form>
     </div>
 
@@ -103,8 +103,3 @@ body {
 
 </body>
 </html>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-
