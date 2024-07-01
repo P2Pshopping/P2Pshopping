@@ -54,4 +54,8 @@ public class WriteController extends HttpServlet {
             JSFunction.alertLocation(resp, "글쓰기에 실패했습니다", "../mvcboard/write.do");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/master

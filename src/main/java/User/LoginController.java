@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
             // 사용자 인증에 성공한 경우
             HttpSession session = request.getSession(); // 현재 세션을 가져오거나 새 세션을 생성합니다.
             session.setAttribute("username", user.getUsername()); // 세션에 사용자 이름을 저장합니다.
-
+            session.setAttribute("id", user.getId());
             session.setAttribute("name", user.getName());
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());

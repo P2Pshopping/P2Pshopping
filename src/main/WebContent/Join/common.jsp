@@ -39,11 +39,7 @@
 			document.join.birth.focus();
 			return;
 
-		}
-		if (f.nickname.value.trim() == "") {
-			alert("닉네임을 다시 한번 확인해주세요.")
-			document.join.nickname.focus();
-			return;
+		
 
 		}
 		if (f.id.value.trim() == "") {
