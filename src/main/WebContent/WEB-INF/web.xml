@@ -176,13 +176,45 @@
     <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
   <servlet>
+		<description></description>
+		<display-name>PwFindController</display-name>
+		<servlet-name>PwFindController</servlet-name>
+		<servlet-class>Check.PwFindController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PwFindController</servlet-name>
+		<url-pattern>/PwFindController</url-pattern>
+	</servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>SiteTrafficServlet</display-name>
     <servlet-name>SiteTrafficServlet</servlet-name>
     <servlet-class>admin.SiteTrafficServlet</servlet-class>
   </servlet>
+	<servlet>
+		<description></description>
+		<display-name>UpdateService</display-name>
+		<servlet-name>UpdateService</servlet-name>
+		<servlet-class>Check.UpdateService</servlet-class>
+	</servlet>
   <servlet-mapping>
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ChangeService</display-name>
+		<servlet-name>ChangeService</servlet-name>
+		<servlet-class>Check.ChangeService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeService</servlet-name>
+		<url-pattern>/ChangeService</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<description></description>
+		<display-name>idCheck</display-name>
+		<servlet-name>idCheck</servlet-name>
+		<servlet-class>Check.idCheck</servlet-class>
+	</servlet>
 </web-app>
