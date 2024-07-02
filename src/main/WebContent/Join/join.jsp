@@ -8,16 +8,36 @@
 
 
 
-    <link href="text.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-          crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="text.css" rel="stylesheet" type="text/css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -162,76 +182,74 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 <%@include file="../layout/Header.jsp"%>
 <div style = "margin-top:300px;">
 
-<div class="wrap">
-    <div class="contents">
-        <div class="join_wrapper2">
-    <div class="logo"> 회원가입 </div>
-            <div class="join_form">
-                 <form action="join.jsp" method="post" id ="form__wrap" >
-                    <div class="col-12">
-                        <label for="inputName" class="form-label">성명</label>
-                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputBirth" class="form-label">생년월일</label>
-                        <input type="number" class="form-control" id="inputBirth" name="inputBirth" placeholder="생년월일 입력">
-                    </div>
-                 <!--    <div class="form-inline w-85">
-                        <div class="col-12">
-                            <label for="inputNickName" class="form-label">닉네임</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="inputNickName" name="inputNickName" placeholder="한글만 입력하세요">
-                                <button type="button" id="nickbtn" class="btn btn-danger">중복 확인</button>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form-inline w-100">
-                        <div class="col-12">
-                            <label for="inputId" class="form-label">아이디</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="10자 이하">
-                            <input type="button" class="btn btn-danger" id="btn" value="중복 확인">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPWD" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" id="inputPWD" name="inputPWD" placeholder="20자 이하">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPWDC" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="inputPWDC" name="inputPWDC" placeholder="위와 같이 입력하세요">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPhone" class="form-label">전화번호</label>
-                        <input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="숫자만 입력하세요.">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="이메일을 입력하세요.">
-                    </div>
-                    <div onload ="init();">
-                    <div class="col-12">
-                        <label for="inputAddress" class="form-label">주소</label>
-                        <div class="input-group">
-                        						<!-- <input type="text" id="addrDetail" style="width:40%" value=""> -->
-						<!-- <input type="text" id="roadAddrPart2"  style="width:40%" value=""> -->
-                        
-                            <input type="text" class="form-control" id="roadAddrPart1" name="inputAddress" placeholder="주소 입력">
-                            <button type="button" onclick="goPopup()" class="btn btn-danger">주소 검색</button>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress2" class="form-label">상세 주소</label>
-                        <input type="text" class="form-control" id="addrDetail" name="inputAddress2" placeholder="상세 주소 입력">
-                        <!-- zipNo 안써도 지우지마 --><input type="hidden" class="form-control" id="zipNo" name="inputAddress2" placeholder="">
-                    </div>
-                    </div>
-                   <div class = "blank">
-                   
-                   </div>
-                   <p>
-                   </p>
+		<div class="wrap">
+			<div class="contents">
+				<div class="join_wrapper2">
+					<div class="logo">회원가입</div>
+					<div class="join_form">
+						<form action="join.jsp" method="post" id="form__wrap">
+							<div class="col-12">
+								<label for="inputName" class="form-label">성명</label> <input
+									type="text" class="form-control" id="inputName"
+									name="inputName" placeholder="성명 입력" maxlength="5">
+							</div>
+							<div class="col-12">
+								<label for="inputBirth" class="form-label">생년월일</label> <input
+									type="text" class="form-control" id="inputBirth"
+									name="inputBirth" placeholder="YYYYMMDD 형식으로 생년월일 입력"
+									maxlength="8" oninput="formatDate(this)">
+
+							</div>
+					
+							<div class="form-inline w-100">
+								<div class="col-12">
+									<label for="inputId" class="form-label">아이디</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="username"
+											name="username" placeholder="10자 이하" maxlength="10">
+										<input type="button" class="btn btn-danger" id="btnCheckId"
+											value="중복 확인">
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<label for="inputPWD" class="form-label">비밀번호</label> <input
+									type="password" class="form-control" id="inputPWD"
+									name="inputPWD" placeholder="20자 이하" maxlength="20">
+							</div>
+							<div class="col-12">
+								<label for="inputPWDC" class="form-label">비밀번호 확인</label> <input
+									type="password" class="form-control" id="inputPWDC"
+									name="inputPWDC" placeholder="위와 같이 입력하세요" maxlength="20">
+							</div>
+							<div class="col-12">
+								<label for="inputPhone" class="form-label">전화번호</label> <input
+									type="text" class="form-control" id="inputPhone"
+									name="inputPhone" placeholder="숫자만 입력하세요." maxlength="11">
+							</div>
+							<div class="col-12">
+								<label for="inputEmail" class="form-label">Email</label> <input
+									type="email" class="form-control" id="inputEmail"
+									name="inputEmail" placeholder="이메일을 입력하세요.">
+							</div>
+							<div onload="init();">
+								<div class="col-12">
+									<label for="inputAddress" class="form-label">주소</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="roadAddrPart1"
+											name="inputAddress" placeholder="주소 입력">
+										<button type="button" onclick="goPopup()"
+											class="btn btn-danger">주소 검색</button>
+									</div>
+								</div>
+								<div class="col-12">
+									<label for="inputAddress2" class="form-label">상세 주소</label> <input
+										type="text" class="form-control" id="addrDetail"
+										name="inputAddress2" placeholder="상세 주소 입력">
+								</div>
+							</div>
+							<div class="blank"></div>
+							<p></p>
 
    <!--                 <div class="terms__box">
                         <div class="input__check">
@@ -239,63 +257,69 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                             <label class="required" for="privacyPolicy"> 회원가입 하시겠습니까 ? </label>
                         </div>
                    </div> -->
-                  <% if (message != null) { %>
-        <p><%= message %></p>
-    <% } %>
-                <div class="d-grid gap-2">
-                    <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
-                    <button type="submit" id="target_btn" class="btn btn-primary btn-lg" name = "loginButton" onclick="loginbtn();" disabled>회원 가입</button>
-                
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div style = "margin-top:40%;">
+							<%
+							if (message != null) {
+							%>
+							<p><%=message%></p>
+							<%
+							}
+							%>
+							<div class="d-grid gap-2">
+								<a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로
+									가기</a>
+								<button type="submit" id="target_btn"
+									class="btn btn-primary btn-lg" name="loginButton"
+									onclick="loginbtn();" disabled>회원 가입</button>
 
-<%@include file="../layout/Footer.jsp"%>
-</div>
-<script src="assets/js/jquery.min.js"></script>
-	<script type="text/javascript">
-		// 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
-		$('#btn').on('click', function() {
-			//입력한 email가져오기
-			let username = $('input[name=username]').val();
-			console.log(username);
-			//ajax로 email보내기 idCheckServiceCon
-			$.ajax({
-				url : '/idCheckServiceCon',	//어디로 보낼지 주소
-				data : {
-					username : username //입력한 email data 보내기
-				},
-				dataType : "text",	//중복체크 결과값 text로 받아오기
-				success : function(result){
-				/* 	alert('성공' + result); */
-					// result가 text형태로 와서 false가 text형태로 비교해줘됨
-					if(result == 'false'){
-						alert('사용 가능한 아이디입니다.');
-						   event.preventDefault();
-						   $('#target_btn').prop('disabled', false);
-					
-						//중복이 없다는 뜻
-					}else {
-						//중복이 있다.
-						alert('중복되는 아이디가 있습니다.');
-						   event.preventDefault();
-						   $('#target_btn').prop('disabled', true);
-						
-					}
-				},
-				error : function(){
-					alert('실패');
-				}
-
-			});
-
-		});
-
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 30%;">
+		<%@include file="../layout/Footer.jsp"%>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
+        $('#btnCheckId').on('click', function() {
+            // 입력한 username 가져오기
+            var username = $('input[name=username]').val();
+        
+            // Ajax로 username 보내기
+            $.ajax({
+                url: '/idCheck',   // 서버의 URL
+                type: 'POST',      // POST 방식으로 요청
+                data: {
+                    username: username // 입력한 username 데이터 보내기
+                },
+                dataType: "json",   // 응답 데이터 타입은 text로 지정
+                success: function(result) {
+                	/*  console.log(result); */
+                    // 서버에서 받은 결과(result)를 처리
+                    if (result === 'false') {
+                        // 중복이 없는 경우
+                        alert('사용 가능한 아이디입니다.');
+                        $('#target_btn').prop('disabled', false); // 회원 가입 버튼 활성화
+                        
+                    } else {
+                        // 중복이 있는 경우
+                        alert('중복되는 아이디가 있습니다.');
+                        $('#target_btn').prop('disabled', true);  // 회원 가입 버튼 비활성화
+                    }
+                },
+                error: function() {
+                    // Ajax 요청 실패 시 처리
+                    alert('서버 오류가 발생했습니다.');
+                }
+            });
+        });
+    });
+</script>
+<script>
 function loginbtn(){
 	if (result == "false"){
 		joinCheck();
@@ -306,6 +330,18 @@ function loginbtn(){
 		
 	}
 }
+function formatDate(input) {
+    // 숫자 외의 문자를 모두 제거
+    input.value = input.value.replace(/[^\d]/g, '');
+
+    // YYYYMMDD 형식으로 입력이 되도록 변환
+    if (input.value.length > 4 && input.value.length <= 6) {
+        input.value = input.value.replace(/(\d{4})(\d{2})/, '$1-$2');
+    } else if (input.value.length > 6) {
+        input.value = input.value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+    }
+}
+
 function init(){
     var url = location.href;
     var confmKey = "U01TX0FVVEgyMDI0MDYxNjIyNDUwMDExNDg0NTc=";
@@ -320,41 +356,39 @@ function init(){
 		document.form.submit();
 	}else{
 		//완료버튼
-	opener.jusoCallBack("<%=roadAddrPart1%>","<%=addrDetail%>");
-	// overlay 닫기
-	opener.document.getElementById('overlay').style.display = 'none';
-	opener.document.getElementById('confirmButton').style.display = 'none';
-	// form 열기
-	opener.document.getElementById('form').style.display = 'block';
-	opener.document.getElementById('nextPage').style.display = 'block';
-	window.close();
-	}
-}  
-function goPopup(){
-	
-    var pop = window.open("../popup/jusoPopup2.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-}
-function jusoCallBack2(roadAddrPart1,addrDetail,zipNo){
-	  // 디버깅 로그 추가
-    console.log("jusoCallBack2 called");
-    console.log("roadAddrPart1: " + roadAddrPart1);
-    console.log("addrDetail: " + addrDetail);
-    console.log("zipNo: " + zipNo);
-	
-    // 팝업 페이지에서 주소 입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-    document.getElementById('roadAddrPart1').value = roadAddrPart1;
-    document.getElementById('addrDetail').value = addrDetail;
-    document.getElementById('zipNo').value = zipNo;
+	opener.jusoCallBack("<%=roadAddrPart1%>","<%=addrDetail%>
+		");
+				// overlay 닫기
+				opener.document.getElementById('overlay').style.display = 'none';
+				opener.document.getElementById('confirmButton').style.display = 'none';
+				// form 열기
+				opener.document.getElementById('form').style.display = 'block';
+				opener.document.getElementById('nextPage').style.display = 'block';
+				window.close();
+			}
+		}
+		function goPopup() {
 
-    sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
-    sessionStorage.setItem('addrDetail', addrDetail);
-    sessionStorage.setItem('zipNo', zipNo);
+			var pop = window.open("../popup/jusoPopup.jsp", "pop",
+					"width=570,height=420, scrollbars=yes, resizable=yes");
+		}
+		function jusoCallBack(roadAddrPart1, addrDetail) {
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+			document.form.roadAddrPart1.value = roadAddrPart1;
+			document.form.addrDetail.value = addrDetail;
+			document.form.zipNo.value = zipNo;
 
-    // 디버깅 로그
-    console.log("roadAddrPart1 set to: " + roadAddrPart1);
-    console.log("addrDetail set to: " + addrDetail);
-    console.log("zipNo set to: " + zipNo);}
-</script>
+			sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+			sessionStorage.setItem('addrDetail', addrDetail);
+			sessionStorage.setItem('zipNo', zipNo);
+
+			// Debugging logs
+			console.log("roadAddrPart1 set to: " + roadAddrPart1);
+			console.log("addrDetail set to: " + addrDetail);
+			console.log("zipNo set to: " + zipNo);
+
+		}
+	</script>
 
 	
 </body>
