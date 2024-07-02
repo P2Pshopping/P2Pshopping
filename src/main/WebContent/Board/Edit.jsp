@@ -52,7 +52,7 @@ body {
 
     <div id="contents">
         <form name="editFrm" method="post" enctype="multipart/form-data" action="edit.do" onsubmit="return validateForm(this);">
-            <input type="hidden" name="id" value="${dto.idx}" />
+            <input type="hidden" name="id" value="${dto.id}" />
             <div class="form-group">
                 <label for="category">분류</label>
                 <select class="form-control" id="category" name="category">
@@ -73,6 +73,9 @@ body {
                 <label for="summernote">내용</label>
                 <textarea id="summernote" name="content">${dto.content}</textarea>
             </div>
+            <div class="form-group">
+                    <input type="file" name="attachedFile" id="attachedFile" onchange="insertFileIntoEditor()" />
+                </div>
             <button type="submit" class="btn btn-primary">수정 완료</button>
             <button type="button" class="btn btn-secondary" onclick="location.href='../Board/List.jsp';">취소</button>
         </form>

@@ -83,7 +83,7 @@ public class EditController extends HttpServlet {
 			session.removeAttribute("pass");
 			resp.sendRedirect("../mvcboard/view.do?id=" + id);
 		} else { // 수정 실패
-			JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요.", "../mvcboard/view.do?id=" + id);
+			JSFunction.alertLocation(resp, " ", "../mvcboard/view.do?id=" + id);
 		}
 	}
 }
