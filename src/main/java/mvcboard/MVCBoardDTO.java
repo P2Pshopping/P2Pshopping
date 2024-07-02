@@ -15,6 +15,9 @@ public class MVCBoardDTO {
 	private String sfile; // 파일
 	private int views; // 조회수
 	private int likes; // 추천수
+	
+		
+	
 
 	public String getId() {
 		return id;

@@ -20,13 +20,16 @@ public class ViewController extends HttpServlet {
         // 게시물 불러오기
         MVCBoardDAO dao = new MVCBoardDAO();
         String id = req.getParameter("id");
-        
+
         // 조회수 증가 (좋아요 클릭이 아닌 경우에만)
         if (req.getParameter("like") == null) {
             dao.updateVisitCount(id);  // 조회수 1 증가
         }
 
         MVCBoardDTO dto = dao.selectView(id);
+
+        // 작성자 이름 가져오기
+        String writerName = dao.getNameByWriterId(dto.getWriterId());
         dao.close();
 
         // 줄바꿈 처리
@@ -44,9 +47,10 @@ public class ViewController extends HttpServlet {
             isImage = true;
         }
 
-        // 게시물(dto) 저장 후 뷰로 포워드
+        // 게시물(dto)와 작성자 이름(writerName) 저장 후 뷰로 포워드
         req.setAttribute("dto", dto);
         req.setAttribute("isImage", isImage);
+        req.setAttribute("writerName", writerName);
         req.getRequestDispatcher("/Board/View.jsp").forward(req, resp);
     }
 }

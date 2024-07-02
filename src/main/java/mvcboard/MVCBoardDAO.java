@@ -76,12 +76,12 @@ public class MVCBoardDAO extends JDBConnect {
 		int result = 0;
 
 		try {
-			String query = "INSERT INTO boards (id, bno, writerid, title, content, ofile, sfile) "
+			String query = "INSERT INTO boards (id, bno, writerId, title, content, ofile, sfile) "
 					+ " VALUES (seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
-			psmt.setInt(1, dto.getWriterId());
-			psmt.setString(2, dto.getBno());
+			psmt.setString(1, dto.getBno());
+			psmt.setInt(2, dto.getWriterId());
 			psmt.setString(3, dto.getTitle());
 			psmt.setString(4, dto.getContent());
 			psmt.setString(5, dto.getOfile());
@@ -197,19 +197,44 @@ public class MVCBoardDAO extends JDBConnect {
 	}
 
 	public int getWriterIdByUsername(String username) {
-		int writerId = 0;
-		String query = "SELECT id FROM users WHERE username=?";
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, username);
-			rs = psmt.executeQuery();
-			if (rs.next()) {
-				writerId = rs.getInt("id");
-			}
-		} catch (Exception e) {
-			System.out.println("사용자 ID 조회 중 예외 발생");
-			e.printStackTrace();
-		} 
-		return writerId;
+        int writerId = 0;
+        String query = "SELECT id FROM users  WHERE username=?";
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, username);
+            rs = psmt.executeQuery();
+            if (rs.next()) {
+                writerId = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("작성자 ID 조회 중 예외 발생");
+            e.printStackTrace();
+        
+        }
+        return writerId;
+    }
+	
+	public String getNameByWriterId(int writerId) {
+	    String name = null;
+	    String query = "SELECT name FROM users WHERE id = ?";
+
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setInt(1, writerId);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            name = rs.getString("name");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return name;
 	}
+
+	
+
+	
+
 }
