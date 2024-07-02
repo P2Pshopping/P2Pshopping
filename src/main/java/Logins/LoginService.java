@@ -2,7 +2,6 @@ package Logins;
 
 import java.lang.reflect.Member;
 import java.sql.Connection;
-import utils.JDBConnect;
 public class LoginService {
 	public Member getLoginMember(String username,String password) {
 		LoginDAO loginDAO = LoginDAO.getInstance();
@@ -13,5 +12,5 @@ public class LoginService {
 		return loginMember;
 	}
 
-	
+
 }

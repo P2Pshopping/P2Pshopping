@@ -1,7 +1,5 @@
 package admin;
 
-import java.security.Timestamp;
-
 public class ReviewDTO {
     private int id;
     private int sellerId;

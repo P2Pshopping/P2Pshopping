@@ -30,11 +30,11 @@ public class MVCBoardDAO extends DBConnPool {
 
 		return totalCount;
 	}
-	
-	
+
+
 
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map) {
-		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
+		List<MVCBoardDTO> board = new Vector<>();
 
 		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM boards ";
 
@@ -134,7 +134,7 @@ public class MVCBoardDAO extends DBConnPool {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateLikesCount(String id) {
         String query = "UPDATE boards SET LIKES = LIKES + 1 WHERE ID=?";
         try {
@@ -165,8 +165,8 @@ public class MVCBoardDAO extends DBConnPool {
         return likes;
     }
 
-		
-	
+
+
 	public int deletePost(String id) {
 		int result=0;
 		try {
@@ -181,23 +181,23 @@ public class MVCBoardDAO extends DBConnPool {
 		}
 		return result;
 	}
-	
+
 	public int updatePost(MVCBoardDTO dto) {
 		int result =0;
 		try {
 			String query = "UPDATE mvcboard "
 					+ " SET title=?,  content=?, ofile=?, sfile=? "
 					+ " WHERE id=? ";
-			
+
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
-			
+
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getOfile());
 			psmt.setString(4, dto.getSfile());
 			psmt.setString(5, dto.getId());
-			
-			
+
+
 			result = psmt.executeUpdate();
 		}
 		catch(Exception e) {
@@ -206,16 +206,16 @@ public class MVCBoardDAO extends DBConnPool {
 		}
 		return result;
 	}
-	
+
 	public int getWriterIdByUsername(String username) {
 	    int writerId = 0;
 	    String query = "SELECT id FROM users WHERE username = ?";
-	    
+
 	    try {
 	        psmt = con.prepareStatement(query);
 	        psmt.setString(1, username);
 	        rs = psmt.executeQuery();
-	        
+
 	        if (rs.next()) {
 	            writerId = rs.getInt("id");
 	        }
@@ -223,7 +223,7 @@ public class MVCBoardDAO extends DBConnPool {
 	        System.out.println("사용자 ID 조회 중 예외 발생");
 	        e.printStackTrace();
 	    }
-	    
+
 	    return writerId;
 	}
 }

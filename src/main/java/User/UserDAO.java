@@ -19,7 +19,7 @@ public class UserDAO extends JDBConnect {
 	public UserDAO(String drv, String url, String id, String pw) {
 		super(drv, url, id, pw);
 	}
-	
+
 	   // ServletContext를 사용하는 생성자
     public UserDAO(ServletContext application) {
         super(application);
@@ -28,15 +28,15 @@ public class UserDAO extends JDBConnect {
     public UserDAO() {
     	 // 기본 생성자
     }
-    
+
 	// 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
 	public UserDTO getUserDTO(String uid, String upass) {
 //		UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
 		  UserDTO dto = null;
 	        String query = "SELECT * FROM users WHERE username=? AND password=?";
-		
-		
+
+
         System.out.println("Executing query: " + query);
         System.out.println("Parameters: " + uid + ", " + upass);
 		// 쿼리문 템플릿
@@ -56,7 +56,7 @@ public class UserDAO extends JDBConnect {
                 dto.setUsername(rs.getString("username"));
                 dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
                 dto.setBirth(rs.getString("birth"));
-          
+
                 dto.setName(rs.getString("name"));
                 dto.setEmail(rs.getString("email"));
                 dto.setPhone(rs.getString("phone"));
@@ -76,9 +76,9 @@ public class UserDAO extends JDBConnect {
 		}
 		return dto; // DTO 객체 반환
 	}
-							
-	
-	
+
+
+
 	//비밀번호 해시화 매서드
 	public String hashPassword(String password) {
 	    try {
@@ -104,17 +104,17 @@ public class UserDAO extends JDBConnect {
 	        throw new RuntimeException(e);
 	    }
 	}
-	
-	
+
+
     // 사용자 정보를 추가하는 메서드
     public boolean addUser(UserDTO user) {
-        String sql = "INSERT INTO users (username, name,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+ 
+        String sql = "INSERT INTO users (username, name,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate)"+
         		" VALUES (?, ? ,?, ?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getName());
-    
+
             stmt.setString(3,user.getBirth());
             stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getPhone());
@@ -128,7 +128,7 @@ public class UserDAO extends JDBConnect {
             stmt.setString(13, user.getAuth());
 //            stmt.setString(13, user.getTimestamp());
             stmt.setTimestamp(14, new java.sql.Timestamp(System.currentTimeMillis()));
-            
+
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -139,26 +139,26 @@ public class UserDAO extends JDBConnect {
     public void dbconn() {
     	try {
     		Class.forName("oracle.jdbc.OracleDriver");
-    		
-    		
+
+
     		String url = "jdbc:oracle:thin:@localhost:1521:xe";
     		String id = "c##musthave";
     		String pwd = "1234";
-    		
+
     		con = DriverManager.getConnection(url,id,pwd);
-    		
+
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
     }
     public void dbclose() {
     	try {
-    		
+
     	close();
     	}catch (Exception e) {
     		e.printStackTrace();
     	}
-    	
+
     }
 
 
@@ -166,47 +166,47 @@ public class UserDAO extends JDBConnect {
 		// TODO Auto-generated method stub
 		return false;
 	}
-    
+
 
 	public boolean idCheck(String username) {
-	
-		
-		boolean result = false; //아이디 중복 여부 체크 변수 
-       
-		
-		try {  
-			
-			String sql = "select username from users where username= ?"; 
-		
-			psmt = con.prepareStatement(sql);               
-			psmt.setString(1, username);           
-			rs = psmt.executeQuery();  
-			
+
+
+		boolean result = false; //아이디 중복 여부 체크 변수
+
+
+		try {
+
+			String sql = "select username from users where username= ?";
+
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, username);
+			rs = psmt.executeQuery();
+
 			if(rs.next()) {
 				result = true;    // 아이디가 중복인 경우
 			}else{
-				result = false;  // 사용가능한 아이디인 경우			
+				result = false;  // 사용가능한 아이디인 경우
 			}
-            
+
 		}
         catch(Exception e) {
-			System.out.println("confirmId(): " + e);  
+			System.out.println("confirmId(): " + e);
             //어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
-		} 
+		}
         finally {
 			close();
 		}
 		return result;
-	} 
-	
- 
+	}
+
+
 public UserDTO getIdFindDTO(String name, String phone) {
 //	UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
 //	String query = "SELECT * FROM users WHERE id=? AND password=?";
 	  UserDTO dto = null;
         String query = "SELECT * FROM users WHERE name =? AND phone=?";
-	
-	
+
+
     System.out.println("Executing query: " + query);
     System.out.println("Parameters: " + name + ", " + phone);
 	// 쿼리문 템플릿
@@ -246,12 +246,12 @@ public UserDTO getIdFindDTO(String name, String phone) {
 	return dto; // DTO 객체 반환
 }
 
-    
+
     // 모든 사용자 정보를 가져오는 메서드
     public List<UserDTO> getAllUsers() {
         List<UserDTO> userList = new ArrayList<>();
         String query = "SELECT * FROM users";
-        
+
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -271,8 +271,8 @@ public UserDTO getIdFindDTO(String name, String phone) {
         }
         return userList;
     }
-    
-    
+
+
     // 활성 사용자 수 가져오기
     public int getActiveUserCount() {
         int count = 0;
@@ -306,7 +306,7 @@ public UserDTO getIdFindDTO(String name, String phone) {
         }
         return count;
     }
-    
+
 
  // 사용자 정보를 업데이트하는 메서드
  public boolean updateUser(UserDTO user) {
@@ -365,8 +365,8 @@ public UserDTO getIdFindDTO(String name, String phone) {
      }
      return user;
  }
-    
-    
-    
+
+
+
 }
 

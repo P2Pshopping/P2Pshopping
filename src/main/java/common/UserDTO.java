@@ -1,8 +1,7 @@
 package common; // 기본 패키지 이외의 패키지 (규약 1번)
 
-import java.security.Timestamp;
 public class UserDTO {
-	
+
 	private int id;			//유저아이디(고유번호)
 	private String name;		//본명
 	private String birth;		//생년월일
@@ -20,7 +19,7 @@ public class UserDTO {
 	private String auth ; 	//권한부여
 	private java.sql.Timestamp createDate; 	//가입일자
 	private int active; //비활성
-	
+
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
@@ -51,7 +50,7 @@ public class UserDTO {
 		this.id = id;
 	}
 
-	
+
 	public String getName() {
 		return name;
 	}
@@ -172,4 +171,4 @@ public class UserDTO {
 		this.active = active;
 	}
 
-}	
+}

@@ -1,7 +1,8 @@
 package mvcboard;
 
-import fileupload.FileUtil;
 import java.io.IOException;
+
+import fileupload.FileUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ public class DownloadController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String ofile = req.getParameter("ofile");
@@ -28,7 +30,7 @@ public class DownloadController extends HttpServlet {
 		FileUtil.download(req, resp, "/Uploads", sfile, ofile);
 
 		MVCBoardDAO dao = new MVCBoardDAO();
-		
+
 		dao.close();
 
 	}

@@ -16,8 +16,8 @@ public class MVCBoardDTO {
     private int views;
     private int likes;
 
-    
-    
+
+
     public String getUsername() {
 		return username;
 	}

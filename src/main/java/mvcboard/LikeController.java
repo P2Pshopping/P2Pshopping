@@ -19,7 +19,7 @@ public class LikeController extends HttpServlet {
         MVCBoardDAO dao = new MVCBoardDAO();
         dao.updateLikesCount(idx);  // 좋아요 수 1 증가
         dao.close();
-        
+
         // 조회수는 증가하지 않도록 하고 원래 페이지로 리다이렉트
         resp.sendRedirect("view.do?idx=" + idx + "&like=true");
     }
