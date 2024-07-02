@@ -60,7 +60,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutController</servlet-name>
-    <url-pattern>/Logout.do</url-pattern>
+    <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
