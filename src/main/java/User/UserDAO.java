@@ -2,7 +2,11 @@ package User;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,6 +263,7 @@ public UserDTO getIdFindDTO(String name, String phone) {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setAuth(rs.getString("auth"));
+                user.setActive(rs.getInt("active"));
                 userList.add(user);
             }
         } catch (Exception e) {
@@ -266,5 +271,102 @@ public UserDTO getIdFindDTO(String name, String phone) {
         }
         return userList;
     }
+    
+    
+    // 활성 사용자 수 가져오기
+    public int getActiveUserCount() {
+        int count = 0;
+        String query = "SELECT COUNT(*) FROM users WHERE active = 1";
+        try (Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+//            pstmt = con.prepareStatement(query);
+//            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // 비활성 사용자 수 가져오기
+    public int getInactiveUserCount() {
+        int count = 0;
+        String query = "SELECT COUNT(*) FROM users WHERE active = 0";
+        try (Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) {
+//            pstmt = con.prepareStatement(query);
+//            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
+
+ // 사용자 정보를 업데이트하는 메서드
+ public boolean updateUser(UserDTO user) {
+     String sql = "UPDATE users SET username = ?, name = ?, email = ?, phone = ?, address = ?, auth = ?, active = ? WHERE id = ?";
+     try (PreparedStatement stmt = con.prepareStatement(sql)) {
+         stmt.setString(1, user.getUsername());
+         stmt.setString(2, user.getName());
+         stmt.setString(3, user.getEmail());
+         stmt.setString(4, user.getPhone());
+         stmt.setString(5, user.getAddress());
+         stmt.setString(6, user.getAuth());
+         stmt.setInt(7, user.getActive());
+         stmt.setInt(8, user.getId());
+         int rowsUpdated = stmt.executeUpdate();
+         return rowsUpdated > 0;
+     } catch (SQLException e) {
+         e.printStackTrace();
+         return false;
+     }
+ }
+
+ // 사용자 정보를 삭제하는 메서드
+ public boolean deleteUser(int id) {
+     String sql = "DELETE FROM users WHERE id = ?";
+     try (PreparedStatement stmt = con.prepareStatement(sql)) {
+         stmt.setInt(1, id);
+         int rowsDeleted = stmt.executeUpdate();
+         return rowsDeleted > 0;
+     } catch (SQLException e) {
+         e.printStackTrace();
+         return false;
+     }
+ }
+
+ // 특정 사용자 정보를 ID로 가져오는 메서드
+ public UserDTO getUserById(int id) {
+     UserDTO user = null;
+     String sql = "SELECT * FROM users WHERE id = ?";
+     try (PreparedStatement stmt = con.prepareStatement(sql)) {
+         stmt.setInt(1, id);
+         try (ResultSet rs = stmt.executeQuery()) {
+             if (rs.next()) {
+                 user = new UserDTO();
+                 user.setId(rs.getInt("id"));
+                 user.setUsername(rs.getString("username"));
+                 user.setName(rs.getString("name"));
+                 user.setEmail(rs.getString("email"));
+                 user.setPhone(rs.getString("phone"));
+                 user.setAddress(rs.getString("address"));
+                 user.setAuth(rs.getString("auth"));
+                 user.setActive(rs.getInt("active"));
+             }
+         }
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+     return user;
+ }
+    
+    
+    
 }
 

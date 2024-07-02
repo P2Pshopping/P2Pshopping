@@ -1,7 +1,5 @@
 package PJ2;
 
-
-
 public class PJ2DTO {
 	private String imgUrl_1;
 	private String imgUrl_2;
@@ -10,8 +8,35 @@ public class PJ2DTO {
 	private String productName;
 	private String detail;
 	private String price;
+	private String[] moreid; // 추가적으로 보여주는 글의 id
+	private String[] f; 
+
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	private String address;
 	
 	
+	
+	public String[] getMoreid() {
+		return moreid;
+	}
+	public void setMoreid(String[] moreid) {
+		this.moreid = moreid;
+	}
+
+	
+
+	public String[] getF() {
+		return f;
+	}
+	public void setF(String[] f) {
+		this.f = f;
+	}
 	public String getProductName() {
 		return productName;
 	}

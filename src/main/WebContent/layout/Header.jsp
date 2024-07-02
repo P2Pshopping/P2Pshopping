@@ -81,7 +81,7 @@
 			<div class="container-fluid">
 				<div class="row" style="display: flex; width: 1100px;">
 					<div class="col-sm-4">
-						<a class="navbar-brand" href="../Main/Mainpage.jsp"
+						<a class="navbar-brand" href="${pageContext.request.contextPath}/Main/Mainpage.jsp"
 							style="font-weight: 700; font-size: 50px;"><span
 							style="color: rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market
 						</a>
@@ -93,44 +93,44 @@
 						<c:if test="${sessionScope.username != null}">
 
 
-							<%-- <a href="<%=request.getContextPath()%>/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a> --%>
+							<%-- <a href="${pageContext.request.contextPath}/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a> --%>
 
 							<c:choose>
 								<c:when test="${sessionScope.username == 'a'}">
 									<%-- username이 'a'일시 관리자 페이지 링크 보이기 --%>
-									<a href="<%=request.getContextPath()%>/admin/default.jsp"
+									<a href="${pageContext.request.contextPath}/dashboard"
 										class="bi bi-person-badge"
 										style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">관리자</a>
 								</c:when>
 								<c:otherwise>
 									<%-- 찜 링크 보이기 --%>
 									<a
-										href="<%=request.getContextPath()%>/DetailPage/FavoritePage.jsp"
+										href="${pageContext.request.contextPath}/DetailPage/FavoritePage.jsp"
 										class="bi bi-suit-heart-fill"
 										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;">찜
 									</a>
 								</c:otherwise>
 							</c:choose>
-							<a href="<%=request.getContextPath()%>/user?cmd=checkAgain"
+							<a href="${pageContext.request.contextPath}/user?cmd=checkAgain"
 								class="bi bi-gear-fill"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">정보수정
 							</a>
-							<a href="<%=request.getContextPath()%>/logout.do"
+							<a href="${pageContext.request.contextPath}/logout.do"
 								class="bi bi-box-arrow-left"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">로그아웃
 							</a>
 
-							<a href="<%=request.getContextPath()%>/sell/sell.jsp"
+							<a href="${pageContext.request.contextPath}/sell/sell.jsp"
 								class="bi bi-upload btn btn-outline-secondary" type="submit"
 								style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem;">
 								상품등록 </a>
 						</c:if>
 						<c:if test="${sessionScope.username == null}">
-							<a href="../Login/login.jsp"
+							<a href="${pageContext.request.contextPath}/Login/login.jsp"
 								class="bi bi-box-arrow-in-right btn btn-success btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								Login </a>
-							<a href="<%=request.getContextPath()%>/Join/join.jsp"
+							<a href="${pageContext.request.contextPath}/Join/join.jsp"
 								class="bi bi-person-plus-fill btn btn-primary btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								create account </a>
@@ -147,20 +147,21 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="../Main/Mainpage.jsp">홈</a></li>
+							aria-current="page" href="${pageContext.request.contextPath}/Main/Mainpage.jsp">홈</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-cureent="page"
-							href="<%=request.getContextPath()%>/hospital/Hospital1.jsp">병원찾기</a>
+							href="${pageContext.request.contextPath}/hospital/Hospital1.jsp">병원찾기</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								중고장터 </a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="../Main/ItemList.jsp">상품목록</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Main/ItemList.jsp">상품목록</a></li>
 								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="../mvcboard/list.do">커뮤니티</a></li>
+
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">커뮤니티</a></li>
 							</ul></li>
 					</ul>
 					<form class="d-flex">

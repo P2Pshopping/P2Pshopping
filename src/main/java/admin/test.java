@@ -1,36 +1,81 @@
-package User;
+package admin;
 
-import common.UserDAO;
-import common.UserDTO;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-//@WebServlet("/admin/users.do")
-public class UserServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+import common.JDBConnect;
+import admin.CategoryDTO;
+import jakarta.servlet.ServletContext;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("UserServlet doGet 호출됨"); // 디버그 메시지
+public class CategoryDAO extends JDBConnect {
+    public CategoryDAO(ServletContext application) {
+        super(application);
+    }
 
-        // ServletContext에서 데이터베이스 연결 정보를 가져와서 DAO를 초기화
-        ServletContext context = getServletContext();
-        UserDAO userDAO = new UserDAO(context);
+    // 모든 카테고리를 가져오는 메서드
+    public List<CategoryDTO> getAllCategories() {
+        List<CategoryDTO> categories = new ArrayList<>();
+        String query = "SELECT * FROM category";
 
-        // 사용자 목록을 가져와서 request에 설정
-        List<UserDTO> userList = userDAO.getAllUsers();
-        request.setAttribute("userList", userList);
-        
-        System.out.println("userList 설정됨: " + userList); // 디버그 메시지
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-        // JSP 페이지로 포워딩
-        request.getRequestDispatcher("/admin/users.jsp").forward(request, response);
+            while (rs.next()) {
+                CategoryDTO category = new CategoryDTO();
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setUrl(rs.getString("url"));
+
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categories;
+    }
+
+    // 카테고리 추가 메서드
+    public void addCategory(CategoryDTO category) {
+        String query = "INSERT INTO category (name, url) VALUES (?, ?)";
+
+        try {
+            PreparedStatement psmt = con.prepareStatement(query);
+            psmt.setString(1, category.getName());
+            psmt.setString(2, category.getUrl());
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 카테고리 수정 메서드
+    public void updateCategory(CategoryDTO category) {
+        String query = "UPDATE category SET name = ?, url = ? WHERE id = ?";
+
+        try {
+            PreparedStatement psmt = con.prepareStatement(query);
+            psmt.setString(1, category.getName());
+            psmt.setString(2, category.getUrl());
+            psmt.setInt(3, category.getId());
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 카테고리 삭제 메서드
+    public void deleteCategory(int id) {
+        String query = "DELETE FROM category WHERE id = ?";
+
+        try {
+            PreparedStatement psmt = con.prepareStatement(query);
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
-

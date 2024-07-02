@@ -83,6 +83,24 @@
                 alert('위치 정보를 사용할 수 없습니다.');
             }
         }
+     
+        
+        document.addEventListener('DOMContentLoaded', function() {
+
+        	  // 페이지 로드 시 방문 기록 저장
+            var pageUrl = window.location.pathname + window.location.search;
+            $.ajax({
+                url: '<%= request.getContextPath() %>/track',
+                method: 'GET',
+                data: { pageUrl: pageUrl },
+                success: function(response) {
+                    console.log('Visit recorded');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error recording visit:', error);
+                }
+            });
+        });
     </script>
 </head>
 <body>
