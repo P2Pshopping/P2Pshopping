@@ -112,28 +112,14 @@
     <servlet-name>IdFindController</servlet-name>
     <url-pattern>/IdFindController</url-pattern>
   </servlet-mapping>
-
-  
-  
-  
-
- <!-- <servlet>
+  <servlet>
     <servlet-name>UserAdminServlet</servlet-name>
     <servlet-class>admin.UserAdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserAdminServlet</servlet-name>
-    <url-pattern>/admin/users.do</url-pattern>
-  </servlet-mapping>  -->
- <servlet>
-        <servlet-name>UserAdminServlet</servlet-name>
-        <servlet-class>admin.UserAdminServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserAdminServlet</servlet-name>
-        <url-pattern>/admin/users/*</url-pattern>
-    </servlet-mapping> 
-  
+    <url-pattern>/admin/users/*</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>admin.CategoryAdminServlet</servlet-class>
@@ -162,7 +148,6 @@
     <servlet-name>MVCBoardWrite</servlet-name>
     <url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
-
   <context-param>
     <param-name>POSTS_PER_PAGE</param-name>
     <param-value>9</param-value>
@@ -171,7 +156,6 @@
     <param-name>PAGES_PER_BLOCK</param-name>
     <param-value>5</param-value>
   </context-param>
-
   <servlet>
     <description></description>
     <display-name>DashboardServlet</display-name>
@@ -192,5 +176,58 @@
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>ReviewListServlet</servlet-name>
+    <servlet-class>review.ReviewListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewListServlet</servlet-name>
+    <url-pattern>/review/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReviewWriteServlet</servlet-name>
+    <servlet-class>review.ReviewWriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewWriteServlet</servlet-name>
+    <url-pattern>/review/write</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReviewEditServlet</servlet-name>
+    <servlet-class>review.ReviewEditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewEditServlet</servlet-name>
+    <url-pattern>/review/edit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReviewViewServlet</display-name>
+    <servlet-name>ReviewViewServlet</servlet-name>
+    <servlet-class>review.ReviewViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewViewServlet</servlet-name>
+    <url-pattern>/review/view</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReviewDeleteServlet</display-name>
+    <servlet-name>ReviewDeleteServlet</servlet-name>
+    <servlet-class>review.ReviewDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewDeleteServlet</servlet-name>
+    <url-pattern>/review/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ImageServlet</display-name>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>review.ImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/review/images/*</url-pattern>
+  </servlet-mapping>
 </web-app>

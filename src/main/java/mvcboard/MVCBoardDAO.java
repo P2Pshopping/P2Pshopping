@@ -80,8 +80,8 @@ public class MVCBoardDAO extends JDBConnect {
 					+ " VALUES (seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
-			psmt.setInt(1, dto.getWriterId());
-			psmt.setString(2, dto.getBno());
+			psmt.setInt(2, dto.getWriterId());
+			psmt.setString(1, dto.getBno());
 			psmt.setString(3, dto.getTitle());
 			psmt.setString(4, dto.getContent());
 			psmt.setString(5, dto.getOfile());

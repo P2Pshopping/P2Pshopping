@@ -118,7 +118,7 @@
                     <div class="card-body">
                         <h5 class="card-title">최근 리뷰 및 피드백</h5>
                         <c:forEach var="review" items="${recentReviews}">
-                            <p>${review.detail} - ${review.rating}</p>
+                            <p>${review.title} - ${review.rating}</p>
                         </c:forEach>
                     </div>
                 </div>
