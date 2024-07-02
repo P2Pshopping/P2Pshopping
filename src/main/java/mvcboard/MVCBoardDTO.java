@@ -3,52 +3,50 @@ package mvcboard;
 import java.sql.Date;
 
 public class MVCBoardDTO {
-    private String id;
-    private int bno;
-    private int writerId;
-    private String username;
-    private String title;
-    private String content;
-    private Date createDate;
-    private Date updateDate;
-    private String ofile;
-    private String sfile;
-    private int views;
-    private int likes;
+	private String id; //게시물 번호
+	private String bno; // 카테고리
+	private int writerId; // 작성자 아이디번호 == user(id)
+	private String username; // 작성자 아이디
+	private String title; // 제목
+	private String content; // 내용
+	private Date createDate; // 작성일
+	private Date updateDate; // 수정일
+	private String ofile; // 파일 
+	private String sfile; // 파일
+	private int views; // 조회수
+	private int likes; // 추천수
 
-    
-    
-    public String getUsername() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getBno() {
+		return bno;
+	}
+
+	public void setBno(String bno) {
+		this.bno = bno;
+	}
+
+	public int getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(int writerId) {
+		this.writerId = writerId;
+	}
+
+	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getBno() {
-        return bno;
-    }
-
-    public void setBno(int bno) {
-        this.bno = bno;
-    }
-
-    public int getWriterId() {
-        return writerId;
-    }
-
-    public void setWriterId(int writerId) {
-        this.writerId = writerId;
-    }
 
 	public String getTitle() {
 		return title;
@@ -66,21 +64,21 @@ public class MVCBoardDTO {
 		this.content = content;
 	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
+	public Date getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 
 	public String getOfile() {
 		return ofile;
@@ -98,19 +96,20 @@ public class MVCBoardDTO {
 		this.sfile = sfile;
 	}
 
-    public int getViews() {
-        return views;
-    }
+	public int getViews() {
+		return views;
+	}
 
-    public void setViews(int views) {
-        this.views = views;
-    }
+	public void setViews(int views) {
+		this.views = views;
+	}
 
-    public int getLikes() {
-        return likes;
-    }
+	public int getLikes() {
+		return likes;
+	}
 
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
 }

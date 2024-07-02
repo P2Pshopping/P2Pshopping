@@ -60,7 +60,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutController</servlet-name>
-    <url-pattern>/Logout.do</url-pattern>
+    <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -112,6 +112,11 @@
     <servlet-name>IdFindController</servlet-name>
     <url-pattern>/IdFindController</url-pattern>
   </servlet-mapping>
+
+  
+  
+  
+
  <!-- <servlet>
     <servlet-name>UserAdminServlet</servlet-name>
     <servlet-class>admin.UserAdminServlet</servlet-class>
@@ -143,7 +148,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MVCBoardList</servlet-name>
-    <url-pattern>/board/list.do</url-pattern>
+    <url-pattern>/mvcboard/list.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MVCBoardWrite</servlet-name>
@@ -155,8 +160,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MVCBoardWrite</servlet-name>
-    <url-pattern>/board/write.do</url-pattern>
+    <url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
+
   <context-param>
     <param-name>POSTS_PER_PAGE</param-name>
     <param-value>9</param-value>
@@ -165,6 +171,7 @@
     <param-name>PAGES_PER_BLOCK</param-name>
     <param-value>5</param-value>
   </context-param>
+
   <servlet>
     <description></description>
     <display-name>DashboardServlet</display-name>
@@ -201,6 +208,7 @@
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
+
 	<servlet>
 		<description></description>
 		<display-name>ChangeService</display-name>
@@ -217,4 +225,5 @@
 		<servlet-name>idCheck</servlet-name>
 		<servlet-class>Check.idCheck</servlet-class>
 	</servlet>
+
 </web-app>
