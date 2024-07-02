@@ -161,7 +161,7 @@
 								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
 
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">커뮤니티</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>
 							</ul></li>
 					</ul>
 					<form class="d-flex">

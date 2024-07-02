@@ -148,7 +148,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MVCBoardList</servlet-name>
-    <url-pattern>/board/list.do</url-pattern>
+    <url-pattern>/mvcboard/list.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MVCBoardWrite</servlet-name>
@@ -160,7 +160,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MVCBoardWrite</servlet-name>
-    <url-pattern>/board/write.do</url-pattern>
+    <url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
 
   <context-param>
