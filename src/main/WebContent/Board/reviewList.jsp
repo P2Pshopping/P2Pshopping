@@ -158,8 +158,8 @@ body {
                                     onclick="location.href='../review/view?id=${review.id}'">
                                     <c:if test="${not empty review.sfile}">
                                         <img
-                                            src="/review/images/${review.sfile}&ofile=${review.ofile}"
-                                            alt="${review.title}" />
+                                            src="<c:url value='/review/images/${review.sfile}'/>"
+                                            alt="${review.ofile}" width="200"/>
                                     </c:if>
                                     <div id="caption">${review.title}</div>
                                 </div>
