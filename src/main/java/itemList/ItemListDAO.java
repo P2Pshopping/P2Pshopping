@@ -2,49 +2,83 @@ package itemList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.Vector;
 
 import common.JDBConnect;
 
 public class ItemListDAO extends JDBConnect {
+    public ItemListDAO() {
+        super();
+    }
 
-	 public List<ItemListDTO> selectListPage(Map<String, Object> map){
-	        List<ItemListDTO> board = new Vector<ItemListDTO>();
-	        String query = "SELECT u.username, p.productname, p.price, p.IMGURL_1, p.CATEGORYID "
-	                     + "FROM PRODUCT p, USERS u";
+    public int selectCount(Map<String, Object> map) {
+        int totalCount = 0;
+        String query = "SELECT COUNT(*) FROM PRODUCT p";
 
-			System.out.print("불러오기 시도중");
-			if(map.get("searchWord") != null)
-			{
-				query += " WHERE " + map.get("searchField")
-					  + " LIKE '%" + map.get("searchWord") + "%' ";
-			}
-	try{
+        if (map.get("searchWord") != null) {
+            query += " WHERE " + map.get("searchField") + " LIKE ?";
+        }
 
-		psmt = con.prepareStatement(query);
-        rs = psmt.executeQuery();
-        System.out.println("연결중");
-       while (rs.next()) {
-           ItemListDTO dto = new ItemListDTO();
-           dto.setUsername(rs.getString("username"));
-           dto.setProductName(rs.getString("productname"));
-           dto.setPrice(rs.getString("price"));
-           dto.setImgUrl_1(rs.getString("IMGURL_1"));
-           dto.setCategoryid(rs.getString("CATEGORYID"));
+        try (PreparedStatement psmt = con.prepareStatement(query)) {
+            if (map.get("searchWord") != null) {
+                psmt.setString(1, "%" + map.get("searchWord") + "%");
+            }
+            try (ResultSet rs = psmt.executeQuery()) {
+                if (rs.next()) {
+                    totalCount = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("카운트 오류 발생");
+            e.printStackTrace();
+        }
 
-           board.add(dto);
-}
+        return totalCount;
+    }
 
+    public ArrayList<ItemListDTO> selectListPage(Map<String, Object> map) {
+        ArrayList<ItemListDTO> board = new ArrayList<ItemListDTO>();
+        String query =" SELECT * FROM PRODUCT p " ;
+        		
+        		//"SELECT * FROM (SELECT Tb.*, ROW_NUMBER() OVER (ORDER BY id) rnum FROM PRODUCT Tb";
+        
+		/*
+		 * if (map.get("searchWord") != null) { query += " WHERE " +
+		 * map.get("searchField") + " LIKE ?"; } query +=
+		 * ") WHERE rnum BETWEEN ? AND ?";
+		 */
 
+        try (PreparedStatement psmt = con.prepareStatement(query)) {
+//            int paramIndex = 1;
+			/*
+			 * if (map.get("searchWord") != null) { psmt.setString(paramIndex++, "%" +
+			 * map.get("searchWord") + "%"); } psmt.setInt(paramIndex++, (int)
+			 * map.get("start")); psmt.setInt(paramIndex, (int) map.get("end"));
+			 */
 
-	}catch(Exception e){
-		System.out.println("사진 불러오는 중 예외 발생");
-		e.printStackTrace();
-	}
-	return board;
+            try (ResultSet rs = psmt.executeQuery()) {
+                while (rs.next()) {
+                    ItemListDTO dto = new ItemListDTO();
+                    dto.setId(rs.getInt("id"));
+                    dto.setProductName(rs.getString("productname"));
+                    dto.setCategoryid(rs.getInt("categoryid"));
+                    dto.setPrice(rs.getInt("price"));
+                    dto.setDetail(rs.getString("detail"));
+                    dto.setImgUrl_1(rs.getString("imgUrl_1"));
+                    dto.setWriterid(rs.getInt("writerid"));
+                    
 
+                    board.add(dto);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("사진 불러오는 중 예외 발생");
+            e.printStackTrace();
+        }
 
-}
+        return board;
+
+    }
 }

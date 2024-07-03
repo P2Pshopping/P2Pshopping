@@ -185,4 +185,14 @@
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
+    <servlet>
+     <description></description>
+    <display-name>ItemListt</display-name>
+    <servlet-name>ItemList</servlet-name>
+    <servlet-class>itemList.ItemListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ItemList</servlet-name>
+    <url-pattern>/Main/ItemList.do</url-pattern>
+  </servlet-mapping>
 </web-app>
