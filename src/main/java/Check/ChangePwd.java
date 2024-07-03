@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/UpdateService.do") // 비밀번호 변경 
-public class UpdateService extends HttpServlet {
+@WebServlet("/ChangePwd.do") // 비밀번호 변경 
+public class ChangePwd extends HttpServlet {
     private UserDAO userDAO;
     
     public void init() throws ServletException {
@@ -24,15 +24,17 @@ public class UpdateService extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("EUC-KR");
+    	response.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html;charset=UTF-8");
+	    
 
         // 세션에서 사용자 정보 가져오기
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         String newPassword = request.getParameter("password");
-        
+        System.out.println("변경된 비밀번호는 : " + newPassword);
         String hashedPassword = userDAO.hashPassword(newPassword); // 입력된 비밀번호를 해시화합니다.
-        UserDTO user = userDAO.getUserDTO(username, hashedPassword);
+		/* UserDTO user = userDAO.getUserDTO(username, hashedPassword); */
         
         if (username != null) {
           
@@ -57,8 +59,18 @@ public class UpdateService extends HttpServlet {
             if (success) {
                 System.out.println("Password updated successfully for user: " + username);
                 // 서블릿에서 데이터를 설정하여 JSP 페이지로 전달하는 예시
-                request.setAttribute("message", "비밀번호가 변경되었습니다.");
-                request.getRequestDispatcher("Main/Mainpage.jsp").forward(request, response);
+                request.setAttribute("message", "새 비밀번호가 성공적으로 변경되었습니다.");
+                response.getWriter().write(
+        	            "<html>" +
+        	            "<head>" +
+        	            "<script type='text/javascript'>" +
+        	            "alert(' 새 비밀번호를 성공적으로 변경되었습니다.');" +
+        	            "window.location.href = 'Login/login.jsp';" + // 이전 페이지로 이동
+        	            "</script>" +
+        	            "</head>" +
+        	            "<body></body>" +
+        	            "</html>"
+        	        );	       
             } else {
                 System.out.println("Failed to update password for user: " + username);
                 response.sendRedirect("Change/Change.jsp?error=updateFailed");

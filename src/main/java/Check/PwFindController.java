@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import User.UserDAO;
 
-@WebServlet("/PwFind.do") 
+@WebServlet("/PwFind.do")  // 비밀번호 찾기
 public class PwFindController extends HttpServlet {
 	private UserDAO userDAO;
 
@@ -48,11 +48,21 @@ public class PwFindController extends HttpServlet {
 	            System.out.println("User session set: " + user.getPassword());
 	            	
 	            response.getWriter().write( " 귀하의 아이디는 " +  user.getPassword()+" 입니다.");
-				/*
-				 * response.sendRedirect("M.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
-				 */	        } else {
-					 response.getWriter().write("입력칸을 다시 한번 확인해주세요");
-	            // 사용자 인증에 실패한 경우
+	            
+				
+				  response.sendRedirect("../Change/ChangePw.jsp"); // 로그인 성공 후 새 비밀번호 설정 페이지로 리디렉션합니다.
+				 	        } else {
+				 	        	  response.getWriter().write(
+				 	        	            "<html>" +
+				 	        	            "<head>" +
+				 	        	            "<script type='text/javascript'>" +
+				 	        	            "alert('입력한 정보가 일치하지 않습니다. 다시 한번 확인해주세요.');" +
+				 	        	            "window.location.href = 'Find/FindPw.jsp';" + // 이전 페이지로 이동
+				 	        	            "</script>" +
+				 	        	            "</head>" +
+				 	        	            "<body></body>" +
+				 	        	            "</html>"
+				 	        	        );	            // 사용자 인증에 실패한 경우
 				/*
 				 * response.sendRedirect("Login/login.jsp?error=invalid"); // 로그인 폼으로 리디렉션하고 오류
 				 * 메시지를 전달합니다.

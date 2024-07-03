@@ -90,7 +90,7 @@
 					<div class="col-md-6"
 						style="display: flex; justify-content: right; align-items: center; font-color: black;">
 
-						<c:if test="${sessionScope.username != null}">
+						<c:if test="${sessionScope.password != null}">
 
 
 							<%-- <a href="${pageContext.request.contextPath}/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a> --%>
@@ -105,7 +105,7 @@
 								<c:otherwise>
 									<%-- 찜 링크 보이기 --%>
 									<a
-										href="${pageContext.request.contextPath}/DetailPage/FavoritePage.jsp"
+										href="${pageContext.request.contextPath}/Favor/favorList.jsp"
 										class="bi bi-suit-heart-fill"
 										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;">찜
 									</a>
@@ -125,7 +125,7 @@
 								style="margin-left: 40px; margin-right: -20px; --bs-btn-font-size: 1.05rem;">
 								상품등록 </a>
 						</c:if>
-						<c:if test="${sessionScope.username == null}">
+						<c:if test="${sessionScope.password == null}">
 							<a href="${pageContext.request.contextPath}/Login/login.jsp"
 								class="bi bi-box-arrow-in-right btn btn-success btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">

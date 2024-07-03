@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="common.JDBConnect" %>
-<%@ page import="User.UserDAO" %>
-<%@ page import="common.UserDTO" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="common.JDBConnect"%>
+<%@ page import="User.UserDAO"%>
+<%@ page import="common.UserDTO"%>
 
 
 
@@ -44,10 +44,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="UTF-8">
-    <title>Join</title>
- <script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<title>Join</title>
+<script>
     function joinCheck() {
         var name = document.getElementById("inputName").value.trim();
         var birth = document.getElementById("inputBirth").value.trim();
@@ -110,77 +110,76 @@
 </script>
 
 
-            <%
-            String inputYn = request.getParameter("inputYn"); 
-        	String roadAddrPart1 = request.getParameter("roadAddrPart1");
-            String addrDetail = request.getParameter("addrDetail"); 
+<%
+String inputYn = request.getParameter("inputYn");
+String roadAddrPart1 = request.getParameter("roadAddrPart1");
+String addrDetail = request.getParameter("addrDetail");
 String message = null;
 
 if ("POST".equalsIgnoreCase(request.getMethod())) {
-    String name = request.getParameter("inputName");
-    String birth = request.getParameter("inputBirth");
-   
-    String username = request.getParameter("username");
-    String password = request.getParameter("inputPWD");
-    String phone = request.getParameter("inputPhone");
-    String email = request.getParameter("inputEmail");
-    String address = request.getParameter("inputAddress");
+	String name = request.getParameter("inputName");
+	String birth = request.getParameter("inputBirth");
 
-    // 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
-    // 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
+	String username = request.getParameter("username");
+	String password = request.getParameter("inputPWD");
+	String phone = request.getParameter("inputPhone");
+	String email = request.getParameter("inputEmail");
+	String address = request.getParameter("inputAddress");
 
-    UserDTO user = new UserDTO();
-    user.setName(name);
-    user.setUsername(username);
-    user.setEmail(email);
-    user.setPhone(phone);
-    user.setAddress(address);
- 
-    user.setPassword(password);
-    // 필요한 경우 다른 필드들도 설정
+	// 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
+	// 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
 
-    UserDAO userDAO = null;
-    try {
-        userDAO = new UserDAO(application);
-        String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
-        user.setPassword(hashedPassword); // 해시된 비밀번호 설정
-        boolean isUserAdded = userDAO.addUser(user);
+	UserDTO user = new UserDTO();
+	user.setName(name);
+	user.setUsername(username);
+	user.setEmail(email);
+	user.setPhone(phone);
+	user.setAddress(address);
 
-        if (isUserAdded) {
-            message = "회원가입이 성공적으로 완료되었습니다.";
+	user.setPassword(password);
+	// 필요한 경우 다른 필드들도 설정
+
+	UserDAO userDAO = null;
+	try {
+		userDAO = new UserDAO(application);
+		String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
+		user.setPassword(hashedPassword); // 해시된 비밀번호 설정
+		boolean isUserAdded = userDAO.addUser(user);
+
+		if (isUserAdded) {
+	/*    message = "회원가입이 성공적으로 완료되었습니다."; */
 %>
 <script>
     window.location.href = "../Login/login.jsp";
     alert("회원가입에 성공하였습니다.");
 </script>
 <%
-        } else {
-            message = "입력칸을 다시 한 번 확인해주세요.";
-            
+} else {
+//   message = "잘못 입력하셨습니다 다시 입력해주세요.";
 %>
 <script>
-    alert("입력칸을 다시 한 번 확인해주세요.");
-    event.preventDefault(); // 폼 제출을 중단 
+    alert("잘못 입력하셨습니다. 다시 입력해주세요.");
+   /* event.preventDefault();ㄱ // 폼 제출을 중단  */
  
 </script>
 <%
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        // 예외 처리 로직 추가
-    } finally {
-        if (userDAO != null) {
-            userDAO.close();
-        }
-    }
+}
+} catch (Exception e) {
+e.printStackTrace();
+// 예외 처리 로직 추가
+} finally {
+if (userDAO != null) {
+userDAO.close();
+}
+}
 }
 %>
 
- 	
+
 </head>
 <body>
-<%@include file="../layout/Header.jsp"%>
-<div style = "margin-top:300px;">
+	<%@include file="../layout/Header.jsp"%>
+	<div style="margin-top: 300px;">
 
 		<div class="wrap">
 			<div class="contents">
@@ -200,7 +199,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 									maxlength="8" oninput="formatDate(this)">
 
 							</div>
-					
+
 							<div class="form-inline w-100">
 								<div class="col-12">
 									<label for="inputId" class="form-label">아이디</label>
@@ -251,7 +250,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 							<div class="blank"></div>
 							<p></p>
 
-   <!--                 <div class="terms__box">
+							<!--                 <div class="terms__box">
                         <div class="input__check">
                             <input  type="checkbox" id="privacyPolicy" name ="agreement"value="privacyPolicy" required>
                             <label class="required" for="privacyPolicy"> 회원가입 하시겠습니까 ? </label>
@@ -265,7 +264,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 							}
 							%>
 							<div class="d-grid gap-2">
-								<a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로
+								<a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로
 									가기</a>
 								<button type="submit" id="target_btn"
 									class="btn btn-primary btn-lg" name="loginButton"
@@ -282,13 +281,13 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 		<%@include file="../layout/Footer.jsp"%>
 	</div>
 	<script src="assets/js/jquery.min.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
     $(document).ready(function() {
         // 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
         $('#btnCheckId').on('click', function() {
             // 입력한 username 가져오기
             var username = $('input[name=username]').val();
-        
+        	var result_data;
             // Ajax로 username 보내기
             $.ajax({
                 url: '/idCheck',   // 서버의 URL
@@ -296,30 +295,34 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
                 data: {
                     username: username // 입력한 username 데이터 보내기
                 },
-                dataType: "json",   // 응답 데이터 타입은 text로 지정
-                success: function(result) {
-                	/*  console.log(result); */
-                    // 서버에서 받은 결과(result)를 처리
-                    if (result === 'false') {
-                        // 중복이 없는 경우
-                        alert('사용 가능한 아이디입니다.');
-                        $('#target_btn').prop('disabled', false); // 회원 가입 버튼 활성화
-                        
+                dataType: "json",   // 응답 데이터 타입은 json로 지정
+                success: function(response) {
+                    console.log('서버 응답:', response); // 서버 응답 전체를 콘솔에 출력
+
+                    if (response.success) {
+                        if (response.result === false) {
+                            console.log('사용 가능한 아이디입니다.');
+                            alert('사용 가능한 아이디입니다.');
+                            $('#target_btn').prop('disabled', false);
+                        } else {
+                            console.log('중복되는 아이디가 있습니다.');
+                            alert('중복되는 아이디가 있습니다.');
+                            $('#target_btn').prop('disabled', true);
+                        }
                     } else {
-                        // 중복이 있는 경우
-                        alert('중복되는 아이디가 있습니다.');
-                        $('#target_btn').prop('disabled', true);  // 회원 가입 버튼 비활성화
+                        console.log('오류 발생:', response.message);
+                        alert('오류 발생: ' + response.message);
                     }
                 },
-                error: function() {
-                    // Ajax 요청 실패 시 처리
+                error: function(xhr, status, error) {
+                    console.log('서버 오류:', status, error); // 오류 메시지를 콘솔에 출력
                     alert('서버 오류가 발생했습니다.');
                 }
             });
         });
     });
 </script>
-<script>
+	<script>
 function loginbtn(){
 	if (result == "false"){
 		joinCheck();
@@ -390,6 +393,6 @@ function init(){
 		}
 	</script>
 
-	
+
 </body>
 </html>

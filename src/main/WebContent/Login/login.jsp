@@ -178,6 +178,7 @@ function validateForm(form) {
 		password.focus();
 		return false;
 	}
+}
 </script>
 </head>
 
@@ -189,7 +190,7 @@ function validateForm(form) {
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<span style="color: red; font-size: 1.2em;"> <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>
-		<% if(session.getAttribute("UserId") == null) { %>
+	<%-- 	<% if(session.getAttribute("UserId") == null) { %> --%>
 	</span>
 
 
@@ -207,18 +208,49 @@ function validateForm(form) {
 		}
 	
 	</script>
-	<% String chek =null;
-	String userid= "";
-	Cookie[] cookie = request.getCookies();
+	<script>
+$(document).ready(function() {
+    // 아이디 저장 체크박스의 상태를 감지하여 쿠키 설정
+    $('input[name="checkbox"]').change(function() {
+        if($(this).is(':checked')) {
+            // 체크박스가 체크되면 쿠키를 설정
+            document.cookie = "checkbox=keep; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+        } else {
+            // 체크박스가 해제되면 쿠키를 제거
+            document.cookie = "checkbox=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    });
+
+    // 페이지 로드 시 체크박스 상태를 복원
+    var checkboxValue = getCookie("checkbox");
+    if (checkboxValue == "keep") {
+        $('input[name="checkbox"]').prop('checked', true);
+    }
+});
+
+// 특정 이름의 쿠키 값을 가져오는 함수
+function getCookie(name) {
+    var parts = document.cookie.split(name + '=');
+    if (parts.length === 2) { return parts[1].split(';')[0]; }
+}
+</script>
+	<% 
 	
-	if(cookie != null){
-		for (int i =0; i<cookie.length;i++){
-			if(cookie[i].getName().equals("remember")){
-				chek = "checked";
-				userid = cookie[i].getValue();
-				System.out.println(userid);
-			}
+	String cookie = "";
+	Cookie[] cookies = request.getCookies(); //쿠키생성
+	String checkbox=null;
+	if(cookies !=null&& cookies.length > 0){
+		
+	for (int i = 0; i < cookies.length; i++){
+		if (cookies[i].getName().equals("username")) { // 내가 원하는 쿠키명 찾아서 값 저장
+			cookie = cookies[i].getValue();
 		}
+			if (cookies[i].getName().equals("checkbox")&& cookies[i].getValue().equals("keep")) { // 내가 원하는 쿠키명 찾아서 값 저장
+				 checkbox = "checked"; 
+				cookie = cookies[i].getValue();
+		}
+	}
+			
 	}
 	%>
 
@@ -234,8 +266,8 @@ function validateForm(form) {
 			<form action="<c:url value='/login.do' />" method="post"
 				name="loginFrm" onsubmit="return validateForm(this);">
 
-				<input type="text" name="username" class="login_text"
-					placeholder="ID">
+				<input type="text" name="username" class="login_text" id ="username" 
+					placeholder="ID" value="<%=cookie%>">
 					 <input type="password" name="password"
 					class="login_text" placeholder="PASSWORD">
 
@@ -243,10 +275,11 @@ function validateForm(form) {
 				<div class="blank">
 					<a href="../Find/FindId.jsp" class="btn btn-link" type=button
 						id="Find">Forgot Password?</a> <a href="../agree/agree.jsp"
-						class="btn btn-link" type=button id="join">Sign In</a> <input
-						type="checkbox" class="form-check-input" name="save_check"
-						value= chk<%= chek %>> <label class="form-check-label">아이디
-						저장</label>
+						class="btn btn-link" type=button id="join">Sign In</a> 
+						<input type="checkbox" class="form-check-input" name="checkbox" value="keep" <%= (checkbox == null ? "" : "checked")%> />
+<label class="form-check-label">아이디 저장</label>
+
+
 				</div>
 				</p>
 				<div class="d-grid gap-2 mx-auto">
@@ -277,10 +310,10 @@ function validateForm(form) {
 		</div>
 
 	</div>
-	<% if (request.getParameter("error") != null) { %>
+	<%--  <% if (request.getParameter("error") != null) { %>
 	<p style="color: red;">Invalid username or password. Please try
-		again.</p>
-	<% } %>
+		again.</p> --%>
+	<%-- <% } %> 
 
 	<%
 	} else { //로그인된 상태
@@ -291,7 +324,7 @@ function validateForm(form) {
 	<a href="<c:url value='/login.do' />">[로그아웃]</a>
 	<%
 	}
-	%>
+	%>   --%>
 
 	<div style="margin-top: 50%;">
 		<%@include file="../layout/Footer.jsp"%>
