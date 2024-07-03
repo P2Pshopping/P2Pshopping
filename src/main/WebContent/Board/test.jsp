@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>리뷰 작성</title>
+<title>거래 후기 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     body {
@@ -31,36 +32,22 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>리뷰 작성</h2>
+            <h2>${review.title}</h2>
         </div>
         <div class="card-body">
-            <form action="write" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="transactionId" class="form-label">거래 ID:</label>
-                    <input type="text" class="form-control" id="transactionId" name="transactionId" required>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="form-label">제목:</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
-                </div>
-                <div class="mb-3">
-                    <label for="detail" class="form-label">내용:</label>
-                    <textarea class="form-control" id="detail" name="detail" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="rating" class="form-label">평점:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" min="1" max="10" required>
-                </div>
-                <div class="mb-3">
-                    <label for="reviewImages" class="form-label">이미지 업로드:</label>
-                    <input type="file" class="form-control" id="reviewImages" name="reviewImages">
-                </div>
-                <button type="submit" class="btn btn-primary">작성</button>
-            </form>
+            <p><strong>상세 내용:</strong> ${review.detail}</p>
+            <p><strong>평점:</strong> ${review.rating}</p>
+            <p><strong>거래 날짜:</strong> ${review.transactionDate}</p>
+            <p><strong>판매자 이름:</strong> ${review.sellerName}</p>
+            <p><strong>구매자 이름:</strong> ${review.buyerName}</p>
+            <p><strong>상품 이름:</strong> ${review.productName}</p>
+            <p><strong>사진:</strong><br><img src="<c:url value='/review/images/${review.sfile}'/>" alt="${review.ofile}" width="200"/></p>
+            <a href="edit?id=${review.id}" class="btn btn-primary">수정</a>
+            <a href="delete?id=${review.id}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
+C:\Users\Manic-063\eclipse-workspace\webDeveloper\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\iMarket\wtpwebapps\iMarket\uploads\gynecology.png
