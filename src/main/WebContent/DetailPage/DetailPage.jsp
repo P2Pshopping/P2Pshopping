@@ -164,6 +164,22 @@
 	cursor: default;
 	color: #777;
 }
+
+
+#love{
+      width: 50px;
+      fill: #ddd;
+}
+
+#love.active{
+      fill: red;
+}
+
+
+
+#love.active svg path {
+        fill: red;
+    }    
 </style>
 
 
@@ -217,7 +233,7 @@ PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 
 </head>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <body
-	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center;">
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
 
 
 	<%@ include file="../layout/Header.jsp"%>
@@ -308,7 +324,7 @@ PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#like").click(function() {
+    $("#love").click(function() {
         var sid = "<%= sid %>"; // JSP에서 동적으로 설정된 값
         var bid = "<%= bid %>"; // JSP에서 동적으로 설정된 값
         
@@ -319,20 +335,36 @@ $(document).ready(function() {
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { sid: sid, bid: bid },
             success: function(data) {
-                alert('찜하기 성공!');
+            	
                 // 성공 시 필요한 추가 로직 구현
             },
             error: function(request, status, error) {
-                alert("찜하기 실패: " + request.responseText);
+               
             }
         });
     });
 });
 </script>
 
-<h2>상품 정보</h2>
-<button name="like" type="button" id="like">상품 찜하기</button>
+		<%-- 		<%	if(dto4.getLikeSearch()=="0"){ %>
+				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜하기</button> 
+				<%}else {%>
+				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜해제</button>
+				<% }; %>
 
+
+
+<script>
+function chn() {
+	var change = document.getElementById("like")
+	if(change.innerText=="찜하기"){
+    change.innerText ='찜해제';
+	}else{
+		 change.innerText ='찜하기';
+	}
+}
+</script>
+ --%>
 
 
 
@@ -343,17 +375,48 @@ System.out.println(bid);
 
 
 
-<!-- <script>
-function chn() {
-	var change = document.getElementById("like")
-	if(change.innerText=="찜하기"){
-    change.innerText ='찜해제';
-	}else{
-		 change.innerText ='찜하기';
-	}
-}
+<!-- <button id="love" onclick="chn()" "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg></button>
+
+
+<script>
+  var btn = document.getElementById("love")
+
+  btn.addEventListener('click',function(){
+            btn.classList.toggle('active')
+    })
 </script>
  -->
+
+<button id="love" onclick="toggleHeart()" data-like="<%= dto.getLikeSearch() %>">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+    </svg>
+</button>
+
+<script>
+    var btn = document.getElementById("love");
+    var likeStatus = parseInt(btn.getAttribute('data-like'));
+
+    // 초기 상태에 따라 하트 색상 설정
+    if (likeStatus =! 0) {
+        btn.classList.add('active'); // 하트를 빨간색으로 변경
+    }
+
+    // 클릭 이벤트 핸들러
+    function toggleHeart() {
+        likeStatus = 1 - likeStatus; // 상태 토글 (0 -> 1, 1 -> 0)
+        btn.setAttribute('data-like', likeStatus.toString()); // 상태 업데이트
+
+        if (likeStatus != 0) {
+            btn.classList.add('active'); // 하트를 빨간색으로 변경
+        } else {
+            btn.classList.remove('active'); // 하트를 원래대로 돌리기
+        }
+    }
+</script>
+
+
 
 	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red" class="bi bi-suit-heart" viewBox="0 0 16 16">
   <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
@@ -382,8 +445,8 @@ function chn() {
 	
 	<br />
 	<br />	<br />	
-	<div class="container text-center">
-		<input type="text" name="title" value="<%=dto.getProductName()%>"
+	<div class="container text-center">  <!-- 제목 -->
+		<input type="text" name="title" value="<%=dto.getProductName()%>"   
 			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
 			readonly> <input type="text" name="content"
 			value="<%=dto.getDetail()%>"

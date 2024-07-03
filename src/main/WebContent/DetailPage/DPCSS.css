@@ -134,4 +134,16 @@ table, td, th {
 }
 
 
+.btn{
+      padding: 10px 20px;
+      border: none;
+      background-color: #f2f2f2;
+      cursor: pointer;
+       }
+
+.btn.act{
+      background-color: #ff9800;
+      color: white;
+        }
+
 
