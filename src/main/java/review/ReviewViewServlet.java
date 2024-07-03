@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ReviewViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ReviewDAO reviewDAO = new ReviewDAO();
+        ReviewDAO2 reviewDAO = new ReviewDAO2();
         ReviewDTO review = reviewDAO.getReviewById(id);
 
         request.setAttribute("review", review);

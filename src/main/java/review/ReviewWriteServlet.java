@@ -29,7 +29,7 @@ public class ReviewWriteServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        ReviewDAO reviewDAO = new ReviewDAO();
+        ReviewDAO2 reviewDAO = new ReviewDAO2();
 
         String transactionIdStr = request.getParameter("transactionId");
         if (transactionIdStr == null || transactionIdStr.isEmpty()) {

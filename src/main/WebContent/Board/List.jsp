@@ -130,14 +130,16 @@ body {
 </style>
 </head>
 <body>
-<jsp:include page="../layout/Header.jsp" />
+	<jsp:include page="../layout/Header.jsp" />
 	<div id="container">
 		<div class="flex-container">
 			<div id="left-sidebar">
 				<div class="btn-group-vertical" role="group"
 					aria-label="Vertical button group" style="font-size: 8px;">
-					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';">아기사진</button>
-					<button type="button" class="btn btn-outline-warning" onclick="location.href='../review/list';">거래후기</button>
+					<button type="button" class="btn btn-outline-warning"
+						onclick="location.href='../mvcboard/list.do';">아기사진</button>
+					<button type="button" class="btn btn-outline-warning"
+						onclick="location.href='../review/list';">거래후기</button>
 				</div>
 			</div>
 
@@ -174,7 +176,6 @@ body {
 						<button type="button" class="btn btn-outline-primary"
 							onclick="location.href='../mvcboard/write.do';">글쓰기</button>
 					</div>
-
 				</div>
 			</div>
 
@@ -186,7 +187,7 @@ body {
 		</div>
 	</div>
 
-<jsp:include page="../layout/Footer.jsp" />
+	<jsp:include page="../layout/Footer.jsp" />
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"

@@ -126,6 +126,8 @@ CREATE TABLE review (
     title VARCHAR2(200) NOT NULL,
     detail CLOB NOT NULL,
     rating NUMBER(10) DEFAULT 10,
+    views NUMBER DEFAULT 0 NOT NULL,
+    likes NUMBER DEFAULT 0 NOT NULL
     ofile VARCHAR2(200),
     sfile VARCHAR2(200),
     createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -133,3 +135,9 @@ CREATE TABLE review (
     CONSTRAINT fk_review_transaction FOREIGN KEY (transactionId) REFERENCES transactions(id)
 );
 
+ALTER TABLE review 
+ADD ( 
+    views NUMBER DEFAULT 0 NOT NULL,
+    likes NUMBER DEFAULT 0 NOT NULL
+);
+-----------------------------

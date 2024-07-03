@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ReviewDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ReviewDAO reviewDAO = new ReviewDAO();
+        ReviewDAO2 reviewDAO = new ReviewDAO2();
         
         int result = reviewDAO.deleteReview(id);
         

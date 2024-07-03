@@ -9,6 +9,13 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+      <resource-ref>
+        <description>Oracle Datasource example</description>
+        <res-ref-name>jdbc/myoracle</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    
   <context-param>
     <param-name>OracleDriver</param-name>
     <param-value>oracle.jdbc.OracleDriver</param-value>
@@ -48,7 +55,7 @@
     <servlet-name>LoginController</servlet-name>
     <servlet-class>User.LoginController</servlet-class>
   </servlet>
-<servlet-mapping>
+  <servlet-mapping>
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/login.do</url-pattern>
   </servlet-mapping>
@@ -112,9 +119,7 @@
     <servlet-name>IdFindController</servlet-name>
     <url-pattern>/IdFindController</url-pattern>
   </servlet-mapping>
-
-<servlet>
-
+  <servlet>
     <servlet-name>UserAdminServlet</servlet-name>
     <servlet-class>admin.UserAdminServlet</servlet-class>
   </servlet>
@@ -150,7 +155,6 @@
     <servlet-name>MVCBoardWrite</servlet-name>
     <url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
-
   <context-param>
     <param-name>POSTS_PER_PAGE</param-name>
     <param-value>9</param-value>
@@ -159,7 +163,6 @@
     <param-name>PAGES_PER_BLOCK</param-name>
     <param-value>5</param-value>
   </context-param>
-
   <servlet>
     <description></description>
     <display-name>DashboardServlet</display-name>
@@ -171,32 +174,31 @@
     <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
   <servlet>
-		<description></description>
-		<display-name>PwFindController</display-name>
-		<servlet-name>PwFindController</servlet-name>
-		<servlet-class>Check.PwFindController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PwFindController</servlet-name>
-		<url-pattern>/PwFindController</url-pattern>
-	</servlet-mapping>
+    <description></description>
+    <display-name>PwFindController</display-name>
+    <servlet-name>PwFindController</servlet-name>
+    <servlet-class>Check.PwFindController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PwFindController</servlet-name>
+    <url-pattern>/PwFindController</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>SiteTrafficServlet</display-name>
     <servlet-name>SiteTrafficServlet</servlet-name>
     <servlet-class>admin.SiteTrafficServlet</servlet-class>
   </servlet>
-	<servlet>
-		<description></description>
-		<display-name>UpdateService</display-name>
-		<servlet-name>UpdateService</servlet-name>
-		<servlet-class>Check.UpdateService</servlet-class>
-	</servlet>
+  <servlet>
+    <description></description>
+    <display-name>UpdateService</display-name>
+    <servlet-name>UpdateService</servlet-name>
+    <servlet-class>Check.UpdateService</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>ReviewListServlet</servlet-name>
     <servlet-class>review.ReviewListServlet</servlet-class>
@@ -251,24 +253,22 @@
     <servlet-name>ImageServlet</servlet-name>
     <url-pattern>/review/images/*</url-pattern>
   </servlet-mapping>
-
-
-	<servlet>
-		<description></description>
-		<display-name>ChangeService</display-name>
-		<servlet-name>ChangeService</servlet-name>
-		<servlet-class>Check.ChangeService</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ChangeService</servlet-name>
-		<url-pattern>/ChangeService</url-pattern>
-	</servlet-mapping>
-		<servlet>
-		<description></description>
-		<display-name>idCheck</display-name>
-		<servlet-name>idCheck</servlet-name>
-		<servlet-class>Check.idCheck</servlet-class>
-	</servlet>
+  <servlet>
+    <description></description>
+    <display-name>ChangeService</display-name>
+    <servlet-name>ChangeService</servlet-name>
+    <servlet-class>Check.ChangeService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeService</servlet-name>
+    <url-pattern>/ChangeService</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>idCheck</display-name>
+    <servlet-name>idCheck</servlet-name>
+    <servlet-class>Check.idCheck</servlet-class>
+  </servlet>
   <servlet>
     <description></description>
     <display-name>ChangePwd</display-name>
@@ -279,4 +279,5 @@
     <servlet-name>ChangePwd</servlet-name>
     <url-pattern>/ChangePwd</url-pattern>
   </servlet-mapping>
+
 </web-app>
