@@ -25,8 +25,8 @@ public class UserDAO extends JDBConnect {
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
 		  UserDTO dto = null;
 	        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
-		
-		
+
+
         System.out.println("Executing query: " + query);
         System.out.println("Parameters: " + username + ", " + password);
 		// 쿼리문 템플릿
@@ -71,8 +71,8 @@ public class UserDAO extends JDBConnect {
 	        // MessageDigest 인스턴스를 SHA-256 알고리즘으로 초기화.
 	        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
-	       
-	        		
+
+
 	        // 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
 	        byte[] hash = md.digest(password.getBytes());
 
@@ -89,7 +89,7 @@ public class UserDAO extends JDBConnect {
 	        throw new RuntimeException(e);
 	    }
 	}
-	
+
 	   public boolean addUser(UserDTO user) {
 	        String sql = "INSERT INTO users (username, name,nickname,birth,email, phone, address, password, kakaoId, naverId, provinceId, cityId, districtId, auth, createDate) " +
 	                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -111,7 +111,7 @@ public class UserDAO extends JDBConnect {
 	            stmt.setString(14, user.getAuth());
 //	            stmt.setString(13, user.getTimestamp());
 	            stmt.setTimestamp(15, new java.sql.Timestamp(System.currentTimeMillis()));
-	            
+
 	            int rowsInserted = stmt.executeUpdate();
 	            return rowsInserted > 0;
 	        } catch (SQLException e) {

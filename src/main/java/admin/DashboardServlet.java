@@ -6,7 +6,6 @@ import java.util.List;
 import User.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 //@WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
         TransactionDAO transactionDAO = new TransactionDAO();
         ProductDAO productDAO = new ProductDAO();

@@ -20,6 +20,7 @@ public class UserDAO extends JDBConnect {
 		super(drv, url, id, pw);
 	}
 
+
 	// ServletContext를 사용하는 생성자
 	public UserDAO(ServletContext application) {
 		super(application);
@@ -29,15 +30,19 @@ public class UserDAO extends JDBConnect {
 		// 기본 생성자
 	}
 
+
 	// 명시한 아이디/패스워드와 일치하는 회원 정보를 반환합니다.
 	public UserDTO getUserDTO(String uid, String upass) {
 //		UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
-		UserDTO dto = null;
-		String query = "SELECT * FROM users WHERE username=? AND password=?";
 
-		System.out.println("Executing query: " + query);
-		System.out.println("Parameters: " + uid + ", " + upass);
+		  UserDTO dto = null;
+	        String query = "SELECT * FROM users WHERE username=? AND password=?";
+
+
+        System.out.println("Executing query: " + query);
+        System.out.println("Parameters: " + uid + ", " + upass);
+
 		// 쿼리문 템플릿
 
 		try {
@@ -50,6 +55,7 @@ public class UserDAO extends JDBConnect {
 			// 결과 처리
 			if (rs.next()) {
 				// 쿼리 결과로 얻은 회원 정보를 DTO 객체에 저장
+
 				dto = new UserDTO();
 				dto.setId(rs.getInt("id"));
 				dto.setUsername(rs.getString("username"));
@@ -67,6 +73,7 @@ public class UserDAO extends JDBConnect {
 				dto.setDistrictId(rs.getInt("districtId"));
 				dto.setAuth(rs.getString("auth"));
 				System.out.println("User found: " + dto.getUsername());
+
 			} else {
 				System.out.println("No user found with provided credentials.");
 			}
@@ -75,6 +82,7 @@ public class UserDAO extends JDBConnect {
 		}
 		return dto; // DTO 객체 반환
 	}
+
 
 	// 비밀번호 해시화 매서드
 	public String hashPassword(String password) {
@@ -101,6 +109,7 @@ public class UserDAO extends JDBConnect {
 			throw new RuntimeException(e);
 		}
 	}
+
 
 	// 사용자 정보를 추가하는 메서드
 	public boolean addUser(UserDTO user) {
@@ -156,6 +165,7 @@ public class UserDAO extends JDBConnect {
 			e.printStackTrace();
 		}
 
+
 	}
 
 	public boolean validate(UserDTO user) {
@@ -163,9 +173,11 @@ public class UserDAO extends JDBConnect {
 		return false;
 	}
 
+
 	public boolean idCheck(String username) {
 
 		boolean result = false; // 아이디 중복 여부 체크 변수
+
 
 		try {
 
@@ -175,26 +187,25 @@ public class UserDAO extends JDBConnect {
 			psmt.setString(1, username);
 			rs = psmt.executeQuery();
 
-			System.out.println(result);
-			if (rs.next()) {
-				result = true; // 아이디가 중복인 경우
-				System.out.print("rs값 = ");
-				System.out.println(result);
-			} else {
-				result = false; // 사용가능한 아이디인 경우
-				System.out.print("rs값 = ");
-				System.out.println(result);
+
+			if(rs.next()) {
+				result = true;    // 아이디가 중복인 경우
+			}else{
+				result = false;  // 사용가능한 아이디인 경우
 			}
 
-		} catch (Exception e) {
+		}
+        catch(Exception e) {
 			System.out.println("confirmId(): " + e);
-			System.out.println("Error in idCheck(): " + e.getMessage());
-			// 어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
-		} finally {
+            //어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
+		}
+        finally {
+
 			close();
 		}
 		return result;
 	}
+
 
 	public UserDTO getIdFindDTO(String name, String phone) {
 //	UserDTO dto = new UserDTO(); // 회원 정보 DTO 객체 생성
@@ -263,13 +274,15 @@ public class UserDAO extends JDBConnect {
 			e.printStackTrace();
 		}
 		return userList;
-	}
 
+	}
+    
 	// 활성 사용자 수 가져오기
 	public int getActiveUserCount() {
 		int count = 0;
 		String query = "SELECT COUNT(*) FROM users WHERE active = 1";
 		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
 //            pstmt = con.prepareStatement(query);
 //            rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -288,6 +301,7 @@ public class UserDAO extends JDBConnect {
 		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 //            pstmt = con.prepareStatement(query);
 //            rs = pstmt.executeQuery();
+
 			if (rs.next()) {
 				count = rs.getInt(1);
 			}
@@ -372,6 +386,7 @@ public class UserDAO extends JDBConnect {
 			psmt.setString(2, name); // 쿼리문의 두 번째 인파라미터에 값 설정
 			psmt.setString(3, phone);
 			rs = psmt.executeQuery(); // 쿼리문 실행
+
 
 			// 결과 처리
 			if (rs.next()) {

@@ -17,8 +17,8 @@ public class SellDAO {
         this.con = dbPool.con;
     }
 
-    public void saveProduct(String productName, int categoryId, int subCategoryId, int price, String detail, 
-    		String photo1, String photo2, String photo3, String photo4, 
+    public void saveProduct(String productName, int categoryId, int subCategoryId, int price, String detail,
+    		String photo1, String photo2, String photo3, String photo4,
     		int writerId, String roadAddrPart1, String addrDetail,String latitude, String longitude) throws SQLException {
         String sql = "INSERT INTO product (productName, categoryId, subCategoryId, price, detail, "
         		+ "imgUrl_1, imgUrl_2, imgUrl_3, imgUrl_4, "
@@ -99,8 +99,12 @@ public class SellDAO {
 
     private void closeResultSetAndStatement() {
         try {
-            if (rs != null) rs.close();
-            if (psmt != null) psmt.close();
+            if (rs != null) {
+				rs.close();
+			}
+            if (psmt != null) {
+				psmt.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,7 +113,9 @@ public class SellDAO {
     private void closeResources() {
         closeResultSetAndStatement();
         try {
-            if (con != null) con.close();
+            if (con != null) {
+				con.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }

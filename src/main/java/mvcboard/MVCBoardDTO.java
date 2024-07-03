@@ -3,6 +3,7 @@ package mvcboard;
 import java.sql.Date;
 
 public class MVCBoardDTO {
+
 	private String id; //게시물 번호
 	private String bno; // 카테고리
 	private int writerId; // 작성자 아이디번호 == user(id)

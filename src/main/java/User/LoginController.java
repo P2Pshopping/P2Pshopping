@@ -1,15 +1,14 @@
 package User;
 
+import java.io.IOException;
+
 import common.UserDTO;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
 
 //@WebServlet("/login.do") // 이 서블릿을 "/login" URL 패턴에 매핑합니다.
 public class LoginController extends HttpServlet {
@@ -23,6 +22,7 @@ public class LoginController extends HttpServlet {
 		System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
 	}
 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// POST 요청을 처리하는 메서드
@@ -34,6 +34,7 @@ public class LoginController extends HttpServlet {
 
 		String hashedPassword = userDAO.hashPassword(password); // 입력된 비밀번호를 해시화합니다.
 		UserDTO user = userDAO.getUserDTO(username, hashedPassword); // 해시된 비밀번호로 사용자 정보를 검증합니다.
+
 
 
         if (user != null) {
@@ -56,6 +57,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("createDate", user.getCreateDate());
 
 
+
 			session.setAttribute("checked", user);
 
 			// 디버깅 메시지 추가
@@ -76,4 +78,5 @@ public class LoginController extends HttpServlet {
 		// GET 요청을 처리하는 메서드
 		doPost(request, response); // POST 요청 처리 메서드를 호출하여 동일한 로직을 수행합니다.
 	}
+
 }

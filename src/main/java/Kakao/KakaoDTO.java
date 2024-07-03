@@ -5,9 +5,9 @@ public class KakaoDTO {
 	 private String username;
 	 private String password;
 		private java.sql.Timestamp createDate; 	//가입일자
-	 
+
 	 public KakaoDTO() {
-		 
+
 	 }
 	 public KakaoDTO(int kakaoId,String username,String password,java.sql.Timestamp createDate) {
 		 super();
@@ -42,5 +42,5 @@ public class KakaoDTO {
 		this.createDate = createDate;
 	}
 
-	 
+
 }
