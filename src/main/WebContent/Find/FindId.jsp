@@ -64,7 +64,7 @@
 </div>
    <div class="col align-self-center" style = "margin-left:500px;, margin-bottom:5000px;">
    
-      <button type="submit" class="btn btn-danger" id="btn1" >아이디 찾기</button>
+      <button type="submit" class="btn btn-danger" id="btn" >아이디 찾기</button>
    
 </div>
  </form>
@@ -79,7 +79,7 @@
 <%@include file="../layout/Footer.jsp"%>
 </div>
 <script>
-$('#btn1').on('click', function() {
+$('#btn').on('click', function() {
 $.ajax({
     url: '/IdFind.do',  // 서블릿 URL
     method: 'POST',         // HTTP 메서드 (GET 또는 POST)
@@ -95,7 +95,7 @@ $.ajax({
         // 팝업 창에 결과 출력
      
         popup.document.write('회원님의 아이디는');
-        popup.document.write('<p>' + response + '</p>' +' 입니다.');  // 서블릿에서 받은 메시지 출력
+        popup.document.write('<p>' + response + '</p>' +' 입니다.');   // 서블릿에서 받은 메시지 출력
         popup.document.write('<button onclick="window.close()">닫기</button>');
        
     },

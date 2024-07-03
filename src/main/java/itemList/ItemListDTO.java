@@ -1,5 +1,7 @@
 package itemList;
 
+import java.sql.Date;
+
 public class ItemListDTO {
 	private int id;
 	private String productName;
@@ -12,7 +14,8 @@ public class ItemListDTO {
 	private String imgUrl_3;
 	private String imgUrl_4;
 	private int writerid;
-	private java.sql.Date createDate;
+	private Date createDate;
+	private Date updateDate;
 	
 	public int getId() {
 		return id;
@@ -80,18 +83,17 @@ public class ItemListDTO {
 	public void setWriterid(int writerid) {
 		this.writerid = writerid;
 	}
-	public java.sql.Date getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(java.sql.Date createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public java.sql.Date getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(java.sql.Date updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	private java.sql.Date updateDate;
 	
 }

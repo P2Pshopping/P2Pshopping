@@ -86,23 +86,23 @@ public class JDBConnect {
 	// 연결 해재(자원 반납)
 	public void close() {
 		try {
-			if (rs != null) {
+			if (rs != null)
 				rs.close();
-			}
-			if (stmt != null) {
+			if (stmt != null)
 				stmt.close();
-			}
-			if (psmt != null) {
+			if (psmt != null)
 				psmt.close();
-			}
-			if (con != null) {
+			if (con != null)
 				con.close();
-			}
 
 			System.out.println("JDBC 자원 해제");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+//	public int update(UserDTO dto) {
+//		int cnt = 0;
+//		return cnt;
+//	}
 
 }

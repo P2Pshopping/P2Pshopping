@@ -28,7 +28,7 @@ public class EditController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String saveDirectory = req.getServletContext().getRealPath("/Uploads");
+		String saveDirectory = req.getServletContext().getRealPath("/uploads");
 
 		String originalFileName = "";
 		try {
@@ -66,7 +66,7 @@ public class EditController extends HttpServlet {
 			dto.setSfile(savedFileName); // 서버에 저장된 파일 이름
 
 			// 기존 파일 삭제
-			FileUtil.deleteFile(req, "/Uploads", prevSfile);
+			FileUtil.deleteFile(req, "/uploads", prevSfile);
 		} else {
 			// 첨부 파일이 없으면 기존 이름 유지
 			dto.setOfile(prevOfile);
@@ -83,7 +83,7 @@ public class EditController extends HttpServlet {
 			session.removeAttribute("pass");
 			resp.sendRedirect("../mvcboard/view.do?id=" + id);
 		} else { // 수정 실패
-			JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요.", "../mvcboard/view.do?id=" + id);
+			JSFunction.alertLocation(resp, " ", "../mvcboard/view.do?id=" + id);
 		}
 	}
 }
