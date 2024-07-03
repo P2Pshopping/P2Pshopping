@@ -69,7 +69,7 @@
 </div>
    <div class="col align-self-center" style = "margin-left:500px;, margin-bottom:5000px;">
    
-      <button type="submit" class="btn btn-danger" id="btn1">비밀번호 찾기</button>
+      <button type="submit" class="btn btn-danger" id="btn1">비밀번호 재설정</button>
 </div>
 </form>
   </div>
@@ -93,14 +93,16 @@ $.ajax({
     },
     dataType: 'text',       // 서블릿에서 반환되는 데이터 타입 (text, json 등)
     success: function(response) {
-        // 팝업 창 열기
+  
+    	
+    	/*      // 팝업 창 열기
         var popup = window.open('', 'Popup', 'width=300,height=200');
 
         // 팝업 창에 결과 출력
      
         popup.document.write('회원님의 비밀번호는');
         popup.document.write('<p>' + response + '</p>' +' 입니다.');  // 서블릿에서 받은 메시지 출력
-        popup.document.write('<button onclick="window.close()">닫기</button>');
+        popup.document.write('<button onclick="window.close()">닫기</button>'); */
        
     },
     error: function() {

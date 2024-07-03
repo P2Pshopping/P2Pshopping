@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import User.UserDAO;
 
-@WebServlet("/IdFind.do") 
+@WebServlet("/IdFind.do") // 아이디 찾기 
 public class IdFindController extends HttpServlet {
 	private UserDAO userDAO;
 
@@ -46,11 +46,31 @@ public class IdFindController extends HttpServlet {
 	            // 디버깅 메시지 추가
 	            System.out.println("User session set: " + user.getUsername());
 	            	
-	            response.getWriter().write( " 귀하의 아이디는 " + user.getUsername() +" 입니다.");
-				/*
-				 * response.sendRedirect("M.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
-				 */	        } else {
-					 response.getWriter().write("이름과 전화번호를 다시 한번 확인해주세요");
+	        
+				
+	            response.getWriter().write(
+	        	            "<html>" +
+	        	            "<head>" +
+	        	            "<script type='text/javascript'>" +
+	        	            "alert('아이디는 "+ user.getUsername() +" 입니다.');" +
+	        	            "window.location.href = 'Login/login.jsp';" + // 이전 페이지로 이동
+	        	            "</script>" +
+	        	            "</head>" +
+	        	            "<body></body>" +
+	        	            "</html>"
+	        	        );	       
+	        } else {
+					 response.getWriter().write(
+	 	        	            "<html>" +
+	 	        	            "<head>" +
+	 	        	            "<script type='text/javascript'>" +
+	 	        	            "alert('입력한 정보가 일치하지 않습니다. 다시 한번 확인해주세요.');" +
+	 	        	            "window.location.href = 'Find/FindId.jsp';" + // 이전 페이지로 이동
+	 	        	            "</script>" +
+	 	        	            "</head>" +
+	 	        	            "<body></body>" +
+	 	        	            "</html>"
+	 	        	        );	            
 	            // 사용자 인증에 실패한 경우
 				/*
 				 * response.sendRedirect("Login/login.jsp?error=invalid"); // 로그인 폼으로 리디렉션하고 오류
