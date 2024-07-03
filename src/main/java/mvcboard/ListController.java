@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.BoardPage;
 
-
 public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,10 +21,13 @@ public class ListController extends HttpServlet {
 
 		MVCBoardDAO dao = new MVCBoardDAO();
 
-		Map<String, Object> map = new HashMap<>();
+
+		//Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
-		if(searchWord != null) {
+		if (searchWord != null) {
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
 		}
@@ -38,17 +40,17 @@ public class ListController extends HttpServlet {
 
 		int pageNum = 1;
 		String pageTemp = req.getParameter("pageNum");
-		if(pageTemp != null && !pageTemp.equals("")) {
+
+		if (pageTemp != null && !pageTemp.equals(""))
 			pageNum = Integer.parseInt(pageTemp);
-		}
 
+		int start = (pageNum - 1) * pageSize + 1;
 
-		int start = (pageNum -1 ) * pageSize + 1;
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
 
-
+    
 		List<MVCBoardDTO> boardLists = dao.selectListPage(map);
 
 		dao.close();
@@ -65,6 +67,8 @@ public class ListController extends HttpServlet {
 		req.setAttribute("map", map);
 		req.getRequestDispatcher("/Board/List.jsp").forward(req, resp);
 
-	}
+	//}
 
+
+	}
 }

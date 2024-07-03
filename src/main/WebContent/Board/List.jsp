@@ -137,7 +137,7 @@ body {
 				<div class="btn-group-vertical" role="group"
 					aria-label="Vertical button group" style="font-size: 8px;">
 					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';">아기사진</button>
-					<button type="button" class="btn btn-outline-warning">거래후기</button>
+					<button type="button" class="btn btn-outline-warning" onclick="location.href='../review/list';">거래후기</button>
 				</div>
 			</div>
 
@@ -156,7 +156,7 @@ body {
 									onclick="location.href='../mvcboard/view.do?id=${row.id}'">
 									<c:if test="${not empty row.sfile}">
 										<img
-											src="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.id}"
+											src="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&id=${row.id}"
 											alt="${row.title}" />
 									</c:if>
 									<div id="caption"></div>
@@ -172,7 +172,7 @@ body {
 					<div></div>
 					<div>
 						<button type="button" class="btn btn-outline-primary"
-							onclick="location.href='../board/write.do';">글쓰기</button>
+							onclick="location.href='../mvcboard/write.do';">글쓰기</button>
 					</div>
 
 				</div>

@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
@@ -119,15 +120,15 @@ html, body {
             <div id="gallery">
                 <ul class="no_dot">
                     <li><h3>제목 : ${dto.title }</h3></li>
-                    <li><p>닉네임 : ${dto.name }</p></li>
-                    <li><p>조회수 ${dto.visitcount } | 추천수 ${dto.likes }</p></li>
-                    <li><img src="../Uploads/${dto.sfile}" style="max-width: 100%;" /> ${dto.content}</li>
+                    <li><p>닉네임 : ${dto.username }</p></li>
+                    <li><p>조회수 ${dto.views } | 추천수 ${dto.likes }</p></li>
+                    <li><img src="../Uploads/${dto.ofile}" style="max-width: 100%;" /> ${dto.content}</li>
                     <li>
                         <input class="btn btn-primary btn-block" type="button" value="수정" onclick="location.href='../mvcboard/edit.do';"> 
                         <input class="btn btn-danger btn-block" type="button" value="삭제"> 
                         <br />
                         <form action="../mvcboard/like.do" method="post" style="display:inline;">
-                            <input type="hidden" name="idx" value="${dto.idx}">
+                            <input type="hidden" name="id" value="${dto.id}">
                             <button type="submit">
                                 <img src="../img/ddabong.png" alt="추천" style="width: 50px; height: 50px;">
                             </button>

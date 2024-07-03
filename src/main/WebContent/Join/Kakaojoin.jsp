@@ -1,19 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="common.JDBConnect" %>
-<%@ page import="User.UserDAO" %>
-<%@ page import="common.UserDTO" %>
-    <link href="text.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-          crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
+	pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="common.JDBConnect"%>
+<%@ page import="User.UserDAO"%>
+<%@ page import="common.UserDTO"%>
+<link href="text.css" rel="stylesheet" type="text/css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -156,82 +176,153 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 <jsp:include page="../layout/Header.jsp" />
 <div style = "margin-top:400px;">
 
-<div class="wrap">
-    <div class="contents">
-        <div class="join_wrapper2">
-    <div class="logo"> 카카오 회원가입 </div>
-            <div class="join_form">
-                 <form action="join.jsp" method="post" id ="form__wrap" onsubmit = "joincheck();">
-                    <div class="col-12">
-                        <label for="inputName" class="form-label">성명</label>
-                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="성명 입력">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputBirth" class="form-label">생년월일</label>
-                        <input type="number" class="form-control" id="inputBirth" name="inputBirth" placeholder="생년월일 입력">
-                    </div>
-                  
-                    
-                    <div class="form-inline w-100">
+		<div class="wrap">
+			<div class="contents">
+				<div class="join_wrapper2">
+					<div class="logo">카카오 회원가입</div>
+					<div class="join_form">
+						<form action="join.jsp" method="post" id="form__wrap">
+							<div class="col-12">
+								<label for="inputName" class="form-label">성명</label> <input
+									type="text" class="form-control" id="inputName"
+									name="inputName" placeholder="성명 입력" maxlength="5">
+							</div>
+							<div class="col-12">
+								<label for="inputBirth" class="form-label">생년월일</label> <input
+									type="text" class="form-control" id="inputBirth"
+									name="inputBirth" placeholder="YYYYMMDD 형식으로 생년월일 입력"
+									maxlength="8" oninput="formatDate(this)">
+
+							</div>
+							<!--    <div class="form-inline w-85">
                         <div class="col-12">
-                            <label for="inputId" class="form-label">아이디</label>
+                            <label for="inputNickName" class="form-label">닉네임</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="inputId" name="inputId" placeholder="10자 이하">
-                            <input type="button" class="btn btn-danger" id="idChkBtn" value="중복 확인">
+                                <input type="text" class="form-control" id="inputNickName" name="inputNickName" placeholder="한글만 입력하세요">
+                                <button type="button" id="nickbtn" class="btn btn-danger">중복 확인</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPWD" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" id="inputPWD" name="inputPWD" placeholder="20자 이하">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPWDC" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="inputPWDC" name="inputPWDC" placeholder="위와 같이 입력하세요">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPhone" class="form-label">전화번호</label>
-                        <input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="숫자만 입력하세요.">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="이메일을 입력하세요.">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress" class="form-label">주소</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="주소 입력">
-                            <button type="button" class="btn btn-danger">주소 검색</button>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress2" class="form-label">상세 주소</label>
-                        <input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="상세 주소 입력">
-                    </div>
-                   <div class = "blank">
-                   
-                   </div>
-                   <p>
-                   </p>
-   
-                  <% if (message != null) { %>
-        <p><%= message %></p>
-    <% } %>
-                <div class="d-grid gap-2">
-                    <a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로 가기</a>
-                    <button type="submit" class="btn btn-primary btn-lg" name = "loginButton" onclick="joinCheck1();">회원 가입</button>
-                
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div style = "margin-top:30%;">	
-<%-- <%@include file="../layout/Footer.jsp"%> --%>
+                    </div> -->
+							<div class="form-inline w-100">
+								<div class="col-12">
+									<label for="inputId" class="form-label">아이디</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="username"
+											name="username" placeholder="10자 이하" maxlength="10">
+										<input type="button" class="btn btn-danger" id="btn"
+											value="중복 확인">
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<label for="inputPWD" class="form-label">비밀번호</label> <input
+									type="password" class="form-control" id="inputPWD"
+									name="inputPWD" placeholder="20자 이하" maxlength="20">
+							</div>
+							<div class="col-12">
+								<label for="inputPWDC" class="form-label">비밀번호 확인</label> <input
+									type="password" class="form-control" id="inputPWDC"
+									name="inputPWDC" placeholder="위와 같이 입력하세요" maxlength="20">
+							</div>
+							<div class="col-12">
+								<label for="inputPhone" class="form-label">전화번호</label> <input
+									type="text" class="form-control" id="inputPhone"
+									name="inputPhone" placeholder="숫자만 입력하세요." maxlength="11">
+							</div>
+							<div class="col-12">
+								<label for="inputEmail" class="form-label">Email</label> <input
+									type="email" class="form-control" id="inputEmail"
+									name="inputEmail" placeholder="이메일을 입력하세요.">
+							</div>
+							<div onload="init();">
+								<div class="col-12">
+									<label for="inputAddress" class="form-label">주소</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="roadAddrPart1"
+											name="inputAddress" placeholder="주소 입력">
+										<button type="button" onclick="goPopup()"
+											class="btn btn-danger">주소 검색</button>
+									</div>
+								</div>
+								<div class="col-12">
+									<label for="inputAddress2" class="form-label">상세 주소</label> <input
+										type="text" class="form-control" id="addrDetail"
+										name="inputAddress2" placeholder="상세 주소 입력">
+								</div>
+							</div>
+							<div class="blank"></div>
+							<p></p>
 
-    <jsp:include page="../layout/Footer.jsp" />
-</div>
+							<!--                 <div class="terms__box">
+                        <div class="input__check">
+                            <input  type="checkbox" id="privacyPolicy" name ="agreement"value="privacyPolicy" required>
+                            <label class="required" for="privacyPolicy"> 회원가입 하시겠습니까 ? </label>
+                        </div>
+                   </div> -->
+							<%
+							if (message != null) {
+							%>
+							<p><%=message%></p>
+							<%
+							}
+							%>
+							<div class="d-grid gap-2">
+								<a href="../Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로
+									가기</a>
+								<button type="submit" id="target_btn"
+									class="btn btn-primary btn-lg" name="loginButton"
+									onclick="loginbtn();" disabled>회원 가입</button>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 30%;">
+		<%-- <%@include file="../layout/Footer.jsp"%> --%>
+
+		<jsp:include page="../layout/Footer.jsp" />
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
+		$('#btn').on('click', function() {
+			//입력한 email가져오기
+			let username = $('input[name=username]').val();
+			console.log(username);
+			//ajax로 email보내기 idCheckServiceCon
+			$.ajax({
+				url : '/idCheckServiceCon',	//어디로 보낼지 주소
+				data : {
+					username : username //입력한 email data 보내기
+				},
+				dataType : "text",	//중복체크 결과값 text로 받아오기
+				success : function(result){
+				/* 	alert('성공' + result); */
+					// result가 text형태로 와서 false가 text형태로 비교해줘됨
+					if(result == 'false'){
+						alert('사용 가능한 아이디입니다.');
+						   event.preventDefault();
+						   $('#target_btn').prop('disabled', false);
+					
+						//중복이 없다는 뜻
+					}else {
+						//중복이 있다.
+						alert('중복되는 아이디가 있습니다.');
+						   event.preventDefault();
+						   $('#target_btn').prop('disabled', true);
+						
+					}
+				},
+				error : function(){
+					alert('실패');
+				}
+
+			});
+
+		});
+	</script>
 </body>
 </html>
