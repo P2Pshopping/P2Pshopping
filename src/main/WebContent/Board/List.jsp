@@ -170,10 +170,15 @@ body {
         </div>
 
         <div id="right-sidebar">
-            <p>인기 게시글</p>
-            <a href="#"><img alt="아기1" src="../img/333.jpg"></a>
-        </div>
-    </div>
+    <p>인기 게시글</p>
+    <c:forEach items="${likePosts}" var="post">
+        <a href="../mvcboard/view.do?id=${post.id}">
+            <c:if test="${not empty post.sfile}">
+                <img alt="${post.title}" src="../mvcboard/download.do?ofile=${post.ofile}&sfile=${post.sfile}&id=${post.id}" />
+            </c:if>
+            <p>${post.title}</p>
+        </a>
+    </c:forEach>
 </div>
 
 <jsp:include page="../layout/Footer.jsp" />
