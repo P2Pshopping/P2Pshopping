@@ -9,13 +9,16 @@ public class ReviewDTO {
     private int rating;
     private String ofile;
     private String sfile;
+    private int views;
+    private int likes;
     private Timestamp createDate;
     private Timestamp updateDate;
     private Timestamp transactionDate;
     private String sellerName;
     private String buyerName;
     private String productName;
-
+    private String type = "review";
+    
     // Getters and setters
     public int getId() {
         return id;
@@ -73,6 +76,22 @@ public class ReviewDTO {
         this.sfile = sfile;
     }
 
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
     public Timestamp getCreateDate() {
         return createDate;
     }
@@ -119,5 +138,13 @@ public class ReviewDTO {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

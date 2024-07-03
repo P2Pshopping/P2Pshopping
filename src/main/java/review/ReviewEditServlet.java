@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ReviewEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ReviewDAO reviewDAO = new ReviewDAO();
+        ReviewDAO2 reviewDAO = new ReviewDAO2();
         ReviewDTO review = reviewDAO.getReviewById(id);
 
         request.setAttribute("review", review);
@@ -23,7 +23,7 @@ public class ReviewEditServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        ReviewDAO reviewDAO = new ReviewDAO();
+        ReviewDAO2 reviewDAO = new ReviewDAO2();
 
         ReviewDTO review = new ReviewDTO();
         review.setId(Integer.parseInt(request.getParameter("id")));

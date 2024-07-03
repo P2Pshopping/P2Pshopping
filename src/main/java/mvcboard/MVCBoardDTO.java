@@ -16,7 +16,8 @@ public class MVCBoardDTO {
 	private String sfile; // 파일
 	private int views; // 조회수
 	private int likes; // 추천수
-
+	private String type = "board";
+	
 	public String getId() {
 		return id;
 	}
@@ -112,5 +113,13 @@ public class MVCBoardDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 }

@@ -1,5 +1,6 @@
 package common; // 기본 패키지 이외의 패키지 (규약 1번)
 
+import java.security.Timestamp;
 public class UserDTO {
 
 	private int id;			//유저아이디(고유번호)
