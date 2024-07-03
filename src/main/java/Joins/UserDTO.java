@@ -1,7 +1,7 @@
 package Joins;
 
 public class UserDTO {
-	
+
 	private int id;			//유저아이디(고유번호)
 	private String name;		//본명
 	private String birth;		//생년월일
@@ -18,8 +18,8 @@ public class UserDTO {
 	private int districtId; // 동(위치)
 	private String auth ; 	//권한부여
 	private java.sql.Timestamp createDate; 	//가입일자
-	
-	
+
+
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
@@ -168,4 +168,4 @@ public class UserDTO {
 		this.createDate = createDate;
 	}
 
-}	
+}

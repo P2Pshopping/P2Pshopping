@@ -6,14 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import common.JDBConnect;
-import Kakao.KakaoDTO;
 import jakarta.servlet.ServletContext;
 
 public class KakaoDAO extends JDBConnect {
 	public KakaoDAO(String drv, String url, String id, String pw) {
 		super(drv, url, id, pw);
 	}
-  
+
 	public KakaoDAO(ServletContext application) {
         super(application);
 	}
@@ -22,8 +21,8 @@ public class KakaoDAO extends JDBConnect {
 //		String query = "SELECT * FROM users WHERE id=? AND password=?";
 		KakaoDTO dto = null;
 	        String query = "SELECT * FROM users WHERE username=? AND password=?";
-		
-		
+
+
         System.out.println("Executing query: " + query);
         System.out.println("Parameters: " + uname + ", " + upass);
 		// 쿼리문 템플릿
@@ -39,11 +38,11 @@ public class KakaoDAO extends JDBConnect {
 			if (rs.next()) {
 				// 쿼리 결과로 얻은 회원 정보를 DTO 객체에 저장
 				  dto = new KakaoDTO();
-           
+
                 dto.setUsername(rs.getString("username"));
                 dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
                 dto.setKakaoId(rs.getInt("kakaoId"));
-               
+
                 System.out.println("User found: " + dto.getUsername());
 			} else {
                 System.out.println("No user found with provided credentials.");
@@ -53,7 +52,7 @@ public class KakaoDAO extends JDBConnect {
 		}
 		return dto; // DTO 객체 반환
 	}
-							
+
 	public String hashPassword(String password) {
 	    try {
 	        // MessageDigest 인스턴스를 SHA-256 알고리즘으로 초기화.
@@ -88,17 +87,17 @@ public class KakaoDAO extends JDBConnect {
 	            stmt.setInt(3, kuser.getKakaoId());
 //	            stmt.setString(13, kuser.getTimestamp());
 	            stmt.setTimestamp(4, new java.sql.Timestamp(System.currentTimeMillis()));
-	            
+
 	            int rowsInserted = stmt.executeUpdate();
 	            return rowsInserted > 0;
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 }

@@ -23,6 +23,7 @@ public class logoutservlet extends HttpServlet {
 	public logoutservlet() {
 		super();
 	}
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();

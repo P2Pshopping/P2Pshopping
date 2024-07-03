@@ -1,13 +1,10 @@
 package Logins;
 
-import utils.JDBConnect;
-
-
 public class LoginDAO extends JDBConnect{
 	public LoginDAO(String drv, String url, String id, String pw) {
 		super(drv,url,id,pw);
 	}
-	
+
 
 
 	 public LoginDTO getLoginDTO(String username, String password) {
@@ -27,7 +24,7 @@ public class LoginDAO extends JDBConnect{
 					// 쿼리 결과로 얻은 회원 정보를 DTO 객체에 저장
 					dto.setUsername(rs.getString("username"));
 					dto.setPassword(rs.getString("password"));
-				
+
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -35,14 +32,14 @@ public class LoginDAO extends JDBConnect{
 			return dto; // DTO 객체 반환
 		}
 }
-//	
+//
 //	private LoginDAO() {
-//		
+//
 //	}
 //	public static LoginDAO getInstance() {
 //		if(loginDAO == null) {
 //			loginDAO = new LoginDAO();
-//			
+//
 //		}
 //		return loginDAO;
 //	}
@@ -53,23 +50,23 @@ public class LoginDAO extends JDBConnect{
 //		LoginDTO LoginDTO = null;
 //		PreparedStatement psmt= null;
 //		ResultSet rs = null;
-//		
+//
 //		try {
 //			psmt = con.prepareStatement(" SELECT USERNAME ,PASSWORD  FROM USERS where username=? and password =? ");
 //			psmt.setString(1,username);
 //			psmt.setString(2, password);
-//			
+//
 //			rs = psmt.executeQuery();
 //			if(rs.next()) {
 //				LoginDTO= new LoginDTO();
 //				LoginDTO.setUsername(rs.getString("username"));
 //				LoginDTO.setPassword(rs.getString("password"));
-//			}		
+//			}
 //		}
 //		catch(Exception e) {
 //			e.printStackTrace();
 //		}
-//		
+//
 //	finally {
 //		try {
 //			rs.close();
@@ -80,7 +77,7 @@ public class LoginDAO extends JDBConnect{
 //		}
 //		}
 //	}
-//	
-//	
+//
+//
 //
 //}

@@ -6,19 +6,8 @@ public class ItemListDTO {
    private String productName;
    private String price;
    private String categoryid;
-   
-   public ItemListDTO() {}
-   
-   public ItemListDTO(String username, String imgUrl_1, String productName, String price, String categoryid) {
-      super();
-      this.username = username;
-      this.imgUrl_1 = imgUrl_1;
-      this.productName = productName;
-      this.price = price;
-      this.categoryid = categoryid;
-   }
-   
-   
+
+
    public String getUsername() {
       return username;
    }

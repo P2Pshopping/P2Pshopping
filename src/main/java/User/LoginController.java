@@ -1,19 +1,25 @@
 package User;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
+
 
 import common.UserDTO;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/login.do") // 이 서블릿을 "/login" URL 패턴에 매핑합니다.
+
+//@WebServlet("/login.do") // 이 서블릿을 "/login" URL 패턴에 매핑합니다.
+
 public class LoginController extends HttpServlet {
 	private UserDAO userDAO;
 	private UserDTO userDTO;
@@ -25,6 +31,7 @@ public class LoginController extends HttpServlet {
 		userDAO = new UserDAO(context); // UserDAO 객체를 초기화합니다.
 		System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -60,6 +67,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession(); // 현재 세션을 가져오거나 새 세션을 생성합니다.
 			session.setAttribute("username", user.getUsername()); // 세션에 사용자 이름을 저장합니다.
 			session.setAttribute("name", user.getName());
+      session.setAttribute("id", user.getId());
 			session.setAttribute("email", user.getEmail());
 			session.setAttribute("phone", user.getPhone());
 			session.setAttribute("address", user.getAddress());
@@ -71,6 +79,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("districtId", user.getDistrictId());
 			session.setAttribute("auth", user.getAuth());
 			session.setAttribute("createDate", user.getCreateDate());
+
 
 			session.setAttribute("checked", user);
 
@@ -107,4 +116,5 @@ public class LoginController extends HttpServlet {
 		// GET 요청을 처리하는 메서드
 		doPost(request, response); // POST 요청 처리 메서드를 호출하여 동일한 로직을 수행합니다.
 	}
+
 }
