@@ -4,11 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../iMarket/CSS/style-header.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>파일 첨부형 게시판</title>
 <style>
 body {
@@ -129,37 +133,34 @@ body {
 </head>
 <body>
 	<%@include file="../layout/Header.jsp"%>
-
-	<h2>파일 첨부형 게시판 - 목록 보기(List)</h2>
-
-	<div id="contents">
-		<h2>게시판</h2>
-		<div id="gallery">
-			<c:choose>
-				<c:when test="${empty product}">
-					<div id="gallery-item">
-						<p>등록된 게시물이 없습니다^^*</p>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${product}" var="ItemListDTO" varStatus="loop">
-					<div id="caption">
-                <h5>${ItemListDTO.productName}</h5>
-                <p>가격: ${ItemListDTO.price}</p>
-                <p>작성자 ID: ${ItemListDTO.username}</p>
-              </div>
-						<div id="gallery-item"
-							onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
-							<c:if test="${not empty ItemListDTO.imgUrl_1}">
-								<img src="${ItemListDTO.imgUrl_1}"
-									alt="${ItemListDTO.imgUrl_1}" />
-							</c:if>
-							<div id="caption">${ItemListDTO.productName}</div>
-							<p>작성자 ID: ${ItemListDTO.username}</p>
+	<div id="container">
+		<div id="contents">
+			<div id="gallery">
+				<c:choose>
+					<c:when test="${empty product}">
+						<div id="gallery-item">
+							<p>등록된 게시물이 없습니다^^*</p>
 						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${product}" var="ItemListDTO" varStatus="loop">
+							<div id="gallery-item"
+								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
+								<c:if test="${not empty ItemListDTO.imgUrl_1}">
+									<img
+										src="<%=request.getContextPath()%>/uploads/${ItemListDTO.imgUrl_1}"
+										style="width: 500px; height: 300px;"
+										;
+									alt="${ItemListDTO.imgUrl_1}">
+								</c:if>
+								<p>제목 : ${ItemListDTO.productName}</p>
+								<p>작성자 ID: ${ItemListDTO.username}</p>
+								<p>가격: ${ItemListDTO.price}</p>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
 	</div>
 </body>
