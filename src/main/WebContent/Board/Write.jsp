@@ -70,7 +70,7 @@ body {
                     <textarea class="form-control" id="content" name="content" rows="20" placeholder="내용을 입력하세요"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="file" name="attachedFile" id="attachedFile" onchange="insertFileIntoEditor()" />
+                    <input type="file" name="ofile" id="attachedFile" onchange="insertFileIntoEditor()" />
                 </div>
                 
                 <button type="submit" class="btn btn-primary">확인</button>
