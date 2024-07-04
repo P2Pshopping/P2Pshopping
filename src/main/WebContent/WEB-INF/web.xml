@@ -199,6 +199,18 @@
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
+
+    <servlet>
+     <description></description>
+    <display-name>ItemList</display-name>
+    <servlet-name>ItemList</servlet-name>
+    <servlet-class>itemList.ItemListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ItemList</servlet-name>
+    <url-pattern>/itemList/ItemList.do</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>ReviewListServlet</servlet-name>
     <servlet-class>review.ReviewListServlet</servlet-class>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,12 +157,17 @@
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								중고장터 </a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							
+							
+								<form name= list method= "get" >
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Main/ItemList.jsp">상품목록</a></li>
+								
 								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
 
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>
-							</ul></li>
+							</form></ul></li>
+							
 					</ul>
 					<form class="d-flex">
 						<input class="form-control me-2" id="autocompleteInput"
