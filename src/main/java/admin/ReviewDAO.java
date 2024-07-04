@@ -19,10 +19,10 @@ public class ReviewDAO extends JDBConnect {
             while (rs.next()) {
                 ReviewDTO review = new ReviewDTO();
                 review.setId(rs.getInt("id"));
-                review.setSellerId(rs.getInt("sellerId"));
-                review.setBuyerId(rs.getInt("buyerId"));
-                review.setProductId(rs.getInt("productId"));
-                review.setDetail(rs.getString("detail"));
+//                review.setSellerId(rs.getInt("sellerId"));
+//                review.setBuyerId(rs.getInt("buyerId"));
+//                review.setProductId(rs.getInt("productId"));
+                review.setTitle(rs.getString("title"));
                 review.setRating(rs.getInt("rating"));
                 review.setCreateDate(rs.getTimestamp("createDate"));
                 reviews.add(review);

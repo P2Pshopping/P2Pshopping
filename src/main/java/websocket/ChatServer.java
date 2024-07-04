@@ -15,9 +15,9 @@ import jakarta.websocket.server.ServerEndpoint;
 @ServerEndpoint("/ChatingServer")
 public class ChatServer {
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
-	
+
 	@OnOpen
-	public void onOpen(Session session) { 
+	public void onOpen(Session session) {
 		clients.add(session);
 		System.out.println("웹소켓 연결:" + session.getId());
 	}
@@ -33,13 +33,13 @@ public class ChatServer {
 			}
 
 		}
-		
+
 	@OnClose
 	public void onClose(Session session) {
 		clients.remove(session);
 		System.out.println("웹소켓 종료 : " + session.getId());
 	}
-	
+
 	@OnError
 	public void onError(Throwable e) {
 		System.out.println("에러 발생");

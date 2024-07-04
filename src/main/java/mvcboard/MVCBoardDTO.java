@@ -3,6 +3,7 @@ package mvcboard;
 import java.sql.Date;
 
 public class MVCBoardDTO {
+
 	private String id; //게시물 번호
 	private String bno; // 카테고리
 	private int writerId; // 작성자 아이디번호 == user(id)
@@ -15,9 +16,7 @@ public class MVCBoardDTO {
 	private String sfile; // 파일
 	private int views; // 조회수
 	private int likes; // 추천수
-	
-		
-	
+	private String type = "board";
 
 	public String getId() {
 		return id;
@@ -114,5 +113,13 @@ public class MVCBoardDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 }

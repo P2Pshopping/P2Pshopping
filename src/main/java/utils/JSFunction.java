@@ -17,7 +17,7 @@ public class JSFunction {
 		} catch (Exception e) {
 		}
 	}
-	
+
 	public static void alertLocation(HttpServletResponse resp, String msg, String url) {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
@@ -42,7 +42,7 @@ public class JSFunction {
 		} catch (Exception e) {
 		}
 	}
-	
+
 	public static void alertBack(HttpServletResponse resp, String msg) {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");

@@ -33,9 +33,10 @@ public class MVCBoardDAO extends JDBConnect {
 		}
 		return totalCount;
 	}
-
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map) {
+  	//List<MVCBoardDTO> board = new Vector<>();
 		List<MVCBoardDTO> boardList = new ArrayList<>();
+
 		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM boards ";
 
 		if (map.get("searchWord") != null) {
@@ -80,8 +81,9 @@ public class MVCBoardDAO extends JDBConnect {
 					+ " VALUES (seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getBno());
+
 			psmt.setInt(2, dto.getWriterId());
+			psmt.setString(1, dto.getBno());
 			psmt.setString(3, dto.getTitle());
 			psmt.setString(4, dto.getContent());
 			psmt.setString(5, dto.getOfile());
@@ -136,6 +138,37 @@ public class MVCBoardDAO extends JDBConnect {
 	}
 
 	public void updateLikesCount(String id) {
+
+//         String query = "UPDATE boards SET LIKES = LIKES + 1 WHERE ID=?";
+//         try {
+//             psmt = con.prepareStatement(query);
+//             psmt.setString(1, id);
+//             psmt.executeUpdate(); // 수정된 내용: executeQuery() 대신 executeUpdate() 사용
+//         } catch (Exception e) {
+//             System.out.println("게시물 좋아요 증가 중 예외 발생");
+//             e.printStackTrace();
+//         }
+//     }
+
+//     // 추천 수 조회 메서드 (필요에 따라 추가)
+//     public int getLikesCount(String id) {
+//         int likes = 0;
+//         String query = "SELECT LIKES FROM boards WHERE ID=?";
+//         try {
+//             psmt = con.prepareStatement(query);
+//             psmt.setString(1, id);
+//             rs = psmt.executeQuery();
+//             if (rs.next()) {
+//                 likes = rs.getInt("LIKES");
+//             }
+//         } catch (Exception e) {
+//             System.out.println("게시물 좋아요 수 조회 중 예외 발생");
+//             e.printStackTrace();
+//         }
+//         return likes;
+//     }
+
+
 		String query = "UPDATE boards SET likes=likes+1 WHERE id=?";
 		try {
 			psmt = con.prepareStatement(query);
@@ -181,13 +214,16 @@ public class MVCBoardDAO extends JDBConnect {
 	public int updatePost(MVCBoardDTO dto) {
 		int result = 0;
 		try {
+
 			String query = "UPDATE boards SET title=?, content=?, ofile=?, sfile=? WHERE id=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
+
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getOfile());
 			psmt.setString(4, dto.getSfile());
 			psmt.setString(5, dto.getId());
+
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("게시물 수정 중 예외 발생");
@@ -197,6 +233,7 @@ public class MVCBoardDAO extends JDBConnect {
 	}
 
 	public int getWriterIdByUsername(String username) {
+
 		int writerId = 0;
 		String query = "SELECT id FROM users  WHERE username=?";
 		try {
@@ -212,6 +249,7 @@ public class MVCBoardDAO extends JDBConnect {
 
 		}
 		return writerId;
+
 	}
 
 	public String getNameByWriterId(int writerId) {

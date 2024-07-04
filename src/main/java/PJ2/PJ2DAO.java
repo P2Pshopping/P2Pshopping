@@ -113,9 +113,50 @@ public class PJ2DAO extends JDBConnect {
 		}
 		return result;
 	}
+	
 
+	public int likedelete(String sid, String bid) {
+		int result = 0;
+	
+		String query = "DELETE FROM FAVORITE WHERE userid=? and productid= ?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, bid);
+			psmt.setString(2, sid);
+			result = psmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("찜 해제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
+	
+	public PJ2DTO likesearch(String sid,String bid) { //판매글 번호, 구매자 번호
+		PJ2DTO dto4 = new PJ2DTO();
+		
+		String query = "SELECT * FROM FAVORITE WHERE USERID = ? AND PRODUCTID = ? ";
+				
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, bid);
+			psmt.setString(2, sid);
+			rs = psmt.executeQuery();
+		
+		if(rs.next()) {
+			dto4.setLikeSearch("1");
+		}else {
+			dto4.setLikeSearch("0");
+		}
+		}catch(Exception e) {
+			System.out.println("찜 확인 중 예외 발생");
+			e.printStackTrace();
+			
+		}
+		return dto4;
+	}
 	
 	
 	

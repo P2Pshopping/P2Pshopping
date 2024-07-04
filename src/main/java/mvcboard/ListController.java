@@ -19,6 +19,7 @@ public class ListController extends HttpServlet {
 
 		MVCBoardDAO dao = new MVCBoardDAO();
 
+		//Map<String, Object> map = new HashMap<>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		String searchField = req.getParameter("searchField");
 		String searchWord = req.getParameter("searchWord");
@@ -34,10 +35,12 @@ public class ListController extends HttpServlet {
 
 		int pageNum = 1;
 		String pageTemp = req.getParameter("pageNum");
+
 		if (pageTemp != null && !pageTemp.equals(""))
 			pageNum = Integer.parseInt(pageTemp);
 
 		int start = (pageNum - 1) * pageSize + 1;
+
 		int end = pageNum * pageSize;
 		map.put("start", start);
 		map.put("end", end);
@@ -48,10 +51,10 @@ public class ListController extends HttpServlet {
 
 		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../mvcboard/list.do");
 
-		map.put("pagingImg", pagingImg);
-		map.put("totalCount", totalCount);
-		map.put("pageSize", pageSize);
-		map.put("pageNum", pageNum);
+        map.put("pagingImg", pagingImg);
+        map.put("totalCount", totalCount);
+        map.put("pageSize", pageSize);
+        map.put("pageNum", pageNum);
 
 		req.setAttribute("boardLists", boardLists);
 		req.setAttribute("map", map);

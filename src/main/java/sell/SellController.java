@@ -30,9 +30,10 @@ import jakarta.servlet.http.Part;
 public class SellController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+
         // 디버깅 메시지 추가
         System.out.println("SellController doPost 메서드 호출됨");
 
@@ -62,7 +63,9 @@ public class SellController extends HttpServlet {
                         String uploadPath = getServletContext().getRealPath("") + "uploads" + File.separator + fileName;
 
                         File uploadDir = new File(getServletContext().getRealPath("") + "uploads");
-                        if (!uploadDir.exists()) uploadDir.mkdir();
+                        if (!uploadDir.exists()) {
+							uploadDir.mkdir();
+						}
 
                         try {
                             part.write(uploadPath);
@@ -72,22 +75,22 @@ public class SellController extends HttpServlet {
                         }
                     }
                 }
-                
+
                 String photo1 = fileNames.size() > 0 ? fileNames.get(0) : null;
                 String photo2 = fileNames.size() > 1 ? fileNames.get(1) : null;
                 String photo3 = fileNames.size() > 2 ? fileNames.get(2) : null;
-                String photo4 = fileNames.size() > 3 ? fileNames.get(3) : null;  
-                
-                
+                String photo4 = fileNames.size() > 3 ? fileNames.get(3) : null;
+
+
              // 좌표 변환 API 호출
                 Coordinates coordinates = getCoordinates(roadAddrPart1);
-                
+
                 try {
                     int categoryId = sellDAO.getCategoryId(selectedCategory);
                     int subCategoryId = sellDAO.getSubcategoryId(selectedSubcategory);
                     int writerId = sellDAO.getUserId(email);
 
-                    sellDAO.saveProduct(productName, categoryId, subCategoryId, Integer.parseInt(price), productDescription, 
+                    sellDAO.saveProduct(productName, categoryId, subCategoryId, Integer.parseInt(price), productDescription,
                     		photo1, photo2, photo3, photo4, writerId, roadAddrPart1, addrDetail, coordinates.getLatitude(), coordinates.getLongitude());
 
                     response.sendRedirect("../Main/ItemList.jsp");
@@ -102,7 +105,7 @@ public class SellController extends HttpServlet {
         String clientId = "ztfp2obt82"; // 네이버 클라이언트 ID
         String clientSecret = "hnPwfHZh6DgZl65JqRsZJks2sfn8ahvpnfY0mLjG"; // 네이버 클라이언트 시크릿
         String apiURL = "";
-        
+
         try {
             apiURL = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + java.net.URLEncoder.encode(address, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -124,7 +127,7 @@ public class SellController extends HttpServlet {
 //                String latitude = addressObject.getString("y");
 //                String longitude = addressObject.getString("x");
 //                return "위도: " + latitude + ", 경도: " + longitude;
-                
+
                 JSONObject addressObject = addresses.getJSONObject(0);
                 String latitude = addressObject.getString("y");
                 String longitude = addressObject.getString("x");

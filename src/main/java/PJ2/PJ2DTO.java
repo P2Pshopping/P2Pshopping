@@ -9,9 +9,14 @@ public class PJ2DTO {
 	private String detail;
 	private String price;
 	private String[] moreid; // 추가적으로 보여주는 글의 id
-	private String[] f; 
-
+	private String likeSearch;
 	
+	public String getLikeSearch() {
+		return likeSearch;
+	}
+	public void setLikeSearch(String likeSearch) {
+		this.likeSearch = likeSearch;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -28,6 +33,7 @@ public class PJ2DTO {
 	public void setMoreid(String[] moreid) {
 		this.moreid = moreid;
 	}
+	private String[] f; 
 
 	
 
