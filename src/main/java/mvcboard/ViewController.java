@@ -28,6 +28,13 @@ public class ViewController extends HttpServlet {
         }
 
         MVCBoardDTO dto = dao.selectView(id);
+
+        // 작성자 이름 가져오기
+        String writerName = dao.getNameByWriterId(dto.getWriterId());
+
+        // 인기 게시글 가져오기
+        List<MVCBoardDTO> likePosts = dao.get3likes();
+
         dao.close();
 
         // 줄바꿈 처리
@@ -45,9 +52,11 @@ public class ViewController extends HttpServlet {
             isImage = true;
         }
 
-        // 게시물(dto) 저장 후 뷰로 포워드
+        // 게시물(dto)와 작성자 이름(writerName) 및 인기 게시글(popularPosts) 저장 후 뷰로 포워드
         req.setAttribute("dto", dto);
         req.setAttribute("isImage", isImage);
+        req.setAttribute("writerName", writerName);
+        req.setAttribute("likePosts", likePosts);
         req.getRequestDispatcher("/Board/View.jsp").forward(req, resp);
     }
 }

@@ -53,7 +53,7 @@ public class MVCBoardDAO extends JDBConnect {
 
 			while (rs.next()) {
 				MVCBoardDTO dto = new MVCBoardDTO();
-				
+
 				dto.setId(rs.getString("id"));
 				dto.setBno(rs.getString("bno"));
 				dto.setWriterId(rs.getInt("writerId"));
@@ -77,10 +77,11 @@ public class MVCBoardDAO extends JDBConnect {
 		int result = 0;
 
 		try {
-			String query = "INSERT INTO boards (id, bno, writerid, title, content, ofile, sfile) "
+			String query = "INSERT INTO boards (id, bno, writerId, title, content, ofile, sfile) "
 					+ " VALUES (seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
+
 			psmt.setInt(2, dto.getWriterId());
 			psmt.setString(1, dto.getBno());
 			psmt.setString(3, dto.getTitle());
@@ -92,7 +93,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 입력 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 
 		return result;
 	}
@@ -119,7 +120,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 상세보기 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 
 		return dto;
 	}
@@ -133,7 +134,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 조회수 증가 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public void updateLikesCount(String id) {
@@ -176,7 +177,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 좋아요 증가 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public int getLikesCount(String id) {
@@ -192,7 +193,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 좋아요 수 조회 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 		return likes;
 	}
 
@@ -206,7 +207,7 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 삭제 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 		return result;
 	}
 
@@ -227,14 +228,14 @@ public class MVCBoardDAO extends JDBConnect {
 		} catch (Exception e) {
 			System.out.println("게시물 수정 중 예외 발생");
 			e.printStackTrace();
-		} 
+		}
 		return result;
 	}
 
 	public int getWriterIdByUsername(String username) {
 
 		int writerId = 0;
-		String query = "SELECT id FROM users WHERE username=?";
+		String query = "SELECT id FROM users  WHERE username=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, username);
@@ -242,11 +243,60 @@ public class MVCBoardDAO extends JDBConnect {
 			if (rs.next()) {
 				writerId = rs.getInt("id");
 			}
-		} catch (Exception e) {
-			System.out.println("사용자 ID 조회 중 예외 발생");
+		} catch (SQLException e) {
+			System.out.println("작성자 ID 조회 중 예외 발생");
 			e.printStackTrace();
-		} 
+
+		}
 		return writerId;
 
 	}
+
+	public String getNameByWriterId(int writerId) {
+		String name = null;
+		String query = "SELECT name FROM users WHERE id = ?";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, writerId);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				name = rs.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return name;
+	}
+
+	public List<MVCBoardDTO> get3likes() {
+		List<MVCBoardDTO> likePosts = new ArrayList<>();
+		String query = "SELECT * FROM boards ORDER BY likes DESC FETCH FIRST 3 ROWS ONLY";
+
+		try {
+			psmt = con.prepareStatement(query);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				MVCBoardDTO dto = new MVCBoardDTO();
+				dto.setId(rs.getString("id"));
+				dto.setWriterId(rs.getInt("writerId"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setCreateDate(rs.getDate("createDate"));
+				dto.setOfile(rs.getString("ofile"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setViews(rs.getInt("views"));
+				dto.setLikes(rs.getInt("likes"));
+				likePosts.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return likePosts;
+	}
+
 }

@@ -9,7 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
 @WebServlet("/mvcboard/edit.do")
@@ -26,64 +25,62 @@ public class EditController extends HttpServlet {
 		req.getRequestDispatcher("/Board/Edit.jsp").forward(req, resp);
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String saveDirectory = req.getServletContext().getRealPath("/uploads");
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	        throws ServletException, IOException {
+	        String saveDirectory = req.getServletContext().getRealPath("/uploads");
 
-		String originalFileName = "";
-		try {
-			originalFileName = FileUtil.uploadFile(req, saveDirectory);
-		} catch (Exception e) {
-			JSFunction.alertBack(resp, "파일 업로드 오류입니다.");
-			return;
-		}
+	        String originalFileName = "";
+	        try {
+	        	originalFileName = FileUtil.uploadFile(req, saveDirectory);
+	        }
+	        catch (Exception e) {
+	        	JSFunction.alertBack(resp, "파일 업로드 오류입니다.");
+	        	return;
+			}
 
-		// 2. 파일 업로드 외 처리 =============================
-		// 수정 내용을 매개변수에서 얻어옴
-		String id = req.getParameter("id");
-		String prevOfile = req.getParameter("prevOfile");
-		String prevSfile = req.getParameter("prevSfile");
+	        // 2. 파일 업로드 외 처리 =============================
+	        // 수정 내용을 매개변수에서 얻어옴
+	        String id = req.getParameter("id");
+	        String prevOfile = req.getParameter("prevOfile");
+	        String prevSfile = req.getParameter("prevSfile");
+	        
+	        String title = req.getParameter("title");
+	        String content = req.getParameter("content");
+	            
+	          // DTO에 저장
+	        MVCBoardDTO dto = new MVCBoardDTO();
+	        dto.setId(id);
+	        dto.setTitle(title);
+	        dto.setContent(content);
+	        	            
+	        // 원본 파일명과 저장된 파일 이름 설정
+	        if (originalFileName != "") {             
+	        	String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
+	        	
+	            dto.setOfile(originalFileName);  // 원래 파일 이름
+	            dto.setSfile(savedFileName);  // 서버에 저장된 파일 이름
 
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
+	            // 기존 파일 삭제
+	            FileUtil.deleteFile(req, "/uploads", prevSfile);
+	        }
+	        else {
+	            // 첨부 파일이 없으면 기존 이름 유지
+	            dto.setOfile(prevOfile);
+	            dto.setSfile(prevSfile);
+	        }
 
-		// 비밀번호는 session에서 가져옴
-		HttpSession session = req.getSession();
-		String pass = (String) session.getAttribute("pass");
+	        // DB에 수정 내용 반영
+	        MVCBoardDAO dao = new MVCBoardDAO();
+	        int result = dao.updatePost(dto);
+	        dao.close();
 
-		// DTO에 저장
-		MVCBoardDTO dto = new MVCBoardDTO();
-		dto.setId(id);
-
-		dto.setTitle(title);
-		dto.setContent(content);
-
-		// 원본 파일명과 저장된 파일 이름 설정
-		if (originalFileName != "") {
-			String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
-
-			dto.setOfile(originalFileName); // 원래 파일 이름
-			dto.setSfile(savedFileName); // 서버에 저장된 파일 이름
-
-			// 기존 파일 삭제
-			FileUtil.deleteFile(req, "/uploads", prevSfile);
-		} else {
-			// 첨부 파일이 없으면 기존 이름 유지
-			dto.setOfile(prevOfile);
-			dto.setSfile(prevSfile);
-		}
-
-		// DB에 수정 내용 반영
-		MVCBoardDAO dao = new MVCBoardDAO();
-		int result = dao.updatePost(dto);
-		dao.close();
-
-		// 성공 or 실패?
-		if (result == 1) { // 수정 성공
-			session.removeAttribute("pass");
-			resp.sendRedirect("../mvcboard/view.do?id=" + id);
-		} else { // 수정 실패
-			JSFunction.alertLocation(resp, " ", "../mvcboard/view.do?id=" + id);
-		}
-	}
+	        // 성공 or 실패?
+	        if (result == 1) {  // 수정 성공
+	            resp.sendRedirect("../mvcboard/view.do?id=" + id);
+	        }
+	        else {  // 수정 실패
+	            JSFunction.alertLocation(resp, "실패.",
+	                "../mvcboard/view.do?id=" + id);
+	        }
+	    }
 }
