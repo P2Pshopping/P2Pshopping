@@ -46,6 +46,7 @@ public class ListController extends HttpServlet {
 		map.put("end", end);
 
 		List<MVCBoardDTO> boardLists = dao.selectListPage(map);
+		List<MVCBoardDTO> likePosts = dao.get3likes();
 
 		dao.close();
 
@@ -58,6 +59,7 @@ public class ListController extends HttpServlet {
 
 		req.setAttribute("boardLists", boardLists);
 		req.setAttribute("map", map);
+		req.setAttribute("likePosts", likePosts);
 		req.getRequestDispatcher("/Board/List.jsp").forward(req, resp);
 
 	}

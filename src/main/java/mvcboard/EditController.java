@@ -1,7 +1,7 @@
 package mvcboard;
 
 import java.io.IOException;
-
+import java.nio.file.Paths;
 import fileupload.FileUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -12,75 +12,65 @@ import jakarta.servlet.http.HttpServletResponse;
 import utils.JSFunction;
 
 @WebServlet("/mvcboard/edit.do")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 10)
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10)
 public class EditController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		MVCBoardDAO dao = new MVCBoardDAO();
-		MVCBoardDTO dto = dao.selectView(id);
-		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/Board/Edit.jsp").forward(req, resp);
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        MVCBoardDAO dao = new MVCBoardDAO();
+        String id = req.getParameter("id");
+        MVCBoardDTO dto = dao.selectView(id);
+        String writerName = dao.getNameByWriterId(dto.getWriterId());
+        req.setAttribute("dto", dto);
+        req.setAttribute("writerName", writerName);
+        req.getRequestDispatcher("/Board/Edit.jsp").forward(req, resp);
+    }
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-	        throws ServletException, IOException {
-	        String saveDirectory = req.getServletContext().getRealPath("/uploads");
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String saveDirectory = req.getServletContext().getRealPath("/uploads");
+        String originalFileName = "";
 
-	        String originalFileName = "";
-	        try {
-	        	originalFileName = FileUtil.uploadFile(req, saveDirectory);
-	        }
-	        catch (Exception e) {
-	        	JSFunction.alertBack(resp, "파일 업로드 오류입니다.");
-	        	return;
-			}
+        try {
+            originalFileName = FileUtil.uploadFile(req, saveDirectory);
+        } catch (Exception e) {
+            e.printStackTrace(); // 파일 업로드 예외 로그 출력
+            JSFunction.alertBack(resp, "파일 업로드 오류입니다: " + e.getMessage());
+            return;
+        }
 
-	        // 2. 파일 업로드 외 처리 =============================
-	        // 수정 내용을 매개변수에서 얻어옴
-	        String id = req.getParameter("id");
-	        String prevOfile = req.getParameter("prevOfile");
-	        String prevSfile = req.getParameter("prevSfile");
-	        
-	        String title = req.getParameter("title");
-	        String content = req.getParameter("content");
-	            
-	          // DTO에 저장
-	        MVCBoardDTO dto = new MVCBoardDTO();
-	        dto.setId(id);
-	        dto.setTitle(title);
-	        dto.setContent(content);
-	        	            
-	        // 원본 파일명과 저장된 파일 이름 설정
-	        if (originalFileName != "") {             
-	        	String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
-	        	
-	            dto.setOfile(originalFileName);  // 원래 파일 이름
-	            dto.setSfile(savedFileName);  // 서버에 저장된 파일 이름
+        String id = req.getParameter("id");
+        String prevOfile = req.getParameter("prevOfile");
+        String prevSfile = req.getParameter("prevSfile");
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+        String category = req.getParameter("category");
 
-	            // 기존 파일 삭제
-	            FileUtil.deleteFile(req, "/uploads", prevSfile);
-	        }
-	        else {
-	            // 첨부 파일이 없으면 기존 이름 유지
-	            dto.setOfile(prevOfile);
-	            dto.setSfile(prevSfile);
-	        }
+        MVCBoardDTO dto = new MVCBoardDTO();
+        dto.setId(id);
+        dto.setBno(category);
+        dto.setTitle(title);
+        dto.setContent(content);
 
-	        // DB에 수정 내용 반영
-	        MVCBoardDAO dao = new MVCBoardDAO();
-	        int result = dao.updatePost(dto);
-	        dao.close();
+        if (originalFileName != null && !originalFileName.isEmpty()) {
+            String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
+            dto.setOfile(originalFileName);
+            dto.setSfile(savedFileName);
+            FileUtil.deleteFile(req, "/uploads", prevSfile);
+        } else {
+            dto.setOfile(prevOfile);
+            dto.setSfile(prevSfile);
+        }
 
-	        // 성공 or 실패?
-	        if (result == 1) {  // 수정 성공
-	            resp.sendRedirect("../mvcboard/view.do?id=" + id);
-	        }
-	        else {  // 수정 실패
-	            JSFunction.alertLocation(resp, "실패.",
-	                "../mvcboard/view.do?id=" + id);
-	        }
-	    }
+        MVCBoardDAO dao = new MVCBoardDAO();
+        int result = dao.updatePost(dto);
+        dao.close();
+
+        if (result == 1) {
+            resp.sendRedirect("../mvcboard/view.do?id=" + id);
+        } else {
+            JSFunction.alertLocation(resp, "수정에 실패했습니다.", "../mvcboard/view.do?id=" + id);
+        }
+    }
 }
