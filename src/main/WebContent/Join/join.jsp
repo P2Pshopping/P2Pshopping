@@ -340,6 +340,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div style="margin-top: 10%;">
 			<%@include file="../layout/Footer.jsp"%>
 		</div>
@@ -361,6 +362,30 @@
 		  }
 		})
 		</script>
+
+<!-- 	</div>
+	<div style="margin-top: 30%;">
+		<%@include file="../layout/Footer.jsp"%>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript">
+    $(document).ready(function() {
+        // 아이디 중복체크 버튼을 클릭했을 때 비동기통신으로 데이터 주고받음(page새로고침없음)
+        $('#btnCheckId').on('click', function() {
+            // 입력한 username 가져오기
+            var username = $('input[name=username]').val();
+        	var result_data;
+            // Ajax로 username 보내기
+            $.ajax({
+                url: '../idCheck',   // 서버의 URL
+                type: 'POST',      // POST 방식으로 요청
+                data: {
+                    username: username // 입력한 username 데이터 보내기
+                },
+                dataType: "json",   // 응답 데이터 타입은 json로 지정
+                success: function(response) {
+                    console.log('서버 응답:', response); // 서버 응답 전체를 콘솔에 출력 -->
+
 
 		
 		

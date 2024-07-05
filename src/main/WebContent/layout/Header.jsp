@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,6 +146,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<form name= list method= "get" >
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="${pageContext.request.contextPath}/Main/Mainpage.jsp">홈</a></li>
@@ -157,13 +159,19 @@
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								중고장터 </a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Main/ItemList.jsp">상품목록</a></li>
+							
+							
+								
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/itemList/ItemList.do">상품목록</a></li>
+								
 								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
 
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>
 							</ul></li>
+							
 					</ul>
+					</form>
 					<form class="d-flex">
 						<input class="form-control me-2" id="autocompleteInput"
 							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."

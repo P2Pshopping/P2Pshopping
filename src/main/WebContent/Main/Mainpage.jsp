@@ -102,7 +102,7 @@
         </div>
     </div>
 </body>
-<%-- <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
 
 	  // 페이지 로드 시 방문 기록 저장
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
-</script> --%>
+</script>
 <%@ include file="../layout/Footer.jsp"%>
 
 </html>

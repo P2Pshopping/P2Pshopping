@@ -17,7 +17,7 @@ public class MVCBoardDTO {
 	private int views; // 조회수
 	private int likes; // 추천수
 	private String type = "board";
-	
+
 	public String getId() {
 		return id;
 	}
