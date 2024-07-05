@@ -177,14 +177,14 @@ body {
 				</div>
 			</div>
 
-<!-- 			<div id="right-sidebar">
+	<div id="right-sidebar">
 				<p>인기 게시글</p>
 				<a href="#"><img alt="아기1" src="../img/333.jpg" width="100"
 					height="100"></a>
 			</div>
 		</div>
-	</div> -->
-      <div id="right-sidebar">
+	</div>
+ <%--      <div id="right-sidebar">
     <p>인기 게시글</p>
     <c:forEach items="${likePosts}" var="post">
         <a href="../mvcboard/view.do?id=${post.id}">
@@ -194,7 +194,7 @@ body {
             <p>${post.title}</p>
         </a>
     </c:forEach>
-</div>
+</div> --%>
 
 
 	<jsp:include page="../layout/Footer.jsp" />
