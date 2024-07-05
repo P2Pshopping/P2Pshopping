@@ -17,17 +17,18 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="DPCSS.css" rel="stylesheet" type="text/css">
 <!-- 다중 슬라이드 js,css링크-->
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <title>아이 자세히 보기</title>
 
-<script type="text/javascript" src="./DPJS.js"></script>
+
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -163,6 +164,22 @@
 	cursor: default;
 	color: #777;
 }
+
+
+#love{
+      width: 50px;
+      fill: #ddd;
+}
+
+#love.active{
+      fill: red;
+}
+
+
+
+#love.active svg path {
+        fill: red;
+    }    
 </style>
 
 
@@ -206,6 +223,8 @@ PJ2DTO dto3 = dao.ADRS(suid);
 String[] f = Arrays.copyOf(dto2.getF(), 4);
 String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
+PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 안함 1이면 함
+
 %>
 
 
@@ -214,7 +233,7 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 </head>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <body
-	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center;">
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
 
 
 	<%@ include file="../layout/Header.jsp"%>
@@ -292,53 +311,110 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
 	<br />
 
+<!-- <button id="like" class="btn" onclick="chn();" style="color:black"> -->
 
 
-<button type="button" id="likebtn" style="background-color: black; width: 60px; height: 50px">
-    <i class="bi bi-suit-heart"></i> <!-- 초기 버튼 아이콘 -->
-</button>
+<%-- <% if(dto4.getLikeSearch()=="0"){ %>
+<button id="like" onclick="chn();" >찜하기</button>
+<%}else {%>
+<button id="like"  onclick="chn();">찜해제</button>
+  <%} %>	 --%>
 
-<%-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   $(document).ready(function () {
-        $("#likebtn").click(function () {
-            $.ajax({
-                url: 'LikeServlet',
-                type: 'POST',
-                data: {
-                    sellerid: '<%= sid %>',
-                    userid: '<%= bid %>'
-                },
-                success: function (response) {
-                    if (response.trim() === "liked") {
-                        $("#likebtn").html('<i class="bi bi-suit-heart-fill" style="color: red;"></i>');
-                    } else if (response.trim() === "unliked") {
-                        $("#likebtn").html('<i class="bi bi-suit-heart"></i>');
-                    }
-                },
-                error: function () {
-                    alert('찜 하는 중 오류 발생.');
-                }
-            });
+$(document).ready(function() {
+    $("#love").click(function() {
+        var sid = "<%= sid %>"; // JSP에서 동적으로 설정된 값
+        var bid = "<%= bid %>"; // JSP에서 동적으로 설정된 값
+        
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8081/iMarket/DetailController", // DetailController 서블릿의 URL 매핑
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { sid: sid, bid: bid },
+            success: function(data) {
+            	
+                // 성공 시 필요한 추가 로직 구현
+            },
+            error: function(request, status, error) {
+               
+            }
         });
     });
+});
 </script>
 
+		<%-- 		<%	if(dto4.getLikeSearch()=="0"){ %>
+				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜하기</button> 
+				<%}else {%>
+				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜해제</button>
+				<% }; %>
 
+
+
+<script>
+function chn() {
+	var change = document.getElementById("like")
+	if(change.innerText=="찜하기"){
+    change.innerText ='찜해제';
+	}else{
+		 change.innerText ='찜하기';
+	}
+}
+</script>
  --%>
 
 
 
- <button class="btn" onclick="like()">찜하기</button>
- 
- <script>
- 	function like(){
- 	
- 		<%= dao.like(sid, bid)%>	
- 	}
- 	
- </script>
+<%System.out.println(dto4.getLikeSearch());
+System.out.println(sid);
+System.out.println(bid);
+%>
 
+
+
+<!-- <button id="love" onclick="chn()" "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg></button>
+
+
+<script>
+  var btn = document.getElementById("love")
+
+  btn.addEventListener('click',function(){
+            btn.classList.toggle('active')
+    })
+</script>
+ -->
+
+<button id="love" onclick="toggleHeart()" data-like="<%= dto.getLikeSearch() %>">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+    </svg>
+</button>
+
+<script>
+    var btn = document.getElementById("love");
+    var likeStatus = parseInt(btn.getAttribute('data-like'));
+
+    // 초기 상태에 따라 하트 색상 설정
+    if (likeStatus =! 0) {
+        btn.classList.add('active'); // 하트를 빨간색으로 변경
+    }
+
+    // 클릭 이벤트 핸들러
+    function toggleHeart() {
+        likeStatus = 1 - likeStatus; // 상태 토글 (0 -> 1, 1 -> 0)
+        btn.setAttribute('data-like', likeStatus.toString()); // 상태 업데이트
+
+        if (likeStatus != 0) {
+            btn.classList.add('active'); // 하트를 빨간색으로 변경
+        } else {
+            btn.classList.remove('active'); // 하트를 원래대로 돌리기
+        }
+    }
+</script>
 
 
 
@@ -358,7 +434,7 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 		<b style="border: solid 1px black; width: auto; height: auto;"
 			id=favorite;> <%
  String seller = (String) session.getAttribute("seller"); //판매자 이름
- out.print(seller);%> 
+ out.print(seller);%>
  &nbsp;&nbsp;&nbsp;
 		</b>
 	</div>
@@ -369,8 +445,8 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 	
 	<br />
 	<br />	<br />	
-	<div class="container text-center">
-		<input type="text" name="title" value="<%=dto.getProductName()%>"
+	<div class="container text-center">  <!-- 제목 -->
+		<input type="text" name="title" value="<%=dto.getProductName()%>"   
 			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
 			readonly> <input type="text" name="content"
 			value="<%=dto.getDetail()%>"
