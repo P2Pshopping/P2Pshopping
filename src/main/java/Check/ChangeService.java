@@ -25,8 +25,8 @@ public class ChangeService extends HttpServlet {
 	    
 	    @Override
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        request.setCharacterEncoding("EUC-KR");
-
+	    	response.setCharacterEncoding("UTF-8");
+		    response.setContentType("text/html;charset=UTF-8");
 	        // 세션에서 사용자 정보 가져오기
 	        HttpSession session = request.getSession();
 	        String username = (String) session.getAttribute("username");

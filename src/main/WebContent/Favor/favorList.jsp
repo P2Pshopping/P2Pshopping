@@ -35,11 +35,17 @@
 <div class="container text-center">
 			<%@ include file="../layout/Header.jsp"%>
 	</div>
+<div class ="visual">
+
 	<div class ="fav_wrapper">
-	<div class ="left">
-		<div class ="title_font">
-		${sessionScope.username} </div> 님
-		</div>
+	<span class ="left">
+		<span class ="title_font">
+		${sessionScope.username} 	<span class ="nim">님</span>
+	</span> 
+		</span>
+		<div class ="right">  게시물 : ${sessionScope.boardCount} 개  </div> 
+		<div class ="right"> 찜 개수 : ${sessionScope.likeCount} 개</div> 
+		<div class ="right">판매 상품 : ${sessionScope.productCount} 개</div> 
 	</div>
 	<div style="margin-top:15%;">
 	</div> 
@@ -49,10 +55,22 @@
 	<button type="button" class="btn btn-dark">장난감</button>
 	<button type="button" class="btn btn-dark">의류</button>
 
-	<button style="float:right;" type="button" class="btn btn-dark">▲가격순</button>
+	<!-- <button style="float:right;" type="button" class="btn btn-dark">▲가격순</button> -->
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" style="float:right;"type="button" data-bs-toggle="dropdown" aria-expanded="false">
+   ▲ 가격순
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">▼ 가격순</a></li>
+    <li><a class="dropdown-item" href="#">▼ 가격순</a></li>
+    <li><a class="dropdown-item" href="#">▼ 가격순</a></li>
+  </ul>
+</div>
+	</div>
 	</div>
 	
 	<div class="container text-center">	
+	<div class ="visual">
 	<div class="row" >
 	<div class="card" style="width: 18rem;margin-left:100px;">
   <img src="./babycloth.jpg" class="card-img-top" alt="...">
@@ -124,6 +142,7 @@
 </div>
 	</div>
 	</div>
+	</div>
 	<!-- <div class="col">
 	<img src="./babycloth.jpg" style="width: 300px; height: auto;border:solid 2px black;">
 	<br/>
@@ -145,7 +164,16 @@
 	
 	
 	
-	
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
 	
 	
 	
