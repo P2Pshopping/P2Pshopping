@@ -59,6 +59,39 @@
     <jsp:include page="../layout/Header.jsp" />
     <!-- Main Container -->
     <div id="container">
+
+
+<!--         <div id="contents">
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/write.do" onsubmit="return validateForm(this);">
+    
+                <div class="form-group">
+                    <label for="category">분류</label> 
+                    <select class="form-control" id="bno" name="bno">
+                        <option value="1">아기 자랑</option>
+                        <option value="2">거래 후기</option>
+                      
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">제목</label> 
+                    <input type="text"
+                        class="form-control" id="title" name="title"
+                        placeholder="제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="name">작성자 : </label>
+                    <label><%=session.getAttribute("name")%></label>
+                    <input type="hidden" name="username" value="<%=session.getAttribute("username")%>">
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" name="content" rows="20" placeholder="내용을 입력하세요"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="ofile" id="attachedFile" onchange="insertFileIntoEditor()" />
+                </div> -->
+                
+
         <h2 class="text-center"></h2>
         <form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/write.do" onsubmit="return validateForm(this);">
             <div class="form-group">
@@ -89,6 +122,7 @@
                 <input type="file" class="form-control-file" name="attachedFile" id="attachedFile" onchange="insertFileIntoEditor()">
             </div>
             <div class="text-center">
+
                 <button type="submit" class="btn btn-primary">확인</button>
                 <button type="button" class="btn btn-secondary" onclick="location.href='../Board/List.jsp';">취소</button>
             </div>
