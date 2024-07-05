@@ -38,7 +38,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>로그인</title>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
 	integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
 	crossorigin="anonymous"></script>
@@ -263,7 +263,7 @@ function getCookie(name) {
 
 
 
-			<form action="<c:url value='/login.do' />" method="post"
+			<form action="<c:url value='/login.do' />" method="post" id ="loginFrm"
 				name="loginFrm" onsubmit="return validateForm(this);">
 
 				<input type="text" name="username" class="login_text" id ="username" 
@@ -283,7 +283,7 @@ function getCookie(name) {
 				</div>
 				</p>
 				<div class="d-grid gap-2 mx-auto">
-					<input type="submit" width="300px" height="45px"
+					<input type="submit" width="300px" height="45px" id ="login"
 						class="btn btn-secondary" value="로그인" />
 
 				</div>
@@ -326,7 +326,7 @@ function getCookie(name) {
 	}
 	%>   --%>
 
-	<div style="margin-top: 50%;">
+	<div style="margin-top: 700px;">
 		<%@include file="../layout/Footer.jsp"%>
 	</div>
 

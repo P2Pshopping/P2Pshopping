@@ -19,7 +19,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Join </title>
+<title> 새 비밀번호 설정 </title>
 <%
 
 String message = null;
@@ -94,7 +94,7 @@ if(password ==='' || passwordc === '' ){
  
 
     
-			<form action="/ChangePwd.do" method="post" name="ChangeFrm" style ="width:700px;height:300px;">
+			<form action="/ChangePwd.do" method="Post" name="ChangeFrm" style ="width:700px;height:300px;">
     <label class="col-sm-2 col-form-label" style ="width:300px;font-weight:bold;font-size:30px;">새 비밀번호 설정  </label>
     <div class="input-group">
     <label for="inputPassword" class="col-sm-2 col-form-label" style ="width:200px;margin-top:10px;" >새 비밀번호  </label>
@@ -116,7 +116,7 @@ if(password ==='' || passwordc === '' ){
 </div>
 
    <div class="col align-self-center">
-      <input class="btn btn-danger" value = "비밀번호 변경"onclick = "return joinCheck();"  type="submit" style="margin-left:30%;">
+      <input class="btn btn-success" value = "비밀번호 변경"onclick = "return joinCheck();"  type="submit" style="margin-left:450px;">
 </div>
 </form>
   </div>

@@ -1,5 +1,19 @@
 @charset "UTF-8";
-
+body {
+    background-color: #FAFAFA;
+    margin: 0px;
+    color: #262626;
+    box-sizing: border-box;
+}.fixed-width-label {
+    width: 140px; /* 원하는 너비로 설정 */
+    text-align: center; 
+}
+.title{
+	margin-right:470px;
+	font-size: 25px;
+	 /*  font-weight: bold; */
+	
+}
 
 .parent {
   display: flex;
@@ -32,10 +46,10 @@
      justify-content: center;
   
   	width:900px;
-    height:380px;
+    height:600px;
     top:50%;
     left:50%;
-    margin: -270px 0px 0px -380px;
+    margin: -370px 0px 0px -440px;
      background-color:white; 
      
   border-radius: 20%

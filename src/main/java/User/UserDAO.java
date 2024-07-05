@@ -187,20 +187,22 @@ public class UserDAO extends JDBConnect {
 			psmt.setString(1, username);
 			rs = psmt.executeQuery();
 
-
-			if(rs.next()) {
-				result = true;    // 아이디가 중복인 경우
-			}else{
-				result = false;  // 사용가능한 아이디인 경우
+			System.out.println(result);
+			if (rs.next()) {
+				result = true; // 아이디가 중복인 경우
+				System.out.print("rs값 = ");
+				System.out.println(result);
+			} else {
+				result = false; // 사용가능한 아이디인 경우
+				System.out.print("rs값 = ");
+				System.out.println(result);
 			}
 
-		}
-        catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("confirmId(): " + e);
-            //어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
-		}
-        finally {
-
+			System.out.println("Error in idCheck(): " + e.getMessage());
+			// 어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
+		} finally {
 			close();
 		}
 		return result;
@@ -492,6 +494,99 @@ public class UserDAO extends JDBConnect {
 			}
 		}
 		return success;
+	}
+	public UserDTO productcount(String username) {
+	    UserDTO dto = null;
+	    String query = "SELECT COUNT(*) AS product_count "
+	            + "FROM users u "
+	            + "JOIN product p ON u.username = p.WRITERID "
+	            + "WHERE u.username = ? "
+	            + "GROUP BY p.writerid"; // GROUP BY 절 수정
+
+	    System.out.println("Executing query: " + query);
+	    System.out.println("Parameters: " + username);
+
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, username);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            dto = new UserDTO();
+	            dto.setProductCount(rs.getInt("product_count")); // 컬럼명 수정
+	            System.out.println("ProductCount: " + rs.getInt("product_count"));
+	        } else {
+	        	dto = new UserDTO();
+	        	dto.setProductCount(0);
+	            System.out.println("판매 상품이 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return dto;
+	}
+	public UserDTO likecount(String username) {
+	    UserDTO dto = null;
+	    String query = "SELECT COUNT(*) AS likecount "
+	            + "FROM users u "
+	            + "JOIN favorite f ON u.username = f.productid "
+	            + "WHERE u.username = ? "
+	            + "GROUP BY f.productid"; // GROUP BY 절 수정
+
+	    System.out.println("Executing query: " + query);
+	    System.out.println("Parameters: " + username);
+
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, username);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            dto = new UserDTO();
+	            dto.setLikeCount(rs.getInt("likecount")); // 컬럼명 수정
+	            System.out.println("likecount: " + rs.getInt("likecount"));
+	        } else {
+	        	dto = new UserDTO();
+	        	dto.setLikeCount(0);
+	            System.out.println("좋아요 누른 상품이 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return dto;
+	}
+	public UserDTO boardCount(String username) {
+	    UserDTO dto = null;
+	    String query = "SELECT COUNT(*) AS boardCount "
+	            + "FROM users u "
+	            + "JOIN Boards b ON u.username = b.writerid "
+	            + "WHERE u.username = ? "
+	            + "GROUP BY b.writerid"; // GROUP BY 절 수정
+
+	    System.out.println("Executing query: " + query);
+	    System.out.println("Parameters: " + username);
+
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, username);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            dto = new UserDTO();
+	            dto.setBoardCount(rs.getInt("boardCount")); // 컬럼명 수정
+	            System.out.println("boardcount: " + rs.getInt("boardCount"));
+	        } else {
+	        	dto = new UserDTO();
+	        	dto.setBoardCount(0);
+	            System.out.println("올린 게시글이 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return dto;
 	}
 
 }

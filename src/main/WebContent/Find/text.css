@@ -32,7 +32,8 @@ display: flex;
     background-color:white;
     
     }
-.join_form{
+
+.join_frm3{
     display:flex;
      align-items: center;
     flex-direction: column;
@@ -41,36 +42,109 @@ display: flex;
     margin-top:10px;
     margin-left: -100px;
      background-color: #ffffff;
-  border: 1px solid #dadada; /*  */
+/*   border: 1px solid #dadada; 
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); */
     
 }
-.join_form2{
-    display:flex;
-     align-items: center;
-    flex-direction: column;
-    width:600px;
-    height:300px;
-    margin-top:10px;
-    margin-left: -100px;
-     background-color: #ffffff;
-  border: 1px solid #dadada; /*  */
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-    
+
+body {
+    background-color: #FAFAFA;
+    margin: 0px;
+    color: #262626;
+    box-sizing: border-box;
+}.fixed-width-label {
+    width: 120px; /* 원하는 너비로 설정 */
+    text-align: center; 
 }
-.join_form3{
-    display:flex;
-     align-items: center;
-    flex-direction: column;
-    width:600px;
-    height:230px;
-    margin-top:10px;
-    margin-left: -100px;
-     background-color: #ffffff;
-  border: 1px solid #dadada; /*  */
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-    
+
+.wrap {
+    margin: auto;
+    position: relative;
+}
+
+.wrap .logo {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size:30px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: #262626;
+}
+
+.flex-center {
+    display: flex; /* 플렉스 컨테이너로 설정합니다 */
+    justify-content: center; /* 수평으로 가운데 정렬합니다 */
+    height: 100vh; /* 컨테이너 높이를 전체 뷰포트 높이로 설정 (예시) */
+    margin-top: -100px;
+    font-size: 50px;
+    font-family: Verdana, Geneva, Arial, sans-serif;
+}
+
+
+
+
+.info #info__id {
+    position: relative;
+}
+
+.info__button {
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    margin: auto 0;
+    border-radius: 3px;
+}
+
+/* 입력 칸의 너비를 조정하는 스타일 추가 */
+.input-group .form-control,
+.form-inline .form-control,
+.col-12 .form-control {
+    width: 100%; /* 입력 칸을 부모 컨테이너의 100% 너비로 설정 */
+    max-width: 500px; /* 최대 너비를 설정하여 너무 넓어지지 않도록 제한 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비를 계산 */
+}
+select.box {
+  width: 100px;
+  height: 50px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  padding: 5px 0 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #d9d6d6;
+  color: #383838;
+  background-color: #ffffff;
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+}
+
+option {
+  font-size: 16px;
+}
+
+.info .box#domain-list option {
+  font-size: 14px;
+  background-color: #ffffff;
+}
+.button-container {
+    display: flex;  /* Flexbox 사용 */
+    justify-content: center;  /* 내부 요소들을 가로 방향으로 중앙 정렬 */
+    gap: 10px;  /* 버튼 사이의 간격 설정 */
+}
+
+.button-container .btn {
+    width: 50%;  /* 버튼 너비 설정 */
+}
+.input-group-container {
+    display: flex;
+    justify-content: center;
+}
+.input-group .btn {
+    margin-left: 10px; /* 버튼과 입력 필드 사이 간격 조정 */
+  
 }

@@ -100,9 +100,9 @@ public class JDBConnect {
 			e.printStackTrace();
 		}
 	}
-//	public int update(UserDTO dto) {
-//		int cnt = 0;
-//		return cnt;
-//	}
+	public int update(UserDTO dto) {
+		int cnt = 0;
+		return cnt;
+	}
 
 }

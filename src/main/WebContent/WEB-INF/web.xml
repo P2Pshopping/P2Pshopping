@@ -279,5 +279,14 @@
     <servlet-name>ChangePwd</servlet-name>
     <url-pattern>/ChangePwd</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>ProductCount</display-name>
+    <servlet-name>ProductCount</servlet-name>
+    <servlet-class>Count.ProductCount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductCount</servlet-name>
+    <url-pattern>/ProductCount</url-pattern>
+  </servlet-mapping>
 </web-app>
