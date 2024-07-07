@@ -2,11 +2,11 @@ package common; // 기본 패키지 이외의 패키지 (규약 1번)
 
 import java.security.Timestamp;
 public class UserDTO {
-
+	
 	private int id;			//유저아이디(고유번호)
 	private String name;		//본명
 	private String birth;		//생년월일
-
+	private String nickname;
 	private String username;	// 가입아이디
 	private String email;		//이메일
 	private String phone;		//휴대폰번호
@@ -19,40 +19,41 @@ public class UserDTO {
 	private int districtId; // 동(위치)
 	private String auth ; 	//권한부여
 	private java.sql.Timestamp createDate; 	//가입일자
+
 	private int active; //비활성
-	private int productCount;
-	private int likeCount;
-	private int boardCount;
+// 	private int productCount;
+// 	private int likeCount;
+// 	private int boardCount;
 	
 	
-	public int getBoardCount() {
-		return boardCount;
-	}
+// 	public int getBoardCount() {
+// 		return boardCount;
+// 	}
 
-	public void setBoardCount(int boardCount) {
-		this.boardCount = boardCount;
-	}
+// 	public void setBoardCount(int boardCount) {
+// 		this.boardCount = boardCount;
+// 	}
 
-	public int getLikeCount() {
-		return likeCount;
-	}
+// 	public int getLikeCount() {
+// 		return likeCount;
+// 	}
 
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
+// 	public void setLikeCount(int likeCount) {
+// 		this.likeCount = likeCount;
+// 	}
 
-	public int getProductCount() {
-		return productCount;
-	}
+// 	public int getProductCount() {
+// 		return productCount;
+// 	}
 
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
-	}
+// 	public void setProductCount(int productCount) {
+// 		this.productCount = productCount;
+// 	}
 
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 
-	public UserDTO(int id, String name, String username,String birth, String email, String phone, String address, String password,
+	public UserDTO(int id, String name, String nickname,String birth,String username, String email, String phone, String address, String password,
 			int kakaoId, int naverId, int provinceId, int cityId, int districtId, String auth,java.sql.Timestamp createDate) {
 		super();
 		this.username = username;
@@ -61,6 +62,7 @@ public class UserDTO {
 		this.phone = phone;
 		this.birth=birth;
 		this.address = address;
+		this.nickname = nickname;
 		this.password = password;
 		this.kakaoId = kakaoId;
 		this.naverId = naverId;
@@ -79,7 +81,13 @@ public class UserDTO {
 		this.id = id;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
 
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getName() {
 		return name;
 	}
@@ -192,12 +200,4 @@ public class UserDTO {
 		this.createDate = createDate;
 	}
 
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
-	}
-
-}
+}	
