@@ -38,7 +38,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Join</title>
+<title>개인정보 수정</title>
 <%
 String message = null;
 session = request.getSession();
@@ -123,7 +123,9 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 	<%@include file="../layout/Header.jsp"%>
 
 
-	<div class="join_wrapper2">
+	<div class="join_wrapper2" >
+	 <h2 style="font-weight: bold; margin-bottom:50px;">개인정보 수정</h2>
+	 <h2 class="title">전화번호 변경</h2>
 		<div class="join_form">
 			<div class="row g-3">
 
@@ -131,54 +133,60 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 				<form action="/ChangeService.do" method="post" name="ChangeFrm">
 					<div class="form-inline w-100 ">
 						<div class="mb-3 row">
-							<div class="input-group">
-								<label for="inputPassword" class="col-sm-2 col-form-label">전화번호</label>
+							<div class="input-group mb-3">
+								<label for="inputPassword" class="input-group-text fixed-width-label">전화번호</label>
 								<input type="text" class="form-control" name="phone" id="phone"
-									placeholder="숫자만 입력하세요." maxlength="11"
+									placeholder="전화 번호를 입력해주세요." maxlength="11"
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
 							</div>
 						</div>
 					</div>
-					<div class="d-flex justify-content-center">
-						<input type="submit" class="btn btn-danger" value="전화번호 변경"
+				
+					
+					
+					
+					<div class="d-flex justify-content-center" style ="margin-left:500px;">
+						<input type="submit" class="btn btn-success" value="전화번호 변경"
 							onclick="return PhoneCheck();">
 					</div>
 					<div></div>
 				</form>
-
+		</div>
+					</div>
+		 <h2 class="title">비밀번호 변경</h2>
+				<div class="join_form">
 				<form action="/UpdateService.do" method="post" name="ChangeFrm">
 					<div class="mb-3 row">
-						<div class="input-group">
-							<label for="inputPassword" class="col-sm-2 col-form-label">새
+						<div class="input-group mb-3">
+							<label for="inputPassword" class="input-group-text fixed-width-label">새
 								비밀번호 </label>
-							<div class="col-sm-10">
+							
 								<input type="text" class="form-control" name="password"
 									id="password" placeholder="20자 이하" maxlength="20">
-							</div>
+							
 						</div>
 					</div>
 
 
 
 					<div class="mb-3 row">
-						<div class="input-group">
-							<label for="inputPassword" class="col-sm-2 col-form-label">새
+						<div class="input-group mb-3">
+							<label for="inputPassword" class="input-group-text fixed-width-label">새
 								비밀번호 확인</label>
-							<div class="col-sm-10">
+							
 								<input type="text" class="form-control" name="passwordc"
 									id="passwordc" placeholder="20자 이하" maxlength="20">
-							</div>
+							
 						</div>
 					</div>
 
-					<div class="col align-self-center">
-						<input class="btn btn-danger" value="비밀번호 변경"
+					<div class="col align-self-center" style ="margin-left:500px;">
+						<input class="btn btn-success" value="비밀번호 변경"
 							onclick="return joinCheck();" type="submit">
 					</div>
 				</form>
 			</div>
-		</div>
 	</div>
 
 

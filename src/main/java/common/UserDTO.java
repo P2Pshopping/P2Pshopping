@@ -19,8 +19,37 @@ public class UserDTO {
 	private int districtId; // 동(위치)
 	private String auth ; 	//권한부여
 	private java.sql.Timestamp createDate; 	//가입일자
+
+	private int active; //비활성
+// 	private int productCount;
+// 	private int likeCount;
+// 	private int boardCount;
 	
 	
+// 	public int getBoardCount() {
+// 		return boardCount;
+// 	}
+
+// 	public void setBoardCount(int boardCount) {
+// 		this.boardCount = boardCount;
+// 	}
+
+// 	public int getLikeCount() {
+// 		return likeCount;
+// 	}
+
+// 	public void setLikeCount(int likeCount) {
+// 		this.likeCount = likeCount;
+// 	}
+
+// 	public int getProductCount() {
+// 		return productCount;
+// 	}
+
+// 	public void setProductCount(int productCount) {
+// 		this.productCount = productCount;
+// 	}
+
 	public UserDTO() {
 	}// 기본 생성자 (규약 3번)
 

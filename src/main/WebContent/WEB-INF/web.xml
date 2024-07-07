@@ -199,18 +199,6 @@
     <servlet-name>SiteTrafficServlet</servlet-name>
     <url-pattern>/track</url-pattern>
   </servlet-mapping>
-
-    <servlet>
-     <description></description>
-    <display-name>ItemList</display-name>
-    <servlet-name>ItemList</servlet-name>
-    <servlet-class>itemList.ItemListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ItemList</servlet-name>
-    <url-pattern>/itemList/ItemList.do</url-pattern>
-  </servlet-mapping>
-
   <servlet>
     <servlet-name>ReviewListServlet</servlet-name>
     <servlet-class>review.ReviewListServlet</servlet-class>
@@ -292,4 +280,15 @@
     <url-pattern>/ChangePwd</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <description></description>
+    <display-name>ProductCount</display-name>
+    <servlet-name>ProductCount</servlet-name>
+    <servlet-class>Count.ProductCount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductCount</servlet-name>
+    <url-pattern>/ProductCount</url-pattern>
+  </servlet-mapping>
 </web-app>
+

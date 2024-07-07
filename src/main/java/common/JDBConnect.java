@@ -101,4 +101,10 @@ public class JDBConnect {
 		}
 	}
 
+	public int update(UserDTO dto) {
+		int cnt = 0;
+		return cnt;
+	}
+
+
 }

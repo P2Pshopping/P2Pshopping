@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,12 +107,12 @@
 									<%-- 찜 링크 보이기 --%>
 									<a
 										href="${pageContext.request.contextPath}/Favor/favorList.jsp"
-										class="bi bi-suit-heart-fill"
-										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;">찜
+										class="bi bi-suit-heart-fill" id = "favor"
+										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;" > 찜
 									</a>
 								</c:otherwise>
 							</c:choose>
-							<a href="${pageContext.request.contextPath}/user?cmd=checkAgain"
+							<a href="${pageContext.request.contextPath}/Change/Change.jsp"
 								class="bi bi-gear-fill"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">정보수정
 							</a>
@@ -130,7 +131,7 @@
 								class="bi bi-box-arrow-in-right btn btn-success btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								Login </a>
-							<a href="${pageContext.request.contextPath}/Join/join.jsp"
+							<a href="${pageContext.request.contextPath}/agree/agree.jsp"
 								class="bi bi-person-plus-fill btn btn-primary btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								create account </a>
@@ -145,6 +146,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<form name= list method= "get" >
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="${pageContext.request.contextPath}/Main/Mainpage.jsp">홈</a></li>
@@ -159,16 +161,17 @@
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							
 							
-								<form name= list method= "get" >
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Main/ItemList.jsp">상품목록</a></li>
+								
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/itemList/ItemList.do">상품목록</a></li>
 								
 								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
 
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>
-							</form></ul></li>
+							</ul></li>
 							
 					</ul>
+					</form>
 					<form class="d-flex">
 						<input class="form-control me-2" id="autocompleteInput"
 							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."

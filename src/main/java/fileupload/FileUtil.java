@@ -16,6 +16,7 @@ import jakarta.servlet.http.Part;
 
 public class FileUtil {
 	public static String uploadFile(HttpServletRequest req, String sDirectory) throws ServletException, IOException {
+
 	    Part part = req.getPart("ofile");
 	    String submittedFileName = part.getSubmittedFileName();
 	    
@@ -26,6 +27,16 @@ public class FileUtil {
 	    }
 	    
 	    return null;
+
+// 		Part part = req.getPart("ofile");
+// 		String partHeader = part.getHeader("content-disposition");
+// 		String[] phArr = partHeader.split("filename=");
+// 		String originalFileName = phArr[1].trim().replace("\"", "");
+// 		if (!originalFileName.isEmpty()) {
+// 			part.write(sDirectory + File.separator + originalFileName);
+// 		}
+// 		return originalFileName;
+
 	}
 
 	public static String renameFile(String sDirectory, String fileName) {

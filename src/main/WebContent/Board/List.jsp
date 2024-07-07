@@ -167,6 +167,7 @@ body {
 				</div>
 			</div>
 
+
 			<div id="right-sidebar">
 				<p>인기글</p>
 				<c:forEach items="${likePosts}" var="post">
@@ -181,6 +182,7 @@ body {
 			</div>
 		</div>
 	</div>
+
 	<jsp:include page="../layout/Footer.jsp" />
 
 	<script

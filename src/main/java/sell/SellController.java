@@ -69,7 +69,7 @@ public class SellController extends HttpServlet {
 
                         try {
                             part.write(uploadPath);
-                            fileNames.add("uploads/" + fileName);
+                            fileNames.add("/uploads/" + fileName);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

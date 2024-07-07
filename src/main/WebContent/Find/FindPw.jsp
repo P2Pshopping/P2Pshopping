@@ -36,41 +36,47 @@
 		<div class="row g-3">
 	
     <div style = "magin-bottom:100px;">
-    <h2 style ="magin-top:10px;margin-left:15px; font-size: 25px;">  비밀번호를 찾습니다. </h2>
+    <h2 style ="magin-top:10px; font-size: 25px; ">  비밀번호 찾기  </h2>
     </div>
     <div class="mb-3 row">
-    <div class= "blank">
-    </div>
-    <div class="input-group">
-    <label for="inputPassword" class="col-sm-2 col-form-label">아이디</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name = "username" id="inputPassword">
-      </div>
-      </div>
-      </div>
-       <div class="mb-3 row">
-        <div class="input-group">
-    <label for="inputPassword" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" id="inputPassword">
-      </div>
-      </div>
-     </div>
-      
-
-<div class="mb-3 row">
-<div class="input-group">
-    <label for="inputPassword" class="col-sm-2 col-form-label">휴대전화</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name= "phone" id="inputPassword">
-</div>
-</div>
-</div>
-</div>
-   <div class="col align-self-center" style = "margin-left:500px;, margin-bottom:5000px;">
    
-      <button type="submit" class="btn btn-danger" id="btn1">비밀번호 재설정</button>
+    <div class="input-group mb-3" style="width: 600px;  margin-top:20px;">
+    <label for="username" class="input-group-text fixed-width-label">아이디</label>
+  
+      <input type="text" class="form-control" name = "username" id="username" placeholder="아이디를 입력해주세요." maxlength="10">
+     
+      </div>
+      </div>
+   
+      <div class="mb-3 row">
+						<div class="input-group mb-3"style="width: 600px; ">
+							<label for="name"class="input-group-text fixed-width-label">이름</label> 
+								<input 	type="text" class="form-control" id="inputName" name="name"
+								placeholder="성명을 입력해주세요." maxlength="5">
+						</div>
+					</div>
+					
+					<div class="mb-3 row" style="margin-bottom:10px;">
+						<div class="input-group mb-3" style="width: 600px;margin-bottom:10px;">
+							<label for="phone" class="input-group-text fixed-width-label">휴대전화</label>
+							<!-- <div class="col-sm-10"> -->
+								<input type="text" name="phone" class="form-control"
+									id="phone" placeholder="전화 번호를 입력해주세요." maxlength="11"  oninput="formatDate(this)">
+							<!-- </div> -->
+						</div>
+						
+					</div>
+
+
 </div>
+
+   
+  <div class="col align-self-center"
+					style="margin-left: 440px; , margin-bottom: 5000px;">
+
+					<button type="submit" class="btn btn-success" id="btn">비밀번호 찾기</button>
+
+				</div>
 </form>
   </div>
   </div>
@@ -79,7 +85,7 @@
 	
 
 
-<div style = "margin-top:20%;">
+<div style = "margin-top:25%;">
 <%@include file="../layout/Footer.jsp"%>
 </div>
 <script>
