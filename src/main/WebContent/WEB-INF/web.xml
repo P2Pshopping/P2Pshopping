@@ -253,6 +253,14 @@
     <servlet-name>ImageServlet</servlet-name>
     <url-pattern>/review/images/*</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ReviewLikeController</servlet-name>
+    <servlet-class>review.LikeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewLikeController</servlet-name>
+    <url-pattern>/review/like</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>ChangeService</display-name>

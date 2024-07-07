@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import common.DBConnPool;
+import mvcboard.MVCBoardDTO;
 
 //<paging>
 // 1. DBConnPool 클래스의 getConnection() 메서드를 추가하여 
@@ -194,8 +195,8 @@ public class ReviewDAO2 extends DBConnPool {
 	// 리뷰 작성
 	public int insertReview(ReviewDTO review) {
 		int result = 0;
-		String sql = "INSERT INTO review (transactionId, title, detail, rating, ofile, sfile, createDate, updateDate) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE)";
+		String sql = "INSERT INTO review (transactionId, title, detail, rating, ofile, sfile, writerId, createDate, updateDate) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE)";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, review.getTransactionId());
@@ -204,6 +205,7 @@ public class ReviewDAO2 extends DBConnPool {
 			psmt.setInt(4, review.getRating());
 			psmt.setString(5, review.getOfile());
 			psmt.setString(6, review.getSfile());
+			psmt.setInt(7, review.getWriterId());
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -238,17 +240,19 @@ public class ReviewDAO2 extends DBConnPool {
 	public ReviewDTO getReviewById(int id) {
 		ReviewDTO review = null;
 		String sql = "SELECT r.id, r.transactionId, r.title, r.detail, r.rating, r.ofile, r.sfile, "
-				+ "r.views, r.likes, r.createDate, r.updateDate, "
+				+ "r.views, r.likes, r.writerID, r.createDate, r.updateDate, "
 				+ "t.transaction_date, s.name AS sellerName, b.name AS buyerName, p.productName " + "FROM review r "
 				+ "JOIN transactions t ON r.transactionId = t.id " + "JOIN users s ON t.sellerId = s.id "
 				+ "JOIN users b ON t.buyerId = b.id " + "JOIN product p ON t.productId = p.id " + "WHERE r.id = ?";
 		try {
-			psmt = con.prepareStatement(sql);
+			 psmt = getConnection().prepareStatement(sql);
+//			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				review = new ReviewDTO();
 				review.setId(rs.getInt("id"));
+				review.setWriterId(rs.getInt("writerId"));
 				review.setTransactionId(rs.getInt("transactionId"));
 				review.setTitle(rs.getString("title"));
 				review.setDetail(rs.getString("detail"));
@@ -277,7 +281,8 @@ public class ReviewDAO2 extends DBConnPool {
 		int result = 0;
 		String sql = "DELETE FROM review WHERE id = ?";
 		try {
-			psmt = con.prepareStatement(sql);
+			psmt = getConnection().prepareStatement(sql);
+//			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, id);
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
@@ -292,7 +297,8 @@ public class ReviewDAO2 extends DBConnPool {
 	public void updateVisitCount(int id) {
 		String query = "UPDATE review SET views = views + 1 WHERE id = ?";
 		try {
-			psmt = con.prepareStatement(query);
+//			psmt = con.prepareStatement(query);
+			psmt = getConnection().prepareStatement(query);
 			psmt.setInt(1, id);
 			psmt.executeUpdate();
 		} catch (SQLException e) {
@@ -302,14 +308,28 @@ public class ReviewDAO2 extends DBConnPool {
 		}
 	}
 
+//	public void updateLikesCount(String id) {
+//		String query = "UPDATE boards SET likes=likes+1 WHERE id=?";
+//		try {
+//			psmt = con.prepareStatement(query);
+//			psmt.setString(1, id);
+//			psmt.executeUpdate();
+//		} catch (Exception e) {
+//			System.out.println("게시물 좋아요 증가 중 예외 발생");
+//			e.printStackTrace();
+//		}
+//	}
+	
 	// 좋아요 증가
 	public void updateLikesCount(int id) {
 		String query = "UPDATE review SET likes = likes + 1 WHERE id = ?";
 		try {
-			psmt = con.prepareStatement(query);
+			psmt = getConnection().prepareStatement(query);
+//			psmt = con.prepareStatement(query);
 			psmt.setInt(1, id);
 			psmt.executeUpdate();
 		} catch (SQLException e) {
+			System.out.println("게시물 좋아요 증가 중 예외 발생");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -321,7 +341,8 @@ public class ReviewDAO2 extends DBConnPool {
 		int likes = 0;
 		String query = "SELECT likes FROM review WHERE id = ?";
 		try {
-			psmt = con.prepareStatement(query);
+			psmt = getConnection().prepareStatement(query);
+//			psmt = con.prepareStatement(query);
 			psmt.setInt(1, id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
@@ -334,7 +355,76 @@ public class ReviewDAO2 extends DBConnPool {
 		}
 		return likes;
 	}
+//////////////////////////////////////
+	public int getWriterIdByUsername(String username) {
+		int writerId = 0;
+		String query = "SELECT id FROM users  WHERE username=?";
+		try {
+			psmt = getConnection().prepareStatement(query);
+//			psmt = con.prepareStatement(query);
+			psmt.setString(1, username);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				writerId = rs.getInt("id");
+			}
+		} catch (SQLException e) {
+			System.out.println("작성자 ID 조회 중 예외 발생");
+			e.printStackTrace();
 
+		}
+		return writerId;
+	}
+	
+	public String getNameByWriterId(int writerId) {
+		String name = null;
+		String query = "SELECT name FROM users WHERE id = ?";
+
+		try {
+			psmt = getConnection().prepareStatement(query);
+//			psmt = con.prepareStatement(query);
+			psmt.setInt(1, writerId);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				name = rs.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return name;
+	}
+	
+	public List<ReviewDTO> get3likes() {
+		List<ReviewDTO> likePosts = new ArrayList<>();
+		String query = "SELECT * FROM review ORDER BY likes DESC FETCH FIRST 3 ROWS ONLY";
+
+		try {
+			psmt = getConnection().prepareStatement(query);
+//			psmt = con.prepareStatement(query);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				dto.setId(rs.getInt("id"));
+				dto.setWriterId(rs.getInt("writerId"));
+				dto.setTitle(rs.getString("title"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setCreateDate(rs.getTimestamp("createDate"));
+				dto.setOfile(rs.getString("ofile"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setViews(rs.getInt("views"));
+				dto.setLikes(rs.getInt("likes"));
+				likePosts.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return likePosts;
+	}
+	
+	
 //	// 추가: 자원 해제 메서드
     private void closeResource(ResultSet rs, PreparedStatement psmt, Connection con) {
         try {

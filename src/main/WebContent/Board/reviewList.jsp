@@ -13,9 +13,9 @@
 	crossorigin="anonymous">
 <title>거래 후기 게시판</title>
 <style>
-body {
+/* body {
 	font-size: 13px;
-}
+} */
 
 #container {
 	width: 1200px;
@@ -24,14 +24,20 @@ body {
 }
 
 #contents {
+width: 800px;
 	flex-grow: 1;
 	padding: 0px;
 	margin: 20px;
 }
 
-#gallery img {
+/* #gallery img {
 	width: 50%;
 	height: auto;
+} */
+#gallery img {
+	width: 100%;
+	height: auto;
+	display: block;
 }
 
 #caption {
@@ -129,7 +135,8 @@ body {
 }
 </style>
 </head>
-<body>
+<body 
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
 	<jsp:include page="../layout/Header.jsp" />
 	<div id="container">
 		<div class="flex-container">

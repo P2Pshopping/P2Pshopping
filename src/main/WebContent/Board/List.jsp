@@ -128,7 +128,7 @@ body {
 				<div class="btn-group-vertical" role="group"
 					aria-label="Vertical button group">
 					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;">아기사진</button>
-					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;">거래후기</button>
+					<button type="button" class="btn btn-outline-warning" onclick="location.href='../review/list';" style="font-size: 18px;">거래후기</button>
 				</div>
 			</div>
 

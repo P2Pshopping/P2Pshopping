@@ -141,3 +141,9 @@ ADD (
     likes NUMBER DEFAULT 0 NOT NULL
 );
 -----------------------------
+(ver 1.3.7)
+
+ALTER TABLE review
+ADD writerId NUMBER NOT NULL,
+ADD CONSTRAINT fk_review_writer FOREIGN KEY (writerId) REFERENCES users(id);
+
