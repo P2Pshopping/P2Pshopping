@@ -133,6 +133,56 @@ body {
 	margin-top: 10px;
 	text-align: center;
 }
+
+.comment-container {
+	margin-top: 20px;
+	padding: 15px;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+}
+
+.comment-item {
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.comment-item:last-child {
+	border-bottom: none;
+}
+
+.comment-header {
+	font-weight: bold;
+	color: #555;
+}
+
+.comment-content {
+	margin-top: 5px;
+	color: #333;
+}
+
+.comment-form {
+	margin-top: 15px;
+	display: flex;
+}
+
+.comment-date {
+	margin-left: auto;
+}
+
+.comment-actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.comment-form input[type="text"] {
+	flex-grow: 1;
+	margin-right: 10px;
+}
+
+#view {
+	margin-left: auto;
+}
 </style>
 </head>
 <body>
@@ -157,7 +207,8 @@ body {
 						<li><h3>제목 : ${dto.title }</h3></li>
 						<li><p>작성자 : ${writerName }</p></li>
 						<li><p>조회수 ${dto.views } | 추천수 ${dto.likes } | 작성시간
-								${dto.createDate }</p></li>
+								${dto.createDate }</p>
+						</li>
 						<li><p>
 								<img src="../uploads/${dto.sfile}" style="max-width: 100%;" /><br />
 								${dto.content}
@@ -178,7 +229,6 @@ body {
 				<div id="action-buttons">
 					<c:if test="${sessionScope.id == dto.writerId}">
 						<input type="hidden" name="id" value="${dto.id}">
-						<!--  <input onclick="location.href='../mvcboard/edit.do';" class="btn btn-primary" type="submit" value="수정">-->
 						<button class="btn btn-primary" type="button"
 							onclick="location.href='../mvcboard/edit.do?mode=edit&id=${param.id }';">수정하기</button>
 					</c:if>
@@ -193,6 +243,29 @@ body {
 					</c:if>
 				</div>
 
+
+				<!-- 댓글 표시 -->
+				<div class="comment-container mt-4">
+					<h5>전체 댓글 ${commentList.size()}개</h5>
+					<c:forEach items="${commentList}" var="comment">
+						<div class="comment-item">
+							<div>
+								<span>${comment.cm_writerName} </span><br> <span
+									class="comment-content">${comment.cm_content}</span>
+							</div>
+							<div class="comment-actions">
+								<span class="comment-date">${comment.cm_createDate}</span>
+								<form action="../mvcboard/deleteComment.do" method="post"
+									style="display: inline;">
+									<input type="hidden" name="commentId" value="${comment.cm_id}">
+									<input type="hidden" name="boardId" value="${dto.id}">
+									<button type="submit" class="btn btn-outline-danger btn-sm">삭제</button>
+								</form>
+							</div>
+						</div>
+					</c:forEach>
+
+				</div>
 				<div class="mt-3">
 					<form action="../mvcboard/addComment.do" method="post">
 						<input type="hidden" name="id" value="${dto.id}"> <input
@@ -200,8 +273,8 @@ body {
 						<button type="submit" class="btn btn-secondary mt-1">등록</button>
 					</form>
 				</div>
-
 			</div>
+
 
 			<div id="right-sidebar">
 				<p>인기글</p>
