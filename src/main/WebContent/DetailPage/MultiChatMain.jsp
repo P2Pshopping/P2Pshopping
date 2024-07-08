@@ -17,7 +17,7 @@
 			}
 
 			window.open("ChatWindow.jsp?chatId=" + id.value, "",
-					"width=300px,height=400px,left=750px,top=350px");
+					"width=400px,height=500px,left=750px,top=350px");
 		}
 	</script>
 	<input type="text"

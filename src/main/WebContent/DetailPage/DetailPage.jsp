@@ -192,38 +192,28 @@ PJ2DAO dao = new PJ2DAO();
 PJ2DTO dto = new PJ2DTO();
 
 
-if(request.getParameter("sellerid")!= null){
- String	sellerid=request.getParameter("sellerid");
+
+ String	sellerid=request.getParameter("sellerid");  //앞에서 판매글 id 가져와야함.
  dto=dao.img(sellerid);	
- 
 
-}else{
-	session.setAttribute("seller", "sell"); //판매자 이름
-	session.setAttribute("sellerid", "22"); //판매 글 고유 번호
-	session.setMaxInactiveInterval(30000);
-	
-	
-
-	String sid = (String) session.getAttribute("sellerid");
-	String bid = (String) session.getAttribute("username");
- 	 dto = dao.img(sid); /* 기억해라 애송이 이거다 */
-}
-session.setAttribute("seller", "sell");
-session.setAttribute("username", "42");
+session.setAttribute("seller", "sell");  //판매자 닉네임
+session.setAttribute("bid", "42");  //구매자 이름
 
 String sid = (String) session.getAttribute("sellerid");
-String bid = (String) session.getAttribute("username");
+String bid = (String) session.getAttribute("bid");
 
+String bname =(String) session.getAttribute("username"); 
 
 
 session.setAttribute("suid", "43"); //판매자의 아이디 번호.
-String suid =(String)session.getAttribute("suid");
+String suid = dto.getWriterid();
 PJ2DTO dto2 = dao.more();
 PJ2DTO dto3 = dao.ADRS(suid);
 String[] f = Arrays.copyOf(dto2.getF(), 4);
 String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
 PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 안함 1이면 함
+
 
 %>
 
@@ -432,9 +422,7 @@ System.out.println(bid);
 
 	<div class="end" style="float: right;">
 		<b style="border: solid 1px black; width: auto; height: auto;"
-			id=favorite;> <%
- String seller = (String) session.getAttribute("seller"); //판매자 이름
- out.print(seller);%>
+			id=favorite;> <%=bname%>
  &nbsp;&nbsp;&nbsp;
 		</b>
 	</div>
@@ -445,16 +433,41 @@ System.out.println(bid);
 	
 	<br />
 	<br />	<br />	
-	<div class="container text-center">  <!-- 제목 -->
+	
+	
+	
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- 제목 -->
+            <input type="text" name="title" value="<%=dto.getProductName()%>"
+                class="form-control mb-4" style="font-size: 30px; text-align: center;" readonly>
+
+            <!-- 상세 내용 -->
+            <textarea name="content" style="font-size:20px;" class="form-control mb-4" rows="20" readonly><%=dto.getDetail()%></textarea>
+
+            <!-- 가격 -->
+            <input type="text" name="price" value="가격: <%=dto.getPrice()%>"
+                class="form-control mb-4" style="font-size: 24px; text-align: center;" readonly>
+        </div>
+    </div>
+</div>
+
+	
+	
+	<%-- <div class="container text-center">  <!-- 제목 -->
 		<input type="text" name="title" value="<%=dto.getProductName()%>"   
 			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
 			readonly> <input type="text" name="content"
 			value="<%=dto.getDetail()%>"
 			style="width: 50%; height: 500px; px; font-size: 30px; text-align: center; border: 2px solid black;"
 			readonly>
+			<input type="text" name="price"
+			value="가격:<%=dto.getPrice()%>"
+			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
+			readonly>
 			
-			
-	</div>
+	</div> --%>
 
 	<br />
 
@@ -725,16 +738,16 @@ function removeAllChildNods(el) {
 	<div class="grid text-center">
 		<div class="row"></div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 	</div>
 
