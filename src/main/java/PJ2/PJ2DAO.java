@@ -4,7 +4,7 @@ import common.JDBConnect;
 
 public class PJ2DAO extends JDBConnect {
 	
-	public PJ2DTO img(String sid) {  //게시물 출력
+	public PJ2DTO img(String sid2) {  //게시물 출력
 					//판매글 id
 		PJ2DTO dto = new PJ2DTO();
 		
@@ -14,7 +14,7 @@ public class PJ2DAO extends JDBConnect {
 			
 	try{
 		psmt = con.prepareStatement(query);
-		psmt.setString(1, sid);
+		psmt.setString(1, sid2);
 		rs = psmt.executeQuery();
 		
 		if(rs.next()){
@@ -73,7 +73,7 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 	
-	public PJ2DTO favorite(String bid) {
+	public PJ2DTO favorite(int bid) {
 		PJ2DTO dto5 = new PJ2DTO();
 		
 		String query = "SELECT * FROM FAVORITE WHERE USERID=?";
@@ -81,7 +81,7 @@ public class PJ2DAO extends JDBConnect {
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, bid);
+			psmt.setInt(1, bid);
 			rs = psmt.executeQuery();
 			int i =0;
 		
@@ -129,7 +129,7 @@ public class PJ2DAO extends JDBConnect {
 	
 	
 	
-	public PJ2DTO desc(String bid) {
+	public PJ2DTO desc(int bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
 	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
@@ -137,7 +137,7 @@ public class PJ2DAO extends JDBConnect {
 
 	    try {
 	        psmt = con.prepareStatement(query);
-	        psmt.setString(1, bid);
+	        psmt.setInt(1, bid);
 	        rs = psmt.executeQuery();
 
 	        int i = 0;
@@ -181,7 +181,7 @@ public class PJ2DAO extends JDBConnect {
 	    return dto5;
 	}
 
-	public PJ2DTO asc(String bid) {
+	public PJ2DTO asc(int bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
 	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
@@ -189,7 +189,7 @@ public class PJ2DAO extends JDBConnect {
 
 	    try {
 	        psmt = con.prepareStatement(query);
-	        psmt.setString(1, bid);
+	        psmt.setInt(1, bid);
 	        rs = psmt.executeQuery();
 
 	        int i = 0;
@@ -277,6 +277,7 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 
+
 	public int likedelete(String sid, String bid) {
 		int result = 0;
 	
@@ -296,15 +297,15 @@ public class PJ2DAO extends JDBConnect {
 	
 	
 	
-	public PJ2DTO likesearch(String sid,String bid) { //판매글 번호, 구매자 번호
+	public PJ2DTO likesearch(int sid,int bid) { //판매글 번호, 구매자 번호
 		PJ2DTO dto4 = new PJ2DTO();
 		
 		String query = "SELECT * FROM FAVORITE WHERE USERID = ? AND PRODUCTID = ? ";
 				
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, bid);
-			psmt.setString(2, sid);
+			psmt.setInt(1, bid);
+			psmt.setInt(2, sid);
 			rs = psmt.executeQuery();
 		
 		if(rs.next()) {
@@ -321,12 +322,56 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 
-
+	
+	public int sell(int sid) {  //판매글 번호 , 구매자 이름
+		int result = 0;
+	
+		String query ="UPDATE PRODUCT SET SOLD= '1' WHERE PRODUCT.ID = ?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, sid);
+			result = psmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("판매 완료 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
 	
 	
-	
-	
-	
+	public int sell2(int sid,String bidname) {
+			int result = 0;					         //구매자 id
+			int bid = (Integer) null;
+		String query = 	"SELECT ID FROM USERS WHERE USERS.USERNAME = ? ";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, bidname);
+			rs = psmt.executeQuery();
+		if(rs.next()) {
+			 bid = rs.getInt("ID");
+		}
+		
+		}catch(Exception e) {
+			System.out.println("판매 완료 중 예외 발생");
+			e.printStackTrace();
+		}
+			
+		String query2 = "Insert into TRANSACTIONS(USERID, PRODUCTID,CREATEDATE) "
+				+ " VALUES(?,?,SYSDATE)";
+		try {
+			psmt = con.prepareStatement(query2);
+			psmt.setInt(1,bid);
+			psmt.setInt(2, sid);
+			result = psmt.executeUpdate();
+		}catch(Exception e){
+			System.out.println("판매 완료 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 	

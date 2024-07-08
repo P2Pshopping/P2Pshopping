@@ -17,7 +17,7 @@
 			}
 
 			window.open("ChatWindow.jsp?chatId=" + id.value, "",
-					"width=400px,height=500px,left=750px,top=350px");
+					"width=400px,height=550px,left=750px,top=350px");
 		}
 	</script>
 	<input type="text"
@@ -25,6 +25,6 @@
 out.print(username);%>
 		id="chatId" style="display: none;" />
 	<button class="btn btn-warning" onclick="chatWinOpen();"
-		style="width: 100px; height: 50px; float: right;">채팅 참여</button>
+		style="width: 100px; height: 50px; float: right; font-family: 'Godo', sans-serif;">채팅 참여</button>
 </body >
 </html>
