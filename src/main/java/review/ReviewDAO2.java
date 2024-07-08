@@ -294,19 +294,30 @@ public class ReviewDAO2 extends DBConnPool {
 	}
 
 	// 조회수 증가
-	public void updateVisitCount(int id) {
-		String query = "UPDATE review SET views = views + 1 WHERE id = ?";
-		try {
-//			psmt = con.prepareStatement(query);
-			psmt = getConnection().prepareStatement(query);
-			psmt.setInt(1, id);
-			psmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-	}
+//	public void updateVisitCount(int id) {
+//		String query = "UPDATE review SET views = views + 1 WHERE id = ?";
+//		try {
+////			psmt = con.prepareStatement(query);
+//			psmt = getConnection().prepareStatement(query);
+//			psmt.setInt(1, id);
+//			psmt.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//	}
+	
+	// 조회수 증가
+    public void updateVisitCount(int id) {
+        String query = "UPDATE review SET views = views + 1 WHERE id = ?";
+        try (Connection conn = getConnection(); PreparedStatement psmt = conn.prepareStatement(query)) {
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 //	public void updateLikesCount(String id) {
 //		String query = "UPDATE boards SET likes=likes+1 WHERE id=?";
@@ -321,21 +332,32 @@ public class ReviewDAO2 extends DBConnPool {
 //	}
 	
 	// 좋아요 증가
-	public void updateLikesCount(int id) {
-		String query = "UPDATE review SET likes = likes + 1 WHERE id = ?";
-		try {
-			psmt = getConnection().prepareStatement(query);
-//			psmt = con.prepareStatement(query);
-			psmt.setInt(1, id);
-			psmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("게시물 좋아요 증가 중 예외 발생");
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-	}
+//	public void updateLikesCount(int id) {
+//		String query = "UPDATE review SET likes = likes + 1 WHERE id = ?";
+//		try {
+//			psmt = getConnection().prepareStatement(query);
+////			psmt = con.prepareStatement(query);
+//			psmt.setInt(1, id);
+//			psmt.executeUpdate();
+//		} catch (SQLException e) {
+//			System.out.println("게시물 좋아요 증가 중 예외 발생");
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//	}
 
+	// 좋아요 증가
+    public void updateLikesCount(int id) {
+        String query = "UPDATE review SET likes = likes + 1 WHERE id = ?";
+        try (Connection conn = getConnection(); PreparedStatement psmt = conn.prepareStatement(query)) {
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	// 좋아요 수 조회
 	public int getLikesCount(int id) {
 		int likes = 0;
@@ -417,6 +439,7 @@ public class ReviewDAO2 extends DBConnPool {
 				dto.setLikes(rs.getInt("likes"));
 				likePosts.add(dto);
 			}
+	        System.out.println("Number of popular posts fetched: " + likePosts.size()); // 디버깅 로그 추가
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

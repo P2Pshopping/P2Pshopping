@@ -6,23 +6,37 @@ import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//@WebServlet("/review/view")
+@WebServlet("/review/view")
 public class ReviewViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ReviewDAO2 reviewDAO = new ReviewDAO2();
         
+        // 조회수 증가 (좋아요 클릭이 아닌 경우에만)
+        String likeParam = request.getParameter("like");
+//        System.out.println("Received like parameter: " + likeParam); // 로그 추가
+        
      // 조회수 증가 (좋아요 클릭이 아닌 경우에만)
-        if (request.getParameter("like") == null) {
-        	reviewDAO.updateVisitCount(id);  // 조회수 1 증가
+//        if (request.getParameter("like") == null) {
+//        	reviewDAO.updateVisitCount(id);  // 조회수 1 증가
+//        }
+        
+//        if (request.getParameter("like") == null) {
+            if (likeParam == null) {
+//        	System.out.println("Like parameter is null, updating visit count.");
+            reviewDAO.updateVisitCount(id);  // 조회수 1 증가
+        } else {
+            System.out.println("Like parameter is present, not updating visit count.");
         }
        
         ReviewDTO review = reviewDAO.getReviewById(id);
+        System.out.println("Review details: " + review); // 리뷰 정보 로그 추가
 
         if (review == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Review not found with id: " + id);
@@ -31,9 +45,11 @@ public class ReviewViewServlet extends HttpServlet {
         
         // 작성자 이름 가져오기
         String writerName = reviewDAO.getNameByWriterId(review.getWriterId());
+        System.out.println("Writer name: " + writerName); // 작성자 이름 로그 추가
 
         // 인기 게시글 가져오기
         List<ReviewDTO> likePosts = reviewDAO.get3likes();
+        System.out.println("Popular posts: " + likePosts); // 인기 게시글 로그 추가
 
         reviewDAO.close();
 

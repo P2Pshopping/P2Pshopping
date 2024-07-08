@@ -157,7 +157,8 @@ body {
                     <p>평점 : ${review.rating} | 거래 날짜 : ${review.transactionDate}</p>
                     <p><strong>상세 내용:</strong><br>${review.detail}</p>
                     <div id="action-buttons">
-                        <form action="../review/like" method="post" style="display: inline;">
+                        <!-- <form action="../review/like" method="post" style="display: inline;"> -->
+                        <form action="${pageContext.request.contextPath}/review/like" method="post" style="display: inline;">
                             <input type="hidden" name="id" value="${review.id}">
                             <button type="submit" class="btn btn-outline-success">
                                 <img src="../Image/ddabong.png" alt="추천" style="width: 50px; height: 50px;">
@@ -177,26 +178,45 @@ body {
                 </c:if>
             </div>
 
-            <div class="mt-3">
+            <%-- <div class="mt-3">
                 <form action="../review/addComment.do" method="post">
                     <input type="hidden" name="id" value="${review.id}">
                     <input type="text" name="content" placeholder="댓글" class="form-control">
                     <button type="submit" class="btn btn-secondary mt-1">등록</button>
                 </form>
-            </div>
+            </div> --%>
+
         </div>
 
-        <div id="right-sidebar">
+<%--         <div id="right-sidebar">
             <p>인기글</p>
             <c:forEach items="${likePosts}" var="post">
                 <a href="../review/view?id=${post.id}">
                     <c:if test="${not empty post.sfile}">
-                        <img alt="${post.title}" src="../review/download.do?ofile=${post.ofile}&sfile=${post.sfile}&id=${post.id}" />
+                        <img alt="${post.title}" src="../review/images/${post.ofile}&sfile=${post.sfile}&id=${post.id}" />
+                        <img alt="${review.title}" src="../review/images/${review.sfile}&sfile=${post.sfile}&id=${post.id}" />
+                    <img src="../review/images/${review.sfile}" alt="${review.ofile}" style="max-width: 100%;" />
                     </c:if>
+                    <p></p>
                     <p>${post.title}</p>
                 </a>
             </c:forEach>
-        </div>
+        </div> --%>
+
+			<div id="right-sidebar">
+				<p>인기글</p>
+                <%-- <c:out value="${fn:length(likePosts)}" /> <!-- 리스트 크기 출력 --> --%>
+				<c:forEach items="${likePosts}" var="post">
+					<a href="../review/view?id=${post.id}"> <c:if
+							test="${not empty post.sfile}">
+							<img alt="${post.title}" src="../review/images/${post.sfile}" />
+						</c:if>
+						<%-- <p>${post.title}</p> --%>
+						<p></p>
+					</a>
+				</c:forEach>
+			</div>
+
     </div>
 </div>
 <jsp:include page="../layout/Footer.jsp" />

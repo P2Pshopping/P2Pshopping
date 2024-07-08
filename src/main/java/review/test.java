@@ -1,90 +1,42 @@
-//package User;
+//@WebServlet("/review/list")
+//public class ReviewListServlet extends HttpServlet {
+//    private static final long serialVersionUID = 1L;
 //
-//import java.io.IOException;
-//import java.io.PrintWriter;
-//import common.UserDTO;
-//import jakarta.servlet.ServletContext;
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.annotation.WebServlet;
-//import jakarta.servlet.http.Cookie;
-//import jakarta.servlet.http.HttpServlet;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//import jakarta.servlet.http.HttpSession;
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        int pageSize = 9; // 한 페이지에 보여줄 리뷰 수
+//        int currentPage = 1; // 기본 페이지 번호
+//        String pageParam = request.getParameter("page");
 //
-//@WebServlet("/login.do") // 이 서블릿을 "/login.do" URL 패턴에 매핑합니다.
-//public class LoginController extends HttpServlet {
-//    private UserDAO userDAO;
-//
-//    @Override
-//    public void init() throws ServletException {
-//        // 서블릿 초기화 메서드, 서블릿이 처음 생성될 때 한 번 호출됩니다.
-//        ServletContext context = getServletContext(); // 서블릿 컨텍스트를 가져옵니다.
-//        userDAO = new UserDAO(context); // UserDAO 객체를 초기화합니다.
-//        System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
-//    }
-//
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        // POST 요청을 처리하는 메서드
-//        String username = request.getParameter("username"); // 요청 파라미터에서 사용자 이름을 가져옵니다.
-//        String password = request.getParameter("password"); // 요청 파라미터에서 비밀번호를 가져옵니다.
-//        String checkbox = request.getParameter("checkbox");
-//
-//        String hashedPassword = userDAO.hashPassword(password); // 입력된 비밀번호를 해시화합니다.
-//        UserDTO user = userDAO.getUserDTO(username, hashedPassword); // 해시된 비밀번호로 사용자 정보를 검증합니다.
-//
-//        PrintWriter out = response.getWriter();
-//        Cookie cookie = new Cookie("username", username);
-//
-//        if (checkbox != null) {
-//            cookie.setMaxAge(60 * 60 * 24 * 7); // 7일 동안 유효한 쿠키
-//        } else {
-//            cookie.setMaxAge(0); // 쿠키 삭제
+//        if (pageParam != null && !pageParam.isEmpty()) {
+//            currentPage = Integer.parseInt(pageParam);
 //        }
-//        response.addCookie(cookie);
 //
-//        if (user != null) {
-//            // 사용자 인증에 성공한 경우
-//            HttpSession session = request.getSession(); // 현재 세션을 가져오거나 새 세션을 생성합니다.
-//            session.setAttribute("username", user.getUsername()); // 세션에 사용자 이름을 저장합니다.
-//            session.setAttribute("name", user.getName());
-//            session.setAttribute("id", user.getId());
-//            session.setAttribute("email", user.getEmail());
-//            session.setAttribute("phone", user.getPhone());
-//            session.setAttribute("address", user.getAddress());
-//            session.setAttribute("password", user.getPassword());
-//            session.setAttribute("kakaoId", user.getKakaoId());
-//            session.setAttribute("naverId", user.getNaverId());
-//            session.setAttribute("provinceId", user.getProvinceId());
-//            session.setAttribute("cityId", user.getCityId());
-//            session.setAttribute("districtId", user.getDistrictId());
-//            session.setAttribute("auth", user.getAuth());
-//            session.setAttribute("createDate", user.getCreateDate());
+//        int start = (currentPage - 1) * pageSize + 1;
+//        int end = currentPage * pageSize;
 //
-//            // 디버깅 메시지 추가
-//            System.out.println("User session set: " + user.getName());
+//        ReviewDAO2 dao = new ReviewDAO2();
+//        int totalReviews = dao.getReviewCount();
+//        List<ReviewDTO> reviews = dao.selectReviews(start, end);
 //
-//            response.sendRedirect("Main/Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
-//        } else {
-//            // 사용자 인증에 실패한 경우
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<script type='text/javascript'>");
-//            out.println("alert('아이디와 비밀번호를 다시 한번 확인해주세요.');");
-//            out.println("window.location.href = 'Login/login.jsp';"); // 이전 페이지로 이동
-//            out.println("</script>");
-//            out.println("</head>");
-//            out.println("<body></body>");
-//            out.println("</html>");
-//        }
-//    }
+//        List<ReviewDTO> likePosts = dao.get3likes();
+//        System.out.println("Popular posts: " + likePosts);
 //
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        // GET 요청을 처리하는 메서드
-//        doPost(request, response); // POST 요청 처리 메서드를 호출하여 동일한 로직을 수행합니다.
+//        dao.close();
+//
+//        int totalPages = (int) Math.ceil((double) totalReviews / pageSize);
+//
+//        System.out.println("totalReviews: " + totalReviews);
+//        System.out.println("totalPages: " + totalPages);
+//        System.out.println("currentPage: " + currentPage);
+//
+//        request.setAttribute("reviews", reviews);
+//        request.setAttribute("totalPages", totalPages);
+//        request.setAttribute("currentPage", currentPage);
+//        request.setAttribute("likePosts", likePosts); // 인기글 리스트 설정
+//
+//        // JSP에 전달하기 전에 리스트 크기 로그 출력
+//        System.out.println("Number of likePosts: " + likePosts.size());
+//
+//        request.getRequestDispatcher("../Board/reviewList.jsp").forward(request, response);
 //    }
 //}
-//
