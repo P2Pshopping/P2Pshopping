@@ -80,7 +80,7 @@
 	margin-left: 20px;
 }
 
-#right-sidebar {
+/* #right-sidebar {
 	width: 150px;
 	margin-bottom: 20px;
 }
@@ -91,7 +91,22 @@
 	width: 75px;
 	height: 75px;
 }
+ */
+#right-sidebar {
+    width: 150px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 20px;
+}
 
+#right-sidebar img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
 .flex-container {
 	display: flex;
 	justify-content: center;
