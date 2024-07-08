@@ -1,161 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<title>거래 후기 상세</title>
-<style>
-body {
-    font-size: 13px;
-    background-color: #f8f9fa;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-#container {
-    max-width: 1200px;
-    padding: 20px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#main-content {
-    display: flex;
-    justify-content: space-between;
-}
-
-#left-sidebar {
-    width: 200px;
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-#contents {
-    width: 800px;
-    margin: 0 auto;
-    position: relative;
-}
-
-#right-sidebar {
-    width: 150px;
-    text-align: center;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-#right-sidebar img {
-    width: 75px;
-    height: 75px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.card {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.card-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 15px;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card-body p {
-    margin-bottom: 10px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-
-#action-buttons {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.paging {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.paging a {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 0px 3px;
-    border: 1px solid #ddd;
-    background-color: #f5f5f5;
-    color: #337ab7;
-    text-decoration: none;
-    border-radius: 3px;
-}
-
-.paging .current {
-    background-color: #337ab7;
-    color: white;
-    border: 1px solid #337ab7;
-}
-
-.no_dot {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.paging a:hover {
-    background-color: #ddd;
-}
-
-.btn-group-vertical .btn {
-    margin-bottom: 10px;
-}
-</style>
-</head>
-<body>
-<jsp:include page="../layout/Header.jsp" />
-<div id="container">
-    <div id="main-content">
-        <div id="left-sidebar">
-            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;">아기사진</button>
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='../review/list';" style="font-size: 18px;">거래후기</button>
-            </div>
-        </div>
-
-        <div id="contents">
-            <div class="card">
-                <div class="card-header">
-                    <h2>${review.title}</h2>
-                </div>
-                <div class="card-body">
-                    <p><strong>상세 내용:</strong> ${review.detail}</p>
-                    <p><strong>평점:</strong> ${review.rating}</p>
-                    <p><strong>거래 날짜:</strong> ${review.transactionDate}</p>
-                    <p><strong>판매자 이름:</strong> ${review.sellerName}</p>
-                    <p><strong>구매자 이름:</strong> ${review.buyerName}</p>
-                    <p><strong>상품 이름:</strong> ${review.productName}</p>
-                    <p><strong>좋아요 : </strong> ${review.likes}</p>
-                    <p><strong>조회수 : </strong> ${review.views}</p>
-                    <p><strong>사진:</strong><br><img src="../review/images/${review.s
+//package User;
+//
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//import common.UserDTO;
+//import jakarta.servlet.ServletContext;
+//import jakarta.servlet.ServletException;
+//import jakarta.servlet.annotation.WebServlet;
+//import jakarta.servlet.http.Cookie;
+//import jakarta.servlet.http.HttpServlet;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
+//import jakarta.servlet.http.HttpSession;
+//
+//@WebServlet("/login.do") // 이 서블릿을 "/login.do" URL 패턴에 매핑합니다.
+//public class LoginController extends HttpServlet {
+//    private UserDAO userDAO;
+//
+//    @Override
+//    public void init() throws ServletException {
+//        // 서블릿 초기화 메서드, 서블릿이 처음 생성될 때 한 번 호출됩니다.
+//        ServletContext context = getServletContext(); // 서블릿 컨텍스트를 가져옵니다.
+//        userDAO = new UserDAO(context); // UserDAO 객체를 초기화합니다.
+//        System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
+//    }
+//
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        // POST 요청을 처리하는 메서드
+//        String username = request.getParameter("username"); // 요청 파라미터에서 사용자 이름을 가져옵니다.
+//        String password = request.getParameter("password"); // 요청 파라미터에서 비밀번호를 가져옵니다.
+//        String checkbox = request.getParameter("checkbox");
+//
+//        String hashedPassword = userDAO.hashPassword(password); // 입력된 비밀번호를 해시화합니다.
+//        UserDTO user = userDAO.getUserDTO(username, hashedPassword); // 해시된 비밀번호로 사용자 정보를 검증합니다.
+//
+//        PrintWriter out = response.getWriter();
+//        Cookie cookie = new Cookie("username", username);
+//
+//        if (checkbox != null) {
+//            cookie.setMaxAge(60 * 60 * 24 * 7); // 7일 동안 유효한 쿠키
+//        } else {
+//            cookie.setMaxAge(0); // 쿠키 삭제
+//        }
+//        response.addCookie(cookie);
+//
+//        if (user != null) {
+//            // 사용자 인증에 성공한 경우
+//            HttpSession session = request.getSession(); // 현재 세션을 가져오거나 새 세션을 생성합니다.
+//            session.setAttribute("username", user.getUsername()); // 세션에 사용자 이름을 저장합니다.
+//            session.setAttribute("name", user.getName());
+//            session.setAttribute("id", user.getId());
+//            session.setAttribute("email", user.getEmail());
+//            session.setAttribute("phone", user.getPhone());
+//            session.setAttribute("address", user.getAddress());
+//            session.setAttribute("password", user.getPassword());
+//            session.setAttribute("kakaoId", user.getKakaoId());
+//            session.setAttribute("naverId", user.getNaverId());
+//            session.setAttribute("provinceId", user.getProvinceId());
+//            session.setAttribute("cityId", user.getCityId());
+//            session.setAttribute("districtId", user.getDistrictId());
+//            session.setAttribute("auth", user.getAuth());
+//            session.setAttribute("createDate", user.getCreateDate());
+//
+//            // 디버깅 메시지 추가
+//            System.out.println("User session set: " + user.getName());
+//
+//            response.sendRedirect("Main/Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
+//        } else {
+//            // 사용자 인증에 실패한 경우
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<script type='text/javascript'>");
+//            out.println("alert('아이디와 비밀번호를 다시 한번 확인해주세요.');");
+//            out.println("window.location.href = 'Login/login.jsp';"); // 이전 페이지로 이동
+//            out.println("</script>");
+//            out.println("</head>");
+//            out.println("<body></body>");
+//            out.println("</html>");
+//        }
+//    }
+//
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        // GET 요청을 처리하는 메서드
+//        doPost(request, response); // POST 요청 처리 메서드를 호출하여 동일한 로직을 수행합니다.
+//    }
+//}
+//
