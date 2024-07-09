@@ -106,26 +106,25 @@
 JDBConnect db = new JDBConnect(); //<% 이건 Java <script>는 jscript...
 PJ2DAO dao = new PJ2DAO();
 PJ2DTO dto = new PJ2DTO();
+String	productid=request.getParameter("productid");  //앞에서 판매글 id 가져와야함.
 
-
- String	sellerid=request.getParameter("sellerid");  //앞에서 판매글 id 가져와야함.
- dto=dao.img(sellerid);	
-
+dto = dao.img(productid);
 session.setAttribute("seller", "sell");  //판매자 닉네임
 
 session.setAttribute("bid", "42");  //구매자 고유 번호
 
-if(session.getAttribute("productid") ==null){
+
+if(request.getParameter("productid")==null){
 session.setAttribute("productid", "43");
 System.out.println("43으로 설정");
 }else{
-String sid = (String)session.getAttribute("productid");
-System.out.println(sid+"로 설정");
-}
+String sid = productid;
+System.out.println(sid+"으로 설정");
+} 
 
-String sid = (String)session.getAttribute("productid");
+String sid = productid;  //이건 파라메터로 가져와야함
 int sid2 = Integer.parseInt(sid);
-String bid = (String)session.getAttribute("bid");
+String bid = (String)session.getAttribute("bid"); //이건 세션 맞음
 int bid2 = Integer.parseInt(bid);
 String username =(String) session.getAttribute("username"); 
 
@@ -334,36 +333,43 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	
 
+
 <script>
 function sellProduct() {
     // 팝업 창을 띄워서 구매자 이름을 입력받음
     var bidname = prompt("구매자 이름을 입력하세요", "");
     var sid = "<%= sid %>";
+
     // bidname이 null 또는 빈 문자열이면 아무 작업도 하지 않음
     if (bidname !== null && bidname !== "") {
-       
-    	$.ajax({
-    	    type: "GET",  // HTTP GET 요청
-    	    url: "http://localhost:8081/iMarket/DetailController",
-    	    data: {
-    	        action: "sell",
-    	        sid: sid,
-    	        bidname: bidname
-    	    },
-    	    success: function(response) {
-    	        // 처리 성공 시 작업
-    	        alert("판매가 완료되었습니다.");
-    	    },
-    	    error: function(xhr, status, error) {
-    	        // 오류 발생 시 처리
-    	        console.error("판매 처리 중 오류 발생:", error);
-    	        alert("판매 처리 중 오류가 발생했습니다.");
-    	    }
-    	});
+        // AJAX 요청
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/iMarket/DetailController",
+            data: {
+                action: "sell",
+                sid: sid,
+                bidname: bidname
+            },
+            success: function(response) {
+                if (response === "success") {
+                    alert("판매가 완료되었습니다.");
+                } else if (response === "duplicate") {
+                    alert("이미 판매된 상품입니다.");
+                } else {
+                    alert("판매 처리 중 오류가 발생했습니다.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("판매 처리 중 오류 발생:", error);
+                alert("판매 처리 중 오류가 발생했습니다.");
+            }
+        });
+    } else {
+        alert("구매자 이름을 입력해주세요.");
     }
 }
-</script>	
-	
+</script>
 	
 	
 	
@@ -660,16 +666,16 @@ function removeAllChildNods(el) {
 	<div class="grid text-center">
 		<div class="row"></div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 	</div>
 
