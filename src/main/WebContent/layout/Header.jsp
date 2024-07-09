@@ -172,8 +172,8 @@
 							
 					</ul>
 					</form>
-					<form class="d-flex">
-						<input class="form-control me-2" id="autocompleteInput"
+					<form class="d-flex" action="../itemList/ItemList.do" method="get">
+						<input class="form-control me-2" id="keyword" name="keyword"
 							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."
 							aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>

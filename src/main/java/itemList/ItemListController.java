@@ -17,6 +17,11 @@ public class ItemListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("1");
 
+        String keyword = null;
+        
+        if(req.getParameter("keyword") != null) {
+        	keyword = req.getParameter("keyword");
+        }
         // 페이지 번호와 페이지 크기 파라미터 받기
         int page = 1;
         int pageSize = 9; // 한 페이지당 보여줄 아이템 수
@@ -29,9 +34,10 @@ public class ItemListController extends HttpServlet {
         }
 
         ItemListDAO dao = new ItemListDAO();
-        List<ItemListDTO> product = dao.getAllproduct(page, pageSize);
+        List<ItemListDTO> product = dao.getAllproduct(page, pageSize, keyword);
         dao.close();
 
+        req.setAttribute("keyword", keyword);
         req.setAttribute("product", product);
         req.setAttribute("currentPage", page);
         req.setAttribute("pageSize", pageSize);

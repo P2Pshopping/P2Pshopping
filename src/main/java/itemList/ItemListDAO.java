@@ -30,7 +30,7 @@ public class ItemListDAO extends JDBConnect {
     }
 
     
-    public List<ItemListDTO> getAllproduct(int page, int pageSize) {
+    public List<ItemListDTO> getAllproduct(int page, int pageSize, String keyword) {
         List<ItemListDTO> product = new ArrayList<>();
         int offset = (page - 1) * pageSize;
         String query = "SELECT * FROM ( " +
@@ -40,6 +40,9 @@ public class ItemListDAO extends JDBConnect {
                        ") WHERE rnum BETWEEN ? AND ?";
         System.out.println("쿼리문 실행: " + query);
 
+        if(keyword != null && !keyword.equals("")) {
+        	query += "and productname like '%" + keyword + "%'";
+        }
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, offset + 1);
             stmt.setInt(2, offset + pageSize);
@@ -71,4 +74,5 @@ public class ItemListDAO extends JDBConnect {
         return product;
     }
 
+	
 }
