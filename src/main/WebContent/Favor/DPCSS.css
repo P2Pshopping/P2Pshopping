@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
 /* 기존 CSS 코드 유지 */
-
+.text{
+font-family: 'Nanum Barun Gothic', sans-serif;
+	
+	
+}
 .fav_wrapper {
     position: relative;
     display: flex;
@@ -14,7 +18,7 @@
     margin: -400px 0px 0px -200px;
     background-color: white;
     border: 1px solid gray;
-    border-radius: 15%;
+    border-radius: 20%;
 }
 
 .products {
