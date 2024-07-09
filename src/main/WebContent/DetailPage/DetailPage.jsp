@@ -704,7 +704,9 @@ function removeAllChildNods(el) {
 </body>
 
 
-</html>                   <c:otherwise>
+</html>                   
+<%-- 
+<c:otherwise>
                             <c:forEach items="${pagedLists}" var="item" varStatus="loop">
                                 <c:choose>
                                     <c:when test="${item.type == 'board'}">
@@ -726,7 +728,7 @@ function removeAllChildNods(el) {
                                 </c:choose>
                             </c:forEach>
                         </c:otherwise>
-                    <%-- </c:choose> --%>
+                    </c:choose>
                 </div>
 
                 <div class="paging">${map.pagingImg}</div>
@@ -751,4 +753,4 @@ function removeAllChildNods(el) {
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0" crossorigin="anonymous"></script>
 </body>
-</html>
+</html> --%>
