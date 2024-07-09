@@ -74,5 +74,22 @@ public class CommentDAO extends JDBConnect {
 		return result;
 	}
 
-	// 기타 필요한 메서드들 추가 가능
+	public String getWriterNameByCommentId(int cm_id) {
+	    String cm_writerName = null;
+	    String query = "SELECT u.name FROM users u JOIN BOARD_COMMENT bc ON u.id = bc.cm_writerId WHERE bc.cm_id = ?";
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setInt(1, cm_id);
+	        rs = psmt.executeQuery();
+	        if (rs.next()) {
+	            cm_writerName = rs.getString("name");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("작성자 이름 조회 중 예외 발생");
+	        e.printStackTrace();
+	    } 
+	    return cm_writerName;
+	}
+
+	
 }

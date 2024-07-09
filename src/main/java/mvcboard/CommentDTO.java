@@ -8,6 +8,15 @@ public class CommentDTO {
 	private String cm_writerId;
 	private Date cm_createDate;
 	private String cm_content;
+	private String cm_writerName;
+
+	public String getCm_writerName() {
+		return cm_writerName;
+	}
+
+	public void setCm_writerName(String cm_writerName) {
+		this.cm_writerName = cm_writerName;
+	}
 
 	public int getCm_id() {
 		return cm_id;
