@@ -3,6 +3,7 @@ package itemList;
 import java.sql.Date;
 
 public class ItemListDTO {
+	private String productid;
 	private String username;
 	private String productName;
 	private int categoryid;
@@ -94,6 +95,12 @@ public class ItemListDTO {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getProductid() {
+		return productid;
+	}
+	public void setProductid(String productid) {
+		this.productid = productid;
 	}
 	
 }

@@ -28,6 +28,8 @@
             color: #fff; 
         }
 
+
+
         /* 추가된 스타일 */
         .container {
             margin-top: 50px; 
