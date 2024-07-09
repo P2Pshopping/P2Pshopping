@@ -301,13 +301,4 @@
     <url-pattern>/GoDetail</url-pattern>
   </servlet-mapping>
 
-    <servlet>
-        <servlet-name>MainPageController</servlet-name>
-        <servlet-class>itemList.MainPageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MainPageController</servlet-name>
-        <url-pattern>/MainPage.do</url-pattern>
-    </servlet-mapping>
-
 </web-app>

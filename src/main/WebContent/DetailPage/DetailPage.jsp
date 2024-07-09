@@ -684,16 +684,16 @@ function removeAllChildNods(el) {
 	<div class="grid text-center">
 		<div class="row"></div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[0]%>"><img src="..<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[1]%>"><img src="..<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[2]%>"><img src="..<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[3]%>"><img src="..<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 	</div>
 
