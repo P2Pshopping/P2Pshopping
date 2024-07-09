@@ -12,9 +12,9 @@ public class ItemListDAO extends JDBConnect {
         super();
     }
     
-    public int countProduct() {
-        int itemCount = 0;  // 아이템 수를 저장할 변수를 초기화합니다.
-        String countItemQuery = "SELECT COUNT(*) FROM PRODUCT";  // 제품 수를 계산하는 SQL 쿼리입니다.
+//    public int countProduct() {
+//        int itemCount = 0;  // 아이템 수를 저장할 변수를 초기화합니다.
+//        String countItemQuery = "SELECT COUNT(*) FROM PRODUCT";  // 제품 수를 계산하는 SQL 쿼리입니다.
 
 
 //         try (PreparedStatement stmt = con.prepareStatement(countItemQuery)) {  // SQL 문을 준비합니다.

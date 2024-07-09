@@ -3,8 +3,8 @@
 <%@ page import="itemList.ItemListDTO"%>
 <%@ page import="itemList.ItemListDAO"%>
 <%@ page import="java.util.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- <%@ taglib prefix="c" uri="jakarta.tags.core"%> -->
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
 <html>
@@ -121,9 +121,8 @@ body {
 
 </head>
 <body>
-
-<!--     <jsp:include page="../layout/Header.jsp" />
-   <div id="container">
+    <jsp:include page="../layout/Header.jsp" />
+ <!--   <div id="container">
         <h3 style="margin-top:10%; margin-bottom:5%;">상품 리스트</h3>
         <hr class="dropdown-divider" style="margin-top:5%; margin-bottom:5%;">
         <div id="contents">
@@ -155,7 +154,7 @@ body {
     </c:if>
     
     <!-- 페이지 번호 표시 -->
-    <c:forEach begin="1" end="${totalPages}" var="pageNum">
+   <!--  <c:forEach begin="1" end="${totalPages}" var="pageNum">
         <c:choose>
             <c:when test="${pageNum == currentPage}">
                 <span class="current">${pageNum}</span>
@@ -171,8 +170,8 @@ body {
         </div>
     </div>
     <jsp:include page="../layout/Footer.jsp" /> -->
-/////////////////////////////////////////////////////
-	<%@include file="../layout/Header.jsp"%>
+<!-- ///////////////////////////////////////////////////// -->
+
 	<div id="container">
 		<div id="contents">
 			<div id="gallery">
