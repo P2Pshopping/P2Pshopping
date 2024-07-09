@@ -109,9 +109,12 @@ PJ2DTO dto = new PJ2DTO();
 String	productid=request.getParameter("productid");  //앞에서 판매글 id 가져와야함.
 
 dto = dao.img(productid);
-session.setAttribute("seller", "sell");  //판매자 닉네임
 
-session.setAttribute("bid", "42");  //구매자 고유 번호
+String username =(String) session.getAttribute("username"); 
+PJ2DTO dto6 = dao.findid(username);
+
+/* if(session.getAttribute("")) */
+session.setAttribute("bid", dto6.getUserid());  //구매자 고유 번호
 
 /* if(request.getParameter("productid")==null){
 session.setAttribute("productid", "43");
@@ -125,20 +128,20 @@ System.out.println(sid+"로 설정");
 String sid = productid;
 System.out.println(sid+"으로 설정");
 }  */
-String sid = null;
+String sid = null;  // sid = productid
 int sid2 = 0;
 if(productid==null){
-String dump = "42";
+String dump = "42";   //이거 땜에 그럼
 sid2 = Integer.parseInt(dump);
 }else{
 sid = productid;
-sid2 = Integer.parseInt(sid);
+sid2 = Integer.parseInt(productid);
 }//이건 파라메터로 가져와야함
 
 
-String bid = (String)session.getAttribute("bid"); //이건 세션 맞음
-int bid2 = Integer.parseInt(bid);
-String username =(String) session.getAttribute("username"); 
+String bid = Integer.toString(dto6.getUserid());
+int bid2 = dto6.getUserid();
+
 
 
 /* session.setAttribute("suid", "43"); //판매자의 아이디 번호. */
@@ -152,15 +155,15 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
 PJ2DTO dto4 = dao.likesearch(sid2, bid2); //찜했나 안했나 확인 null이면 안함 1이면 함
  
-PJ2DTO dto6 = dao.findid(username);
 
+System.out.println(username);
 
 /* System.out.print(session.getAttribute("username"));
  */
 
-System.out.println(dto6.getUserid());
-System.out.println(dto.getWriterid());
-System.out.println(productid);
+System.out.println(dto6.getUserid());  //현재 구매자
+System.out.println(dto.getWriterid()); //글 판매자
+System.out.println(productid);  //판매글 번호
 %>
 
 
