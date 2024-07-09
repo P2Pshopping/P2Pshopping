@@ -8,11 +8,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <title>거래 후기 상세</title>
 <style>
-body {
+/* body {
     font-size: 13px;
     background-color: #f8f9fa;
     font-family: 'Noto Sans KR', sans-serif;
-}
+} */
 
 #container {
     max-width: 1200px;
@@ -133,7 +133,7 @@ body {
 }
 </style>
 </head>
-<body>
+<body style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color: #f7f7f7;">
 <jsp:include page="../layout/Header.jsp" />
 <div id="container">
     <div id="main-content">

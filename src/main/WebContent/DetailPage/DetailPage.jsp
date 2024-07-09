@@ -106,28 +106,39 @@
 JDBConnect db = new JDBConnect(); //<% 이건 Java <script>는 jscript...
 PJ2DAO dao = new PJ2DAO();
 PJ2DTO dto = new PJ2DTO();
+String	productid=request.getParameter("productid");  //앞에서 판매글 id 가져와야함.
 
-
- String	sellerid=request.getParameter("sellerid");  //앞에서 판매글 id 가져와야함.
- dto=dao.img(sellerid);	
-
+dto = dao.img(productid);
 session.setAttribute("seller", "sell");  //판매자 닉네임
 
 session.setAttribute("bid", "42");  //구매자 고유 번호
 
-if(session.getAttribute("sellerid") ==null){
-session.setAttribute("sellerid", "43");
+/* if(request.getParameter("productid")==null){
+session.setAttribute("productid", "43");
 System.out.println("43으로 설정");
 }else{
-String sid = (String)session.getAttribute("sellerid"); // 판매글번호
-System.out.println(sid+"로 설정");
-}
 
-String sid = (String)session.getAttribute("sellerid");
-int sid2 = Integer.parseInt(sid);
-String bid = (String)session.getAttribute("bid");
+/*String sid = (String)session.getAttribute("sellerid"); // 판매글번호
+System.out.println(sid+"로 설정");
+}*/
+
+String sid = productid;
+System.out.println(sid+"으로 설정");
+}  */
+String sid = null;
+int sid2 = 0;
+if(productid==null){
+String dump = "42";
+sid2 = Integer.parseInt(dump);
+}else{
+sid = productid;
+sid2 = Integer.parseInt(sid);
+}//이건 파라메터로 가져와야함
+
+
+String bid = (String)session.getAttribute("bid"); //이건 세션 맞음
 int bid2 = Integer.parseInt(bid);
-String bname =(String) session.getAttribute("username"); 
+String username =(String) session.getAttribute("username"); 
 
 
 /* session.setAttribute("suid", "43"); //판매자의 아이디 번호. */
@@ -141,9 +152,16 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
 PJ2DTO dto4 = dao.likesearch(sid2, bid2); //찜했나 안했나 확인 null이면 안함 1이면 함
  
-System.out.println(Arrays.toString(moreid));
-%>
+PJ2DTO dto6 = dao.findid(username);
 
+
+/* System.out.print(session.getAttribute("username"));
+ */
+
+System.out.println(dto6.getUserid());
+System.out.println(dto.getWriterid());
+System.out.println(productid);
+%>
 
 
 
@@ -195,7 +213,6 @@ System.out.println(Arrays.toString(moreid));
 
 
 
-
 	<script>
 
 	new Swiper('.swiper-container',{
@@ -231,8 +248,8 @@ System.out.println(Arrays.toString(moreid));
 <script>
 $(document).ready(function() {
     $("#love").click(function() {
-        var sid = "<%= sid %>"; // JSP에서 동적으로 설정된 값
-        var bid = "<%= bid %>"; // JSP에서 동적으로 설정된 값
+        var sid = "<%= sid %>"; 
+        var bid = "<%= bid %>"; 
         
         $.ajax({
             type: "POST",
@@ -251,7 +268,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
 
 
 
@@ -292,25 +308,86 @@ $(document).ready(function() {
 
 
 
-
 	<div class="end" style="float: right;">
 		<b style="border: solid 1px black; width: auto; height: auto;"
-			id=favorite;> <%=bname%>
+			id=favorite;> <%=username%>
  &nbsp;&nbsp;&nbsp;
 		</b>
 	</div>
 
 	<hr class="recenter" style="border: solid 1px black; width: 1200px;">
 	<div>
-
-   <button class="btn btn-warning" onclick=""
-		style="width: 100px; height: 50px; float: left;  font-family: 'Godo', sans-serif;">판매 완료</button>
+<button id="sellButton" class="btn btn-warning" onclick="sellProduct()"
+    style="width: 100px; height: 50px; float: left; font-family: 'Godo', sans-serif;">
+    판매 완료
+</button>
 </div>
 	
 		<%@ include file="./MultiChatMain.jsp"%>
 	</div>
 	<br />
 	<br />	<br />	
+	
+<script>
+// JavaScript 코드
+document.addEventListener("DOMContentLoaded", function() {
+    var sellButton = document.getElementById("sellButton");
+    var userId = <%=dto6.getUserid()%>;
+    var writerId = <%=dto.getWriterid()%>;
+
+    if (userId === writerId) {
+        sellButton.style.display = "block";  // 보이기
+    } else {
+        sellButton.style.display = "none";   // 숨기기
+    }
+});	
+</script>	
+	
+	
+	
+
+
+<script>
+function sellProduct() {
+    // 팝업 창을 띄워서 구매자 이름을 입력받음
+    var bidname = prompt("구매자 이름을 입력하세요", "");
+    var sid = "<%= sid %>";
+
+    // bidname이 null 또는 빈 문자열이면 아무 작업도 하지 않음
+    if (bidname !== null && bidname !== "") {
+        // AJAX 요청
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/iMarket/DetailController",
+            data: {
+                action: "sell",
+                sid: sid,
+                bidname: bidname
+            },
+            success: function(response) {
+                if (response === "success") {
+                    alert("판매가 완료되었습니다.");
+                } else if (response === "duplicate") {
+                    alert("이미 판매된 상품입니다.");
+                } else {
+                    alert("판매 처리 중 오류가 발생했습니다.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("판매 처리 중 오류 발생:", error);
+                alert("판매 처리 중 오류가 발생했습니다.");
+            }
+        });
+    } else {
+        alert("구매자 이름을 입력해주세요.");
+    }
+}
+</script>
+	
+	
+	
+	
+	
 	
 
 	
@@ -602,16 +679,16 @@ function removeAllChildNods(el) {
 	<div class="grid text-center">
 		<div class="row"></div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../DetailPage/DetailPage.jsp?sellerid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 	</div>
 

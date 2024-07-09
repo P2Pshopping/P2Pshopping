@@ -21,8 +21,7 @@
 		}
 	</script>
 	<input type="text"
-		value=<%String username = (String) session.getAttribute("username"); //판매자 이름
-out.print(username);%>
+		value="구매자"
 		id="chatId" style="display: none;" />
 	<button class="btn btn-warning" onclick="chatWinOpen();"
 		style="width: 100px; height: 50px; float: right; font-family: 'Godo', sans-serif;">채팅 참여</button>

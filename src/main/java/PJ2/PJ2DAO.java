@@ -42,7 +42,28 @@ public class PJ2DAO extends JDBConnect {
 	
 
 }
-	
+
+	public PJ2DTO findid(String username) {
+		PJ2DTO dto6 = new PJ2DTO();
+		
+		String query = "SELECT ID FROM USERS WHERE USERNAME=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, username);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto6.setUserid(rs.getInt("ID"));
+			}
+		}catch(Exception e) {
+			System.out.println("구매자 id 확인 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return dto6;
+		 
+	}
 	
 	
 	
@@ -348,43 +369,52 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 	
-	public int sell2(int sid,String bidname) {
-			int result = 0;					         //구매자 id
-			int bid = (Integer) null;
-		String query = 	"SELECT ID FROM USERS WHERE USERS.USERNAME = ? ";
-		
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, bidname);
-			rs = psmt.executeQuery();
-		if(rs.next()) {
-			 bid = rs.getInt("ID");
-		}
-		
-		}catch(Exception e) {
-			System.out.println("판매 완료 중 예외 발생");
-			e.printStackTrace();
-		}
-			
-		String query2 = "Insert into TRANSACTIONS(USERID, PRODUCTID,CREATEDATE) "
-				+ " VALUES(?,?,SYSDATE)";
-		try {
-			psmt = con.prepareStatement(query2);
-			psmt.setInt(1,bid);
-			psmt.setInt(2, sid);
-			result = psmt.executeUpdate();
-		}catch(Exception e){
-			System.out.println("판매 완료 중 예외 발생");
-			e.printStackTrace();
-		}
-		return result;
+	@SuppressWarnings("null")
+	public int sell2(int sid, String bidname) {
+	    int result = 0;
+	    int bid = 0;
+
+	    // 구매자 이름을 이용해 사용자 ID 조회
+	    String query = "SELECT ID FROM USERS WHERE USERS.USERNAME = ?";
+	    try {
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, bidname);
+	        rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            bid = rs.getInt("ID");
+
+	            // 이미 판매된 상품인지 확인
+	            String checkQuery = "SELECT COUNT(*) AS cnt FROM TRANSACTIONS WHERE PRODUCTID = ?";
+	            psmt = con.prepareStatement(checkQuery);
+	            psmt.setInt(1, sid);
+	            rs = psmt.executeQuery();
+
+	            if (rs.next() && rs.getInt("cnt") > 0) {
+	                // 이미 판매된 상품이면
+	                return -1; 
+	            } else {
+	              
+	                String insertQuery = "INSERT INTO TRANSACTIONS(USERID, PRODUCTID) VALUES(?, ?)";
+	                psmt = con.prepareStatement(insertQuery);
+	                psmt.setInt(1, bid);
+	                psmt.setInt(2, sid);
+	                result = psmt.executeUpdate();
+	                return result; 
+	            }
+	        } else {
+	         
+	            return 0; 
+	        }
+	    } catch (Exception e) {
+	        System.out.println("판매 완료 중 예외 발생");
+	        e.printStackTrace();
+	        return 0; 
 	}
 	
-	
-	
-	
-	
-	
+	}
+}
+
 	
 	
 	
@@ -444,4 +474,3 @@ public class PJ2DAO extends JDBConnect {
 	 * "jdbc:oracle:thin:@localhost:1521:xe"; String id = "c##musthave"; String pwd
 	 * = "1234"; return DriverManager.getConnection(url, id, pwd); }
 	 */
-}

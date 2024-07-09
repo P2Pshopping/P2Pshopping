@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<c:out value="${fn:length(likePosts)}" />
+<%-- <c:out value="${fn:length(likePosts)}" /> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -25,9 +29,8 @@
 	padding: 20px;
 	margin: 0 auto;
 }
-
 #contents {
-	width: 800px;
+	/* width: 800px; */
 	flex-grow: 1;
 	padding: 0px;
 	margin: 20px;
@@ -40,7 +43,7 @@
 #gallery img {
 	width: 100%;
 	height: auto;
-	display: block;
+	/* display: block; */
 }
 
 #caption {
@@ -53,6 +56,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
+	   flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
 }
 
 #gallery-item {
@@ -69,6 +75,8 @@
 #gallery-item:hover {
 	transform: scale(1.05);
 }
+
+
 
 #left-sidebar {
 	width: 200px;
@@ -93,20 +101,20 @@
 }
  */
 #right-sidebar {
-    width: 150px;
-    text-align: center;
-    margin-top: 20px;
-    margin-left: 20px;
+	width: 150px;
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 20px;
 }
 
 #right-sidebar img {
-    width: 75px;
-    height: 75px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    object-fit: cover;
+	width: 75px;
+	height: 75px;
+	margin-bottom: 10px;
+	border-radius: 50%;
+	object-fit: cover;
 }
- 
+
 .flex-container {
 	display: flex;
 	justify-content: center;
@@ -152,10 +160,12 @@
 	background-color: #ddd;
 }
 </style>
+<jsp:include page="../layout/Header.jsp" />
 </head>
 <body
 	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color: #f7f7f7;">
-	<jsp:include page="../layout/Header.jsp" />
+	
+	
 	<div id="container">
 		<div class="flex-container">
 			<div id="left-sidebar">
@@ -239,13 +249,12 @@
 
 			<div id="right-sidebar">
 				<p>인기글</p>
-                <%-- <c:out value="${fn:length(likePosts)}" /> <!-- 리스트 크기 출력 --> --%>
+				<%-- <c:out value="${fn:length(likePosts)}" /> <!-- 리스트 크기 출력 --> --%>
 				<c:forEach items="${likePosts}" var="post">
 					<a href="../review/view?id=${post.id}"> <c:if
 							test="${not empty post.sfile}">
 							<img alt="${post.title}" src="../review/images/${post.sfile}" />
-						</c:if>
-						<%-- <p>${post.title}</p> --%>
+						</c:if> <%-- <p>${post.title}</p> --%>
 						<p></p>
 					</a>
 				</c:forEach>
@@ -256,11 +265,8 @@
 
 	<jsp:include page="../layout/Footer.jsp" />
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
-
-<!-- 	<script
+	<!-- 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+"
 		crossorigin="anonymous"></script>
@@ -269,4 +275,12 @@
 		integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0"
 		crossorigin="anonymous"></script> -->
 </body>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+		integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+		crossorigin="anonymous"></script>
 </html>
