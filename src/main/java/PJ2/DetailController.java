@@ -16,8 +16,10 @@ public class DetailController extends HttpServlet {
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 	String sid = request.getParameter("sid");
 		    String bid = request.getParameter("bid");
+		    int sid2 = Integer.parseInt(sid);
+		    int bid2 = Integer.parseInt(bid);
 		    PJ2DAO dao = new PJ2DAO();
-		    PJ2DTO dto = dao.likesearch(sid, bid);
+		    PJ2DTO dto = dao.likesearch(sid2, bid2);
 		  
 		    
 		    if (dto.getLikeSearch()=="0") {

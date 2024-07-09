@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<c:out value="${fn:length(likePosts)}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,7 +20,6 @@
 /* body {
 	font-size: 13px;
 } */
-
 #container {
 	width: 1200px;
 	padding: 20px;
@@ -24,7 +27,7 @@
 }
 
 #contents {
-width: 800px;
+	width: 800px;
 	flex-grow: 1;
 	padding: 0px;
 	margin: 20px;
@@ -77,7 +80,7 @@ width: 800px;
 	margin-left: 20px;
 }
 
-#right-sidebar {
+/* #right-sidebar {
 	width: 150px;
 	margin-bottom: 20px;
 }
@@ -88,7 +91,22 @@ width: 800px;
 	width: 75px;
 	height: 75px;
 }
+ */
+#right-sidebar {
+    width: 150px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 20px;
+}
 
+#right-sidebar img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
 .flex-container {
 	display: flex;
 	justify-content: center;
@@ -135,8 +153,8 @@ width: 800px;
 }
 </style>
 </head>
-<body 
-	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
+<body
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color: #f7f7f7;">
 	<jsp:include page="../layout/Header.jsp" />
 	<div id="container">
 		<div class="flex-container">
@@ -175,7 +193,7 @@ width: 800px;
 				</div>
 
 				<%-- <div class="paging">${map.pagingImg}</div> --%>
-				 <div class="paging">
+				<div class="paging">
 					<c:forEach var="i" begin="1" end="${totalPages}">
 						<c:choose>
 							<c:when test="${i == currentPage}">
@@ -186,8 +204,8 @@ width: 800px;
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</div> 
-				                <%-- <div class="paging">
+				</div>
+				<%-- <div class="paging">
                     <c:out value="${pagingImg}" />
                 </div> --%>
 
@@ -200,23 +218,55 @@ width: 800px;
 				</div>
 			</div>
 
-			<div id="right-sidebar">
+			<!-- 			<div id="right-sidebar">
 				<p>인기 게시글</p>
 				<a href="#"><img alt="아기1" src="../img/333.jpg" width="100"
 					height="100"></a>
+			</div> -->
+			<%-- <div id="right-sidebar">
+				<p>인기글</p>
+				<c:forEach items="${likePosts}" var="post">
+					<a href="../review/view?id=${post.id}"> <c:if
+							test="${not empty post.sfile}">
+							<img alt="${post.title}"
+								src="../review/images/${post.ofile}&sfile=${post.sfile}&id=${post.id}" />
+							<img alt="${review.title}" src="../review/images/${review.sfile}&sfile=${post.sfile}&id=${post.id}" />
+							<img src="../review/images/${review.sfile}" alt="${review.ofile}" style="max-width: 100%;" />
+						</c:if> <p>${post.title}</p>
+					</a>
+				</c:forEach>
+			</div> --%>
+
+			<div id="right-sidebar">
+				<p>인기글</p>
+                <%-- <c:out value="${fn:length(likePosts)}" /> <!-- 리스트 크기 출력 --> --%>
+				<c:forEach items="${likePosts}" var="post">
+					<a href="../review/view?id=${post.id}"> <c:if
+							test="${not empty post.sfile}">
+							<img alt="${post.title}" src="../review/images/${post.sfile}" />
+						</c:if>
+						<%-- <p>${post.title}</p> --%>
+						<p></p>
+					</a>
+				</c:forEach>
 			</div>
+
 		</div>
 	</div>
 
 	<jsp:include page="../layout/Footer.jsp" />
 
-	<script
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+
+<!-- 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+"
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 </body>
 </html>

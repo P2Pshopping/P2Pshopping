@@ -33,7 +33,7 @@
     <param-value>1234</param-value>
   </context-param>
   <session-config>
-    <session-timeout>300</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
   <servlet>
     <description></description>
@@ -223,7 +223,7 @@
     <servlet-name>ReviewEditServlet</servlet-name>
     <url-pattern>/review/edit</url-pattern>
   </servlet-mapping>
-  <servlet>
+  <!-- <servlet>
     <description></description>
     <display-name>ReviewViewServlet</display-name>
     <servlet-name>ReviewViewServlet</servlet-name>
@@ -232,7 +232,7 @@
   <servlet-mapping>
     <servlet-name>ReviewViewServlet</servlet-name>
     <url-pattern>/review/view</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   <servlet>
     <description></description>
     <display-name>ReviewDeleteServlet</display-name>

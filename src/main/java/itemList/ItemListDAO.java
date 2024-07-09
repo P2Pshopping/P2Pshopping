@@ -14,7 +14,7 @@ public class ItemListDAO extends JDBConnect {
 
     public List<ItemListDTO> getAllproduct() {
         List<ItemListDTO> product = new ArrayList<>();
-        String query = "SELECT p.*, u.username FROM PRODUCT p,USERS u";
+        String query = "SELECT p.*, u.username FROM PRODUCT p JOIN USERS u ON p.writerid = u.id";
         System.out.println("쿼리문 실행");
 
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,11 +148,21 @@ body {
 							<div id="gallery-item"
 								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
 								<c:if test="${not empty ItemListDTO.imgUrl_1}">
-									<img
+									<%-- <img
 										src="<%=request.getContextPath()%>/uploads/${ItemListDTO.imgUrl_1}"
+										src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}"
 										style="width: 500px; height: 300px;"
-										;
-									alt="${ItemListDTO.imgUrl_1}">
+										
+									alt="${ItemListDTO.imgUrl_1}"> --%>
+									<%-- <img
+										src="${pageContext.request.contextPath}/itemList/download.do?ofile=${ItemListDTO.imgUrl_1}&sfile=${ItemListDTO.imgUrl_1}&id=${ItemListDTO.id}"
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}"> --%>
+									<img
+										src="${pageContext.request.contextPath}../itemList/image?sfile=${ItemListDTO.imgUrl_1}"
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}">
+
 								</c:if>
 								<p>제목 : ${ItemListDTO.productName}</p>
 								<p>작성자 ID: ${ItemListDTO.username}</p>
@@ -163,5 +174,6 @@ body {
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../layout/Footer.jsp" />
 </body>
 </html>
