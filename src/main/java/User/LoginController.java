@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
 //			session = request.getSession();
 //			session.setAttribute("getUserDTO", userDTO); // userDTO는 로그인 성공 후 가져온 사용자 정보 객체
 
-            response.sendRedirect("Main/Mainpage.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
+            response.sendRedirect("Main/default.jsp"); // 로그인 성공 후 메인 페이지로 리디렉션합니다.
         } else {
             // 사용자 인증에 실패한 경우
             out.println("<html>");

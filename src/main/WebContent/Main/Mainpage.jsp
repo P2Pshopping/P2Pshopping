@@ -143,7 +143,7 @@ body {
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <a href="../Main/Mainpage.jsp"><img src="../Image/logobanner.png" class="pics" alt="..." width="1200" height="450"></a>
+                        <a href="${pageContext.request.contextPath}/Mainpage.do"><img src="${pageContext.request.contextPath}/Image/logobanner.png" class="pics" alt="..." width="1200" height="450"></a>
                     </div>
                     <div class="carousel-item">
                         <a href="${pageContext.request.contextPath}/itemList/ItemList.do"><img src="https://baby-direct.com.au/cdn/shop/files/Copy_of_Pink_and_Tan_Flowers_Modern_Artisan_Business_X-Frame_Banner_4_1200x.png?v=1641170892" class="pics" alt="..." width="1200" height="450"></a>

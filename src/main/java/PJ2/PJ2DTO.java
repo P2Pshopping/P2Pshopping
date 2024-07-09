@@ -24,15 +24,16 @@ public class PJ2DTO {
 	}
 	public void setFavoritenum(int[] favoritenum) {
 		this.favoritenum = favoritenum;
-
-// 	private int userid;
+	}
+	
+ 	private int userid;
 	
 	
-// 	public int getUserid() {
-// 		return userid;
-// 	}
-// 	public void setUserid(int userid) {
-// 		this.userid = userid;
+ 	public int getUserid() {
+ 		return userid;
+ 	}
+ 	public void setUserid(int userid) {
+ 		this.userid = userid;
 
 	}
 	public int[] getFavoriteprice() {

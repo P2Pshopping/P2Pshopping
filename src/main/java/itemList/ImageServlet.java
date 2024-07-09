@@ -16,15 +16,16 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sfile = req.getParameter("sfile");
-        String sDirectory = req.getServletContext().getRealPath("/uploads");
+        String sDirectory = req.getServletContext().getRealPath("");
+//        String sDirectory = req.getServletContext().getRealPath("/uploads");
 
-        // µð¹ö±ë ·Î±× Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ß°ï¿½
         System.out.println("Requested file: " + sfile);
         System.out.println("Directory: " + sDirectory);
 
         File file = new File(sDirectory, sfile);
         
-        // ÆÄÀÏ Á¸Àç ¿©ºÎ È®ÀÎ ·Î±×
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Î±ï¿½
         if (file.exists()) {
             System.out.println("File exists: " + file.getAbsolutePath());
             resp.setContentType(getServletContext().getMimeType(file.getName()));
