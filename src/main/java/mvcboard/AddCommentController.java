@@ -22,21 +22,19 @@ public class AddCommentController extends HttpServlet {
         Integer writerIdInteger = (Integer) request.getSession().getAttribute("id");
         if (writerIdInteger == null) {
             
-            response.sendRedirect("../mvcboard/view.do?id=" + boardId); // Redirect back to view page
+            response.sendRedirect("../mvcboard/view.do?id=" + boardId);  
             return;
         }
 
         String writerId = writerIdInteger.toString();
         String content = request.getParameter("content");
-
         
         if (boardId == null || writerId == null || content == null || boardId.isEmpty() || writerId.isEmpty() || content.isEmpty()) {
             
-            response.sendRedirect("../mvcboard/view.do?id=" + boardId); // Redirect back to view page
+            response.sendRedirect("../mvcboard/view.do?id=" + boardId); 
             return;
         }
-
-        // Create a comment DTO and set its properties
+       
         CommentDTO comment = new CommentDTO();
         comment.setCm_board(boardId);
         comment.setCm_writerId(writerId);

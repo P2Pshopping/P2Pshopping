@@ -137,8 +137,8 @@ body {
 .comment-container {
 	margin-top: 20px;
 	padding: 15px;
-	background-color: #f9f9f9;
-	border: 1px solid #ddd;
+	background-color: #ffffff;
+	border: 0.5px solid #ddd;
 	border-radius: 8px;
 }
 
@@ -202,26 +202,38 @@ body {
 			</div>
 
 			<div id="contents">
+
+				<!-- 좋아요 에러 메시지 출력 -->
+				<c:if test="${param.error == 'notLoggedIn'}">
+					<div class="alert alert-danger" role="alert">로그인 후 이용 가능합니다.
+					</div>
+				</c:if>
+				<c:if test="${param.error == 'alreadyLiked'}">
+					<div class="alert alert-warning" role="alert">이미 좋아요를 눌렀습니다.
+					</div>
+				</c:if>
+
 				<div id="gallery">
 					<ul class="no_dot">
 						<li><h3>제목 : ${dto.title }</h3></li>
 						<li><p>작성자 : ${writerName }</p></li>
 						<li><p>조회수 ${dto.views } | 추천수 ${dto.likes } | 작성시간
-								${dto.createDate }</p>
-						</li>
+								${dto.createDate }</p></li>
 						<li><p>
 								<img src="../uploads/${dto.sfile}" style="max-width: 100%;" /><br />
 								${dto.content}
 							</p></li>
 						<li>
 							<form action="../mvcboard/like.do" method="post"
-								style="display: inline;">
+								style="display: flex; justify-content: center;">
 								<input type="hidden" name="id" value="${dto.id}">
-								<button type="submit" class="btn btn-outline-success">
+								<button type="submit" class="btn btn-outline-success"
+									<c:if test="${dao.isLikedByUser(dto.id, sessionScope.id)}">disabled</c:if>>
 									<img src="../Image/ddabong.png" alt="추천"
 										style="width: 50px; height: 50px;">
 								</button>
 							</form>
+
 						</li>
 					</ul>
 				</div>
@@ -243,14 +255,13 @@ body {
 					</c:if>
 				</div>
 
-
 				<!-- 댓글 표시 -->
 				<div class="comment-container mt-4">
 					<h5>전체 댓글 ${commentList.size()}개</h5>
 					<c:forEach items="${commentList}" var="comment">
 						<div class="comment-item">
 							<div>
-								<span>${comment.cm_writerName} </span><br> <span
+								<span>${comment.cm_writerName}</span><br> <span
 									class="comment-content">${comment.cm_content}</span>
 							</div>
 							<div class="comment-actions">
@@ -259,22 +270,29 @@ body {
 									style="display: inline;">
 									<input type="hidden" name="commentId" value="${comment.cm_id}">
 									<input type="hidden" name="boardId" value="${dto.id}">
-									<button type="submit" class="btn btn-outline-danger btn-sm">삭제</button>
+									<c:if test="${sessionScope.id == comment.cm_writerId }">
+										&nbsp;<button type="submit"
+											class="btn btn-outline-danger btn-sm">삭제</button>
+									</c:if>
 								</form>
 							</div>
 						</div>
 					</c:forEach>
-
 				</div>
+
 				<div class="mt-3">
 					<form action="../mvcboard/addComment.do" method="post">
-						<input type="hidden" name="id" value="${dto.id}"> <input
-							type="text" name="content" placeholder="댓글" class="form-control">
-						<button type="submit" class="btn btn-secondary mt-1">등록</button>
+						<div class="input-group mb-3">
+							<input type="text" name="content" class="form-control"
+								placeholder="댓글 입력" aria-label="댓글 입력"
+								aria-describedby="button-addon2"> <input type="hidden"
+								name="id" value="${dto.id}">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2">등록</button>
+						</div>
 					</form>
 				</div>
 			</div>
-
 
 			<div id="right-sidebar">
 				<p>인기글</p>

@@ -199,14 +199,26 @@ public class MVCBoardDAO extends JDBConnect {
 	public int deletePost(String id) {
 		int result = 0;
 		try {
+			String query2 = "DELETE FROM board_likes WHERE board_id=?";
+			psmt = con.prepareStatement(query2);
+			psmt.setString(1, id);
+			psmt.executeUpdate();
+
+			String query1 = "DELETE FROM board_comment WHERE cm_board=?";
+			psmt = con.prepareStatement(query1);
+			psmt.setString(1, id);
+			psmt.executeUpdate();
+
 			String query = "DELETE FROM boards WHERE id=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
 			result = psmt.executeUpdate();
+
 		} catch (Exception e) {
 			System.out.println("게시물 삭제 중 예외 발생");
 			e.printStackTrace();
 		}
+
 		return result;
 	}
 
@@ -267,7 +279,7 @@ public class MVCBoardDAO extends JDBConnect {
 
 		return name;
 	}
-	
+
 	public List<MVCBoardDTO> get3likes() {
 		List<MVCBoardDTO> likePosts = new ArrayList<>();
 		String query = "SELECT * FROM boards ORDER BY likes DESC FETCH FIRST 3 ROWS ONLY";
@@ -294,5 +306,41 @@ public class MVCBoardDAO extends JDBConnect {
 		}
 
 		return likePosts;
+	}
+
+	public boolean isLikedByUser(String boardId, int userId) {
+		boolean isLiked = false;
+		String query = "SELECT COUNT(*) FROM board_likes WHERE board_id=? AND user_id=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, boardId);
+			psmt.setInt(2, userId);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				isLiked = rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isLiked;
+	}
+
+	public void addLike(String boardId, int userId) {
+		String insertLikeQuery = "INSERT INTO board_likes (board_id, user_id) VALUES (?, ?)";
+		String updateBoardQuery = "UPDATE boards SET likes = likes + 1 WHERE id = ?";
+		try {
+			// 좋아요 기록 추가
+			psmt = con.prepareStatement(insertLikeQuery);
+			psmt.setString(1, boardId);
+			psmt.setInt(2, userId);
+			psmt.executeUpdate();
+
+			// 게시물의 좋아요 수 증가
+			psmt = con.prepareStatement(updateBoardQuery);
+			psmt.setString(1, boardId);
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
