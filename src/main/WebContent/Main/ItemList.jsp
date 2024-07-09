@@ -145,6 +145,7 @@ body {
 								<p>제목 : ${item.productName}</p>
 								<p>작성자 ID: ${item.username}</p>
 								<p>가격: ${item.price}</p>
+								<p>생성일: ${item.createDate}</p>
 							</div>
 						</c:forEach>
 					</c:otherwise>

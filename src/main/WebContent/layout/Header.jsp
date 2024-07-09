@@ -172,7 +172,7 @@
 							
 					</ul>
 					</form>
-					<form class="d-flex" action="../itemList/ItemList.do" method="get">
+					<form class="d-flex" action="${pageContext.request.contextPath}/itemList/ItemList.do" method="get">
 						<input class="form-control me-2" id="keyword" name="keyword"
 							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."
 							aria-label="Search">

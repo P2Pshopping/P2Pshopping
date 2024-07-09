@@ -35,7 +35,7 @@ public class MainController extends HttpServlet {
 
         ItemListDAO dao = new ItemListDAO();
         int totalProducts = dao.getProductCount();
-        List<ItemListDTO> product = dao.getAllproduct(start, end, keyword);
+        List<ItemListDTO> product = dao.getAllpopular(start, end, keyword);
         dao.close();
 
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);

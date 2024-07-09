@@ -29,13 +29,14 @@ public class ItemListDAO extends JDBConnect {
 		List<ItemListDTO> product = new ArrayList<>();
 		String query = "SELECT * FROM (SELECT ROWNUM rnum, p.*, u.username "
 				+ "FROM PRODUCT p JOIN USERS u ON p.writerid = u.id " 
-				+ "WHERE ROWNUM <= ?) WHERE rnum >= ?"
-				+ "ORDER BY CREATEDATE DESC";
-		System.out.println("쿼리문 실행: " + query);
+				+ "WHERE ROWNUM <= ? AND p.sold IS NULL ) WHERE rnum >= ? ";
+		
 
 		if (keyword != null && !keyword.equals("")) {
 			query += "and productname like '%" + keyword + "%'";
-		}
+		} 
+		System.out.println("쿼리문 실행: " + query);
+		query += "ORDER BY CREATEDATE DESC ";
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			stmt.setInt(1, end);
 			stmt.setInt(2, start);
@@ -100,6 +101,7 @@ public class ItemListDAO extends JDBConnect {
 					dto.setWriterid(rs.getInt("WRITERID"));
 					dto.setCreateDate(rs.getDate("CREATEDATE"));
 					dto.setUpdateDate(rs.getDate("UPDATEDATE"));
+					dto.setVisit(rs.getInt("VISIT"));
 					product.add(dto);
 				}
 			}
