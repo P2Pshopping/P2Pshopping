@@ -42,7 +42,28 @@ public class PJ2DAO extends JDBConnect {
 	
 
 }
-	
+
+	public PJ2DTO findid(String username) {
+		PJ2DTO dto6 = new PJ2DTO();
+		
+		String query = "SELECT ID FROM USERS WHERE USERNAME=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, username);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto6.setUserid(rs.getInt("ID"));
+			}
+		}catch(Exception e) {
+			System.out.println("구매자 id 확인 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return dto6;
+		 
+	}
 	
 	
 	
@@ -341,9 +362,10 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 	
+	@SuppressWarnings("null")
 	public int sell2(int sid,String bidname) {
 			int result = 0;					         //구매자 id
-			int bid = (Integer) null;
+			int bid = 0;
 		String query = 	"SELECT ID FROM USERS WHERE USERS.USERNAME = ? ";
 		
 		try {
@@ -359,8 +381,8 @@ public class PJ2DAO extends JDBConnect {
 			e.printStackTrace();
 		}
 			
-		String query2 = "Insert into TRANSACTIONS(USERID, PRODUCTID,CREATEDATE) "
-				+ " VALUES(?,?,SYSDATE)";
+		String query2 = "Insert into TRANSACTIONS(USERID, PRODUCTID) "
+				+ " VALUES(?,?)";
 		try {
 			psmt = con.prepareStatement(query2);
 			psmt.setInt(1,bid);
