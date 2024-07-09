@@ -82,7 +82,7 @@
 			<div class="container-fluid">
 				<div class="row" style="display: flex; width: 1100px;">
 					<div class="col-sm-4">
-						<a class="navbar-brand" href="${pageContext.request.contextPath}/Main/Mainpage.jsp"
+						<a class="navbar-brand" href="${pageContext.request.contextPath}/MainPage.do"
 							style="font-weight: 700; font-size: 50px;"><span
 							style="color: rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market
 						</a>

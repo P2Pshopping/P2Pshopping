@@ -12,10 +12,15 @@
     <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .custom-body {
+/*         .custom-body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
         }
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
 
         .container {
             background-color: #fff;
@@ -23,7 +28,102 @@
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+        } */
+body {
+    font-size: 13px;
+}
+
+#container {
+    width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+#contents {
+    flex-grow: 1;
+    padding: 0px;
+    margin: 20px;
+}
+
+#gallery img {
+    width: 50%;
+    height: auto;
+}
+
+#caption {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+#gallery-item {
+    width: calc(33.333% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+#gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+#footer {
+    overflow: hidden;
+    width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 25px;
+    background: url(/img/imfs/main/bg_footer.jpg) repeat-x;
+    font-family: "Noto Sans KR";
+    font-weight: 400;
+    font-size: 12px;
+    color: black;
+    background-color: whitesmoke;
+    z-index: 2;
+}
+
+.paging {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paging a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0px 3px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    color: #337ab7;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.paging .current {
+    background-color: #337ab7;
+    color: white;
+    border: 1px solid #337ab7;
+}
+
+.paging a:hover {
+    background-color: #ddd;
+}
     </style>
     <meta charset="UTF-8">
     <title>i-Market</title>
