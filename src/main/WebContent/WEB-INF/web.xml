@@ -2,20 +2,22 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>iMarket</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+<!--     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.htm</welcome-file> -->
+   <welcome-file>MainPage.do</welcome-file>
+     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-      <resource-ref>
-        <description>Oracle Datasource example</description>
-        <res-ref-name>jdbc/myoracle</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
     
+  <resource-ref>
+    <description>Oracle Datasource example</description>
+    <res-ref-name>jdbc/myoracle</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
   <context-param>
     <param-name>OracleDriver</param-name>
     <param-value>oracle.jdbc.OracleDriver</param-value>
@@ -33,7 +35,7 @@
     <param-value>1234</param-value>
   </context-param>
   <session-config>
-    <session-timeout>300</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
   <servlet>
     <description></description>
@@ -225,16 +227,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ReviewViewServlet</display-name>
-    <servlet-name>ReviewViewServlet</servlet-name>
-    <servlet-class>review.ReviewViewServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReviewViewServlet</servlet-name>
-    <url-pattern>/review/view</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ReviewDeleteServlet</display-name>
     <servlet-name>ReviewDeleteServlet</servlet-name>
     <servlet-class>review.ReviewDeleteServlet</servlet-class>
@@ -252,6 +244,14 @@
   <servlet-mapping>
     <servlet-name>ImageServlet</servlet-name>
     <url-pattern>/review/images/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReviewLikeController</servlet-name>
+    <servlet-class>review.LikeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewLikeController</servlet-name>
+    <url-pattern>/review/like</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -279,5 +279,23 @@
     <servlet-name>ChangePwd</servlet-name>
     <url-pattern>/ChangePwd</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductCount</display-name>
+    <servlet-name>ProductCount</servlet-name>
+    <servlet-class>Count.ProductCount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductCount</servlet-name>
+    <url-pattern>/ProductCount</url-pattern>
+  </servlet-mapping>
+    <servlet>
+        <servlet-name>MainPageController</servlet-name>
+        <servlet-class>itemList.MainPageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainPageController</servlet-name>
+        <url-pattern>/MainPage.do</url-pattern>
+    </servlet-mapping>
 
 </web-app>

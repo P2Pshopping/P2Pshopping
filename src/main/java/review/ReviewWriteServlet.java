@@ -7,10 +7,10 @@ import java.nio.file.Paths;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 //@WebServlet("/review/write")
@@ -42,7 +42,15 @@ public class ReviewWriteServlet extends HttpServlet {
         review.setTitle(request.getParameter("title"));
         review.setDetail(request.getParameter("detail"));
         review.setRating(Integer.parseInt(request.getParameter("rating")));
-
+        // 세션에서 사용자 ID 가져오기
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("id");
+        if (userId == null) {
+            response.getWriter().write("로그인이 필요합니다.");
+            return;
+        }
+        review.setWriterId(userId);
+	    
         // Handle file upload
         for (Part part : request.getParts()) {
             if (part.getName().equals("reviewImages") && part.getSize() > 0) {

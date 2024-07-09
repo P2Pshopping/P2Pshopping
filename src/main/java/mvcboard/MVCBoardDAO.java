@@ -33,8 +33,9 @@ public class MVCBoardDAO extends JDBConnect {
 		}
 		return totalCount;
 	}
+
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map) {
-  	//List<MVCBoardDTO> board = new Vector<>();
+		// List<MVCBoardDTO> board = new Vector<>();
 		List<MVCBoardDTO> boardList = new ArrayList<>();
 
 		String query = "" + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM boards ";
@@ -81,7 +82,6 @@ public class MVCBoardDAO extends JDBConnect {
 					+ " VALUES (seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
 			psmt = con.prepareStatement(query);
-
 			psmt.setInt(2, dto.getWriterId());
 			psmt.setString(1, dto.getBno());
 			psmt.setString(3, dto.getTitle());
@@ -168,7 +168,6 @@ public class MVCBoardDAO extends JDBConnect {
 //         return likes;
 //     }
 
-
 		String query = "UPDATE boards SET likes=likes+1 WHERE id=?";
 		try {
 			psmt = con.prepareStatement(query);
@@ -215,14 +214,14 @@ public class MVCBoardDAO extends JDBConnect {
 		int result = 0;
 		try {
 
-			String query = "UPDATE boards SET title=?, content=?, ofile=?, sfile=? WHERE id=?";
+			String query = "UPDATE boards SET title=?, content=?, ofile=?, sfile=?, bno=? WHERE id=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
-
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getOfile());
 			psmt.setString(4, dto.getSfile());
-			psmt.setString(5, dto.getId());
+			psmt.setString(5, dto.getBno());
+			psmt.setString(6, dto.getId());
 
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -233,7 +232,6 @@ public class MVCBoardDAO extends JDBConnect {
 	}
 
 	public int getWriterIdByUsername(String username) {
-
 		int writerId = 0;
 		String query = "SELECT id FROM users  WHERE username=?";
 		try {
@@ -249,7 +247,6 @@ public class MVCBoardDAO extends JDBConnect {
 
 		}
 		return writerId;
-
 	}
 
 	public String getNameByWriterId(int writerId) {
@@ -270,7 +267,7 @@ public class MVCBoardDAO extends JDBConnect {
 
 		return name;
 	}
-
+	
 	public List<MVCBoardDTO> get3likes() {
 		List<MVCBoardDTO> likePosts = new ArrayList<>();
 		String query = "SELECT * FROM boards ORDER BY likes DESC FETCH FIRST 3 ROWS ONLY";
@@ -298,5 +295,4 @@ public class MVCBoardDAO extends JDBConnect {
 
 		return likePosts;
 	}
-
 }

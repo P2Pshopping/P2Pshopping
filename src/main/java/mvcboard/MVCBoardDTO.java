@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class MVCBoardDTO {
 
-	private String id; //게시물 번호
+	private String id; // 게시물 번호
 	private String bno; // 카테고리
 	private int writerId; // 작성자 아이디번호 == user(id)
 	private String username; // 작성자 아이디
@@ -12,10 +12,11 @@ public class MVCBoardDTO {
 	private String content; // 내용
 	private Date createDate; // 작성일
 	private Date updateDate; // 수정일
-	private String ofile; // 파일 
+	private String ofile; // 파일
 	private String sfile; // 파일
 	private int views; // 조회수
 	private int likes; // 추천수
+
 	private String type = "board";
 
 	public String getId() {
@@ -114,12 +115,12 @@ public class MVCBoardDTO {
 		this.likes = likes;
 	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
 }

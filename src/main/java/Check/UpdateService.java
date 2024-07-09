@@ -24,8 +24,8 @@ public class UpdateService extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("EUC-KR");
-
+    	response.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html;charset=UTF-8");
         // 세션에서 사용자 정보 가져오기
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
@@ -39,13 +39,13 @@ public class UpdateService extends HttpServlet {
 
             if (username == null || username.isEmpty() ) {
                 System.out.println("username is null");
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username or password cannot be null or empty");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username cannot be null or empty");
                 return;  // Ensure no further proce
             }
             if( hashedPassword == null ||hashedPassword.isEmpty()) {
             	
                 System.out.println("newPassword is null");
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username or password cannot be null or empty");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "password cannot be null or empty");
                 return;  // Ensure no further proce
             	
         }

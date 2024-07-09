@@ -4,6 +4,7 @@
 <%@ page import="itemList.ItemListDAO"%>
 <%@ page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- <%@ taglib prefix="c" uri="jakarta.tags.core"%> -->
 
 <!DOCTYPE html>
 <html>
@@ -18,8 +19,7 @@
     rel="stylesheet">
 <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>파일 첨부형 게시판</title>
-
+<title>상품 리스트</title>
 <style>
 /* 기존 스타일 */
 body {
@@ -121,7 +121,8 @@ body {
 
 </head>
 <body>
-    <jsp:include page="../layout/Header.jsp" />
+
+<!--     <jsp:include page="../layout/Header.jsp" />
    <div id="container">
         <h3 style="margin-top:10%; margin-bottom:5%;">상품 리스트</h3>
         <hr class="dropdown-divider" style="margin-top:5%; margin-bottom:5%;">
@@ -169,6 +170,56 @@ body {
             </div>
         </div>
     </div>
-    <jsp:include page="../layout/Footer.jsp" />
+    <jsp:include page="../layout/Footer.jsp" /> -->
+/////////////////////////////////////////////////////
+	<%@include file="../layout/Header.jsp"%>
+	<div id="container">
+		<div id="contents">
+			<div id="gallery">
+				<c:choose>
+					<%-- <c:when test="${empty product}"> --%>
+					<c:when test="${empty products}">
+						<div id="gallery-item">
+							<p>등록된 상품이 없습니다.</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${products}" var="ItemListDTO" varStatus="loop">
+							<div id="gallery-item"
+								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
+								<c:if test="${not empty ItemListDTO.imgUrl_1}">
+									<%-- <img
+										src="<%=request.getContextPath()%>/uploads/${ItemListDTO.imgUrl_1}"
+										src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}"
+										style="width: 500px; height: 300px;"
+										
+									alt="${ItemListDTO.imgUrl_1}"> --%>
+									<%-- <img
+										src="${pageContext.request.contextPath}/itemList/download.do?ofile=${ItemListDTO.imgUrl_1}&sfile=${ItemListDTO.imgUrl_1}&id=${ItemListDTO.id}"
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}"> --%>
+									<img
+										src="${pageContext.request.contextPath}/itemList/image?sfile=${ItemListDTO.imgUrl_1}"
+										<%-- src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}" --%>
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}">
+								</c:if>
+								<p>제목 : ${ItemListDTO.productName}</p>
+								<p>작성자 ID: ${ItemListDTO.username}</p>
+								<p>가격: ${ItemListDTO.price}</p>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+		<div class="paging">
+			<c:forEach begin="1" end="${totalPages}" var="i">
+				<a href="?page=${i}" class="${i == currentPage ? 'current' : ''}">${i}</a>
+			</c:forEach>
+		</div>
+	</div>
+	<jsp:include page="../layout/Footer.jsp" />
+
 </body>
 </html>

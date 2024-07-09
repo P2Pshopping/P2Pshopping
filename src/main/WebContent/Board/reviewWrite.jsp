@@ -6,10 +6,10 @@
 <title>리뷰 작성</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body {
+ /*    body {
         background-color: #f8f9fa;
         font-family: Arial, sans-serif;
-    }
+    } */
     .container {
         margin-top: 50px;
     }
@@ -37,7 +37,9 @@
     }
 </style>
 </head>
-<body>
+<body 
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
+    <%@include file="../layout/Header.jsp"%>
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -82,4 +84,5 @@ function validateForm() {
 }
 </script>
 </body>
+<%@ include file="../layout/Footer.jsp"%>
 </html>

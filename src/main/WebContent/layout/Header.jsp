@@ -107,12 +107,12 @@
 									<%-- 찜 링크 보이기 --%>
 									<a
 										href="${pageContext.request.contextPath}/Favor/favorList.jsp"
-										class="bi bi-suit-heart-fill"
-										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;">찜
+										class="bi bi-suit-heart-fill" id = "favor"
+										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;" > 찜
 									</a>
 								</c:otherwise>
 							</c:choose>
-							<a href="${pageContext.request.contextPath}/user?cmd=checkAgain"
+							<a href="${pageContext.request.contextPath}/Change/Change.jsp"
 								class="bi bi-gear-fill"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">정보수정
 							</a>
@@ -131,7 +131,7 @@
 								class="bi bi-box-arrow-in-right btn btn-success btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								Login </a>
-							<a href="${pageContext.request.contextPath}/Join/join.jsp"
+							<a href="${pageContext.request.contextPath}/agree/agree.jsp"
 								class="bi bi-person-plus-fill btn btn-primary btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								create account </a>
@@ -164,7 +164,7 @@
 								
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/itemList/ItemList.do">상품목록</a></li>
 								
-								<li><a class="dropdown-item" href="#">후기글</a></li>
+								<!-- <li><a class="dropdown-item" href="#">후기글</a></li> -->
 								<li><hr class="dropdown-divider"></li>
 
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>

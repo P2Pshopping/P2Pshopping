@@ -18,6 +18,7 @@ public class ReviewDTO {
     private String buyerName;
     private String productName;
     private String type = "review";
+    private int writerId;
     
     // Getters and setters
     public int getId() {
@@ -147,4 +148,12 @@ public class ReviewDTO {
     public void setType(String type) {
         this.type = type;
     }
+
+	public int getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(int writerId) {
+		this.writerId = writerId;
+	}
 }
