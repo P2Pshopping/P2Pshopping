@@ -94,7 +94,7 @@ public class PJ2DAO extends JDBConnect {
 	}
 	
 	
-	public PJ2DTO favorite(int bid) {
+	public PJ2DTO favorite(String bid) {
 		PJ2DTO dto5 = new PJ2DTO();
 		
 		String query = "SELECT * FROM FAVORITE WHERE USERID=?";
@@ -102,7 +102,7 @@ public class PJ2DAO extends JDBConnect {
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setInt(1, bid);
+			psmt.setString(1, bid);
 			rs = psmt.executeQuery();
 			int i =0;
 		
@@ -115,7 +115,8 @@ public class PJ2DAO extends JDBConnect {
 			e.printStackTrace();
 		}
 		
-		String query2 = "SELECT imgUrl_1,PRODUCTNAME,PRICE FROM PRODUCT WHERE ID = ?";
+		String query2 = "SELECT id,imgUrl_1,PRODUCTNAME,PRICE FROM PRODUCT WHERE ID = ?";
+		int[] favoritenum = new int[100];
 		String[] favoriteimg = new String[100];
 		String[] favoritename = new String[100];
 		int[] favoriteprice = new int[100];
@@ -128,10 +129,12 @@ public class PJ2DAO extends JDBConnect {
 			psmt.setString(1, favoritesid[i]);
 			rs= psmt.executeQuery();	
 		if(rs.next()) {
+			favoritenum[i]= rs.getInt("id");
 			favoriteimg[i] = rs.getString("imgUrl_1"); 
 			favoritename[i] = rs.getString("PRODUCTNAME"); 
 			favoriteprice[i] = rs.getInt("PRICE"); 
 		}
+		dto5.setFavoritenum(favoritenum);
 		dto5.setFavoriteimg(favoriteimg);
 		dto5.setFavoritename(favoritename);
 		dto5.setFavoriteprice(favoriteprice);
@@ -150,7 +153,7 @@ public class PJ2DAO extends JDBConnect {
 	
 	
 	
-	public PJ2DTO desc(int bid) {
+	public PJ2DTO desc(String bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
 	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
@@ -158,7 +161,7 @@ public class PJ2DAO extends JDBConnect {
 
 	    try {
 	        psmt = con.prepareStatement(query);
-	        psmt.setInt(1, bid);
+	        psmt.setString(1, bid);
 	        rs = psmt.executeQuery();
 
 	        int i = 0;
@@ -171,7 +174,8 @@ public class PJ2DAO extends JDBConnect {
 	        e.printStackTrace();
 	    }
 
-	    String query2 = "SELECT imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE DESC";
+	    String query2 = "SELECT id,imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE DESC";
+	    int[] favoritenum = new int[100];
 	    String[] favoriteimg = new String[100];
 	    String[] favoritename = new String[100];
 	    int[] favoriteprice = new int[100];
@@ -184,12 +188,13 @@ public class PJ2DAO extends JDBConnect {
 	            rs = psmt.executeQuery();
 
 	            if (rs.next()) {
+	            	favoritenum[i]= rs.getInt("id");
 	                favoriteimg[i] = rs.getString("imgUrl_1");
 	                favoritename[i] = rs.getString("PRODUCTNAME");
 	                favoriteprice[i] = rs.getInt("PRICE");
 	            }
 	        }
-
+	        dto5.setFavoritenum(favoritenum);
 	        dto5.setFavoriteimg(favoriteimg);
 	        dto5.setFavoritename(favoritename);
 	        dto5.setFavoriteprice(favoriteprice);
@@ -202,7 +207,7 @@ public class PJ2DAO extends JDBConnect {
 	    return dto5;
 	}
 
-	public PJ2DTO asc(int bid) {
+	public PJ2DTO asc(String bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
 	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
@@ -210,7 +215,7 @@ public class PJ2DAO extends JDBConnect {
 
 	    try {
 	        psmt = con.prepareStatement(query);
-	        psmt.setInt(1, bid);
+	        psmt.setString(1, bid);
 	        rs = psmt.executeQuery();
 
 	        int i = 0;
@@ -223,7 +228,8 @@ public class PJ2DAO extends JDBConnect {
 	        e.printStackTrace();
 	    }
 
-	    String query2 = "SELECT imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE ASC";
+	    String query2 = "SELECT id,imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE ASC";
+	    int[] favoritenum = new int[100];
 	    String[] favoriteimg = new String[100];
 	    String[] favoritename = new String[100];
 	    int[] favoriteprice = new int[100];
@@ -236,12 +242,13 @@ public class PJ2DAO extends JDBConnect {
 	            rs = psmt.executeQuery();
 
 	            if (rs.next()) {
+	            	favoritenum[i]= rs.getInt("id");
 	                favoriteimg[i] = rs.getString("imgUrl_1");
 	                favoritename[i] = rs.getString("PRODUCTNAME");
 	                favoriteprice[i] = rs.getInt("PRICE");
 	            }
 	        }
-
+	        dto5.setFavoritenum(favoritenum);
 	        dto5.setFavoriteimg(favoriteimg);
 	        dto5.setFavoritename(favoritename);
 	        dto5.setFavoriteprice(favoriteprice);

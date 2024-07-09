@@ -117,6 +117,11 @@ session.setAttribute("bid", "42");  //구매자 고유 번호
 session.setAttribute("productid", "43");
 System.out.println("43으로 설정");
 }else{
+
+/*String sid = (String)session.getAttribute("sellerid"); // 판매글번호
+System.out.println(sid+"로 설정");
+}*/
+
 String sid = productid;
 System.out.println(sid+"으로 설정");
 }  */
