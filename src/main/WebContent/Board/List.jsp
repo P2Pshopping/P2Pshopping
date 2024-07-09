@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -37,6 +41,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
+	font-family: Arial, sans-serif;
 }
 
 #gallery-item {
@@ -117,6 +122,8 @@ body {
 	width: 75px;
 	height: 75px;
 	margin-bottom: 10px;
+	border-radius: 50%;
+	object-fit: cover;
 }
 </style>
 </head>
@@ -133,6 +140,9 @@ body {
 			</div>
 
 			<div id="contents">
+			<h2 class="text-center my-4" style="font-size: 24px; font-weight: bold; color: #333;">
+        아기 사진
+    </h2>
 				<div id="gallery">
 					<c:choose>
 						<c:when test="${empty boardLists}">

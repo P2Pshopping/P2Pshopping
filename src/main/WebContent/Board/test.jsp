@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%-- <c:out value="${fn:length(likePosts)}" /> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -34,6 +30,7 @@ body {
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 #contents {
 	width: 800px;
 	flex-grow: 1;
@@ -110,6 +107,7 @@ body {
 .paging a:hover {
 	background-color: #ddd;
 }
+
 .btn-group-vertical .btn {
 	margin-bottom: 10px;
 }
@@ -135,18 +133,14 @@ body {
 		<div class="flex-container">
 			<div id="left-sidebar">
 				<div class="btn-group-vertical" role="group"
-					aria-label="Vertical button group" >
-					<button type="button" class="btn btn-outline-warning"
-						onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;" >아기사진</button>
-					<button type="button" class="btn btn-outline-warning"
-						onclick="location.href='../review/list';" style="font-size: 18px;" >거래후기</button>
+					aria-label="Vertical button group">
+					<button type="button" class="btn btn-outline-warning" onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;">아기사진</button>
+					<button type="button" class="btn btn-outline-warning" onclick="location.href='../review/list';" style="font-size: 18px;">거래후기</button>
 				</div>
 			</div>
 
 			<div id="contents">
-				 <h2 class="text-center my-4" style="font-size: 24px; font-weight: bold; color: #333;">
-        거래 후기
-    </h2>
+				<h2>거래 후기 게시판</h2>
 				<div id="gallery">
 					<c:choose>
 						<c:when test="${empty reviews}">
@@ -169,7 +163,6 @@ body {
 					</c:choose>
 				</div>
 
-				<%-- <div class="paging">${map.pagingImg}</div> --%>
 				<div class="paging">
 					<c:forEach var="i" begin="1" end="${totalPages}">
 						<c:choose>
@@ -182,9 +175,6 @@ body {
 						</c:choose>
 					</c:forEach>
 				</div>
-				<%-- <div class="paging">
-                    <c:out value="${pagingImg}" />
-                </div> --%>
 
 				<div class="d-flex justify-content-between mt-4">
 					<div></div>
@@ -195,33 +185,13 @@ body {
 				</div>
 			</div>
 
-			<!-- 			<div id="right-sidebar">
-				<p>인기 게시글</p>
-				<a href="#"><img alt="아기1" src="../img/333.jpg" width="100"
-					height="100"></a>
-			</div> -->
-			<%-- <div id="right-sidebar">
-				<p>인기글</p>
-				<c:forEach items="${likePosts}" var="post">
-					<a href="../review/view?id=${post.id}"> <c:if
-							test="${not empty post.sfile}">
-							<img alt="${post.title}"
-								src="../review/images/${post.ofile}&sfile=${post.sfile}&id=${post.id}" />
-							<img alt="${review.title}" src="../review/images/${review.sfile}&sfile=${post.sfile}&id=${post.id}" />
-							<img src="../review/images/${review.sfile}" alt="${review.ofile}" style="max-width: 100%;" />
-						</c:if> <p>${post.title}</p>
-					</a>
-				</c:forEach>
-			</div> --%>
-
 			<div id="right-sidebar">
 				<p>인기글</p>
-				<%-- <c:out value="${fn:length(likePosts)}" /> <!-- 리스트 크기 출력 --> --%>
 				<c:forEach items="${likePosts}" var="post">
 					<a href="../review/view?id=${post.id}"> <c:if
 							test="${not empty post.sfile}">
 							<img alt="${post.title}" src="../review/images/${post.sfile}" />
-						</c:if> <%-- <p>${post.title}</p> --%>
+						</c:if>
 						<p></p>
 					</a>
 				</c:forEach>

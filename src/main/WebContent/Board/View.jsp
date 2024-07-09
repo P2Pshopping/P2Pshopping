@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -133,6 +137,56 @@ body {
 	margin-top: 10px;
 	text-align: center;
 }
+
+.comment-container {
+	margin-top: 20px;
+	padding: 15px;
+	background-color: #ffffff;
+	border: 0.5px solid #ddd;
+	border-radius: 8px;
+}
+
+.comment-item {
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.comment-item:last-child {
+	border-bottom: none;
+}
+
+.comment-header {
+	font-weight: bold;
+	color: #555;
+}
+
+.comment-content {
+	margin-top: 5px;
+	color: #333;
+}
+
+.comment-form {
+	margin-top: 15px;
+	display: flex;
+}
+
+.comment-date {
+	margin-left: auto;
+}
+
+.comment-actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.comment-form input[type="text"] {
+	flex-grow: 1;
+	margin-right: 10px;
+}
+
+#view {
+	margin-left: auto;
+}
 </style>
 </head>
 <body>
@@ -152,6 +206,17 @@ body {
 			</div>
 
 			<div id="contents">
+
+				<!-- 좋아요 에러 메시지 출력 -->
+				<c:if test="${param.error == 'notLoggedIn'}">
+					<div class="alert alert-danger" role="alert">로그인 후 이용 가능합니다.
+					</div>
+				</c:if>
+				<c:if test="${param.error == 'alreadyLiked'}">
+					<div class="alert alert-warning" role="alert">이미 좋아요를 눌렀습니다.
+					</div>
+				</c:if>
+
 				<div id="gallery">
 					<ul class="no_dot">
 						<li><h3>제목 : ${dto.title }</h3></li>
@@ -164,13 +229,15 @@ body {
 							</p></li>
 						<li>
 							<form action="../mvcboard/like.do" method="post"
-								style="display: inline;">
+								style="display: flex; justify-content: center;">
 								<input type="hidden" name="id" value="${dto.id}">
-								<button type="submit" class="btn btn-outline-success">
+								<button type="submit" class="btn btn-outline-success"
+									<c:if test="${dao.isLikedByUser(dto.id, sessionScope.id)}">disabled</c:if>>
 									<img src="../Image/ddabong.png" alt="추천"
 										style="width: 50px; height: 50px;">
 								</button>
 							</form>
+
 						</li>
 					</ul>
 				</div>
@@ -178,7 +245,6 @@ body {
 				<div id="action-buttons">
 					<c:if test="${sessionScope.id == dto.writerId}">
 						<input type="hidden" name="id" value="${dto.id}">
-						<!--  <input onclick="location.href='../mvcboard/edit.do';" class="btn btn-primary" type="submit" value="수정">-->
 						<button class="btn btn-primary" type="button"
 							onclick="location.href='../mvcboard/edit.do?mode=edit&id=${param.id }';">수정하기</button>
 					</c:if>
@@ -193,14 +259,43 @@ body {
 					</c:if>
 				</div>
 
-				<div class="mt-3">
-					<form action="../mvcboard/addComment.do" method="post">
-						<input type="hidden" name="id" value="${dto.id}"> <input
-							type="text" name="content" placeholder="댓글" class="form-control">
-						<button type="submit" class="btn btn-secondary mt-1">등록</button>
-					</form>
+				<!-- 댓글 표시 -->
+				<div class="comment-container mt-4">
+					<h5>전체 댓글 ${commentList.size()}개</h5>
+					<c:forEach items="${commentList}" var="comment">
+						<div class="comment-item">
+							<div>
+								<span>${comment.cm_writerName}</span><br> <span
+									class="comment-content">${comment.cm_content}</span>
+							</div>
+							<div class="comment-actions">
+								<span class="comment-date">${comment.cm_createDate}</span>
+								<form action="../mvcboard/deleteComment.do" method="post"
+									style="display: inline;">
+									<input type="hidden" name="commentId" value="${comment.cm_id}">
+									<input type="hidden" name="boardId" value="${dto.id}">
+									<c:if test="${sessionScope.id == comment.cm_writerId }">
+										&nbsp;<button type="submit"
+											class="btn btn-outline-danger btn-sm">삭제</button>
+									</c:if>
+								</form>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 
+				<div class="mt-3">
+					<form action="../mvcboard/addComment.do" method="post">
+						<div class="input-group mb-3">
+							<input type="text" name="content" class="form-control"
+								placeholder="댓글 입력" aria-label="댓글 입력"
+								aria-describedby="button-addon2"> <input type="hidden"
+								name="id" value="${dto.id}">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2">등록</button>
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div id="right-sidebar">

@@ -103,11 +103,13 @@ public class ItemListDTO {
 	public void setProductid(String productid) {
 		this.productid = productid;
 	}
+
 	public int getVisit() {
 		return visit;
 	}
 	public void setVisit(int visit) {
 		this.visit = visit;
 	}
+
 	
 }
