@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<% 
+    response.sendRedirect(request.getContextPath() + "/MainPage.do"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +31,7 @@
 <body class="custom-body">
 
     <%@include file="../layout/Header.jsp"%>
-    <div class="mainwrrap">
+    <div class="mainwrap">
         <div style="display: flex; justify-content: center;">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1200px;">
                 <div class="carousel-indicators">
@@ -72,7 +76,56 @@
             </figure>
         </div>
         <hr color="black" size="4px" width="1200px" style="margin-left: auto; margin-right: auto;">
-        <div class="flex-center" style="margin-top: 3%;">
+        
+        <div id="container">
+		<div id="contents">
+			<div id="gallery">
+				<c:choose>
+					<%-- <c:when test="${empty product}"> --%>
+					<c:when test="${empty products}">
+						<div id="gallery-item">
+							<p>등록된 상품이 없습니다.</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${products}" var="ItemListDTO" varStatus="loop">
+							<div id="gallery-item"
+								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
+								<c:if test="${not empty ItemListDTO.imgUrl_1}">
+									<%-- <img
+										src="<%=request.getContextPath()%>/uploads/${ItemListDTO.imgUrl_1}"
+										src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}"
+										style="width: 500px; height: 300px;"
+										
+									alt="${ItemListDTO.imgUrl_1}"> --%>
+									<%-- <img
+										src="${pageContext.request.contextPath}/itemList/download.do?ofile=${ItemListDTO.imgUrl_1}&sfile=${ItemListDTO.imgUrl_1}&id=${ItemListDTO.id}"
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}"> --%>
+									<img
+										src="${pageContext.request.contextPath}/itemList/image?sfile=${ItemListDTO.imgUrl_1}"
+										<%-- src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}" --%>
+										style="width: 500px; height: 300px;"
+										alt="${ItemListDTO.imgUrl_1}">
+								</c:if>
+								<p>제목 : ${ItemListDTO.productName}</p>
+								<p>작성자 ID: ${ItemListDTO.username}</p>
+								<p>가격: ${ItemListDTO.price}</p>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+		<div class="paging">
+			<c:forEach begin="1" end="${totalPages}" var="i">
+				<a href="?page=${i}" class="${i == currentPage ? 'current' : ''}">${i}</a>
+			</c:forEach>
+		</div>
+	</div>
+        
+        
+        <!-- <div class="flex-center" style="margin-top: 3%;">
             <div class="container" style="display: flex-center; justify-content: center; max-width: 1200px;">
                 <div class="row">
                     <div class="col" style="width: 25%; border: 1px">
@@ -99,7 +152,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </body>
 <script>

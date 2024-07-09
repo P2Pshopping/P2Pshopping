@@ -16,12 +16,17 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sfile = req.getParameter("sfile");
-//        String sDirectory = req.getServletContext().getRealPath("/uploads");
-        String sDirectory = req.getServletContext().getRealPath("");
+        String sDirectory = req.getServletContext().getRealPath("/uploads");
+
+        // 디버깅 로그 추가
+        System.out.println("Requested file: " + sfile);
+        System.out.println("Directory: " + sDirectory);
 
         File file = new File(sDirectory, sfile);
-
+        
+        // 파일 존재 여부 확인 로그
         if (file.exists()) {
+            System.out.println("File exists: " + file.getAbsolutePath());
             resp.setContentType(getServletContext().getMimeType(file.getName()));
             resp.setContentLength((int) file.length());
 
@@ -34,6 +39,7 @@ public class ImageServlet extends HttpServlet {
                 }
             }
         } else {
+            System.out.println("File not found: " + file.getAbsolutePath());
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }

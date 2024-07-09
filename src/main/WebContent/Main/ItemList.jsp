@@ -14,7 +14,7 @@
 	rel="stylesheet">
 <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>파일 첨부형 게시판</title>
+<title>상품 리스트</title>
 <style>
 body {
 	font-size: 13px;
@@ -138,13 +138,14 @@ body {
 		<div id="contents">
 			<div id="gallery">
 				<c:choose>
-					<c:when test="${empty product}">
+					<%-- <c:when test="${empty product}"> --%>
+					<c:when test="${empty products}">
 						<div id="gallery-item">
-							<p>등록된 게시물이 없습니다^^*</p>
+							<p>등록된 상품이 없습니다.</p>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${product}" var="ItemListDTO" varStatus="loop">
+						<c:forEach items="${products}" var="ItemListDTO" varStatus="loop">
 							<div id="gallery-item"
 								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
 								<c:if test="${not empty ItemListDTO.imgUrl_1}">
@@ -159,10 +160,10 @@ body {
 										style="width: 500px; height: 300px;"
 										alt="${ItemListDTO.imgUrl_1}"> --%>
 									<img
-										src="${pageContext.request.contextPath}../itemList/image?sfile=${ItemListDTO.imgUrl_1}"
+										src="${pageContext.request.contextPath}/itemList/image?sfile=${ItemListDTO.imgUrl_1}"
+										<%-- src="${pageContext.request.contextPath}/uploads/${ItemListDTO.imgUrl_1}" --%>
 										style="width: 500px; height: 300px;"
 										alt="${ItemListDTO.imgUrl_1}">
-
 								</c:if>
 								<p>제목 : ${ItemListDTO.productName}</p>
 								<p>작성자 ID: ${ItemListDTO.username}</p>
@@ -172,6 +173,11 @@ body {
 					</c:otherwise>
 				</c:choose>
 			</div>
+		</div>
+		<div class="paging">
+			<c:forEach begin="1" end="${totalPages}" var="i">
+				<a href="?page=${i}" class="${i == currentPage ? 'current' : ''}">${i}</a>
+			</c:forEach>
 		</div>
 	</div>
 	<jsp:include page="../layout/Footer.jsp" />

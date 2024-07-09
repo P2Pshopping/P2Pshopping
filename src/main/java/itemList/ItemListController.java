@@ -15,13 +15,28 @@ public class ItemListController extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    System.out.println("1");
+    int pageSize = 9; // 한 페이지에 보여줄 상품 수
+    int currentPage = 1; // 기본 페이지 번호
+    String pageParam = req.getParameter("page");
+
+    if (pageParam != null && !pageParam.isEmpty()) {
+        currentPage = Integer.parseInt(pageParam);
+    }
+
+    int start = (currentPage - 1) * pageSize + 1;
+    int end = currentPage * pageSize;
 
     ItemListDAO dao = new ItemListDAO();
-    List<ItemListDTO> product = dao.getAllproduct();
+    int totalProducts = dao.getProductCount();
+    List<ItemListDTO> products = dao.selectProducts(start, end);
     dao.close();
 
-    req.setAttribute("product", product);
+    int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
+    req.setAttribute("products", products);
+    req.setAttribute("totalPages", totalPages);
+    req.setAttribute("currentPage", currentPage);
+
     req.getRequestDispatcher("/Main/ItemList.jsp").forward(req, resp);
   }
 }

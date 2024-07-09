@@ -1,5 +1,6 @@
 package itemList;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -12,14 +13,36 @@ public class ItemListDAO extends JDBConnect {
         super();
     }
 
-    public List<ItemListDTO> getAllproduct() {
-        List<ItemListDTO> product = new ArrayList<>();
-        String query = "SELECT p.*, u.username FROM PRODUCT p JOIN USERS u ON p.writerid = u.id";
-        System.out.println("쿼리문 실행");
-
+    public int getProductCount() {
+        int count = 0;
+        String query = "SELECT COUNT(*) FROM PRODUCT";
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("제품 수를 불러오는 중 예외 발생");
+            e.printStackTrace();
+        }
+        return count;
+    }
+//    public List<ItemListDTO> getAllproduct() {
+//        List<ItemListDTO> product = new ArrayList<>();
+//        String query = "SELECT p.*, u.username FROM PRODUCT p JOIN USERS u ON p.writerid = u.id";
+//        System.out.println("쿼리문 실행");
+//
+//        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+    public List<ItemListDTO> selectProducts(int start, int end) {
+        List<ItemListDTO> product = new ArrayList<>();
+        String query = "SELECT * FROM (SELECT ROWNUM rnum, p.*, u.username " +
+                       "FROM PRODUCT p JOIN USERS u ON p.writerid = u.id " +
+                       "WHERE ROWNUM <= ?) WHERE rnum >= ?";
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, end);
+            pstmt.setInt(2, start);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                System.out.println("DB정보 불러오기");
                 ItemListDTO dto = new ItemListDTO();
                 dto.setUsername(rs.getString("username"));
                 dto.setProductName(rs.getString("productName"));
@@ -37,10 +60,9 @@ public class ItemListDAO extends JDBConnect {
                 product.add(dto);
             }
         } catch (Exception e) {
-            System.out.println("불러오는 중 예외 발생");
+            System.out.println("제품을 불러오는 중 예외 발생");
             e.printStackTrace();
         }
-        System.out.println("리턴하기");
         return product;
     }
 }
