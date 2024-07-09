@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/itemList/ItemList.do")
-public class ItemListController extends HttpServlet {
+@WebServlet("/MainPage.do")
+public class MainController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -40,10 +40,9 @@ public class ItemListController extends HttpServlet {
 
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
         
-        req.setAttribute("keyword", keyword);
         req.setAttribute("product", product);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
-        req.getRequestDispatcher("/Main/ItemList.jsp").forward(req, resp);
+        req.getRequestDispatcher("/Main/Mainpage.jsp").forward(req, resp);
     }
 }
