@@ -93,7 +93,7 @@ public class SellController extends HttpServlet {
                     sellDAO.saveProduct(productName, categoryId, subCategoryId, Integer.parseInt(price), productDescription,
                     		photo1, photo2, photo3, photo4, writerId, roadAddrPart1, addrDetail, coordinates.getLatitude(), coordinates.getLongitude());
 
-                    response.sendRedirect("../Main/ItemList.jsp");
+                    response.sendRedirect("../Main/Mainpage.jsp");
                 } catch (SQLException e) {
                     e.printStackTrace();
 //                    response.sendRedirect("error.jsp");
