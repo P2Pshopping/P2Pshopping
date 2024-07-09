@@ -6,10 +6,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,6 +54,16 @@ body {
 			<form name="writeFrm" method="post" enctype="multipart/form-data"
 				action="../mvcboard/write.do" onsubmit="return validateForm(this);">
 
+				
+				<div class="form-group" style="display: none;">
+					<label for="category">분류</label> <select class="form-control"
+						id="bno" name="bno">
+						<option value="1">아기 자랑</option>
+						<option value="2">거래 후기</option>
+
+					</select>
+				</div>
+				
 				<div class="form-group">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" id="title" name="title"

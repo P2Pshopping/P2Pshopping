@@ -41,6 +41,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
+	font-family: Arial, sans-serif;
 }
 
 #gallery-item {
