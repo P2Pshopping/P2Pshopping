@@ -1,84 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import = "User.UserDAO" %>
+<%@ page import="User.UserDAO"%>
 <link href="text.css" rel="stylesheet" type="text/css">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기 </title>
+<title>아이디 찾기</title>
 </head>
 <body>
-<%@include file="../layout/Header.jsp"%>
-    <div class= "find_form">
- <div class="row">
-    <div class="col">
-<a class="icon-link" href="FindId.jsp">
-  아이디 찾기
-  <svg class="bi" aria-hidden="true"></svg>
-</a>
-<a class="icon-link" href="FindPw.jsp">
-  비밀번호 찾기
-  <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
-</a>
-  </div>
-  </div>
- </div>
- 
- 
- 
+	<%@include file="../layout/Header.jsp"%>
+	<div class="find_form">
+		<div class="row">
+			<div class="col">
+				<a class="icon-link" href="FindId.jsp"> 아이디 찾기 <svg class="bi"
+						aria-hidden="true"></svg>
+				</a> <a class="icon-link" href="FindPw.jsp"> 비밀번호 찾기 <svg class="bi"
+						aria-hidden="true">
+						<use xlink:href="#arrow-right"></use></svg>
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+
+
 	<div class="join_wrapper2">
-		<div class="join_form3">
- <form action="<c:url value='/IdFind.do' />" method="post">
-		<div class="row g-3">
+		<div class="join_frm3">
+			<form action="<c:url value='/IdFind.do' />" method="post">
+				<div class="row g-3">
+
+					<div style="magin-bottom: 100px;">
+						<h2 style="magin-top: 10px; margin-left: 30px; font-size: 25px;">
+							아이디 찾기 </h2>
+					</div>
+
+					<div class="mb-3 row" style = "margin-top:20px;">
+						<div class="input-group mb-3"style="width: 600px; margin-left: 30px;">
+							<label for="name"class="input-group-text fixed-width-label">이름</label> 
+								<input 	type="text" class="form-control" id="inputName" name="name"
+								placeholder="성명을 입력해주세요." maxlength="5">
+						</div>
+					</div>
+					
+					<div class="mb-3 row" style="margin-bottom:10px;">
+						<div class="input-group mb-3" style="width: 600px; margin-left: 30px;margin-bottom:10px;">
+							<label for="phone" class="input-group-text fixed-width-label">휴대전화</label>
+							<!-- <div class="col-sm-10"> -->
+								<input type="text" name="phone" class="form-control"
+									id="phone" placeholder="전화 번호를 입력해주세요." maxlength="11"  oninput="formatDate(this)">
+							<!-- </div> -->
+						</div>
+						
+					</div>
+						
+				</div>
+				<div class="col align-self-center"
+					style="margin-left: 470px; , margin-bottom: 5000px;">
+
+					<button type="submit" class="btn btn-success" id="btn">아이디
+						찾기</button>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+
+
+
+	<div style="margin-top: 25%;">
+		<%@include file="../layout/Footer.jsp"%>
+	</div>
+	<script>
+	function formatDate(input) {
+	    // 숫자 외의 문자를 모두 제거
+	    input.value = input.value.replace(/[^\d]/g, '');
+	}
+	</script>
+	<script>
 	
-    <div style = "magin-bottom:100px;">
-    <h2 style ="magin-top:10px;margin-left:15px; font-size: 25px;">  계정을 찾습니다. </h2>
-    </div>
-    
-    <div class="mb-3 row">
-    <div class= "blank">
-    </div>
-    
-    <div class="input-group">
-    <label for="inputPassword" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" name ="name" class="form-control" id="inputPassword">
-      </div>
-      </div>
-      </div>
-<div class="mb-3 row">
-<div class="input-group">
-    <label for="inputPassword" class="col-sm-2 col-form-label">휴대전화</label>
-    <div class="col-sm-10">
-      <input type="text" name ="phone"class="form-control" id="inputPassword">
-</div>
-</div>
-</div>
-
-</div>
-   <div class="col align-self-center" style = "margin-left:500px;, margin-bottom:5000px;">
-   
-      <button type="submit" class="btn btn-danger" id="btn" >아이디 찾기</button>
-   
-</div>
- </form>
-    
-  </div>
-  </div>
-
-	
-
-
-<div style = "margin-top:20%;">
-<%@include file="../layout/Footer.jsp"%>
-</div>
-<script>
 $('#btn').on('click', function() {
 $.ajax({
     url: '/IdFind.do',  // 서블릿 URL

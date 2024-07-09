@@ -3,17 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>병원찾기</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
+      /*   body {
             font-family: 'Roboto', sans-serif;
             text-align: center;
             background-color: #E0F7FA;
             margin: 0;
             padding: 0;
-        }
+        } */
         header {
             margin-top: 20px;
             display: flex;
@@ -103,7 +107,8 @@
         });
     </script>
 </head>
-<body>
+<body style="overflow-x: scroll; margin: 0 auto; width: 1200px; font-family: 'Roboto', sans-serif;
+            /* text-align: center; */ align-items: center; background-color: #f7f7f7;">
 	<%@ include file="../layout/Header.jsp"%>
     <header>
         <h1>병원찾기</h1>

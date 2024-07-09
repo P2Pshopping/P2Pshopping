@@ -1,14 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
+<%@ page session="true" %>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect("../Login/login.jsp"); // 세션이 없으면 로그인 페이지로 리다이렉트
+    }
+%>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
         <title>상품 판매하기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -108,8 +116,16 @@
 </script>
 
 </head>
-<body>
-<%@include file="../layout/Header.jsp"%>
+<body
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
+
+
+	<%@ include file="../layout/Header.jsp"%>
+
+
+
+	<br />
+	<br />
 <!-- 화면어둡게 -->
     <div id="overlay" class="hidden"></div>
 <%
@@ -231,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("roadAddrPart2: " + roadAddrPart2);
     console.log("zipNo: " + zipNo);
 
-    if (roadAddrPart1) {
+    /* if (roadAddrPart1) {
         document.getElementById('roadAddrPart1').value = roadAddrPart1;
         document.getElementById('roadAddrPart1Display').value = roadAddrPart1;
     }
@@ -240,7 +256,32 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('addrDetailDisplay').value = addrDetail;
     }
     if (roadAddrPart2) document.getElementById('roadAddrPart2').value = roadAddrPart2;
-    if (zipNo) document.getElementById('zipNo').value = zipNo;
+    if (zipNo) document.getElementById('zipNo').value = zipNo; */
+    
+    // 각각의 요소가 존재하는지 확인한 후 값을 설정합니다.
+    if (roadAddrPart1) {
+        var roadAddrPart1Element = document.getElementById('roadAddrPart1');
+        var roadAddrPart1DisplayElement = document.getElementById('roadAddrPart1Display');
+        if (roadAddrPart1Element) roadAddrPart1Element.value = roadAddrPart1;
+        if (roadAddrPart1DisplayElement) roadAddrPart1DisplayElement.value = roadAddrPart1;
+    }
+
+    if (addrDetail) {
+        var addrDetailElement = document.getElementById('addrDetail');
+        var addrDetailDisplayElement = document.getElementById('addrDetailDisplay');
+        if (addrDetailElement) addrDetailElement.value = addrDetail;
+        if (addrDetailDisplayElement) addrDetailDisplayElement.value = addrDetail;
+    }
+
+    if (roadAddrPart2) {
+        var roadAddrPart2Element = document.getElementById('roadAddrPart2');
+        if (roadAddrPart2Element) roadAddrPart2Element.value = roadAddrPart2;
+    }
+
+    if (zipNo) {
+        var zipNoElement = document.getElementById('zipNo');
+        if (zipNoElement) zipNoElement.value = zipNo;
+    }
 
     $('form').on('submit', function(event) {
         var productName = $('#productName').val();

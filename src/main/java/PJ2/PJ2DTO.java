@@ -7,10 +7,73 @@ public class PJ2DTO {
 	private String imgUrl_4;
 	private String productName;
 	private String detail;
-	private String price;
+	private int price;
 	private String[] moreid; // 추가적으로 보여주는 글의 id
-	private String likeSearch;
+	private String likeSearch;	
+	private String favorite[];
+	private String favoriteimg[];
+	private String writerid;
+	private String favoritename[];
+	private int favoriteprice[];
+
+	private int favoritenum[];
 	
+	
+	public int[] getFavoritenum() {
+		return favoritenum;
+	}
+	public void setFavoritenum(int[] favoritenum) {
+		this.favoritenum = favoritenum;
+	}
+	
+ 	private int userid;
+	
+	
+ 	public int getUserid() {
+ 		return userid;
+ 	}
+ 	public void setUserid(int userid) {
+ 		this.userid = userid;
+
+	}
+	public int[] getFavoriteprice() {
+		return favoriteprice;
+	}
+	public void setFavoriteprice(int[] favoriteprice) {
+		this.favoriteprice = favoriteprice;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getWriterid() {
+		return writerid;
+	}
+	public void setWriterid(String writerid) {
+		this.writerid = writerid;
+	}
+	public String[] getFavoriteimg() {
+		return favoriteimg;
+	}
+	public void setFavoriteimg(String[] favoriteimg) {
+		this.favoriteimg = favoriteimg;
+	}
+	public String[] getFavoritename() {
+		return favoritename;
+	}
+	public void setFavoritename(String[] favoritename) {
+		this.favoritename = favoritename;
+	}
+	
+	
+	public String[] getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String[] favorite) {
+		this.favorite = favorite;
+	}
 	public String getLikeSearch() {
 		return likeSearch;
 	}
@@ -55,12 +118,7 @@ public class PJ2DTO {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
+	
 	public String getImgUrl_1() {
 		return imgUrl_1;
 	}

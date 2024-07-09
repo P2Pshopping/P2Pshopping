@@ -47,21 +47,21 @@ public class JDBConnect {
 			e.printStackTrace();
 		}
 	}
-//	// 세 번째 생성자 196ㅔ
+//	// 세 번째 생성자 196ㅔ	
 //	public void close() {
 //		try {
 //			if (rs != null) rs.close();
 //			if(stmt != null) stmt.close();
 //			if(psmt != null) psmt.close();
 //			if(con != null) con.close();
-//
+//			
 //			System.out.println("JDBC 자원 해제");
 //		}
 //		catch(Exception e) {
 //			e.printStackTrace();
 //		}
 //}
-
+		
 	   // ServletContext를 사용하는 생성자
 	public JDBConnect(ServletContext application) {
 		try {
@@ -70,12 +70,12 @@ public class JDBConnect {
 			String url = application.getInitParameter("OracleURL");
 			String id= application.getInitParameter("OracleId");
 			String pwd = application.getInitParameter("OraclePwd");
-
+			
 			//JDBC 드라이버 로드
 			Class.forName(driver);
 			// 데이터베이스 연결
 			con = DriverManager.getConnection(url,id,pwd);
-
+			
 			System.out.println("DB 연결 성공(인수 생성자 2)");
 		}
 		catch(Exception e) {
@@ -100,9 +100,11 @@ public class JDBConnect {
 			e.printStackTrace();
 		}
 	}
-//	public int update(UserDTO dto) {
-//		int cnt = 0;
-//		return cnt;
-//	}
+
+	public int update(UserDTO dto) {
+		int cnt = 0;
+		return cnt;
+	}
+
 
 }

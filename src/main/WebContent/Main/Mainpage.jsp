@@ -211,9 +211,9 @@ body {
 						<c:otherwise>
 							<c:forEach var="item" items="${product}" varStatus="status">
 								<div id="gallery-item"
-									onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
+									onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
 									<c:if test="${not empty item.imgUrl_1}">
-										<img src="../${item.imgUrl_1}" alt="..."
+										<img src="${pageContext.request.contextPath}/${item.imgUrl_1}" alt="..."
 											style="width: 200px; height: 200px; object-fit: cover;">
 									</c:if>
 									<p>제목 : ${item.productName}</p>

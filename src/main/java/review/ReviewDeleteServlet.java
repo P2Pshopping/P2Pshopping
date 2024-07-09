@@ -11,6 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 //@WebServlet("/review/delete")
 public class ReviewDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ReviewDAO2 reviewDAO = new ReviewDAO2();
         

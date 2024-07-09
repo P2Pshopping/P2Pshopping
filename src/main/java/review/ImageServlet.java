@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 //@WebServlet("/images/*")
 public class ImageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String filename = request.getPathInfo().substring(1); // ¿äÃ» °æ·Î¿¡¼­ ÆÄÀÏ¸íÀ» ÃßÃâ
-        // ¿©±â¼­´Â /uploads µð·ºÅä¸®¸¦ °æ·Î¿¡ Æ÷ÇÔÇÏÁö ¾ÊÀ½
+        String filename = request.getPathInfo().substring(1); // ï¿½ï¿½Ã» ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ /uploads ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         String uploadPath = getServletContext().getRealPath("/") + filename;
         File file = new File(uploadPath);
 
-        // µð¹ö±× ¸Þ½ÃÁö Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         System.out.println("Requested file: " + filename);
-        System.out.println("Full file path: " + file.getAbsolutePath());
+//        System.out.println("Full file path: " + file.getAbsolutePath());
 
         if (file.exists()) {
             response.setContentType(getServletContext().getMimeType(file.getName()));
@@ -36,8 +36,8 @@ public class ImageServlet extends HttpServlet {
                 }
             }
         } else {
-            // ÆÄÀÏÀÌ ¾øÀ» ¶§ µð¹ö±× ¸Þ½ÃÁö Ãß°¡
-            System.out.println("File not found: " + file.getAbsolutePath());
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+//            System.out.println("File not found: " + file.getAbsolutePath());
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }

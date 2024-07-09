@@ -5,8 +5,8 @@
 <%@ page import="User.UserDAO"%>
 <%@ page import="common.UserDTO"%>
 
+<!-- 내일 와서 diff 떠보기 join 페이지 -->
 
-<!-- join,idCheck,UserDAO에 있는 거 콘솔에 뜨는거 확인하구 다시 체크해서 값오게 해서 중복 된 값 아닌지 확인하게 하는거부터 하기 -->
 
 <link href="text.css" rel="stylesheet" type="text/css">
 <link
@@ -46,134 +46,8 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
-<title>Join</title>
-<script>
-    function joinCheck() {
-        var name = document.getElementById("inputName").value.trim();
-        var birth = document.getElementById("inputBirth").value.trim();
-        var id = document.getElementById("username").value.trim();
-        var pw = document.getElementById("inputPWD").value.trim();
-        var pwc = document.getElementById("inputPWDC").value.trim();
-        var phone = document.getElementById("inputPhone").value.trim();
-        var address = document.getElementById("inputAddress").value.trim();
-        var email = document.getElementById("inputEmail").value.trim();
+<title>카카오 회원가입</title>
 
-        if (name === "") {
-            alert("이름을 입력해주세요.");
-            document.getElementById("inputName").focus();
-            event.preventDefault();
-            return false;
-        } else if (birth === "") {
-            alert("생년월일을 입력해주세요.");
-            document.getElementById("inputBirth").focus();
-            event.preventDefault();
-            return false;
-        
-        } else if (id === "") {
-            alert("아이디를 입력해주세요.");
-            document.getElementById("username").focus();
-            event.preventDefault();
-            return false;
-        } else if (pw === "") {
-            alert("비밀번호를 입력해주세요.");
-            document.getElementById("inputPWD").focus();
-            event.preventDefault();
-            return false;
-        } else if (pwc === "") {
-            alert("비밀번호 확인을 입력해주세요.");
-            document.getElementById("inputPWDC").focus();
-            event.preventDefault();
-            return false;
-        } else if (pw !== pwc) {
-            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-            document.getElementById("inputPWDC").focus();
-            event.preventDefault();
-            return false;
-        } else if (phone === "") {
-            alert("전화번호를 입력해주세요.");
-            document.getElementById("inputPhone").focus();
-            event.preventDefault();
-            return false;
-        } else if (email === "") {
-            alert("이메일을 입력해주세요.");
-            document.getElementById("inputEmail").focus();
-            event.preventDefault();
-            return false;
-        } else if (address === "") {
-            alert("주소를 입력해주세요.");
-            document.getElementById("inputAddress").focus();
-            event.preventDefault();
-            return false;
-        }
-        return true;
-    }
-</script>
-
-
-<%
-String inputYn = request.getParameter("inputYn");
-String roadAddrPart1 = request.getParameter("roadAddrPart1");
-String addrDetail = request.getParameter("addrDetail");
-String message = null;
-
-if ("POST".equalsIgnoreCase(request.getMethod())) {
-	String name = request.getParameter("inputName");
-	String birth = request.getParameter("inputBirth");
-
-	String username = request.getParameter("username");
-	String password = request.getParameter("inputPWD");
-	String phone = request.getParameter("inputPhone");
-	String email = request.getParameter("inputEmail");
-	String address = request.getParameter("inputAddress");
-
-	// 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
-	// 예를 들어, 이메일 중복 체크 등의 로직을 수행할 수 있습니다.
-
-	UserDTO user = new UserDTO();
-	user.setName(name);
-	user.setUsername(username);
-	user.setEmail(email);
-	user.setPhone(phone);
-	user.setAddress(address);
-
-	user.setPassword(password);
-	// 필요한 경우 다른 필드들도 설정
-
-	UserDAO userDAO = null;
-	try {
-		userDAO = new UserDAO(application);
-		String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
-		user.setPassword(hashedPassword); // 해시된 비밀번호 설정
-		boolean isUserAdded = userDAO.addUser(user);
-
-		if (isUserAdded) {
-	/*    message = "회원가입이 성공적으로 완료되었습니다."; */
-%>
-<script>
-    window.location.href = "../Login/login.jsp";
-    alert("회원가입에 성공하였습니다.");
-</script>
-<%
-} else {
-//   message = "잘못 입력하셨습니다 다시 입력해주세요.";
-%>
-<script>
-    alert("잘못 입력하셨습니다. 다시 입력해주세요.");
-   /* event.preventDefault();ㄱ // 폼 제출을 중단  */
- 
-</script>
-<%
-}
-} catch (Exception e) {
-e.printStackTrace();
-// 예외 처리 로직 추가
-} finally {
-if (userDAO != null) {
-userDAO.close();
-}
-}
-}
-%>
 
 
 </head>
@@ -184,67 +58,97 @@ userDAO.close();
 		<div class="wrap">
 			<div class="contents">
 				<div class="join_wrapper2">
-					<div class="logo">회원가입</div>
+					<div class="logo"> 카카오 회원가입</div>
 					<div class="join_form">
-						<form action="join.jsp" method="post" id="form__wrap">
-							<div class="col-12">
-								<label for="inputName" class="form-label">성명</label> <input
+						<form action="Kakaojoin.jsp" method="post" id="form__wrap">
+
+							<div class="input-group mb-3" style="width: 600px; margin-top:30px;">
+								<label for="inputName"
+									class="input-group-text fixed-width-label">성명</label> <input
 									type="text" class="form-control" id="inputName"
 									name="inputName" placeholder="성명 입력" maxlength="5">
 							</div>
-							<div class="col-12">
-								<label for="inputBirth" class="form-label">생년월일</label> <input
+							<div class="input-group mb-3" style="width: 600px;">
+								<label for="inputBirth"
+									class="input-group-text fixed-width-label">생년월일</label> <input
 									type="text" class="form-control" id="inputBirth"
 									name="inputBirth" placeholder="YYYYMMDD 형식으로 생년월일 입력"
-									maxlength="8" oninput="formatDate(this)">
+									maxlength="8"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
 							</div>
 
-							<div class="form-inline w-100">
-								<div class="col-12">
-									<label for="inputId" class="form-label">아이디</label>
-									<div class="input-group">
-										<input type="text" class="form-control" id="username"
-											name="username" placeholder="10자 이하" maxlength="10">
-										<input type="button" class="btn btn-danger" id="btnCheckId"
-											value="중복 확인">
-									</div>
+							<div class="input-group-container" style ="justify-content: center;">
+								<div class="input-group mb-3" style="width: 480px;">
+									<label for="inputId" class="input-group-text fixed-width-label">아이디</label>
+									<!-- <div class="input-group mb-3"> -->
+									<input type="text" class="form-control" id="username"
+										name="username" placeholder="4글자 이상으로 입력해주세요." maxlength="10"> 
+										
+									<!-- </div> -->
 								</div>
+										<input
+										type="button" class="btn btn-success" id="btnCheckId" style ="margin-left:20px; width:100px; height:38px;"
+										value="중복 확인">
 							</div>
-							<div class="col-12">
-								<label for="inputPWD" class="form-label">비밀번호</label> <input
-									type="password" class="form-control" id="inputPWD"
-									name="inputPWD" placeholder="20자 이하" maxlength="20">
+							<div class="input-group mb-3" style="width: 600px;">
+								<label for="inputPWD" class="input-group-text fixed-width-label">비밀번호</label>
+								<input type="password" class="form-control" id="inputPWD"
+									name="inputPWD" placeholder="영어,숫자,특수기호 3가지를 모두 사용해주세요." maxlength="20">
 							</div>
-							<div class="col-12">
-								<label for="inputPWDC" class="form-label">비밀번호 확인</label> <input
+							<div class="input-group mb-3" style="width: 600px;">
+								<label for="inputPWDC"
+									class="input-group-text fixed-width-label">비밀번호 확인</label> <input
 									type="password" class="form-control" id="inputPWDC"
 									name="inputPWDC" placeholder="위와 같이 입력하세요" maxlength="20">
 							</div>
-							<div class="col-12">
-								<label for="inputPhone" class="form-label">전화번호</label> <input
+							<div class="input-group mb-3" style="width: 600px;">
+								<label for="inputPhone"
+									class="input-group-text fixed-width-label">전화번호</label> <input
 									type="text" class="form-control" id="inputPhone"
-									name="inputPhone" placeholder="숫자만 입력하세요." maxlength="11">
+									name="inputPhone" placeholder="11자리에 맞게 전화번호를 입력해주세요." maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 							</div>
-							<div class="col-12">
-								<label for="inputEmail" class="form-label">Email</label> <input
-									type="email" class="form-control" id="inputEmail"
-									name="inputEmail" placeholder="이메일을 입력하세요.">
+							<div class="input-group mb-3" style="width: 600px;">
+								<label for="inputEmail"
+									class="input-group-text fixed-width-label">Email</label>
+									 <input
+									type="text" class="form-control" name="inputEmail"  id= "inputEmail" placeholder="Username"
+									aria-label="Username"> 
+									<span class="input-group-text">@</span>
+								<!-- <input type="email" class="form-control" id="inputEmail"
+									name="inputEmail" placeholder="이메일을 입력하세요.">  -->
+									
+									<input class="form-control" id="domain-txt" name ="domain-txt" type="email" placeholder="이메일 주소" disabled/> 
+									<select class="box" id="domain-list" name ="domain-list">
+  									<option value="type">직접 입력</option>
+									  <option value="naver.com"  id="domain-list">naver.com</option>
+									<option value="google.com">google.com</option>
+									<option value="hanmail.net">hanmail.net</option>
+									<option value="nate.com">nate.com</option>
+									<option value="kakao.com">kakao.com</option>
+								</select>
 							</div>
 							<div onload="init();">
-								<div class="col-12">
-									<label for="inputAddress" class="form-label">주소</label>
-									<div class="input-group">
-										<input type="text" class="form-control" id="roadAddrPart1"
-											name="inputAddress" placeholder="주소 입력">
-										<button type="button" onclick="goPopup()"
-											class="btn btn-danger">주소 검색</button>
-									</div>
+							<div class="input-group-container" style ="justify-content: center;">
+								<div class="input-group mb-3" style="width: 480px;">
+									<label for="inputAddress"
+										class="input-group-text fixed-width-label">주소</label>
+									<!-- <div class="input-group"> -->
+									<input type="text" class="form-control" id="roadAddrPart1"
+										name="inputAddress" placeholder="주소 입력">
+										
+									<!-- </div> -->
 								</div>
-								<div class="col-12">
-									<label for="inputAddress2" class="form-label">상세 주소</label> <input
+									<button type="button" onclick="goPopup()" style ="margin-left:20px; width:100px; height:38px;"
+										class="btn btn-success">주소 검색</button>
+										</div>
+								<div class="input-group mb-3" style="width: 600px;">
+									<label for="inputAddress2"
+										class="input-group-text fixed-width-label">상세 주소</label> <input
 										type="text" class="form-control" id="addrDetail"
 										name="inputAddress2" placeholder="상세 주소 입력">
+									<!-- zipNo 안써도 지우지마 -->
+									<input type="hidden" class="form-control" id="zipNo"
+										name="inputAddress2" placeholder="">
 								</div>
 							</div>
 							<div class="blank"></div>
@@ -256,30 +160,211 @@ userDAO.close();
                             <label class="required" for="privacyPolicy"> 회원가입 하시겠습니까 ? </label>
                         </div>
                    </div> -->
-							<%
-							if (message != null) {
-							%>
-							<p><%=message%></p>
-							<%
-							}
-							%>
-							<div class="d-grid gap-2">
-								<a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg">뒤로
+							
+							<span class="button-container" style ="margin-top:80px;">
+								<a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg" >뒤로
 									가기</a>
 								<button type="submit" id="target_btn"
-									class="btn btn-primary btn-lg" name="loginButton"
+									class="btn btn-success btn-lg" name="loginButton" 
 									onclick="loginbtn();" disabled>회원 가입</button>
 
-							</div>
+							</span>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div style="margin-top: 30%;">
+	<div style="margin-top: 10%;">
 		<%@include file="../layout/Footer.jsp"%>
 	</div>
+	<%
+	String inputYn = request.getParameter("inputYn");
+	String roadAddrPart1 = request.getParameter("roadAddrPart1");
+	String addrDetail = request.getParameter("addrDetail");
+	String message = null;
+	String inputEmailValue = request.getParameter("inputEmail"); // Username 입력 값
+	String domainTxtValue = request.getParameter("domain-txt"); // 직접 입력한 도메인
+	String domainListValue = request.getParameter("domain-list"); // 선택한 도메인
+	
+	String emails;
+	if (domainTxtValue != null) {
+	    emails = inputEmailValue + "@" + domainTxtValue; // Username + 직접 입력한 도메인
+	} else if (  domainListValue != null) {
+	    emails = inputEmailValue + "@" + domainListValue; // Username + 선택한 도메인
+	} else {
+	  emails = "null";
+	}
+	
+	
+	if ("POST".equalsIgnoreCase(request.getMethod())) {
+		String name = request.getParameter("inputName");
+		String birth = request.getParameter("inputBirth");
+	
+		String username = request.getParameter("username");
+		String password = request.getParameter("inputPWD");
+		String passwordc = request.getParameter("inputPWDC");
+		String phone = request.getParameter("inputPhone");
+		 String email = emails;
+		String address = request.getParameter("inputAddress");
+	
+		// 서버 측에서 추가적인 유효성 검사 및 회원가입 처리 로직
+		 if (name == null || name.trim().isEmpty() ||
+  			 birth == null || birth.trim().isEmpty() ||
+   			 username == null || username.trim().isEmpty() ||
+    		 password == null || password.trim().isEmpty() ||
+    		 phone == null || phone.trim().isEmpty() ||
+    		 email == null || email.trim().isEmpty() ||
+    		 address == null || address.trim().isEmpty()) 
+		 {
+		
+			 message = "모든 필수 항목을 입력해주세요.";
+%>
+<script>
+    alert("모든 필수 항목을 입력해주세요.");
+    event.preventDefault();
+</script>
+<% }else{
+if (username.length() < 4) {
+  
+%>
+<script>
+    alert("아이디는 최소 4글자 이상이어야 합니다.");
+    event.preventDefault();
+</script>
+<%
+} else if (birth.length() != 8) {
+    
+%>
+<script>
+    alert("생년월일은 8글자여야 합니다.");
+    event.preventDefault();
+</script>
+<%
+        } else if (phone.length() != 11 || !phone.matches("[0-9]+")) {
+            message = "전화번호는 11자리의 숫자로 입력해주세요.";
+%>
+            <script>
+                alert("전화번호는 11자리의 숫자로 입력해주세요.");
+                event.preventDefault();
+            </script>
+
+
+	
+<%
+
+} else {
+    // 이메일 형식 유효성 검사 (정규 표현식 사용 예)
+    String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    if (!email.matches(emailRegex)) {
+      
+    %>
+    <script>
+        alert("올바른 이메일 형식이 아닙니다.");
+        event.preventDefault();
+    </script>
+<% 
+    
+    }else{
+    	if (!password.equals(passwordc)) {
+    	   
+    	%>
+    	<script>
+    	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+    	    event.preventDefault();
+    	</script>
+    	<%
+    	} else if (password.length() < 4) {
+    	   
+    	%>
+    	<script>
+    	    alert("비밀번호는 최소 4글자 이상이어야 합니다.");
+    	    event.preventDefault();
+    	</script>
+    	<%
+    	} else {
+    	    // 정규 표현식을 사용하여 영어, 숫자, 특수 기호 포함 여부 확인
+    	    String passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+    	    if (!password.matches(passwordRegex)) {
+    	        message = "비밀번호는 영어, 숫자, 특수 기호(@#$%^&+=!)를 모두 포함해야 합니다.";
+    	    %>
+    	    <script>
+    	        alert("비밀번호는 영어, 숫자, 특수 기호를 모두 포함해야 합니다.");
+    	        event.preventDefault();
+    	    </script>
+    	    <%
+    	    } else {
+    	
+    
+		UserDTO user = new UserDTO();
+		user.setName(name);
+		user.setUsername(username);
+		user.setEmail(email);
+		user.setPhone(phone);
+		user.setAddress(address);
+		user.setBirth(birth);
+		user.setPassword(password);
+		// 필요한 경우 다른 필드들도 설정
+	
+		UserDAO userDAO = null;
+		try {
+			userDAO = new UserDAO(application);
+			String hashedPassword = userDAO.hashPassword(password); // 비밀번호 해시
+			user.setPassword(hashedPassword); // 해시된 비밀번호 설정
+			boolean isUserAdded = userDAO.addUser(user);
+	
+			if (isUserAdded) {
+		/*    message = "회원가입이 성공적으로 완료되었습니다."; */
+	%>
+	<script>
+	    window.location.href = "../Login/login.jsp";
+	    alert("회원가입에 성공하였습니다.");
+	</script>
+	<%
+	} else {
+	  message = "잘못 입력하셨습니다 다시 입력해주세요.";
+	%>
+	<script>
+	    alert("잘못 입력하셨습니다. 다시 입력해주세요.");
+	    event.preventDefault();
+	   /* event.preventDefault();ㄱ // 폼 제출을 중단  */
+	 
+	</script>
+	<%
+	}
+	} catch (Exception e) {
+	e.printStackTrace();
+	// 예외 처리 로직 추가
+	} finally {
+	if (userDAO != null) {
+	userDAO.close();
+	}
+	}
+	}
+}
+	}
+}}}
+	
+	%>
+	<script>
+	const domainListEl = document.querySelector('#domain-list')
+	const domainInputEl = document.querySelector('#domain-txt')
+	// select 옵션 변경 시
+	domainInputEl.value = 'kakao.com';
+
+	domainListEl.addEventListener('change', (event) => {
+	  // option에 있는 도메인 선택 시
+	  if(event.target.value !== "type") {
+	    // 선택한 도메인을 input에 입력하고 disabled
+	    domainInputEl.value = event.target.value
+	    domainInputEl.disabled = true
+	  } else { // 직접 입력 시
+	    // input 내용 초기화 & 입력 가능하도록 변경
+	    domainInputEl.value = ""
+	    domainInputEl.disabled = false
+	  }
+	})
+	</script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script type="text/javascript">
     $(document).ready(function() {
@@ -295,7 +380,7 @@ userDAO.close();
                 data: {
                     username: username // 입력한 username 데이터 보내기
                 },
-                dataType: "json",   // 응답 데이터 타입은 text로 지정
+                dataType: "json",   // 응답 데이터 타입은 json로 지정
                 success: function(response) {
                     console.log('서버 응답:', response); // 서버 응답 전체를 콘솔에 출력
 
@@ -359,8 +444,7 @@ function init(){
 		document.form.submit();
 	}else{
 		//완료버튼
-	opener.jusoCallBack("<%=roadAddrPart1%>","<%=addrDetail%>
-		");
+	opener.jusoCallBack("<%=roadAddrPart1%>","<%=addrDetail%>");
 				// overlay 닫기
 				opener.document.getElementById('overlay').style.display = 'none';
 				opener.document.getElementById('confirmButton').style.display = 'none';
@@ -372,25 +456,29 @@ function init(){
 		}
 		function goPopup() {
 
-			var pop = window.open("../popup/jusoPopup.jsp", "pop",
-					"width=570,height=420, scrollbars=yes, resizable=yes");
+		var pop = window.open("../popup/jusoPopup2.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 		}
-		function jusoCallBack(roadAddrPart1, addrDetail) {
-			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-			document.form.roadAddrPart1.value = roadAddrPart1;
-			document.form.addrDetail.value = addrDetail;
-			document.form.zipNo.value = zipNo;
+	function jusoCallBack2(roadAddrPart1,addrDetail,zipNo){
+	  // 디버깅 로그 추가
+    console.log("jusoCallBack2 called");
+    console.log("roadAddrPart1: " + roadAddrPart1);
+    console.log("addrDetail: " + addrDetail);
+    console.log("zipNo: " + zipNo);
+	
+    // 팝업 페이지에서 주소 입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+    document.getElementById('roadAddrPart1').value = roadAddrPart1;
+    document.getElementById('addrDetail').value = addrDetail;
+    document.getElementById('zipNo').value = zipNo;
 
-			sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
-			sessionStorage.setItem('addrDetail', addrDetail);
-			sessionStorage.setItem('zipNo', zipNo);
+    sessionStorage.setItem('roadAddrPart1', roadAddrPart1);
+    sessionStorage.setItem('addrDetail', addrDetail);
+    sessionStorage.setItem('zipNo', zipNo);
 
-			// Debugging logs
-			console.log("roadAddrPart1 set to: " + roadAddrPart1);
-			console.log("addrDetail set to: " + addrDetail);
-			console.log("zipNo set to: " + zipNo);
+    // 디버깅 로그
+    console.log("roadAddrPart1 set to: " + roadAddrPart1);
+    console.log("addrDetail set to: " + addrDetail);
+    console.log("zipNo set to: " + zipNo);}
 
-		}
 	</script>
 
 

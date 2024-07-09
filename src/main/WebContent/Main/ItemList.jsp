@@ -135,9 +135,9 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="item" items="${product}" varStatus="status">
+						<c:forEach var="item" items="${product}" varStatus="loop">
 							<div id="gallery-item"
-								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp';">
+								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
 								<c:if test="${not empty item.imgUrl_1}">
 									<img src="../${item.imgUrl_1}" alt="..."
 										style="width: 200px; height: 200px; object-fit: cover;">

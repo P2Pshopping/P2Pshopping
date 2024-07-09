@@ -38,134 +38,22 @@
 <meta charset="UTF-8">
 <title>아이 물건 보기</title>
 
+
+
 <style>
-.map_wrap, .map_wrap * {
-	margin: 0;
-	padding: 0;
-	font-family: Verdana, Geneva, Arial, sans-serif;
-	font-size: 12px;
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'),
+       url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
 }
+.trendy-title,
+    .trendy-content,
+    .trendy-price {
+      font-family: 'Godo', sans-serif; /* 'Godo' 글꼴 적용 */
+    }
 
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
-	color: #000;
-	text-decoration: none;
-}
-
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 500px;
-}
-
-#menu_wrap {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 250px;
-	margin: 10px 0 30px 10px;
-	padding: 5px;
-	overflow-y: auto;
-	background: rgba(255, 255, 255, 0.7);
-	z-index: 1;
-	font-size: 12px;
-	border-radius: 10px;
-}
-
-.bg_white {
-	background: #fff;
-}
-
-#menu_wrap hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 2px solid #5F5F5F;
-	margin: 3px 0;
-}
-
-#menu_wrap .option {
-	text-align: center;
-}
-
-#menu_wrap .option p {
-	margin: 10px 0;
-}
-
-#menu_wrap .option button {
-	margin-left: 5px;
-}
-
-#placesList li {
-	list-style: none;
-}
-
-#placesList .item {
-	position: relative;
-	border-bottom: 1px solid #888;
-	overflow: hidden;
-	cursor: pointer;
-	min-height: 65px;
-}
-
-#placesList .item span {
-	display: block;
-	margin-top: 4px;
-}
-
-#placesList .item h5, #placesList .item .info {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#placesList .item .info {
-	padding: 10px 0 10px 55px;
-}
-
-#placesList .info .gray {
-	color: #8a8a8a;
-}
-
-#placesList .info .jibun {
-	padding-left: 26px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
-		no-repeat;
-}
-
-#placesList .info .tel {
-	color: #009900;
-}
-
-#placesList .item .markerbg {
-	float: left;
-	position: absolute;
-	width: 36px;
-	height: 37px;
-	margin: 10px 0 0 10px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-		no-repeat;
-}
-
-#pagination {
-	margin: 10px auto;
-	text-align: center;
-}
-
-#pagination a {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-#pagination .on {
-	font-weight: bold;
-	cursor: default;
-	color: #777;
-}
-
-
+ 
 #love{
       width: 50px;
       fill: #ddd;
@@ -182,51 +70,103 @@
     }    
 </style>
 
+ <style>
+    .trendy-title {
+        font-size: 36px;
+        text-align: center;
+        border: none;
+        background-color: transparent;
+        font-weight: bold;
+        color: #333; /* 짙은 글자 색상 */
+        outline: none; /* 기본 입력 포커스 테두리 제거 */
+    }
 
+    .trendy-content {
+        font-size: 20px;
+        resize: none; /* 텍스트영역 크기 조정 비활성화 */
+        border: 1px solid #ccc; /* 연한 테두리 */
+        padding: 10px;
+        background-color: #f9f9f9; /* 연한 배경색 */
+        color: #555; /* 약간 짙은 글자 색상 */
+    }
 
+    .trendy-price {
+        font-size: 24px;
+        text-align: center;
+        border: none;
+        background-color: transparent;
+        font-weight: bold;
+        color: #666; /* 조금 더 짙은 글자 색상 */
+        outline: none; /* 기본 입력 포커스 테두리 제거 */
+    }
+</style>
 
 
 <%
 JDBConnect db = new JDBConnect(); //<% 이건 Java <script>는 jscript...
 PJ2DAO dao = new PJ2DAO();
 PJ2DTO dto = new PJ2DTO();
+String	productid=request.getParameter("productid");  //앞에서 판매글 id 가져와야함.
 
+dto = dao.img(productid);
 
-if(request.getParameter("sellerid")!= null){
- String	sellerid=request.getParameter("sellerid");
- dto=dao.img(sellerid);	
- 
+String username =(String) session.getAttribute("username"); 
+PJ2DTO dto6 = dao.findid(username);
 
+/* if(session.getAttribute("")) */
+session.setAttribute("bid", dto6.getUserid());  //구매자 고유 번호
+
+/* if(request.getParameter("productid")==null){
+session.setAttribute("productid", "43");
+System.out.println("43으로 설정");
 }else{
-	session.setAttribute("seller", "sell"); //판매자 이름
-	session.setAttribute("sellerid", "22"); //판매 글 고유 번호
-	session.setMaxInactiveInterval(30000);
-	
-	
 
-	String sid = (String) session.getAttribute("sellerid");
-	String bid = (String) session.getAttribute("username");
- 	 dto = dao.img(sid); /* 기억해라 애송이 이거다 */
-}
-session.setAttribute("seller", "sell");
-session.setAttribute("username", "42");
+/*String sid = (String)session.getAttribute("sellerid"); // 판매글번호
+System.out.println(sid+"로 설정");
+}*/
 
-String sid = (String) session.getAttribute("sellerid");
-String bid = (String) session.getAttribute("username");
+/*
+String sid = productid;
+System.out.println(sid+"으로 설정");
+}  */
+
+String sid = null;  // sid = productid
+int sid2 = 0;
+if(productid==null){
+String dump = "42";   //이거 땜에 그럼
+sid2 = Integer.parseInt(dump);
+}else{
+sid = productid;
+sid2 = Integer.parseInt(productid);
+}//이건 파라메터로 가져와야함
+
+
+String bid = Integer.toString(dto6.getUserid());
+int bid2 = dto6.getUserid();
 
 
 
-session.setAttribute("suid", "43"); //판매자의 아이디 번호.
-String suid =(String)session.getAttribute("suid");
+/* session.setAttribute("suid", "43"); //판매자의 아이디 번호. */
+
+String suid = dto.getWriterid();
 PJ2DTO dto2 = dao.more();
 PJ2DTO dto3 = dao.ADRS(suid);
+
 String[] f = Arrays.copyOf(dto2.getF(), 4);
 String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 
-PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 안함 1이면 함
+PJ2DTO dto4 = dao.likesearch(sid2, bid2); //찜했나 안했나 확인 null이면 안함 1이면 함
+ 
 
+System.out.println(username);
+
+/* System.out.print(session.getAttribute("username"));
+ */
+
+System.out.println(dto6.getUserid());  //현재 구매자
+System.out.println(dto.getWriterid()); //글 판매자
+System.out.println(productid);  //판매글 번호
 %>
-
 
 
 
@@ -243,9 +183,6 @@ PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 
 	<br />
 	<br />
 
-
-	<!-- <i class="bi bi-suit-heart"></i> -->
-	<!-- <i class="bi bi-suit-heart-fill"></i> -->
 
 
 
@@ -274,7 +211,6 @@ PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 
 	</div>
 
 	<div style="text-align: center; margint-top: 5px;">사진</div>
-
 
 
 
@@ -311,22 +247,14 @@ PJ2DTO dto4 = dao.likesearch(sid, bid); //찜했나 안했나 확인 null이면 
 
 	<br />
 
-<!-- <button id="like" class="btn" onclick="chn();" style="color:black"> -->
-
-
-<%-- <% if(dto4.getLikeSearch()=="0"){ %>
-<button id="like" onclick="chn();" >찜하기</button>
-<%}else {%>
-<button id="like"  onclick="chn();">찜해제</button>
-  <%} %>	 --%>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     $("#love").click(function() {
-        var sid = "<%= sid %>"; // JSP에서 동적으로 설정된 값
-        var bid = "<%= bid %>"; // JSP에서 동적으로 설정된 값
+        var sid = "<%= sid %>"; 
+        var bid = "<%= bid %>"; 
         
         $.ajax({
             type: "POST",
@@ -346,61 +274,26 @@ $(document).ready(function() {
 });
 </script>
 
-		<%-- 		<%	if(dto4.getLikeSearch()=="0"){ %>
-				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜하기</button> 
-				<%}else {%>
-				<button name="like" type="button" id="like" onclick="chn()"  disabled>찜해제</button>
-				<% }; %>
 
 
 
-<script>
-function chn() {
-	var change = document.getElementById("like")
-	if(change.innerText=="찜하기"){
-    change.innerText ='찜해제';
-	}else{
-		 change.innerText ='찜하기';
-	}
-}
-</script>
- --%>
-
-
-
-<%System.out.println(dto4.getLikeSearch());
-System.out.println(sid);
-System.out.println(bid);
-%>
-
-
-
-<!-- <button id="love" onclick="chn()" "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg></button>
-
-
-<script>
-  var btn = document.getElementById("love")
-
-  btn.addEventListener('click',function(){
-            btn.classList.toggle('active')
-    })
-</script>
- -->
-
-<button id="love" onclick="toggleHeart()" data-like="<%= dto.getLikeSearch() %>">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+<button id="love" onclick="toggleHeart()" data-like="<%= dto4.getLikeSearch() %>">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="heartIcon">
+        <path id="heartPath" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
     </svg>
 </button>
 
+<%=Integer.parseInt(dto4.getLikeSearch())%>
+
+
 <script>
     var btn = document.getElementById("love");
-    var likeStatus = parseInt(btn.getAttribute('data-like'));
+    var heartPath = document.getElementById("heartPath");
+    var likeStatus = parseInt(btn.getAttribute("data-like"));
 
     // 초기 상태에 따라 하트 색상 설정
-    if (likeStatus =! 0) {
-        btn.classList.add('active'); // 하트를 빨간색으로 변경
+    if (likeStatus !== 0) {
+        heartPath.style.fill = "red"; // 하트를 빨간색으로 변경
     }
 
     // 클릭 이벤트 핸들러
@@ -408,53 +301,124 @@ System.out.println(bid);
         likeStatus = 1 - likeStatus; // 상태 토글 (0 -> 1, 1 -> 0)
         btn.setAttribute('data-like', likeStatus.toString()); // 상태 업데이트
 
-        if (likeStatus != 0) {
-            btn.classList.add('active'); // 하트를 빨간색으로 변경
+        if (likeStatus !== 0) {
+            heartPath.style.fill = "red"; // 하트를 빨간색으로 변경
         } else {
-            btn.classList.remove('active'); // 하트를 원래대로 돌리기
+            heartPath.style.fill = ""; // 하트를 원래대로 돌리기
         }
     }
 </script>
 
 
 
-	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red" class="bi bi-suit-heart" viewBox="0 0 16 16">
-  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
-</svg>	      안채워진거-->
-
-
-	<!-- <svg xmlns="http://www.w3.org/2000/svg" width="60" height="50" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
-</svg>   채워진거
-	 -->
-
 
 
 	<div class="end" style="float: right;">
 		<b style="border: solid 1px black; width: auto; height: auto;"
-			id=favorite;> <%
- String seller = (String) session.getAttribute("seller"); //판매자 이름
- out.print(seller);%>
+			id=favorite;> 판매자 이름 <%-- <%=username%> --%>
  &nbsp;&nbsp;&nbsp;
 		</b>
 	</div>
 
 	<hr class="recenter" style="border: solid 1px black; width: 1200px;">
+	<div>
+<button id="sellButton" class="btn btn-warning" onclick="sellProduct()"
+    style="width: 100px; height: 50px; float: left; font-family: 'Godo', sans-serif;">
+    판매 완료
+</button>
+</div>
 	
 		<%@ include file="./MultiChatMain.jsp"%>
-	
+	</div>
 	<br />
 	<br />	<br />	
-	<div class="container text-center">  <!-- 제목 -->
-		<input type="text" name="title" value="<%=dto.getProductName()%>"   
-			style="width: 50%; height: 50px; px; font-size: 30px; text-align: center; border: 2px solid black;"
-			readonly> <input type="text" name="content"
-			value="<%=dto.getDetail()%>"
-			style="width: 50%; height: 500px; px; font-size: 30px; text-align: center; border: 2px solid black;"
-			readonly>
-			
-			
-	</div>
+	
+<script>
+// JavaScript 코드
+document.addEventListener("DOMContentLoaded", function() {
+    var sellButton = document.getElementById("sellButton");
+    var userId = <%=dto6.getUserid()%>;
+    var writerId = <%=dto.getWriterid()%>;
+
+    if (userId === writerId) {
+        sellButton.style.display = "block";  // 보이기
+    } else {
+        sellButton.style.display = "none";   // 숨기기
+    }
+});	
+</script>	
+	
+	
+	
+
+
+<script>
+function sellProduct() {
+    // 팝업 창을 띄워서 구매자 이름을 입력받음
+    var bidname = prompt("구매자 이름을 입력하세요", "");
+    var sid = "<%= sid %>";
+
+    // bidname이 null 또는 빈 문자열이면 아무 작업도 하지 않음
+    if (bidname !== null && bidname !== "") {
+        // AJAX 요청
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/iMarket/DetailController",
+            data: {
+                action: "sell",
+                sid: sid,
+                bidname: bidname
+            },
+            success: function(response) {
+                if (response === "success") {
+                    alert("판매가 완료되었습니다.");
+                } else if (response === "duplicate") {
+                    alert("이미 판매된 상품입니다.");
+                } else {
+                    alert("판매 처리 중 오류가 발생했습니다.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("판매 처리 중 오류 발생:", error);
+                alert("판매 처리 중 오류가 발생했습니다.");
+            }
+        });
+    } else {
+        alert("구매자 이름을 입력해주세요.");
+    }
+}
+</script>
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+ <div class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- 제목 -->
+            <input type="text" name="trendy-title" value="<%=dto.getProductName()%>"
+                   class="form-control mb-4 trendy-title" readonly>
+
+            <!-- 상세 내용 -->
+            <textarea name="trendy-content" class="form-control mb-4 trendy-content" rows="20" readonly><%=dto.getDetail()%></textarea>
+
+            <!-- 가격 -->
+            <input type="text" name="trendy-price" value="가격: <%=dto.getPrice()%>"
+                   class="form-control mb-4 trendy-price" readonly>
+        </div>
+    </div>
+</div>
+
+
+	
+	
+
 
 	<br />
 
@@ -715,26 +679,21 @@ function removeAllChildNods(el) {
 
 
 
-<%-- <p><%PJ2DTO dto2 = dao.more();
-	System.out.println(Arrays.toString(dto2.getF()));
-	String[] f = Arrays.copyOf(dto2.getF(), 4);
-	System.out.print(f[0]);
-%></p> --%>
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 	<div class="grid text-center">
 		<div class="row"></div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[0]%>"><img src="../<%=f[0] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[1]%>"><img src="../<%=f[1] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[2]%>"><img src="../<%=f[2] %>" style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 		<div class="col">
-			<a href="../PJ2/DetailPage.jsp?sellerid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
+			<a href="../DetailPage/DetailPage.jsp?productid=<%=moreid[3]%>"><img src="../<%=f[3] %>"  style="width: 300px; height: 300px;" onerror="this.style.display='none'"></a>
 		</div>
 	</div>
 
@@ -745,4 +704,51 @@ function removeAllChildNods(el) {
 </body>
 
 
+</html>                   <c:otherwise>
+                            <c:forEach items="${pagedLists}" var="item" varStatus="loop">
+                                <c:choose>
+                                    <c:when test="${item.type == 'board'}">
+                                        <div id="gallery-item" onclick="location.href='../mvcboard/view.do?id=${item.id}'">
+                                            <c:if test="${not empty item.sfile}">
+                                                <img src="../mvcboard/download.do?ofile=${item.ofile}&sfile=${item.sfile}&id=${item.id}" alt="${item.title}" />
+                                            </c:if>
+                                            <div id="caption">${item.title}</div>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${item.type == 'review'}">
+                                        <div id="gallery-item" onclick="location.href='../review/view?id=${item.id}'">
+                                            <c:if test="${not empty item.sfile}">
+                                                <img src="../review/download.do?ofile=${item.ofile}&sfile=${item.sfile}&id=${item.id}" alt="${item.title}" />
+                                            </c:if>
+                                            <div id="caption">${item.title}</div>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                        </c:otherwise>
+                    <%-- </c:choose> --%>
+                </div>
+
+                <div class="paging">${map.pagingImg}</div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <div></div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary" onclick="location.href='../mvcboard/write.do';">글쓰기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-sidebar">
+                <p>인기 게시글</p>
+                <a href="#"><img alt="아기1" src="../img/333.jpg" width="100" height="100"></a>
+            </div>
+        </div>
+    </div>
+
+<jsp:include page="../layout/Footer.jsp" />
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0" crossorigin="anonymous"></script>
+</body>
 </html>
