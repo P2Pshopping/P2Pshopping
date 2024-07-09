@@ -7,15 +7,16 @@
         response.sendRedirect("../Login/login.jsp"); // 세션이 없으면 로그인 페이지로 리다이렉트
     }
 %>
-
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
         <title>상품 판매하기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -115,8 +116,16 @@
 </script>
 
 </head>
-<body>
-<%@include file="../layout/Header.jsp"%>
+<body
+	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color:#f7f7f7;">
+
+
+	<%@ include file="../layout/Header.jsp"%>
+
+
+
+	<br />
+	<br />
 <!-- 화면어둡게 -->
     <div id="overlay" class="hidden"></div>
 <%

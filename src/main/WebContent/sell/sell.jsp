@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      
@@ -18,14 +23,14 @@
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
 <script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
     <style>
-            body {
+          /*   body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             
-           /* text-align: center;*/
+         text-align: center;
             padding: 20px;
             margin-bottom: 10px;
-        }
+        } */
         .narrow-select {
             width: 300px;
             height: auto;
@@ -38,6 +43,7 @@
             margin-top: 50px;
         }*/
            .container {
+           max-width: 1200px;
             background-color: #fff;
             padding: 20px;
             margin-top: 20px;
@@ -234,15 +240,18 @@
     
     
 </head>
-
-<body style="overflow-x: scroll; margin:0 auto; width:1200px; align-items : center;">
-<%@include file="../layout/Header.jsp"%>
-
+<%@ include file="/layout/Header.jsp"%>
+<body style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color: #f7f7f7;">
 
 
-    <h2>상품 판매하기</h2>
 
-    <div class="container">
+	<br />
+	<br />
+
+ 
+
+    <div class="container" >
+       <h2>상품 판매하기</h2>
         <div class="category-section">
             <label for="autocompleteInput">어떤 물건을 판매하고 싶으신가요?:</label>
              <button id="confirmButton" class="btn btn-primary hidden">확인</button>

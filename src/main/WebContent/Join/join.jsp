@@ -399,7 +399,7 @@
 	        	var result_data;
 	            // Ajax로 username 보내기
 	            $.ajax({
-	                url: '/idCheck',   // 서버의 URL
+	                url: '../idCheck',   // 서버의 URL
 	                type: 'POST',      // POST 방식으로 요청
 	                data: {
 	                    username: username // 입력한 username 데이터 보내기
