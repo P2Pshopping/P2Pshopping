@@ -17,6 +17,7 @@ public class ItemListDTO {
 	private int writerid;
 	private Date createDate;
 	private Date updateDate;
+	private int visit;
 	
 	public String getProductName() {
 		return productName;
@@ -102,5 +103,13 @@ public class ItemListDTO {
 	public void setProductid(String productid) {
 		this.productid = productid;
 	}
+
+	public int getVisit() {
+		return visit;
+	}
+	public void setVisit(int visit) {
+		this.visit = visit;
+	}
+
 	
 }

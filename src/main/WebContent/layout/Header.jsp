@@ -82,7 +82,7 @@
 			<div class="container-fluid">
 				<div class="row" style="display: flex; width: 1100px;">
 					<div class="col-sm-4">
-						<a class="navbar-brand" href="${pageContext.request.contextPath}/MainPage.do"
+						<a class="navbar-brand" href="${pageContext.request.contextPath}/Main/default.jsp"
 							style="font-weight: 700; font-size: 50px;"><span
 							style="color: rgb(219, 20, 60, 0.5); font-weight: 700; font-size: 50px;">i-</span>Market
 						</a>
@@ -107,12 +107,12 @@
 									<%-- 찜 링크 보이기 --%>
 									<a
 										href="${pageContext.request.contextPath}/Favor/favorList.jsp"
-										class="bi bi-suit-heart-fill" id = "favor"
-										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;" > 찜
+										class="bi bi-suit-heart-fill"
+										style="margin: 2%; color: red; --bs-btn-font-size: .75rem;">찜
 									</a>
 								</c:otherwise>
 							</c:choose>
-							<a href="${pageContext.request.contextPath}/Change/Change.jsp"
+							<a href="${pageContext.request.contextPath}/user?cmd=checkAgain"
 								class="bi bi-gear-fill"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">정보수정
 							</a>
@@ -131,7 +131,7 @@
 								class="bi bi-box-arrow-in-right btn btn-success btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								Login </a>
-							<a href="${pageContext.request.contextPath}/agree/agree.jsp"
+							<a href="${pageContext.request.contextPath}/Join/join.jsp"
 								class="bi bi-person-plus-fill btn btn-primary btn-sm"
 								style="margin: 2%; color: fff; --bs-btn-font-size: .75rem;">
 								create account </a>
@@ -164,7 +164,7 @@
 								
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/itemList/ItemList.do">상품목록</a></li>
 								
-								<!-- <li><a class="dropdown-item" href="#">후기글</a></li> -->
+								<li><a class="dropdown-item" href="#">후기글</a></li>
 								<li><hr class="dropdown-divider"></li>
 
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/mvcboard/list.do">커뮤니티</a></li>
@@ -172,8 +172,8 @@
 							
 					</ul>
 					</form>
-					<form class="d-flex">
-						<input class="form-control me-2" id="autocompleteInput"
+					<form class="d-flex" action="${pageContext.request.contextPath}/itemList/ItemList.do" method="get">
+						<input class="form-control me-2" id="keyword" name="keyword"
 							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."
 							aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>

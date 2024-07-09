@@ -23,7 +23,9 @@ public class ItemListController extends HttpServlet {
         String keyword = null;
         
         if(req.getParameter("keyword") != null) {
+
            keyword = req.getParameter("keyword");
+
         }
         
         if (pageParam != null && !pageParam.isEmpty()) {
