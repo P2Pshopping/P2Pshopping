@@ -168,3 +168,5 @@ CREATE TABLE board_likes (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+DROP TABLE MESSAGE;
+DROP TABLE CHATROOM;

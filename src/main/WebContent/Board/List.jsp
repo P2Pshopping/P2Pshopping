@@ -140,6 +140,9 @@ body {
 			</div>
 
 			<div id="contents">
+			<h2 class="text-center my-4" style="font-size: 24px; font-weight: bold; color: #333;">
+        아기 사진
+    </h2>
 				<div id="gallery">
 					<c:choose>
 						<c:when test="${empty boardLists}">

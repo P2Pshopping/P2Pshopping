@@ -21,44 +21,30 @@
 	crossorigin="anonymous">
 <title>거래 후기 게시판</title>
 <style>
-/* body {
+body {
 	font-size: 13px;
-} */
+	background-color: #f8f9fa;
+}
+
 #container {
-	width: 1200px;
+	max-width: 1200px;
 	padding: 20px;
 	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 #contents {
-	/* width: 800px; */
+	width: 800px;
 	flex-grow: 1;
-	padding: 0px;
 	margin: 20px;
-}
-
-/* #gallery img {
-	width: 50%;
-	height: auto;
-} */
-#gallery img {
-	width: 100%;
-	height: auto;
-	/* display: block; */
-}
-
-#caption {
-	padding: 10px;
-	font-size: 14px;
-	color: #333;
 }
 
 #gallery {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	   flex-direction: row;
-    align-content: center;
-    justify-content: flex-start;
+	font-family: Arial, sans-serif;
 }
 
 #gallery-item {
@@ -76,62 +62,27 @@
 	transform: scale(1.05);
 }
 
+#gallery img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
 
+#caption {
+	padding: 10px;
+	font-size: 14px;
+	color: #333;
+}
 
 #left-sidebar {
 	width: 200px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-	font-family: "Noto Sans KR";
-	font-size: 12px;
-	margin-top: 200px;
-	margin-left: 20px;
-}
-
-/* #right-sidebar {
-	width: 150px;
-	margin-bottom: 20px;
-}
-
-#right-sidebar img {
-	margin: 0 auto;
-	padding: 0px;
-	width: 75px;
-	height: 75px;
-}
- */
-#right-sidebar {
-	width: 150px;
-	text-align: center;
 	margin-top: 20px;
-	margin-left: 20px;
-}
-
-#right-sidebar img {
-	width: 75px;
-	height: 75px;
-	margin-bottom: 10px;
-	border-radius: 50%;
-	object-fit: cover;
+	font-size: 14px;
 }
 
 .flex-container {
 	display: flex;
 	justify-content: center;
-}
-
-#footer {
-	overflow: hidden;
-	width: 1200px;
-	margin: 0 auto;
-	padding-bottom: 25px;
-	background: url(/img/imfs/main/bg_footer.jpg) repeat-x;
-	font-family: "Noto Sans KR";
-	font-weight: 400;
-	font-size: 12px;
-	color: black;
-	background-color: whitesmoke;
-	z-index: 2;
 }
 
 .paging {
@@ -159,27 +110,43 @@
 .paging a:hover {
 	background-color: #ddd;
 }
+.btn-group-vertical .btn {
+	margin-bottom: 10px;
+}
+
+#right-sidebar {
+	width: 150px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+#right-sidebar img {
+	width: 75px;
+	height: 75px;
+	margin-bottom: 10px;
+	border-radius: 50%;
+	object-fit: cover;
+}
 </style>
-<jsp:include page="../layout/Header.jsp" />
 </head>
-<body
-	style="overflow-x: scroll; margin: 0 auto; width: 1200px; align-items: center; background-color: #f7f7f7;">
-	
-	
+<body>
+	<jsp:include page="../layout/Header.jsp" />
 	<div id="container">
 		<div class="flex-container">
 			<div id="left-sidebar">
 				<div class="btn-group-vertical" role="group"
-					aria-label="Vertical button group" style="font-size: 8px;">
+					aria-label="Vertical button group" >
 					<button type="button" class="btn btn-outline-warning"
-						onclick="location.href='../mvcboard/list.do';">아기사진</button>
+						onclick="location.href='../mvcboard/list.do';" style="font-size: 18px;" >아기사진</button>
 					<button type="button" class="btn btn-outline-warning"
-						onclick="location.href='../review/list';">거래후기</button>
+						onclick="location.href='../review/list';" style="font-size: 18px;" >거래후기</button>
 				</div>
 			</div>
 
 			<div id="contents">
-				<h2>거래 후기 게시판</h2>
+				 <h2 class="text-center my-4" style="font-size: 24px; font-weight: bold; color: #333;">
+        거래 후기
+    </h2>
 				<div id="gallery">
 					<c:choose>
 						<c:when test="${empty reviews}">
@@ -193,7 +160,7 @@
 									onclick="location.href='../review/view?id=${review.id}'">
 									<c:if test="${not empty review.sfile}">
 										<img src="<c:url value='/review/images/${review.sfile}'/>"
-											alt="${review.ofile}" width="200" />
+											alt="${review.ofile}" />
 									</c:if>
 									<div id="caption">${review.title}</div>
 								</div>
@@ -265,16 +232,6 @@
 
 	<jsp:include page="../layout/Footer.jsp" />
 
-
-	<!-- 	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-		integrity="sha384-oBqDVmMz4fnFO9gybBogGzAxU6j5Y3a50p1z0l5y1H5k5jUp7Bhp8vT8Dr+8bkH+"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0"
-		crossorigin="anonymous"></script> -->
-</body>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
 		integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
@@ -283,4 +240,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+</body>
 </html>
