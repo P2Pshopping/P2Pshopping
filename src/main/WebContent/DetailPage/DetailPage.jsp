@@ -113,17 +113,24 @@ session.setAttribute("seller", "sell");  //판매자 닉네임
 
 session.setAttribute("bid", "42");  //구매자 고유 번호
 
-
-if(request.getParameter("productid")==null){
+/* if(request.getParameter("productid")==null){
 session.setAttribute("productid", "43");
 System.out.println("43으로 설정");
 }else{
 String sid = productid;
 System.out.println(sid+"으로 설정");
-} 
+}  */
+String sid = null;
+int sid2 = 0;
+if(productid==null){
+String dump = "42";
+sid2 = Integer.parseInt(dump);
+}else{
+sid = productid;
+sid2 = Integer.parseInt(sid);
+}//이건 파라메터로 가져와야함
 
-String sid = productid;  //이건 파라메터로 가져와야함
-int sid2 = Integer.parseInt(sid);
+
 String bid = (String)session.getAttribute("bid"); //이건 세션 맞음
 int bid2 = Integer.parseInt(bid);
 String username =(String) session.getAttribute("username"); 
@@ -148,6 +155,7 @@ PJ2DTO dto6 = dao.findid(username);
 
 System.out.println(dto6.getUserid());
 System.out.println(dto.getWriterid());
+System.out.println(productid);
 %>
 
 
