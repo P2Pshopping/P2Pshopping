@@ -42,6 +42,7 @@ public class ItemListDAO extends JDBConnect {
 				while (rs.next()) {
 					System.out.println("DB 정보 불러오기");
 					ItemListDTO dto = new ItemListDTO();
+					dto.setProductid(rs.getInt("ID"));
 					dto.setUsername(rs.getString("USERNAME"));
 					dto.setProductName(rs.getString("PRODUCTNAME"));
 					dto.setCategoryid(rs.getInt("CATEGORYID"));
