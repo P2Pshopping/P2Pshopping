@@ -119,7 +119,7 @@ if(session.getAttribute("sellerid") ==null){
 session.setAttribute("sellerid", "43");
 System.out.println("43으로 설정");
 }else{
-String sid = (String)session.getAttribute("sellerid");
+String sid = (String)session.getAttribute("sellerid"); // 판매글번호
 System.out.println(sid+"로 설정");
 }
 

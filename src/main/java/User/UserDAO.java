@@ -497,12 +497,11 @@ public class UserDAO extends JDBConnect {
 	}
 	public UserDTO productcount(String username) {
 	    UserDTO dto = null;
-	    String query = "SELECT COUNT(*) AS product_count "
+	    String query = "SELECT COUNT(p.WRITERID) AS product_count "
 	            + "FROM users u "
-	            + "JOIN product p ON u.username = p.WRITERID "
-	            + "WHERE u.username = ? "
-	            + "GROUP BY p.writerid"; // GROUP BY 절 수정
-
+	            + "JOIN product p ON u.id = p.WRITERID "
+	            + "WHERE u.username = ? ";
+	   
 	    System.out.println("Executing query: " + query);
 	    System.out.println("Parameters: " + username);
 
@@ -528,11 +527,11 @@ public class UserDAO extends JDBConnect {
 	}
 	public UserDTO likecount(String username) {
 	    UserDTO dto = null;
-	    String query = "SELECT COUNT(*) AS likecount "
+	    String query = "SELECT COUNT(f.userID) AS likecount "
 	            + "FROM users u "
-	            + "JOIN favorite f ON u.username = f.productid "
-	            + "WHERE u.username = ? "
-	            + "GROUP BY f.productid"; // GROUP BY 절 수정
+	            + "JOIN favorite f ON u.ID = f.userid "
+	            + "WHERE u.username = ? ";
+	     
 
 	    System.out.println("Executing query: " + query);
 	    System.out.println("Parameters: " + username);
@@ -559,11 +558,10 @@ public class UserDAO extends JDBConnect {
 	}
 	public UserDTO boardCount(String username) {
 	    UserDTO dto = null;
-	    String query = "SELECT COUNT(*) AS boardCount "
+	    String query = "SELECT COUNT(b.id) AS boardCount "
 	            + "FROM users u "
-	            + "JOIN Boards b ON u.username = b.writerid "
-	            + "WHERE u.username = ? "
-	            + "GROUP BY b.writerid"; // GROUP BY 절 수정
+	            + "JOIN Boards b ON u.id = b.writerid "
+	            + "WHERE u.username = ? ";
 
 	    System.out.println("Executing query: " + query);
 	    System.out.println("Parameters: " + username);

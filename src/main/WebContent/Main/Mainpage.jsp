@@ -113,8 +113,21 @@ document.addEventListener('DOMContentLoaded', function() {
       data: { pageUrl: pageUrl },
       success: function(response) {
           console.log('Visit recorded');
-      },
-      error: function(xhr, status, error) {
+            // 첫 번째 AJAX 요청: 제품 수 가져오기
+            $.ajax({
+                url: "${pageContext.request.contextPath}/ProductCnt.do",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    console.log("Received product count:", data);
+                    $("#productCount").text("총 상품 수: " + data.productCount);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching product count:", error);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
           console.error('Error recording visit:', error);
       }
   });

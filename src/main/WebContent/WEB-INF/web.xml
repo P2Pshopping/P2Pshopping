@@ -9,13 +9,12 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-      <resource-ref>
-        <description>Oracle Datasource example</description>
-        <res-ref-name>jdbc/myoracle</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
-    
+  <resource-ref>
+    <description>Oracle Datasource example</description>
+    <res-ref-name>jdbc/myoracle</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
   <context-param>
     <param-name>OracleDriver</param-name>
     <param-value>oracle.jdbc.OracleDriver</param-value>
@@ -223,16 +222,6 @@
     <servlet-name>ReviewEditServlet</servlet-name>
     <url-pattern>/review/edit</url-pattern>
   </servlet-mapping>
-  <!-- <servlet>
-    <description></description>
-    <display-name>ReviewViewServlet</display-name>
-    <servlet-name>ReviewViewServlet</servlet-name>
-    <servlet-class>review.ReviewViewServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReviewViewServlet</servlet-name>
-    <url-pattern>/review/view</url-pattern>
-  </servlet-mapping> -->
   <servlet>
     <description></description>
     <display-name>ReviewDeleteServlet</display-name>
@@ -253,7 +242,7 @@
     <servlet-name>ImageServlet</servlet-name>
     <url-pattern>/review/images/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ReviewLikeController</servlet-name>
     <servlet-class>review.LikeController</servlet-class>
   </servlet>
@@ -287,7 +276,6 @@
     <servlet-name>ChangePwd</servlet-name>
     <url-pattern>/ChangePwd</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <description></description>
     <display-name>ProductCount</display-name>
@@ -298,5 +286,14 @@
     <servlet-name>ProductCount</servlet-name>
     <url-pattern>/ProductCount</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GoDetail</display-name>
+    <servlet-name>GoDetail</servlet-name>
+    <servlet-class>Count.GoDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoDetail</servlet-name>
+    <url-pattern>/GoDetail</url-pattern>
+  </servlet-mapping>
 </web-app>
-
