@@ -116,7 +116,7 @@
 									<!-- <input type="email" class="form-control" id="inputEmail"
 										name="inputEmail" placeholder="이메일을 입력하세요.">  -->
 										
-										<input class="form-control" id="domain-txt" name ="domain-txt" type="email" placeholder="이메일 주소"/> 
+										<input class="form-control" id="domain-txt" name ="domain-txt" type="text" placeholder="이메일 주소"/> 
 										<select class="box" id="domain-list" name ="domain-list">
 	  									<option value="type">직접 입력</option>
 										  <option value="naver.com" >naver.com</option>
@@ -160,7 +160,7 @@
 	                   </div> -->
 							
 								<span class="button-container" style ="margin-top:80px;">
-									<a href="../Main/Mainpage.jsp" class="btn btn-secondary btn-lg" >뒤로
+									<a href="../Main/default.jsp" class="btn btn-secondary btn-lg" >뒤로
 										가기</a>
 									<button   type="submit" id="target_btn"
 										class="btn btn-success btn-lg" name="loginButton" 
@@ -176,75 +176,7 @@
 		<div style="margin-top: 10%;">
 			<%@include file="../layout/Footer.jsp"%>
 		</div>
-	<!-- 	 <script> 
-		 function joinCheck() {
-			    console.log("joinCheck 함수 호출됨");
-			    var name = document.getElementById("inputName").value.trim();
-			    var birth = document.getElementById("inputBirth").value.trim();
-			    var id = document.getElementById("username").value.trim();
-			    var pw = document.getElementById("inputPWD").value.trim();
-			    var pwc = document.getElementById("inputPWDC").value.trim();
-			    var phone = document.getElementById("inputPhone").value.trim();
-			    var address = document.getElementById("inputAddress").value.trim();
-
-			    var inputEmailValue = document.getElementById("inputEmail").value.trim(); // Username 입력 값
-			    var domainTxtValue = document.getElementById("domain-txt").value.trim(); // 직접 입력한 도메인
-			    var domainListValue = document.getElementById("domain-list").value; // 선택한 도메인
-
-			    var email;
-			    if (inputEmailValue && domainTxtValue) {
-			        email = inputEmailValue + "@" + domainTxtValue; // Username + 직접 입력한 도메인
-			    } else if (inputEmailValue && domainListValue) {
-			        email = inputEmailValue + "@" + domainListValue; // Username + 선택한 도메인
-			    }  
-			    console.log(email);
-
-			    if (name === "") {
-			        alert("이름을 입력해주세요.");
-			        document.getElementById("inputName").focus();
-			        return false;
-			    } else if (birth === "" || parseInt(birth) <= 19000000) {
-			        alert("생년월일을 입력해주세요.");
-			        document.getElementById("inputBirth").focus();
-			        return false;
-			    } else if (id === "" || id.length < 4) {
-			        alert("아이디를 4글자 이상 입력해주세요.");
-			        document.getElementById("username").focus();
-			        return false;
-			    } else if (pw === "") {
-			        alert("비밀번호를 입력해주세요.");
-			        document.getElementById("inputPWD").focus();
-			        return false;
-			    } else if (pwc === "") {
-			        alert("비밀번호 확인을 입력해주세요.");
-			        document.getElementById("inputPWDC").focus();
-			        return false;
-			    } else if (pw !== pwc) {
-			        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-			        document.getElementById("inputPWDC").focus();
-			        return false;
-			    } else if (pw.length < 4 || pw.length > 20) {
-			        alert("비밀번호는 4글자 이상, 20글자 이하여야 합니다.");
-			        document.getElementById("inputPWD").focus();
-			        return false;
-			    } else if (phone === "") {
-			        alert("전화번호를 입력해주세요.");
-			        document.getElementById("inputPhone").focus();
-			        return false;
-			    } else if (email === "") {
-			        alert("이메일을 입력해주세요.");
-			        document.getElementById("inputEmail").focus();
-			        return false;
-			    } else if (address === "") {
-			        alert("주소를 입력해주세요.");
-			        document.getElementById("inputAddress").focus();
-			        return false;
-			    }
-			    return true; // 모든 유효성 검사를 통과하면 true 반환
-			}
-
-		</script> 
-		 -->
+	
 
 	<%
 	String inputYn = request.getParameter("inputYn");

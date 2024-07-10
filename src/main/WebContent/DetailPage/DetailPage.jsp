@@ -424,9 +424,6 @@ function sellProduct() {
 	<br />
 
 
-<%String trim = dto3.getAddress().trim();
-System.out.println(trim);%>
-
 
 
 

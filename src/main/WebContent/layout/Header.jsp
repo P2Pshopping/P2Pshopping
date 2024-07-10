@@ -149,7 +149,7 @@
 				<form name= list method= "get" >
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="${pageContext.request.contextPath}/Main/Mainpage.jsp">홈</a></li>
+							aria-current="page" href="${pageContext.request.contextPath}/Main/default.jsp">홈</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-cureent="page"
 							href="${pageContext.request.contextPath}/hospital/Hospital1.jsp">병원찾기</a>
