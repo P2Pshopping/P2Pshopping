@@ -76,7 +76,7 @@ public class PJ2DAO extends JDBConnect {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				dto7.setSellername("USERNAME");
+				dto7.setSellername(rs.getString("USERNAME"));
 			}
 		}catch(Exception e) {
 			System.out.println("판매자 이름 찾는 중 예외 발생");
