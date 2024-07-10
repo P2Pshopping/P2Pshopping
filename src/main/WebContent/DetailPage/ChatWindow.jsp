@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="PJ2.JDBConnect"%>
+<%@ page import="PJ2.PJ2DTO"%>
+<%@ page import="PJ2.PJ2DAO"%>
+<%@ page import = "java.util.*" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -101,6 +105,8 @@
             chatWindow.scrollTop = chatWindow.scrollHeight;
         };
     </script>
+    
+
 </head>
 
 <body>

@@ -24,7 +24,7 @@
 		}
 	</script>
 	<input type="text"
-		value="구매자"
+		value="."
 		id="chatId" style="display: none;" />
 	<button class="btn btn-warning" onclick="chatWinOpen();"
 		style="width: 100px; height: 50px; float: right; font-family: 'Godo', sans-serif;">채팅 참여</button>
