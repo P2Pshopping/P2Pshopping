@@ -22,8 +22,10 @@ public class PwFindController extends HttpServlet {
 	        // 서블릿 초기화 메서드, 서블릿이 처음 생성될 때 한 번 호출됩니다.
 	        ServletContext context = getServletContext(); // 서블릿 컨텍스트를 가져옵니다.
 	        userDAO = new UserDAO(context); // UserDAO 객체를 초기화합니다.
-	        System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
-	    }
+			/*
+			 * System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO
+			 * 초기화 여부를 출력합니다.
+			 */	    }
 
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    	   response.setCharacterEncoding("UTF-8");
@@ -45,12 +47,13 @@ public class PwFindController extends HttpServlet {
 				/* session.setAttribute("password", user.getPassword()); */
 	           	            
 	            // 디버깅 메시지 추가
-	            System.out.println("User session set: " + user.getPassword());
-	            	
+				/*
+				 * System.out.println("User session set: " + user.getPassword());
+				 */
 	            response.getWriter().write( " 귀하의 아이디는 " +  user.getPassword()+" 입니다.");
 	            
 				
-				  response.sendRedirect("../Change/ChangePw.jsp"); // 로그인 성공 후 새 비밀번호 설정 페이지로 리디렉션합니다.
+				  response.sendRedirect("/iMarket/Change/ChangePw.jsp"); // 로그인 성공 후 새 비밀번호 설정 페이지로 리디렉션합니다.
 				 	        } else {
 				 	        	  response.getWriter().write(
 				 	        	            "<html>" +

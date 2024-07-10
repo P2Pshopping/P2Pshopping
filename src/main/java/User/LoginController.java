@@ -29,8 +29,10 @@ public class LoginController extends HttpServlet {
 		// 서블릿 초기화 메서드, 서블릿이 처음 생성될 때 한 번 호출됩니다.
 		ServletContext context = getServletContext(); // 서블릿 컨텍스트를 가져옵니다.
 		userDAO = new UserDAO(context); // UserDAO 객체를 초기화합니다.
-		System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO 초기화 여부를 출력합니다.
-	}
+		/*
+		 * System.out.println("UserDAO initialized: " + (userDAO != null)); // UserDAO
+		 * 초기화 여부를 출력합니다.
+		 */	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -80,7 +82,7 @@ public class LoginController extends HttpServlet {
 //			session.setAttribute("checked", user);
 
 			// 디버깅 메시지 추가
-			System.out.println("User session set: " + user.getName());
+			/* System.out.println("User session set: " + user.getName()); */
 //			UserDTO userDTO = new UserDTO();
 //			session = request.getSession();
 //			session.setAttribute("getUserDTO", userDTO); // userDTO는 로그인 성공 후 가져온 사용자 정보 객체

@@ -150,7 +150,7 @@ int bid2 = dto6.getUserid();
 
 int suid = dto.getWriterid();
 PJ2DTO dto2 = dao.more();
-PJ2DTO dto3 = dao.ADRS(suid);
+PJ2DTO dto3 = dao.ADRS(sid2);
 PJ2DTO dto7 = dao.findSellerName(dto.getWriterid());
 
 String[] f = Arrays.copyOf(dto2.getF(), 4);
@@ -373,6 +373,7 @@ function sellProduct() {
             success: function(response) {
                 if (response === "success") {
                     alert("판매가 완료되었습니다.");
+                    window.location.href = "../Main/Mainpage.jsp";
                 } else if (response === "duplicate") {
                     alert("이미 판매된 상품입니다.");
                 } else {
@@ -424,7 +425,8 @@ function sellProduct() {
 	<br />
 
 
-
+<%String trim = dto3.getAddress().trim();
+System.out.println(trim);%>
 
 
 
@@ -446,8 +448,8 @@ function sellProduct() {
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
 						키워드 : <input type="text"
-							value=<%=dto3.getAddress()%>
-							id="keyword" size="15">
+							id="keyword" size="15"
+							value="<%=dto3.getAddress()%>">
 						<button type="submit">검색하기</button>
 					</form>
 				</div>
@@ -481,11 +483,16 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+
+
+
+
+
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
-    var keyword = document.getElementById('keyword').value;
-
+    var keyword = "<%=dto3.getAddress().trim()%>";
+	console.log('키워드 값:', keyword);  
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         alert('키워드를 입력해주세요!');
         return false;
@@ -494,6 +501,25 @@ function searchPlaces() {
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -508,7 +534,7 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.');
+       
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {

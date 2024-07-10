@@ -38,13 +38,13 @@ public class UpdateService extends HttpServlet {
           
 
             if (username == null || username.isEmpty() ) {
-                System.out.println("username is null");
+				/* System.out.println("username is null"); */
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username cannot be null or empty");
                 return;  // Ensure no further proce
             }
             if( hashedPassword == null ||hashedPassword.isEmpty()) {
             	
-                System.out.println("newPassword is null");
+				/* System.out.println("newPassword is null"); */
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "password cannot be null or empty");
                 return;  // Ensure no further proce
             	
@@ -55,16 +55,16 @@ public class UpdateService extends HttpServlet {
             boolean success = userDAO.changePassword(username, hashedPassword); // 예시 메서드 호출
 
             if (success) {
-                System.out.println("Password updated successfully for user: " + username);
+				/* System.out.println("Password updated successfully for user: " + username); */
                 // 서블릿에서 데이터를 설정하여 JSP 페이지로 전달하는 예시
                 request.setAttribute("message", "비밀번호가 변경되었습니다.");
-                request.getRequestDispatcher("Main/Mainpage.jsp").forward(request, response);
+                request.getRequestDispatcher("Main/default.jsp").forward(request, response);
             } else {
-                System.out.println("Failed to update password for user: " + username);
+				/* System.out.println("Failed to update password for user: " + username); */
                 response.sendRedirect("Change/Change.jsp?error=updateFailed");
             }
         } else {
-            System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다.");
+			/* System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다."); */
             response.sendRedirect("Change/Change.jsp?error=invalidSession");
         }
 		/* userDAO.close(); */

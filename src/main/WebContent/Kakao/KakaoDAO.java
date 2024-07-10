@@ -24,8 +24,10 @@ public class KakaoDAO extends JDBConnect {
 	        String query = "SELECT * FROM users WHERE username=? AND password=?";
 		
 		
-        System.out.println("Executing query: " + query);
-        System.out.println("Parameters: " + uname + ", " + upass);
+			/*
+			 * System.out.println("Executing query: " + query);
+			 * System.out.println("Parameters: " + uname + ", " + upass);
+			 */
 		// 쿼리문 템플릿
 
 		try {
@@ -44,9 +46,9 @@ public class KakaoDAO extends JDBConnect {
                 dto.setPassword(rs.getString("password"));// DB에서 가져온 해시된 비밀번호
                 dto.setKakaoId(rs.getInt("kakaoId"));
                
-                System.out.println("User found: " + dto.getUsername());
+				/* System.out.println("User found: " + dto.getUsername()); */
 			} else {
-                System.out.println("No user found with provided credentials.");
+				/* System.out.println("No user found with provided credentials."); */
             }
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +62,7 @@ public class KakaoDAO extends JDBConnect {
 	        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
 	        if(password == null) {
-        		System.out.println("Password is null");
+				/* System.out.println("Password is null"); */
         	}
 	        // 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
 	        byte[] hash = md.digest(password.getBytes());
