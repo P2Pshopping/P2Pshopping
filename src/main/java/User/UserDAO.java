@@ -202,9 +202,7 @@ public class UserDAO extends JDBConnect {
 			System.out.println("confirmId(): " + e);
 			System.out.println("Error in idCheck(): " + e.getMessage());
 			// 어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
-		} finally {
-			close();
-		}
+		} 
 		return result;
 	}
 
@@ -441,18 +439,7 @@ public class UserDAO extends JDBConnect {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// Close PreparedStatement and Connection
-			try {
-				if (psmt != null) {
-					psmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		
 		}
 		return success;
 	}
@@ -480,18 +467,7 @@ public class UserDAO extends JDBConnect {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// Close PreparedStatement and Connection
-			try {
-				if (psmt != null) {
-					psmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		
 		}
 		return success;
 	}

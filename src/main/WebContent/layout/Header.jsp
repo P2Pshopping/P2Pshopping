@@ -112,7 +112,7 @@
 									</a>
 								</c:otherwise>
 							</c:choose>
-							<a href="${pageContext.request.contextPath}/user?cmd=checkAgain"
+							<a href="${pageContext.request.contextPath}/Change/Change.jsp"
 								class="bi bi-gear-fill"
 								style="margin: 2%; color: black; --bs-btn-font-size: .75rem;">정보수정
 							</a>

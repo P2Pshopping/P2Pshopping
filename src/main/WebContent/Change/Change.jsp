@@ -130,7 +130,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 			<div class="row g-3">
 
 
-				<form action="/ChangeService.do" method="post" name="ChangeFrm">
+				<form action="${pageContext.request.contextPath}/ChangeService.do" method="post" name="ChangeFrm">
 					<div class="form-inline w-100 ">
 						<div class="mb-3 row">
 							<div class="input-group mb-3">
@@ -156,14 +156,14 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 					</div>
 		 <h2 class="title">비밀번호 변경</h2>
 				<div class="join_form">
-				<form action="/UpdateService.do" method="post" name="ChangeFrm">
+				<form action="${pageContext.request.contextPath}/UpdateService.do" method="post" name="ChangeFrm">
 					<div class="mb-3 row">
 						<div class="input-group mb-3">
 							<label for="inputPassword" class="input-group-text fixed-width-label">새
 								비밀번호 </label>
 							
 								<input type="text" class="form-control" name="password"
-									id="password" placeholder="20자 이하" maxlength="20">
+									id="password"  placeholder="영어,숫자,특수기호 3가지를 모두 사용해주세요." maxlength="20">
 							
 						</div>
 					</div>
@@ -176,7 +176,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 								비밀번호 확인</label>
 							
 								<input type="text" class="form-control" name="passwordc"
-									id="passwordc" placeholder="20자 이하" maxlength="20">
+									id="passwordc" placeholder="위와 같이 입력해주세요." maxlength="20">
 							
 						</div>
 					</div>

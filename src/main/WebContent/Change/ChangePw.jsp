@@ -94,12 +94,12 @@ if(password ==='' || passwordc === '' ){
  
 
     
-			<form action="/ChangePwd.do" method="Post" name="ChangeFrm" style ="width:700px;height:300px;">
+			<form action="${pageContext.request.contextPath}/ChangePwd.do" method="Post" name="ChangeFrm" style ="width:700px;height:300px;">
     <label class="col-sm-2 col-form-label" style ="width:300px;font-weight:bold;font-size:30px;">새 비밀번호 설정  </label>
     <div class="input-group">
     <label for="inputPassword" class="col-sm-2 col-form-label" style ="width:200px;margin-top:10px;" >새 비밀번호  </label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="password" id = "password" placeholder="20자 이하" maxlength="20">
+      <input type="text" class="form-control" name="password" id = "password"  placeholder="영어,숫자,특수기호 3가지를 모두 사용해주세요." maxlength="20">
       </div>
       
       </div>
@@ -110,7 +110,7 @@ if(password ==='' || passwordc === '' ){
 
     <label for="inputPassword" class="col-sm-2 col-form-label" style ="width:200px;">새 비밀번호 확인</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="passwordc" id = "passwordc"placeholder="20자 이하" maxlength="20">
+      <input type="text" class="form-control" name="passwordc" id = "passwordc"placeholder="위와 같이 입력하세요." maxlength="20">
 </div>
 
 </div>

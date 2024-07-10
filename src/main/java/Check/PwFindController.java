@@ -50,7 +50,7 @@ public class PwFindController extends HttpServlet {
 	            response.getWriter().write( " 귀하의 아이디는 " +  user.getPassword()+" 입니다.");
 	            
 				
-				  response.sendRedirect("../Change/ChangePw.jsp"); // 로그인 성공 후 새 비밀번호 설정 페이지로 리디렉션합니다.
+				  response.sendRedirect("/iMarket/Change/ChangePw.jsp"); // 로그인 성공 후 새 비밀번호 설정 페이지로 리디렉션합니다.
 				 	        } else {
 				 	        	  response.getWriter().write(
 				 	        	            "<html>" +
