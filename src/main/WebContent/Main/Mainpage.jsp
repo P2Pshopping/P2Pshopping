@@ -1,27 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
 	pageEncoding="UTF-8"%>
-
-<%@ page import="itemList.ItemListDTO"%>
-<%@ page import="itemList.ItemListDAO"%>
 <%@ page import="java.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <script
-
-   src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link
-   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-   rel="stylesheet">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .custom-body {
-
 	font-family: Arial, sans-serif;
 	background-color: #f7f7f7;
 }
@@ -67,11 +62,11 @@ body {
 	gap: 10px;
 	flex-direction: row;
 	align-content: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 }
 
 #gallery-item {
-	width: calc(33.333% - 20px);
+	width: calc(25% - 20px);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	overflow: hidden;
@@ -128,10 +123,42 @@ body {
 
 .paging a:hover {
 	background-color: #ddd;
-
- 
 }
+
+.elapsed-time {
+    font-size: 12px;
+    color: darkgrey;
+}
+
 </style>
+
+<script>
+	// JavaScript 함수 정의
+	function calculateElapsedTime(dateStr) {
+		var date = new Date(dateStr);
+		var now = new Date();
+
+		var seconds = Math.floor((now - date) / 1000);
+
+		if (seconds < 60) {
+			return '방금 전';
+		}
+
+		var minutes = Math.floor(seconds / 60);
+		if (minutes < 60) {
+			return minutes + '분 전';
+		}
+
+		var hours = Math.floor(minutes / 60);
+		if (hours < 24) {
+			return hours + '시간 전';
+		}
+
+		var days = Math.floor(hours / 24);
+		return days + '일 전';
+	}
+</script>
+
 <meta charset="UTF-8">
 <title>i-Market</title>
 </head>
@@ -159,8 +186,8 @@ body {
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<a href="${pageContext.request.contextPath}/Main/default.jsp"><img
-							src="${pageContext.request.contextPath}/Image/logobanner.png" class="pics" alt="..." width="1200"
-							height="450"></a>
+							src="${pageContext.request.contextPath}/Image/logobanner.png"
+							class="pics" alt="..." width="1200" height="450"></a>
 					</div>
 					<div class="carousel-item">
 						<a href="${pageContext.request.contextPath}/itemList/ItemList.do"><img
@@ -217,17 +244,34 @@ body {
 							</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="item" items="${product}" varStatus="status">
+							<c:forEach var="item" items="${product}" varStatus="loop">
 								<div id="gallery-item"
-									onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
-									<c:if test="${not empty item.imgUrl_1}">
-										<img src="${pageContext.request.contextPath}/${item.imgUrl_1}" alt="..."
-											style="width: 200px; height: 200px; object-fit: cover;">
-									</c:if>
-									<p>제목 : ${item.productName}</p>
-									<p>작성자 ID: ${item.username}</p>
-									<p>가격: ${item.price}</p>
-								</div>
+								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
+								<c:if test="${not empty item.imgUrl_1}">
+									<img src="${pageContext.request.contextPath}/${item.imgUrl_1}" alt="..."
+										style="width: 200px; height: 200px; object-fit: cover;">
+								</c:if>
+
+								<p
+									style="font-style: normal; font-size: 18px; font-weight: 700; display: flex; flex-direction: row; margin: 10px; align-items: stretch; justify-content: space-between; align-content: space-between; flex-wrap: nowrap;">
+									<fmt:formatNumber type="number" pattern="#,##0"
+										value="${item.price}" />
+									원
+									 <span id="elapsedTime_${loop.index}" class="elapsed-time"></span>
+								</p>
+								<script>
+								// 각 상품 항목의 경과 시간 계산 및 출력
+								var elapsedTime = calculateElapsedTime('${item.createDate}');
+								var elapsedTimeElement = document
+										.getElementById('elapsedTime_${loop.index}');
+								elapsedTimeElement.textContent = elapsedTime;
+								elapsedTimeElement.classList
+										.add('elapsed-time');
+							</script>
+									
+
+								<a style="font: 'pretendard', sans-serif;">${item.productName}</a>
+							</div>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -235,8 +279,8 @@ body {
 			</div>
 		</div>
 	</div>
-<!-- ======= ----------------------------------------------------------------------------------------->
-<!--    <%@include file="../layout/Header.jsp"%>
+	<!-- ======= ----------------------------------------------------------------------------------------->
+	<!--    <%@include file="../layout/Header.jsp"%>
    <div class="mainwrrap">
       <div style="display: flex; justify-content: center;">
          <div id="carouselExampleIndicators" class="carousel slide"
@@ -333,7 +377,7 @@ body {
          </div>
       </div>
    </div> -->
-<!-- >>>>>>> master ------------------------------------------------>
+	<!-- >>>>>>> master ------------------------------------------------>
 </body>
 <%@ include file="../layout/Footer.jsp"%>
 
