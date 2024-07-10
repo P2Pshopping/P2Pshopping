@@ -324,7 +324,7 @@ if (username.length() < 4) {
 } else {
     // 이메일 형식 유효성 검사 (정규 표현식 사용 예)
     String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    if (!email.matches(emailRegex)) {
+    if (!emails.matches(emailRegex)) {
       
     %>
     <script>
@@ -443,6 +443,12 @@ if (username.length() < 4) {
 	            // 입력한 username 가져오기
 	            var username = $('input[name=username]').val();
 	        	var result_data;
+	        	 if (username.length < 4) {
+	                 alert('4글자 이상으로 입력해주세요.');
+	                 $('#target_btn').prop('disabled', true);
+	                 return ; // 길이가 조건에 맞지 않으면 함수 종료
+	             }
+	        	
 	            // Ajax로 username 보내기
 	            $.ajax({
 	                url: '../idCheck',   // 서버의 URL
