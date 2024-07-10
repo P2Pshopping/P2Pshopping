@@ -27,7 +27,7 @@ public class PJ2DAO extends JDBConnect {
 			dto.setProductName(rs.getString("PRODUCTNAME"));
 			dto.setDetail(rs.getString("DETAIL"));
 			dto.setPrice(rs.getInt("PRICE"));
-			dto.setWriterid(rs.getString("WRITERID"));
+			dto.setWriterid(rs.getInt("WRITERID"));
 		
 			
 		
@@ -65,7 +65,25 @@ public class PJ2DAO extends JDBConnect {
 		 
 	}
 	
-	
+	public PJ2DTO findSellerName(int sellerid) {
+		PJ2DTO dto7 = new PJ2DTO();
+		
+		String query = "SELECT USERNAME FROM USERS WHERE ID=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, sellerid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto7.setSellername("USERNAME");
+			}
+		}catch(Exception e) {
+			System.out.println("판매자 이름 찾는 중 예외 발생");
+			e.printStackTrace();
+		}
+		return dto7;
+	}
 	
 	public  PJ2DTO more()  {
 		PJ2DTO dto2 = new PJ2DTO();
@@ -261,19 +279,17 @@ public class PJ2DAO extends JDBConnect {
 	    return dto5;
 	}
 	
-	public PJ2DTO ADRS(String suid) {  //판매자 번호
+	public PJ2DTO ADRS(int suid) {  //판매자 번호
 		PJ2DTO dto3 = new PJ2DTO();
 		
 		String query = "SELECT ADDRESS FROM USERS WHERE USERS.ID = ?";
 				
 		try {
 		psmt = con.prepareStatement(query);
-		psmt.setString(1, suid);
+		psmt.setInt(1, suid);
 		rs = psmt.executeQuery();
 		
-			if(rs.next()){
-		
-			
+			if(rs.next()){	
 			dto3.setAddress(rs.getString("ADDRESS"));
 			}
 		}catch(Exception e) {
