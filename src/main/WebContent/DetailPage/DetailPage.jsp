@@ -373,6 +373,7 @@ function sellProduct() {
             success: function(response) {
                 if (response === "success") {
                     alert("판매가 완료되었습니다.");
+                    window.location.href = "../Main/Mainpage.jsp";
                 } else if (response === "duplicate") {
                     alert("이미 판매된 상품입니다.");
                 } else {
@@ -423,6 +424,9 @@ function sellProduct() {
 
 	<br />
 
+
+<%String trim = dto3.getAddress().trim();
+System.out.println(trim);%>
 
 
 
