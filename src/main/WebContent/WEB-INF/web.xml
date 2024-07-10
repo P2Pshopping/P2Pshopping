@@ -261,7 +261,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ChangeService</servlet-name>
-    <url-pattern>/ChangeService</url-pattern>
+    <url-pattern>/ChangeService.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

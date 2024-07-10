@@ -58,7 +58,7 @@ public class UpdateService extends HttpServlet {
                 System.out.println("Password updated successfully for user: " + username);
                 // 서블릿에서 데이터를 설정하여 JSP 페이지로 전달하는 예시
                 request.setAttribute("message", "비밀번호가 변경되었습니다.");
-                request.getRequestDispatcher("Main/Mainpage.jsp").forward(request, response);
+                request.getRequestDispatcher("Main/default.jsp").forward(request, response);
             } else {
                 System.out.println("Failed to update password for user: " + username);
                 response.sendRedirect("Change/Change.jsp?error=updateFailed");
