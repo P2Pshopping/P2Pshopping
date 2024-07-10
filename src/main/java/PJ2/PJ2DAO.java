@@ -156,15 +156,8 @@ public class PJ2DAO extends JDBConnect {
 	public PJ2DTO desc(String bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
-	    String query = "SELECT p.ID, p.imgUrl_1, p.PRODUCTNAME, p.PRICE " +
-	                   "FROM FAVORITE f " +
-	                   "JOIN PRODUCT p ON f.PRODUCTID = p.ID " +
-	                   "WHERE f.USERID = ? " +
-	                   "ORDER BY p.PRICE DESC";
-	    int[] favoritenum = new int[100];
-	    String[] favoriteimg = new String[100];
-	    String[] favoritename = new String[100];
-	    int[] favoriteprice = new int[100];
+	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
+	    String[] favoritesid = new String[100];
 
 	    try {
 	        psmt = con.prepareStatement(query);
@@ -173,11 +166,33 @@ public class PJ2DAO extends JDBConnect {
 
 	        int i = 0;
 	        while (rs.next() && i < 100) {
-	            favoritenum[i] = rs.getInt("ID");
-	            favoriteimg[i] = rs.getString("imgUrl_1");
-	            favoritename[i] = rs.getString("PRODUCTNAME");
-	            favoriteprice[i] = rs.getInt("PRICE");
+	            favoritesid[i] = rs.getString("PRODUCTID");
 	            i++;
+	        }
+	    } catch (Exception e) {
+	        System.out.println("찜 목록 가져오는 중 예외 발생");
+	        e.printStackTrace();
+	    }
+
+	    String query2 = "SELECT id,imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE DESC";
+	    int[] favoritenum = new int[100];
+	    String[] favoriteimg = new String[100];
+	    String[] favoritename = new String[100];
+	    int[] favoriteprice = new int[100];
+
+	    try {
+	        psmt = con.prepareStatement(query2);
+
+	        for (int i = 0; i < 100 && favoritesid[i] != null; i++) {
+	            psmt.setString(1, favoritesid[i]);
+	            rs = psmt.executeQuery();
+
+	            if (rs.next()) {
+	            	favoritenum[i]= rs.getInt("id");
+	                favoriteimg[i] = rs.getString("imgUrl_1");
+	                favoritename[i] = rs.getString("PRODUCTNAME");
+	                favoriteprice[i] = rs.getInt("PRICE");
+	            }
 	        }
 	        dto5.setFavoritenum(favoritenum);
 	        dto5.setFavoriteimg(favoriteimg);
@@ -195,15 +210,8 @@ public class PJ2DAO extends JDBConnect {
 	public PJ2DTO asc(String bid) {
 	    PJ2DTO dto5 = new PJ2DTO();
 
-	    String query = "SELECT p.ID, p.imgUrl_1, p.PRODUCTNAME, p.PRICE " +
-	                   "FROM FAVORITE f " +
-	                   "JOIN PRODUCT p ON f.PRODUCTID = p.ID " +
-	                   "WHERE f.USERID = ? " +
-	                   "ORDER BY p.PRICE ASC";
-	    int[] favoritenum = new int[100];
-	    String[] favoriteimg = new String[100];
-	    String[] favoritename = new String[100];
-	    int[] favoriteprice = new int[100];
+	    String query = "SELECT PRODUCTID FROM FAVORITE WHERE USERID=?";
+	    String[] favoritesid = new String[100];
 
 	    try {
 	        psmt = con.prepareStatement(query);
@@ -212,11 +220,33 @@ public class PJ2DAO extends JDBConnect {
 
 	        int i = 0;
 	        while (rs.next() && i < 100) {
-	            favoritenum[i] = rs.getInt("ID");
-	            favoriteimg[i] = rs.getString("imgUrl_1");
-	            favoritename[i] = rs.getString("PRODUCTNAME");
-	            favoriteprice[i] = rs.getInt("PRICE");
+	            favoritesid[i] = rs.getString("PRODUCTID");
 	            i++;
+	        }
+	    } catch (Exception e) {
+	        System.out.println("찜 목록 가져오는 중 예외 발생");
+	        e.printStackTrace();
+	    }
+
+	    String query2 = "SELECT id,imgUrl_1, PRODUCTNAME, PRICE FROM PRODUCT WHERE ID = ? ORDER BY PRICE ASC";
+	    int[] favoritenum = new int[100];
+	    String[] favoriteimg = new String[100];
+	    String[] favoritename = new String[100];
+	    int[] favoriteprice = new int[100];
+
+	    try {
+	        psmt = con.prepareStatement(query2);
+
+	        for (int i = 0; i < 100 && favoritesid[i] != null; i++) {
+	            psmt.setString(1, favoritesid[i]);
+	            rs = psmt.executeQuery();
+
+	            if (rs.next()) {
+	            	favoritenum[i]= rs.getInt("id");
+	                favoriteimg[i] = rs.getString("imgUrl_1");
+	                favoritename[i] = rs.getString("PRODUCTNAME");
+	                favoriteprice[i] = rs.getInt("PRICE");
+	            }
 	        }
 	        dto5.setFavoritenum(favoritenum);
 	        dto5.setFavoriteimg(favoriteimg);
@@ -343,7 +373,20 @@ public class PJ2DAO extends JDBConnect {
 	public int sell2(int sid, String bidname) {
 	    int result = 0;
 	    int bid = 0;
-
+	    int sellerid = 0;
+	    
+	    String selleridquery = "SELECT WRITERID FROM PRODUCT WHERE PRODUCT.ID = ?";
+	    
+	    try {
+	    	psmt =con.prepareStatement(selleridquery);
+	    	psmt.setInt(1, sid);
+	    	rs = psmt.executeQuery();
+	    	
+	    	if(rs.next()){
+	    		sellerid = rs.getInt("WRITERID");
+	    	}
+	    
+	    
 	    // 구매자 이름을 이용해 사용자 ID 조회
 	    String query = "SELECT ID FROM USERS WHERE USERS.USERNAME = ?";
 	    try {
@@ -365,10 +408,11 @@ public class PJ2DAO extends JDBConnect {
 	                return -1; 
 	            } else {
 	              
-	                String insertQuery = "INSERT INTO TRANSACTIONS(USERID, PRODUCTID) VALUES(?, ?)";
+	                String insertQuery = "INSERT INTO TRANSACTIONS(BUYERID,PRODUCTID,SELLERID) VALUES(?, ?, ?)";
 	                psmt = con.prepareStatement(insertQuery);
 	                psmt.setInt(1, bid);
 	                psmt.setInt(2, sid);
+	                psmt.setInt(3, sellerid);
 	                result = psmt.executeUpdate();
 	                return result; 
 	            }
@@ -382,6 +426,11 @@ public class PJ2DAO extends JDBConnect {
 	        return 0; 
 	}
 	
+	}catch (Exception e) {
+        System.out.println("판매 완료 중 예외 발생");
+        e.printStackTrace();
+        return 0; 
+}
 	}
 }
 
