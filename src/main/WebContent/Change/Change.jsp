@@ -82,12 +82,29 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 
 			var password = document.getElementById("password").value.trim();
 			var passwordc = document.getElementById("passwordc").value.trim();
-			if (password === '' || passwordc === '') {
+			if (password.length<4){
+				 alert("비밀번호는 최소 4글자 이상이어야 합니다.");
+				 document.getElementById("password").focus();
+		    	    event.preventDefault();
+				return false;
+				
+			}
+			
+			 var passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(?=\S+$).{4,}$/;
+			  if (!passwordRegex.test(password)) {
+    	    	alert("비밀번호는 영어, 숫자, 특수 기호를 모두 포함해야 합니다.");
+    	        document.getElementById("password").focus();
+    	        event.preventDefault();
+    	   		return false;
+    	    
+    	    } 
+    	    if (password === '' || passwordc === '') {
 				alert("입력칸을 다시 한번 확인해주세요.");
 				document.getElementById("password").focus();
 				event.preventDefault();
 				return false;
-			} else if (password !== passwordc) {
+			} 
+    	    if (password !== passwordc) {
 				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 				document.getElementById("passwordc").focus();
 				event.preventDefault();
@@ -182,8 +199,8 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 					</div>
 
 					<div class="col align-self-center" style ="margin-left:500px;">
-						<input class="btn btn-success" value="비밀번호 변경"
-							onclick="return joinCheck();" type="submit">
+						<input type="submit"class="btn btn-success" value="비밀번호 변경"
+							onclick="return joinCheck();" >
 					</div>
 				</form>
 			</div>

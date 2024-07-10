@@ -117,7 +117,8 @@
 
                 <div class="col-md-4 mb-4" style="width:350px;height:470px;">
                     <div class="card" style="border:none;width:330px;height:450px;">
-                           <a href="../DetailPage/DetailPage.jsp?sellerid=<%=favoritenum[j]%>"><img src="../<%= favoriteimg[j] %>" class="card-img-top" alt="..." style=" margin:0 auto;width: 200px; object-fit: cover;"></a>
+                           <a href="../DetailPage/DetailPage.jsp?productid=<%=favoritenum[j]%>">
+                           <img src="../<%= favoriteimg[j] %>" class="card-img-top" alt="..." style=" margin:0 auto;width: 200px; object-fit: cover;"></a>
                         <div class="card-body text">
                             <h5 class="card-title text" style ="font-weight: bold; font-family: 'Nanum Barun Gothic', sans-serif;"><%= favoritename[j] %></h5>
                             <p class="card-text" ><%= favoriteprice[j] +"원"%></p>
@@ -169,7 +170,7 @@
 
     	                var cardHtml = '<div class="col-md-4 mb-4" style="width:350px;height:470px;">' +
                         '<div class="card" style="border:none;width:330px;height:450px;">' +
-                        '<a href="../DetailPage/DetailPage.jsp?sellerid=' + item.num + '">' +
+                        '<a href="../DetailPage/DetailPage.jsp?productid=' + item.num + '">' +
                         '<img src="../' + item.img + '" class="card-img-top" alt="Product Image" style="margin:0 auto;width: 200px; object-fit: cover;">' +
                         '</a>' +
                         '<div class="card-body text-left">' +
