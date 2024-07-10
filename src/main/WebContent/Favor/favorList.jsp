@@ -24,8 +24,8 @@
         }
 
         .card-img-top {
-            width: 100%;
-            height: 200px;
+             height: 200px;
+    width: 250px;
             object-fit: cover;
         }
      /*     .custom-container {
@@ -50,7 +50,7 @@
 
         <div class="custom-container">
       <div class="visual">
-            <div class="fav_wrapper text" style = "margin-top:60px;">
+            <div class="fav_wrapper" style = "margin-top:60px;">
                 <span class="left">
                     <span class="title_font">${sessionScope.username} <span class="nim">님</span></span>
                 </span>
