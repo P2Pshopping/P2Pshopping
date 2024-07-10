@@ -113,22 +113,7 @@ dto = dao.img(productid);
 String username =(String) session.getAttribute("username"); 
 PJ2DTO dto6 = dao.findid(username);
 
-/* if(session.getAttribute("")) */
 session.setAttribute("bid", dto6.getUserid());  //구매자 고유 번호
-
-/* if(request.getParameter("productid")==null){
-session.setAttribute("productid", "43");
-System.out.println("43으로 설정");
-}else{
-
-/*String sid = (String)session.getAttribute("sellerid"); // 판매글번호
-System.out.println(sid+"로 설정");
-}*/
-
-/*
-String sid = productid;
-System.out.println(sid+"으로 설정");
-}  */
 
 String sid = null;  // sid = productid
 int sid2 = 0;
@@ -159,14 +144,7 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 PJ2DTO dto4 = dao.likesearch(sid2, bid2); //찜했나 안했나 확인 null이면 안함 1이면 함
  
 
-System.out.println(username);
 
-/* System.out.print(session.getAttribute("username"));
- */
-
-System.out.println(dto6.getUserid());  //현재 구매자
-System.out.println(dto.getWriterid()); //글 판매자
-System.out.println(productid);  //판매글 번호
 %>
 
 
@@ -283,8 +261,6 @@ $(document).ready(function() {
         <path id="heartPath" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
     </svg>
 </button>
-
-<%=Integer.parseInt(dto4.getLikeSearch())%>
 
 
 <script>
