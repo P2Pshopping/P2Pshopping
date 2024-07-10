@@ -18,7 +18,7 @@ public class MainController extends HttpServlet {
         System.out.println("1");
      // 페이지 번호와 페이지 크기 파라미터 받기
         int currentPage = 1;
-        int pageSize = 9; // 한 페이지당 보여줄 아이템 수
+        int pageSize = 32; // 한 페이지당 보여줄 아이템 수
         String pageParam = req.getParameter("page");
         String keyword = null;
         
