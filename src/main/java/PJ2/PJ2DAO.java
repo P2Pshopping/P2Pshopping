@@ -249,20 +249,20 @@ public class PJ2DAO extends JDBConnect {
 	    return dto5;
 	}
 	
-	public PJ2DTO ADRS(int suid) {  //판매자 번호
+	public PJ2DTO ADRS(int productid) {  // productid로 찾기
 		PJ2DTO dto3 = new PJ2DTO();
 		
-		String query = "SELECT ADDRESS FROM USERS WHERE USERS.ID = ?";
+		String query = "SELECT ROADADDRPART1  FROM PRODUCT WHERE ID= ?";
 				
 		try {
 		psmt = con.prepareStatement(query);
-		psmt.setInt(1, suid);
+		psmt.setInt(1, productid);
 		rs = psmt.executeQuery();
 		
 			if(rs.next()){
 		
 			
-			dto3.setAddress(rs.getString("ADDRESS"));
+			dto3.setAddress(rs.getString("ROADADDRPART1"));
 			}
 		}catch(Exception e) {
 			System.out.print("주소 가져오는 중 예외 발생");

@@ -150,7 +150,7 @@ int bid2 = dto6.getUserid();
 
 int suid = dto.getWriterid();
 PJ2DTO dto2 = dao.more();
-PJ2DTO dto3 = dao.ADRS(suid);
+PJ2DTO dto3 = dao.ADRS(sid2);
 PJ2DTO dto7 = dao.findSellerName(dto.getWriterid());
 
 String[] f = Arrays.copyOf(dto2.getF(), 4);
