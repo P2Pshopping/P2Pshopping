@@ -23,8 +23,10 @@ public class KakaoDAO extends JDBConnect {
 	        String query = "SELECT * FROM users WHERE username=? AND password=?";
 
 
-        System.out.println("Executing query: " + query);
-        System.out.println("Parameters: " + uname + ", " + upass);
+			/*
+			 * System.out.println("Executing query: " + query);
+			 * System.out.println("Parameters: " + uname + ", " + upass);
+			 */
 		// 쿼리문 템플릿
 
 		try {

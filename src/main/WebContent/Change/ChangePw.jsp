@@ -29,7 +29,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 	    String password = request.getParameter("password");
 	    String confirmPassword = request.getParameter("passwordc");
 		String phone = request.getParameter("phone");
-	System.out.println(password);
+/* 	System.out.println(password); */
 	if (password != null && password.equals(confirmPassword)) {
        
         session.setAttribute("password", password);

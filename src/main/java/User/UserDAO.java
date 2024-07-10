@@ -39,10 +39,10 @@ public class UserDAO extends JDBConnect {
 		  UserDTO dto = null;
 	        String query = "SELECT * FROM users WHERE username=? AND password=?";
 
-
-        System.out.println("Executing query: " + query);
-        System.out.println("Parameters: " + uid + ", " + upass);
-
+			/*
+			 * System.out.println("Executing query: " + query);
+			 * System.out.println("Parameters: " + uid + ", " + upass);
+			 */
 		// 쿼리문 템플릿
 
 		try {
@@ -72,10 +72,10 @@ public class UserDAO extends JDBConnect {
 				dto.setCityId(rs.getInt("cityId"));
 				dto.setDistrictId(rs.getInt("districtId"));
 				dto.setAuth(rs.getString("auth"));
-				System.out.println("User found: " + dto.getUsername());
+				/* System.out.println("User found: " + dto.getUsername()); */
 
 			} else {
-				System.out.println("No user found with provided credentials.");
+				/* System.out.println("No user found with provided credentials."); */
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class UserDAO extends JDBConnect {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 
 			if (password == null) {
-				System.out.println("Password is null");
+				/* System.out.println("Password is null"); */
 			}
 			// 주어진 비밀번호 문자열을 바이트 배열로 변환하여 해시 계산을 수행.
 			byte[] hash = md.digest(password.getBytes());
@@ -187,20 +187,24 @@ public class UserDAO extends JDBConnect {
 			psmt.setString(1, username);
 			rs = psmt.executeQuery();
 
-			System.out.println(result);
+			/* System.out.println(result); */
 			if (rs.next()) {
 				result = true; // 아이디가 중복인 경우
-				System.out.print("rs값 = ");
-				System.out.println(result);
+				/*
+				 * System.out.print("rs값 = "); System.out.println(result);
+				 */
 			} else {
 				result = false; // 사용가능한 아이디인 경우
-				System.out.print("rs값 = ");
-				System.out.println(result);
+				/*
+				 * System.out.print("rs값 = "); System.out.println(result);
+				 */
 			}
 
 		} catch (Exception e) {
-			System.out.println("confirmId(): " + e);
-			System.out.println("Error in idCheck(): " + e.getMessage());
+			/*
+			 * System.out.println("confirmId(): " + e);
+			 * System.out.println("Error in idCheck(): " + e.getMessage());
+			 */
 			// 어떤메소드의 실행할때 에러가 나는지 바로 알수있다.
 		} 
 		return result;
@@ -213,8 +217,10 @@ public class UserDAO extends JDBConnect {
 		UserDTO dto = null;
 		String query = "SELECT * FROM users WHERE name =? AND phone=?";
 
-		System.out.println("Executing query: " + query);
-		System.out.println("Parameters: " + name + ", " + phone);
+		/*
+		 * System.out.println("Executing query: " + query);
+		 * System.out.println("Parameters: " + name + ", " + phone);
+		 */
 		// 쿼리문 템플릿
 
 		try {
@@ -242,9 +248,9 @@ public class UserDAO extends JDBConnect {
 				dto.setCityId(rs.getInt("cityId"));
 				dto.setDistrictId(rs.getInt("districtId"));
 				dto.setAuth(rs.getString("auth"));
-				System.out.println("User found: " + dto.getUsername());
+				/* System.out.println("User found: " + dto.getUsername()); */
 			} else {
-				System.out.println("No user found with provided credentials.");
+				/* System.out.println("No user found with provided credentials."); */
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -375,8 +381,10 @@ public class UserDAO extends JDBConnect {
 		UserDTO dto = null;
 		String query = "SELECT * FROM users WHERE username= ? AND name = ? AND phone = ?";
 
-		System.out.println("Executing query: " + query);
-		System.out.println("Parameters: " + username + ", " + name + " , " + phone);
+		/*
+		 * System.out.println("Executing query: " + query);
+		 * System.out.println("Parameters: " + username + ", " + name + " , " + phone);
+		 */
 		// 쿼리문 템플릿
 
 		try {
@@ -406,9 +414,9 @@ public class UserDAO extends JDBConnect {
 				dto.setCityId(rs.getInt("cityId"));
 				dto.setDistrictId(rs.getInt("districtId"));
 				dto.setAuth(rs.getString("auth"));
-				System.out.println("User found: " + dto.getPassword());
+				/* System.out.println("User found: " + dto.getPassword()); */
 			} else {
-				System.out.println("No user found with provided credentials.");
+				/* System.out.println("No user found with provided credentials."); */
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -423,19 +431,20 @@ public class UserDAO extends JDBConnect {
 		try {
 
 			String query = "UPDATE users SET password = ? WHERE username = ?";
-			System.out.println("Executing query: " + query);
-			System.out.println("Parameters: " + newPassword + ", " + username);
-
+			/*
+			 * System.out.println("Executing query: " + query);
+			 * System.out.println("Parameters: " + newPassword + ", " + username);
+			 */
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, newPassword);
 			psmt.setString(2, username);
 
 			int rowsAffected = psmt.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println("Password updated successfully for user: " + username);
+				/* System.out.println("Password updated successfully for user: " + username); */
 				success = true;
 			} else {
-				System.out.println("Failed to update password for user: " + username);
+				/* System.out.println("Failed to update password for user: " + username); */
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -451,19 +460,20 @@ public class UserDAO extends JDBConnect {
 		try {
 
 			String query = "UPDATE users SET phone = ? WHERE username = ?";
-			System.out.println("Executing query: " + query);
-			System.out.println("Parameters: " + phone + ", " + username);
-
+			/*
+			 * System.out.println("Executing query: " + query);
+			 * System.out.println("Parameters: " + phone + ", " + username);
+			 */
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, phone);
 			psmt.setString(2, username);
 
 			int rowsAffected = psmt.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println("Password updated successfully for user: " + username);
+				/* System.out.println("Password updated successfully for user: " + username); */
 				success = true;
 			} else {
-				System.out.println("Failed to update password for user: " + username);
+				/* System.out.println("Failed to update password for user: " + username); */
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -477,9 +487,10 @@ public class UserDAO extends JDBConnect {
 	            + "FROM users u "
 	            + "JOIN product p ON u.id = p.WRITERID "
 	            + "WHERE u.username = ? ";
-	   
-	    System.out.println("Executing query: " + query);
-	    System.out.println("Parameters: " + username);
+		/*
+		 * System.out.println("Executing query: " + query);
+		 * System.out.println("Parameters: " + username);
+		 */
 
 	    try {
 	        psmt = con.prepareStatement(query);
@@ -489,11 +500,11 @@ public class UserDAO extends JDBConnect {
 	        if (rs.next()) {
 	            dto = new UserDTO();
 	            dto.setProductCount(rs.getInt("product_count")); // 컬럼명 수정
-	            System.out.println("ProductCount: " + rs.getInt("product_count"));
+				/* System.out.println("ProductCount: " + rs.getInt("product_count")); */
 	        } else {
 	        	dto = new UserDTO();
 	        	dto.setProductCount(0);
-	            System.out.println("판매 상품이 없습니다.");
+				/* System.out.println("판매 상품이 없습니다."); */
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -508,9 +519,10 @@ public class UserDAO extends JDBConnect {
 	            + "JOIN favorite f ON u.ID = f.userid "
 	            + "WHERE u.username = ? ";
 	     
-
-	    System.out.println("Executing query: " + query);
-	    System.out.println("Parameters: " + username);
+		/*
+		 * System.out.println("Executing query: " + query);
+		 * System.out.println("Parameters: " + username);
+		 */
 
 	    try {
 	        psmt = con.prepareStatement(query);
@@ -520,11 +532,11 @@ public class UserDAO extends JDBConnect {
 	        if (rs.next()) {
 	            dto = new UserDTO();
 	            dto.setLikeCount(rs.getInt("likecount")); // 컬럼명 수정
-	            System.out.println("likecount: " + rs.getInt("likecount"));
+				/* System.out.println("likecount: " + rs.getInt("likecount")); */
 	        } else {
 	        	dto = new UserDTO();
 	        	dto.setLikeCount(0);
-	            System.out.println("좋아요 누른 상품이 없습니다.");
+				/* System.out.println("좋아요 누른 상품이 없습니다."); */
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -539,9 +551,10 @@ public class UserDAO extends JDBConnect {
 	            + "JOIN Boards b ON u.id = b.writerid "
 	            + "WHERE u.username = ? ";
 
-	    System.out.println("Executing query: " + query);
-	    System.out.println("Parameters: " + username);
-
+		/*
+		 * System.out.println("Executing query: " + query);
+		 * System.out.println("Parameters: " + username);
+		 */
 	    try {
 	        psmt = con.prepareStatement(query);
 	        psmt.setString(1, username);
@@ -550,11 +563,11 @@ public class UserDAO extends JDBConnect {
 	        if (rs.next()) {
 	            dto = new UserDTO();
 	            dto.setBoardCount(rs.getInt("boardCount")); // 컬럼명 수정
-	            System.out.println("boardcount: " + rs.getInt("boardCount"));
+				/* System.out.println("boardcount: " + rs.getInt("boardCount")); */
 	        } else {
 	        	dto = new UserDTO();
 	        	dto.setBoardCount(0);
-	            System.out.println("올린 게시글이 없습니다.");
+				/* System.out.println("올린 게시글이 없습니다."); */
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();

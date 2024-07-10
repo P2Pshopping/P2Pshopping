@@ -32,7 +32,7 @@ public class ChangePwd extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         String newPassword = request.getParameter("password");
-        System.out.println("변경된 비밀번호는 : " + newPassword);
+		/* System.out.println("변경된 비밀번호는 : " + newPassword); */
         String hashedPassword = userDAO.hashPassword(newPassword); // 입력된 비밀번호를 해시화합니다.
 		/* UserDTO user = userDAO.getUserDTO(username, hashedPassword); */
         
@@ -46,7 +46,7 @@ public class ChangePwd extends HttpServlet {
             }
             if( hashedPassword == null ||hashedPassword.isEmpty()) {
             	
-                System.out.println("newPassword is null");
+				/* System.out.println("newPassword is null"); */
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username or password cannot be null or empty");
                 return;  // Ensure no further proce
             	
@@ -57,7 +57,7 @@ public class ChangePwd extends HttpServlet {
             boolean success = userDAO.changePassword(username, hashedPassword); // 예시 메서드 호출
 
             if (success) {
-                System.out.println("Password updated successfully for user: " + username);
+				/* System.out.println("Password updated successfully for user: " + username); */
                 // 서블릿에서 데이터를 설정하여 JSP 페이지로 전달하는 예시
                 request.setAttribute("message", "새 비밀번호가 성공적으로 변경되었습니다.");
                 response.getWriter().write(
@@ -72,11 +72,11 @@ public class ChangePwd extends HttpServlet {
         	            "</html>"
         	        );	       
             } else {
-                System.out.println("Failed to update password for user: " + username);
+				/* System.out.println("Failed to update password for user: " + username); */
                 response.sendRedirect("Change/Change.jsp?error=updateFailed");
             }
         } else {
-            System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다.");
+			/* System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다."); */
             response.sendRedirect("Change/Change.jsp?error=invalidSession");
         }
 		/* userDAO.close(); */

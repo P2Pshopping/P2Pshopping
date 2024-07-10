@@ -129,7 +129,7 @@ public class PJ2DAO extends JDBConnect {
 			i++;
 		}
 		}catch(Exception e) {
-			System.out.println("찜한 제품 번호 가져오는 중 예외 발생");
+			/* System.out.println("찜한 제품 번호 가져오는 중 예외 발생"); */
 			e.printStackTrace();
 		}
 		
@@ -158,7 +158,7 @@ public class PJ2DAO extends JDBConnect {
 		dto5.setFavoriteprice(favoriteprice);
 		}
 		}catch(Exception e) {
-			System.out.println("찜한 제품 번호 가져오고 찜 목록 가져오는 중 예외 발생");
+			/* System.out.println("찜한 제품 번호 가져오고 찜 목록 가져오는 중 예외 발생"); */
 			e.printStackTrace();
 		
 		}
@@ -203,7 +203,7 @@ public class PJ2DAO extends JDBConnect {
 	        dto5.setFavoriteprice(favoriteprice);
 
 	    } catch (Exception e) {
-	        System.out.println("찜 목록 가져오는 중 예외 발생");
+			/* System.out.println("찜 목록 가져오는 중 예외 발생"); */
 	        e.printStackTrace();
 	    }
 
@@ -242,7 +242,7 @@ public class PJ2DAO extends JDBConnect {
 	        dto5.setFavoriteprice(favoriteprice);
 
 	    } catch (Exception e) {
-	        System.out.println("찜 목록 가져오는 중 예외 발생");
+			/* System.out.println("찜 목록 가져오는 중 예외 발생"); */
 	        e.printStackTrace();
 	    }
 
@@ -265,7 +265,7 @@ public class PJ2DAO extends JDBConnect {
 			dto3.setAddress(rs.getString("ROADADDRPART1"));
 			}
 		}catch(Exception e) {
-			System.out.print("주소 가져오는 중 예외 발생");
+			/* System.out.print("주소 가져오는 중 예외 발생"); */
 			e.printStackTrace();
 		}
 		return dto3;
@@ -286,7 +286,7 @@ public class PJ2DAO extends JDBConnect {
 			psmt.setString(2, sid);
 			result = psmt.executeUpdate();
 		}catch(Exception e){
-			System.out.println("찜 시도 중 예외 발생");
+			/* System.out.println("찜 시도 중 예외 발생"); */
 			e.printStackTrace();
 		}
 		return result;

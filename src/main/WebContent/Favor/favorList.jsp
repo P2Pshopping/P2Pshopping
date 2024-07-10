@@ -191,6 +191,40 @@
     	    });
     	}
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 페이지 로드 시 방문 기록 저장
+    var pageUrl = window.location.pathname + window.location.search;
+    $.ajax({
+        url: '<%= request.getContextPath() %>/track',
+        method: 'GET',
+        data: { pageUrl: pageUrl },
+        success: function(response) {
+            console.log('Visit recorded');
+            
+            // 첫 번째 AJAX 요청: 제품 수 가져오기
+            $.ajax({
+                url: "${pageContext.request.contextPath}/ProductCnt.do",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    console.log("Received product count:", data);
+                    $("#productCount").text("총 상품 수: " + data.productCount);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching product count:", error);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error recording visit:', error);
+        }
+    });
+});
+
+
+
+
 </script>
 
      

@@ -34,18 +34,21 @@ public class ProductCount extends HttpServlet {
 	    			    dto.setProductCount(0);
 	    			}
 	               session.setAttribute("productCount", dto.getProductCount());
-	               System.out.println(" 이름 : " + username + " 총 상품 수 : " + dto.getProductCount());
+					/*
+					 * System.out.println(" 이름 : " + username + " 총 상품 수 : " +
+					 * dto.getProductCount());
+					 */
 	               
 	               // 세션에 저장된 데이터를 다시 사용할 수 있는 예제
 	               int storedProductCount = (int) session.getAttribute("productCount");
-	               System.out.println("Product Count from session: " + storedProductCount);
+					/* System.out.println("Product Count from session: " + storedProductCount); */
 	               
 	               // 세션에 저장된 데이터를 이용하여 다른 로직을 수행할 수 있음
 	               // 예: 다른 서블릿으로 리다이렉트하거나 클라이언트에게 응답을 보낼 수 있음
 	               
 	               response.getWriter().write("총 갯수 : " + storedProductCount);
 	           } else {
-	               System.out.println("실패  " + username);
+					/* System.out.println("실패  " + username); */
 	           }
 
 	    	   			// 찜목록 수
@@ -58,18 +61,20 @@ public class ProductCount extends HttpServlet {
 		    			    dto.setLikeCount(0);
 		    			}
 		               session.setAttribute("likeCount", dto.getLikeCount());
-		               System.out.println(" 이름 : " + username + " 총 좋아요 수 : " + dto.getLikeCount());
+						/*
+						 * System.out.println(" 이름 : " + username + " 총 좋아요 수 : " + dto.getLikeCount());
+						 */
 		               
 		               // 세션에 저장된 데이터를 다시 사용할 수 있는 예제
 		               int storedLikeCount = (int) session.getAttribute("likeCount");
-		               System.out.println("Like Count from session: " + storedLikeCount);
+						/* System.out.println("Like Count from session: " + storedLikeCount); */
 		               
 		               // 세션에 저장된 데이터를 이용하여 다른 로직을 수행할 수 있음
 		               // 예: 다른 서블릿으로 리다이렉트하거나 클라이언트에게 응답을 보낼 수 있음
 		               
 		               response.getWriter().write("총 갯수 : " + storedLikeCount);
 		           } else {
-		               System.out.println("실패  " + username);
+						/* System.out.println("실패  " + username); */
 		           }
 		    	    
 		  			// 찜목록 수
@@ -82,18 +87,20 @@ public class ProductCount extends HttpServlet {
 		    			    dto.setBoardCount(0);
 		    			}
 		               session.setAttribute("boardCount", dto.getBoardCount());
-		               System.out.println(" 이름 : " + username + " 총 게시글 수 : " + dto.getBoardCount());
-		               
+						/*
+						 * System.out.println(" 이름 : " + username + " 총 게시글 수 : " +
+						 * dto.getBoardCount());
+						 */
 		               // 세션에 저장된 데이터를 다시 사용할 수 있는 예제
 		               int storedBoardCount = (int) session.getAttribute("boardCount");
-		               System.out.println("Board Count from session: " + storedBoardCount);
+						/* System.out.println("Board Count from session: " + storedBoardCount); */
 		               
 		               // 세션에 저장된 데이터를 이용하여 다른 로직을 수행할 수 있음
 		               // 예: 다른 서블릿으로 리다이렉트하거나 클라이언트에게 응답을 보낼 수 있음
 		               
 		               response.getWriter().write("총 게시글 수 : " + storedBoardCount);
 		           } else {
-		               System.out.println("실패  " + username);
+						/* System.out.println("실패  " + username); */
 		           }
 	    	    
 	    	    

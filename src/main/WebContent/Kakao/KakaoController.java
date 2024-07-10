@@ -21,14 +21,14 @@ public class KakaoController extends HttpServlet{
         // 서블릿 초기화 메서드, 서블릿이 처음 생성될 때 한 번 호출됩니다.
         ServletContext context = getServletContext(); // 서블릿 컨텍스트를 가져옵니다.
         kakaoDAO = new KakaoDAO(context); // UserDAO 객체를 초기화합니다.
-        System.out.println("KakaoDAO initialized: " + (kakaoDAO != null)); // UserDAO 초기화 여부를 출력합니다.
-    }
+      /*  System.out.println("KakaoDAO initialized: " + (kakaoDAO != null)); // UserDAO 초기화 여부를 출력합니다.
+*/    }
 	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        // POST 요청을 처리하는 메서드
 	        String uname = request.getParameter("username"); // 요청 파라미터에서 사용자 이름을 가져옵니다.
 	        String upass = request.getParameter("password"); // 요청 파라미터에서 비밀번호를 가져옵니다.
 	        if (upass == null) {
-	        	System.out.println(" upass is null");
+	        /*	System.out.println(" upass is null");*/
 	        }
 
 	        String hashedPassword = kakaoDAO.hashPassword(upass); // 입력된 비밀번호를 해시화합니다.
