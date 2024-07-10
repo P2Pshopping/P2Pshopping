@@ -12,9 +12,16 @@ public class PJ2DTO {
 	private String likeSearch;	
 	private String favorite[];
 	private String favoriteimg[];
-	private String writerid;
+	private int writerid;
 	private String favoritename[];
 	private int favoriteprice[];
+	private String sellername; 
+	public String getSellername() {
+		return sellername;
+	}
+	public void setSellername(String sellername) {
+		this.sellername = sellername;
+	}
 
 	private int favoritenum[];
 	
@@ -48,10 +55,10 @@ public class PJ2DTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getWriterid() {
+	public int getWriterid() {
 		return writerid;
 	}
-	public void setWriterid(String writerid) {
+	public void setWriterid(int writerid) {
 		this.writerid = writerid;
 	}
 	public String[] getFavoriteimg() {
