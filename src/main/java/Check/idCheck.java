@@ -17,8 +17,10 @@ public class idCheck extends HttpServlet {
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        // 클라이언트로부터 전달받은 username 파라미터 가져오기
 	        String username = request.getParameter("username");
-	        System.out.println("----------------------");
-	        System.out.println( " 중복 체크 이름 :" + username ); 
+			/*
+			 * System.out.println("----------------------"); System.out.println(
+			 * " 중복 체크 이름 :" + username );
+			 */
 	        boolean result = false;
 	        String errorMessage = null;
 	        
@@ -26,7 +28,7 @@ public class idCheck extends HttpServlet {
 	            // 아이디 중복 체크 메소드 호출
 	            result = new UserDAO().idCheck(username);
 	            
-	            System.out.println(result + " 이건 idcheck");
+				/* System.out.println(result + " 이건 idcheck"); */
 	            
 	        } catch (Exception e) {
 	            errorMessage = "오류 발생: " + e.getMessage();
