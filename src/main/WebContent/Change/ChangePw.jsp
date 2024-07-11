@@ -29,7 +29,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
 	    String password = request.getParameter("password");
 	    String confirmPassword = request.getParameter("passwordc");
 		String phone = request.getParameter("phone");
-	System.out.println(password);
+/* 	System.out.println(password); */
 	if (password != null && password.equals(confirmPassword)) {
        
         session.setAttribute("password", password);
@@ -63,19 +63,37 @@ userDAO.close();
 "use strict";
 function joinCheck() {
 
-    var password = document.getElementById("password").value.trim();
-    var passwordc = document.getElementById("passwordc").value.trim();
-if(password ==='' || passwordc === '' ){
-	alert ("입력칸을 다시 한번 확인해주세요.");	
-	  document.getElementById("password").focus();
-	    event.preventDefault();
-	    return false;
-}else if (password !== passwordc) {
-    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-    document.getElementById("passwordc").focus();
-    event.preventDefault();
-    return false;
-} else {
+			var password = document.getElementById("password").value.trim();
+			var passwordc = document.getElementById("passwordc").value.trim();
+			if (password.length<4){
+				 alert("비밀번호는 최소 4글자 이상이어야 합니다.");
+				 document.getElementById("password").focus();
+		    	    event.preventDefault();
+				return false;
+				
+			}
+			
+			 var passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(?=\S+$).{4,}$/;
+			  if (!passwordRegex.test(password)) {
+    	    	alert("비밀번호는 영어, 숫자, 특수 기호를 모두 포함해야 합니다.");
+    	        document.getElementById("password").focus();
+    	        event.preventDefault();
+    	   		return false;
+    	    
+    	    } 
+    	    if (password === '' || passwordc === '') {
+				alert("입력칸을 다시 한번 확인해주세요.");
+				document.getElementById("password").focus();
+				event.preventDefault();
+				return false;
+			} 
+    	    if (password !== passwordc) {
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+				document.getElementById("passwordc").focus();
+				event.preventDefault();
+				return false;
+			} else {
+				alert("비밀번호가 성공적으로 변경되었습니다.");
 
 	return true;
 }
@@ -94,12 +112,12 @@ if(password ==='' || passwordc === '' ){
  
 
     
-			<form action="/ChangePwd.do" method="Post" name="ChangeFrm" style ="width:700px;height:300px;">
+			<form action="${pageContext.request.contextPath}/ChangePwd.do" method="Post" name="ChangeFrm" style ="width:700px;height:300px;">
     <label class="col-sm-2 col-form-label" style ="width:300px;font-weight:bold;font-size:30px;">새 비밀번호 설정  </label>
     <div class="input-group">
     <label for="inputPassword" class="col-sm-2 col-form-label" style ="width:200px;margin-top:10px;" >새 비밀번호  </label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="password" id = "password" placeholder="20자 이하" maxlength="20">
+      <input type="text" class="form-control" name="password" id = "password"  placeholder="영어,숫자,특수기호 3가지를 모두 사용해주세요." maxlength="20">
       </div>
       
       </div>
@@ -110,7 +128,7 @@ if(password ==='' || passwordc === '' ){
 
     <label for="inputPassword" class="col-sm-2 col-form-label" style ="width:200px;">새 비밀번호 확인</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="passwordc" id = "passwordc"placeholder="20자 이하" maxlength="20">
+      <input type="text" class="form-control" name="passwordc" id = "passwordc"placeholder="위와 같이 입력하세요." maxlength="20">
 </div>
 
 </div>
@@ -122,7 +140,47 @@ if(password ==='' || passwordc === '' ){
   </div>
  
  
+<% 
+if ("POST".equalsIgnoreCase(request.getMethod())) {
+	
+	
+	
+		String password = request.getParameter("password");
+		String passwordc = request.getParameter("passwordc");
+	
+		
+    	if (!password.equals(passwordc)) {
+    	   
+    	%>
+    	<script>
+    	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+    	    event.preventDefault();
+    	</script>
+    	<%
+    	} else if (password.length() < 4) {
+    	   
+    	%>
+    	<script>
+    	    alert("비밀번호는 최소 4글자 이상이어야 합니다.");
+    	    event.preventDefault();
+    	</script>
+    	<%
+    	} else {
+    	    // 정규 표현식을 사용하여 영어, 숫자, 특수 기호 포함 여부 확인
+    	    String passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+    	    if (!password.matches(passwordRegex)) {
+    	       
+    	    %>
+    	    <script>
+    	        alert("비밀번호는 영어, 숫자, 특수 기호를 모두 포함해야 합니다.");
+    	        event.preventDefault();
+    	    </script>
+    	    <%
+    	    }
+    	}
+}
 
+%>
 	
 
 

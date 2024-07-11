@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/ChangeService.do") // 핸드폰 번호 변경
+/*@WebServlet("/ChangeService.do")*/ // 정보수정 핸드폰 번호 변경
 public class ChangeService extends HttpServlet {
 	  private UserDAO userDAO;
 	    
@@ -39,7 +39,7 @@ public class ChangeService extends HttpServlet {
 	          
 
 	            if (username == null || username.isEmpty() ) {
-	                System.out.println("username is null");
+					/* System.out.println("username is null"); */
 	                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username  cannot be null or empty");
 	                return;  // Ensure no further proce
 	            }
@@ -68,16 +68,16 @@ public class ChangeService extends HttpServlet {
 	            boolean success = userDAO.changePhone(username, phone); // 예시 메서드 호출
 
 	            if (success) {
-	                System.out.println("phone updated successfully for user: " + username);
+					/* System.out.println("phone updated successfully for user: " + username); */
 	                // 서블릿에서 데이터를 설정하여 JSP 페이지로 전달하는 예시
 	                request.setAttribute("message", "전화번호가 변경되었습니다.");
-	                request.getRequestDispatcher("Main/Mainpage.jsp").forward(request, response);
+	                request.getRequestDispatcher("Main/default.jsp").forward(request, response);
 	            } else {
-	                System.out.println("Failed to update phone for user: " + username);
+					/* System.out.println("Failed to update phone for user: " + username); */
 	                response.sendRedirect("Change/Change.jsp?error=updateFailed");
 	            }
 	        } else {
-	            System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다.");
+				/* System.out.println("세션에서 가져온 객체의 타입이 UserDTO가 아닙니다."); */
 	            response.sendRedirect("Change/Change.jsp?error=invalidSession");
 	        }
 			/* userDAO.close(); */

@@ -113,22 +113,7 @@ dto = dao.img(productid);
 String username =(String) session.getAttribute("username"); 
 PJ2DTO dto6 = dao.findid(username);
 
-/* if(session.getAttribute("")) */
 session.setAttribute("bid", dto6.getUserid());  //구매자 고유 번호
-
-/* if(request.getParameter("productid")==null){
-session.setAttribute("productid", "43");
-System.out.println("43으로 설정");
-}else{
-
-/*String sid = (String)session.getAttribute("sellerid"); // 판매글번호
-System.out.println(sid+"로 설정");
-}*/
-
-/*
-String sid = productid;
-System.out.println(sid+"으로 설정");
-}  */
 
 String sid = null;  // sid = productid
 int sid2 = 0;
@@ -150,7 +135,7 @@ int bid2 = dto6.getUserid();
 
 int suid = dto.getWriterid();
 PJ2DTO dto2 = dao.more();
-PJ2DTO dto3 = dao.ADRS(suid);
+PJ2DTO dto3 = dao.ADRS(sid2);
 PJ2DTO dto7 = dao.findSellerName(dto.getWriterid());
 
 String[] f = Arrays.copyOf(dto2.getF(), 4);
@@ -159,14 +144,7 @@ String[] moreid=Arrays.copyOf(dto2.getMoreid(),4);
 PJ2DTO dto4 = dao.likesearch(sid2, bid2); //찜했나 안했나 확인 null이면 안함 1이면 함
  
 
-System.out.println(username);
 
-/* System.out.print(session.getAttribute("username"));
- */
-
-System.out.println(dto6.getUserid());  //현재 구매자
-System.out.println(dto.getWriterid()); //글 판매자
-System.out.println(productid);  //판매글 번호
 %>
 
 
@@ -284,8 +262,6 @@ $(document).ready(function() {
     </svg>
 </button>
 
-<%=Integer.parseInt(dto4.getLikeSearch())%>
-
 
 <script>
     var btn = document.getElementById("love");
@@ -373,6 +349,7 @@ function sellProduct() {
             success: function(response) {
                 if (response === "success") {
                     alert("판매가 완료되었습니다.");
+                    window.location.href = "../Main/Mainpage.jsp";
                 } else if (response === "duplicate") {
                     alert("이미 판매된 상품입니다.");
                 } else {
@@ -424,7 +401,8 @@ function sellProduct() {
 	<br />
 
 
-
+<%String trim = dto3.getAddress().trim();
+System.out.println(trim);%>
 
 
 
@@ -446,8 +424,8 @@ function sellProduct() {
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
 						키워드 : <input type="text"
-							value=<%=dto3.getAddress()%>
-							id="keyword" size="15">
+							id="keyword" size="15"
+							value="<%=dto3.getAddress()%>">
 						<button type="submit">검색하기</button>
 					</form>
 				</div>
@@ -481,11 +459,16 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+
+
+
+
+
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
-    var keyword = document.getElementById('keyword').value;
-
+    var keyword = "<%=dto3.getAddress().trim()%>";
+	console.log('키워드 값:', keyword);  
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         alert('키워드를 입력해주세요!');
         return false;
@@ -494,6 +477,25 @@ function searchPlaces() {
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -508,7 +510,7 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.');
+       
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
