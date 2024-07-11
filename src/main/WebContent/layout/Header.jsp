@@ -170,7 +170,7 @@
 					</form>
 					<form class="d-flex" action="${pageContext.request.contextPath}/itemList/ItemList.do" method="get">
 						<input class="form-control me-2" id="keyword" name="keyword"
-							type="text" placeholder="상품명 또는 브랜드명으로 검색해주세요."
+							type="text" placeholder="상품명으로 검색해주세요."
 							aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
