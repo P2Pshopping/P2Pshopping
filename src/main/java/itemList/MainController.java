@@ -38,13 +38,13 @@ public class MainController extends HttpServlet {
         ItemListDAO dao = new ItemListDAO();
         int totalProducts = dao.getProductCount();
 
-        List<ItemListDTO> product = dao.getAllproduct(start, end, keyword);
+        List<ItemListDTO> popular = dao.getAllpopular(start, end, keyword);
 
         dao.close();
 
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
         
-        req.setAttribute("product", product);
+        req.setAttribute("popular", popular);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
         req.getRequestDispatcher("/Main/Mainpage.jsp").forward(req, resp);

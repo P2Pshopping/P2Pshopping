@@ -59,10 +59,10 @@ body {
 #gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 25px;
 	flex-direction: row;
 	align-content: center;
-	justify-content: space-between;
+	justify-content: flext-start;
 }
 
 #gallery-item {
@@ -238,13 +238,13 @@ body {
 				style="display: flex-center; justify-content: center; max-width: 1200px;">
 				<div id="gallery">
 					<c:choose>
-						<c:when test="${empty product}">
+						<c:when test="${empty popular}">
 							<div id="gallery-item">
 								<p>등록된 게시물이 없습니다^^*</p>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="item" items="${product}" varStatus="loop">
+							<c:forEach var="item" items="${popular}" varStatus="loop">
 								<div id="gallery-item"
 								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
 								<c:if test="${not empty item.imgUrl_1}">

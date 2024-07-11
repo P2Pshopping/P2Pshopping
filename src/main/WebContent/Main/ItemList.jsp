@@ -69,10 +69,10 @@ body {
 #gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 25px;
 	flex-direction: row;
 	align-content: center;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 
 #gallery-item {
