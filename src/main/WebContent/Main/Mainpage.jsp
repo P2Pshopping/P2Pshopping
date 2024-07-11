@@ -59,10 +59,10 @@ body {
 #gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 25px;
 	flex-direction: row;
 	align-content: center;
-	justify-content: space-between;
+	justify-content: flext-start;
 }
 
 #gallery-item {
@@ -238,13 +238,13 @@ body {
 				style="display: flex-center; justify-content: center; max-width: 1200px;">
 				<div id="gallery">
 					<c:choose>
-						<c:when test="${empty product}">
+						<c:when test="${empty popular}">
 							<div id="gallery-item">
 								<p>등록된 게시물이 없습니다^^*</p>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="item" items="${product}" varStatus="loop">
+							<c:forEach var="item" items="${popular}" varStatus="loop">
 								<div id="gallery-item"
 								onclick="location.href='${pageContext.request.contextPath}/DetailPage/DetailPage.jsp?productid=${item.productid}';">
 								<c:if test="${not empty item.imgUrl_1}">
@@ -377,44 +377,7 @@ body {
          </div>
       </div>
    </div> -->
-
-<!-- >>>>>>> master ------------------------------------------------>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 페이지 로드 시 방문 기록 저장
-    var pageUrl = window.location.pathname + window.location.search;
-    $.ajax({
-        url: '<%= request.getContextPath() %>/track',
-        method: 'GET',
-        data: { pageUrl: pageUrl },
-        success: function(response) {
-            console.log('Visit recorded');
-            
-            // 첫 번째 AJAX 요청: 제품 수 가져오기
-            $.ajax({
-                url: "${pageContext.request.contextPath}/ProductCnt.do",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    console.log("Received product count:", data);
-                    $("#productCount").text("총 상품 수: " + data.productCount);
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching product count:", error);
-                }
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Error recording visit:', error);
-        }
-    });
-});
-
-
-
-
-</script> -->
-
+	<!-- >>>>>>> master ------------------------------------------------>
 </body>
 <%@ include file="../layout/Footer.jsp"%>
 

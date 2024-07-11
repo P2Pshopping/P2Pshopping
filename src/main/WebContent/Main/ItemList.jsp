@@ -23,7 +23,7 @@ int groupEndPage = (Integer) request.getAttribute("groupEndPage");
 	rel="stylesheet">
 <link href="../iMarket/CSS/style-header.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>파일 첨부형 게시판</title>
+<title>상품 리스트</title>
 
 <style>
 .custom-body {
@@ -69,10 +69,10 @@ body {
 #gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 25px;
 	flex-direction: row;
 	align-content: center;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 
 #gallery-item {
