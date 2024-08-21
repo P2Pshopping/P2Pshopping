@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page import="PJ2.JDBConnect"%>
 <%@ page import="PJ2.PJ2DTO"%>
@@ -745,3 +745,4 @@ function removeAllChildNods(el) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-q2mBWTwC8PQ8xu3KjZWR6zrXb+buJ1fgNHhA8sDDYmy1J6C6tv8HgASpRl8d6Pc0" crossorigin="anonymous"></script>
 </body>
 </html>
+ --%>

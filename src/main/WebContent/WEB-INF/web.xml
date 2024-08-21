@@ -49,7 +49,8 @@
   </servlet-mapping>
   <context-param>
     <param-name>CHAT_ADDR</param-name>
-    <param-value>ws://localhost:8081/MustHaveJSP</param-value>
+    <param-value>ws://14.42.124.31:8081/MustHaveJSP</param-value>
+    <!-- <param-value>ws://{본인아이피}:8081/MustHaveJSP</param-value> -->
   </context-param>
   <servlet>
     <description></description>

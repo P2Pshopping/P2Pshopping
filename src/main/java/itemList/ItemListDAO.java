@@ -36,7 +36,7 @@ public class ItemListDAO extends JDBConnect {
 	        query.append("AND p.productname LIKE ? ");
 	    }
 
-	    query.append("ORDER BY p.CREATEDATE DESC) WHERE rnum >= ?");
+	    query.append("ORDER BY p.id DESC) WHERE rnum >= ?");
 
 	    System.out.println("쿼리문 실행: " + query.toString());
 

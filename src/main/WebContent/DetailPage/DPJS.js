@@ -1,11 +1,12 @@
 
 	function currentLocation() {
 		if(navigator.geolocation) {
-			System.out.println("된듯");
+			console.log("된듯"); // 변경된 부분
 			navigator.geolocation.getCurrentPosition(function(postion){
 				
 				var lat = position.coords.latitude; //위도
-				var lon = position.coords.longtitude; //경도
+				
+				   var lon = position.coords.longitude; //경도 (오타 수정)
 				
 				var locPosition = new kakao.maps.LatLng(lat,lon);
 				

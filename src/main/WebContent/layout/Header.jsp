@@ -97,7 +97,7 @@
 							<%-- <a href="${pageContext.request.contextPath}/cart?cmd=cartList" class="bi bi-cart-fill" style="margin: 2%; color:black; --bs-btn-font-size: .75rem;">장바구니</a> --%>
 
 							<c:choose>
-								<c:when test="${sessionScope.username == 'a'}">
+								<c:when test="${sessionScope.username == 'hava'}">
 									<%-- username이 'a'일시 관리자 페이지 링크 보이기 --%>
 									<a href="${pageContext.request.contextPath}/dashboard"
 										class="bi bi-person-badge"
