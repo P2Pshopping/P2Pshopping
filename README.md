@@ -13,5 +13,26 @@
 <p align="center">
   <img width="500" src="https://github.com/user-attachments/assets/d961ca31-b386-495d-8c97-a420657ab0af">
 </p>
-(-로그인페이지)<br> 로그인 & 회원 정보 관리:회원 가입, 정보 수정, 탈퇴 등 회원 정보를 관리하는 기능을 개발했습니다.
+(-메인페이지)<br>
+<br><br>
+
+
+<p align="center">
+  <img width="500" src="https://github.com/user-attachments/assets/96b44e4c-e36a-476e-b360-47f3bbeeff72">
+</p>
+(-찜목록페이지)<br>
+<br><br>
+
+
+<p align="center">
+  <img width="500" src="https://github.com/user-attachments/assets/624e4087-7ec8-4081-b7d7-a852b4f538ca">
+</p>
+(-관리자페이지)<br>
+<br><br>
+
+
+<p align="center">
+  <img width="500" src="https://github.com/user-attachments/assets/db3c6386-b222-47dc-9b85-b0dd7f0135f1">
+</p>
+(-상품상세페이지)<br>
 <br><br>
