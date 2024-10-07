@@ -1,7 +1,8 @@
 ▪ 주제 : 유아용품 중고거래 사이트<br>
 ▪ 사용 프로그램 :  JAVA 17, Oracle21c, Tomcat10.1, DBeaver, Notion, Eclipse<br>
 ▪ URL : P2Pshopping/P2Pshopping (github.com)<br>
-(9+) 프로젝트켈린더 (notion.so)<br>
+  노션 주소 : https://www.notion.so/0e80eba126bd4c1793648c784fd80679?v=43b0eefc36e94dfbb88537b4e00db126<br>
+  ★시연 영상 : https://youtu.be/naexC5ZwsZc <br>
 ▪ 제작시기 및 참여도 : 2024년 7월 - 2024년 8월 (1.5개월), <br>
   함혜중 : 팀장으로 참여(담당파트: DB설계, 상품등록, 병원찾기, 관리자페이지)<br>
 ▪ 기획의도 :<br> 
